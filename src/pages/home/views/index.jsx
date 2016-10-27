@@ -5,14 +5,17 @@ import Navigator from '../../../components/navigator/index.jsx';
 class Home extends Component {
     constructor(props) {
         super(props);
-        
     }
     componentWillMount() {
         this.props.onLoading();
     }
+    componentWillUpdate(nextProps, nextState) { 
+    }
     render(){
         return (
-            <Navigator />
+            <Navigator 
+                title={ (this.props.banner.items ? this.props.banner.items.length : 0 ) + " Banners"}
+            />
         );
     }
 }

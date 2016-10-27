@@ -3,39 +3,40 @@ import {connect} from 'react-redux';
 
 import homepage, {actions as homeActions} from './models';
 
-
-// Generate the App Tag according to env settings
-export default function(env){
-    function mapStateToProps(state){
-        return {
-            homepage: state.homepage || {}
-        }
-    }
-
-    function mapDispatchToProps(dispatch){
-        return {
-            onLoading: function(){
-                dispatch(homeActions.GNR_HOME_getBannerData(env));
-            }
-        }
-    }
-
-    return connect(mapStateToProps, mapDispatchToProps)(Home);
-}
-export const actions = actions;
+export const actions = homeActions;
 export const reducer = homepage;
 
 // For single page usage
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
-import { createStore as createReduxStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware , compose} from 'redux'
 const loggerMiddleware = createLogger();
-export function createStore(){
-    return createReduxStore(
+export function getStore(...otherStores){
+    return createStore(
         homepage,
-        applyMiddleware(
-            thunkMiddleware, // lets us dispatch() functions
-            loggerMiddleware // neat middleware that logs actions
+        compose(
+            applyMiddleware(
+                thunkMiddleware, // lets us dispatch() functions
+                loggerMiddleware // neat middleware that logs actions
+            ),
+            ...otherStores
         )
     );
+}
+
+// Generate the App Tag according to env settings
+export default function(env){
+    function mapStateToProps(state){
+        return state || {};
+    }
+
+    function mapDispatchToProps(dispatch){
+        return {
+            onLoading: function(){
+                return dispatch(homeActions.GNR_HOME_getBannerData(env));
+            }
+        }
+    }
+
+    return connect(mapStateToProps, mapDispatchToProps)(Home);
 }

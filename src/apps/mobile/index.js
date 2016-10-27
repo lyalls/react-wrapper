@@ -43,6 +43,7 @@ const AppStyles = getMuiTheme({
     },
 });
 
+
 // Env Settings
 const envSettings = {
     // baseUrl: "http://m224.baocai.com"
@@ -51,17 +52,38 @@ const envSettings = {
     }
 };
 
+
+
+
+// Redux dev Tool
+
+import { createDevTools } from 'redux-devtools';
+import LogMonitor from 'redux-devtools-log-monitor';
+import DockMonitor from 'redux-devtools-dock-monitor';
+
+const ReduxDevTools = createDevTools(
+    <DockMonitor
+      toggleVisibilityKey="ctrl-h"
+      changePositionKey="ctrl-w"
+    >
+        <LogMonitor />
+    </DockMonitor>
+)
+
 // Components
-import HomeGenerator, {createStore as homeStore, reducer as homeReducer} from '../../pages/home'
+import HomeGenerator, {getStore as homeStore, reducer as homeReducer} from '../../pages/home'
 import { Provider } from 'react-redux'
 
 const Home = HomeGenerator(envSettings);
 
 ReactDOM.render(
-    <Provider store={homeStore()}>
-        <MuiThemeProvider muiTheme={AppStyles}>
-            <Home />
-        </MuiThemeProvider>
+    <Provider store={homeStore(ReduxDevTools.instrument())}>
+        <div>
+            <MuiThemeProvider muiTheme={AppStyles}>
+                <Home />
+            </MuiThemeProvider>
+            <ReduxDevTools />
+        </div>
     </Provider>
     ,
     document.getElementById('app-body')
