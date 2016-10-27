@@ -18,17 +18,17 @@ H5 App of Baocai
 ```shell
 |-index.html
 |-src
-|  |-apps               # 整合到各端
+|  |-apps               # 整合产品页面到各端
 |  |  |-mobile
 |  |-components         # 纯 React 控件
 |  |  |-navigator
 |  |-css                # 样式表
 |  |-pages              # 页面及业务逻辑
 |  |  |-home
-|  |  |  |-models       # 业务逻辑
+|  |  |  |-models       # 业务逻辑 (Model)
 |  |  |  |  |-actions
 |  |  |  |  |-reducers
-|  |  |  |-views        # 页面
+|  |  |  |-views        # 产品页面 (View & Controller)
 |  |  |-invest
 |  |  |-login
 ```
