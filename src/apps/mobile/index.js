@@ -71,7 +71,7 @@ const ReduxDevTools = createDevTools(
 )
 
 // Components
-import HomeGenerator, {getStore as homeStore, reducer as homeReducer} from '../../pages/home'
+import HomeGenerator, {getStore as homeStore, reducer as homeReducer} from '../../pages/home';
 import { Provider } from 'react-redux'
 
 const Home = HomeGenerator(envSettings);
