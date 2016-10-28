@@ -77,12 +77,11 @@ import { Provider } from 'react-redux'
 const Home = HomeGenerator(envSettings);
 
 ReactDOM.render(
-    <Provider store={homeStore(ReduxDevTools.instrument())}>
+    <Provider store={homeStore()} >
         <div>
             <MuiThemeProvider muiTheme={AppStyles}>
                 <Home />
             </MuiThemeProvider>
-            <ReduxDevTools />
         </div>
     </Provider>
     ,

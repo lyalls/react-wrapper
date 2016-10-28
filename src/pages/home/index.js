@@ -33,7 +33,8 @@ export default function(env){
     function mapDispatchToProps(dispatch){
         return {
             onLoading: function(){
-                return dispatch(homeActions.GNR_HOME_getBannerData(env));
+                dispatch(homeActions.GNR_HOME_getBannerData(env));
+                dispatch(homeActions.GNR_HOME_getInvestList(env));
             }
         }
     }

@@ -45,5 +45,8 @@ module.exports = {
                 loaders: ['file']
             }
         ]
-    }
+    },
+    resolveLoader: {
+        root: __dirname + '/node_modules'
+    },
 }
