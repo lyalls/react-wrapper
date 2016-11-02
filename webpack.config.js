@@ -1,3 +1,6 @@
+var webpack = require('webpack');
+var path = require('path');
+
 module.exports = {
     devtool: 'source-map',
     devServer: {
@@ -30,11 +33,11 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                loaders: ['style', 'css', 'less']
+                loader: 'style!css!less',
             },
             {
                 test: /\.css$/,
-                loaders: ['style', 'css']
+                loaders: [ 'css']
             }, 
             {
                 test: /\.json$/,
@@ -42,11 +45,11 @@ module.exports = {
             },
             {
                 test: /\.(jpe?g|gif|png|eot|svg|woff|woff2|ttf)$/,
-                loaders: ['file']
-            }
-        ]
+                loaders: ['file', 'url-loader?limit=100000']
+            },
+        ],
     },
     resolveLoader: {
-        root: __dirname + '/node_modules'
+        root: __dirname + '/node_modules',
     },
 }

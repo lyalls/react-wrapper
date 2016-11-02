@@ -20,12 +20,13 @@ for(var item in webpackConfig.entry){
         webpackConfig.entry[item].push('webpack-hot-middleware/client');
     }
 }
-webpackConfig.plugins = [
+if(webpackConfig.plugins === undefined) webpackConfig.plugins = [];
+Array.prototype.push.apply(webpackConfig.plugins, [
     // Webpack 2.0 fixed this mispelling 
     new webpack.optimize.OccurrenceOrderPlugin(), 
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
-];
+]);
 
 console.log(webpackConfig);
 var compiler = webpack(webpackConfig);

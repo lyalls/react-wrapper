@@ -4,8 +4,8 @@
   "description": "test",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --progress --colors --inline --config webpack.config.js --history-api-fallback",
+    "build": "webpack --progress --colors --inline --config webpack.config-prod.js",
     "server": "nodemon -w . -e node server.js"
   },
   "keywords": [
@@ -45,9 +45,13 @@
     "less-loader": "^2.2.3",
     "morgan": "^1.7.0",
     "nodemon": "^1.11.0",
+    "postcss": "^5.2.5",
+    "postcss-less": "^0.15.0",
+    "postcss-loader": "^1.1.0",
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.1.0",
+    "resolve-url": "^0.2.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
