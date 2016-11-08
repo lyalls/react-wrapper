@@ -17,7 +17,7 @@ class Home extends Component {
     gotoList(){
         // window.location.replace( "#/invest/list" );
 
-        window.location.href = "/invest/list" ;
+        window.location.href = "/#/invest/list" ;
 
         // $(location).attr('href', '/#/invest/list')
     }
@@ -54,7 +54,6 @@ class Home extends Component {
                                     }else{
                                         itemTitle = <h3 className="count-down"><b></b>即将发售：<time>{list.timer}</time></h3>;
                                     }
-                                    let increaseApr = (list.increaseApr > 0)? <div><b className="font-22">+{list.increaseApr}</b><b className="font-12">%</b></div> : "";
                                     let isRead = (list.isReward==1)? <span className="take">{list.promotionTitle}</span> : "";
                                     let isBonusTicket = (list.isBonusticket == 1) ? <span >红包券</span> : "";
                                     let isAllowIncrease = (list.isAllowIncrease == 1) ? <span>加息券</span> : "";
@@ -67,9 +66,13 @@ class Home extends Component {
                                                 <dl className="pro-info">
                                                     <dt>
                                                         <strong className={(list.isReward==0 && list.isBonusticket==0 && list.isAllowIncrease == 0 && list.isBonusticket==0)?'only-data':""}>
-                                                            {list.annualRate}
-                                                            <b className="font-12">%</b>
-                                                            {increaseApr}
+                                                            {list.annualRate}<b className="font-12">%</b>
+                                                            {
+                                                                (list.increaseApr > 0)? <b className="font-22">+{list.increaseApr}</b> : ""
+                                                            }
+                                                            {
+                                                                (list.increaseApr > 0)? <b className="font-12">%</b>: ""
+                                                            }
                                                         </strong>
                                                         {isRead}
                                                         {isBonusTicket}
