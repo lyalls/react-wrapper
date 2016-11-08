@@ -1,5 +1,5 @@
 import React , {Component, PropTypes} from 'react';
-
+import Footer from '../../../components/footer/index.jsx';
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -8,8 +8,6 @@ class Home extends Component {
         this.props.onLoading();
     }
     componentWillReceiveProps(nextProps) {
-        console.log('Home page receiving new props:', nextProps);
-        console.log(this.props.investList.investsLen)
     }
     componentWillUpdate(nextProps, nextState) { 
     }
@@ -103,12 +101,7 @@ class Home extends Component {
                         <div className="loading-btn">查看更多项目</div>
                     </div>
                 </article>
-                <footer className="wx-index-bottom">
-                    <ul>
-                        <li><a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.baocai.p2p">APP下载</a> <a href="tel:4006167070">客服电话</a></li>
-                        <li>&copy; 2016抱财网Baocai.com 投资有风险 选择需谨慎</li>
-                    </ul>
-                </footer>
+                <Footer />
             </div>
         );
     }
