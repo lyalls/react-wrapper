@@ -9,6 +9,7 @@ class Home extends Component {
     }
     componentWillReceiveProps(nextProps) {
         console.log('Home page receiving new props:', nextProps);
+        console.log(this.props.investList.investsLen)
     }
     componentWillUpdate(nextProps, nextState) { 
     }
@@ -78,8 +79,36 @@ class Home extends Component {
                                 : ""
                             }
                         </ul>
+                        {
+                            this.props.investList.investsLen === 1 ?
+                            <div className="btn-area-com margin-t-1-5rem">
+                                {
+                                    (this.props.investList.investsLen === 1 && this.props.investList.investsList[0].statusMessage=='投资中' && this.props.investList.investsList[0].biao_type_zi != '限量标')
+                                    ? <a className="orange-radius-btn wd-80">立即投资</a>
+                                    : ""
+                                }
+                                {
+                                    (this.props.investList.investsLen === 1 && this.props.investList.investsList[0].isLimit &&  this.props.investList.investsList[0].limitTime > 0)
+                                    ? <a class="gray-radius-btn wd-80">即将发售</a>
+                                    : ""
+                                }
+                                {
+                                    (this.props.investList.lastTenderInfo !== false)
+                                    ? <a class="gray-radius-btn wd-80">{this.props.investList.lastTenderInfo.addtime * 1000} 抢光</a>
+                                    : ""
+                                }
+                            </div>
+                            :""
+                        }
+                        <div className="loading-btn">查看更多项目</div>
                     </div>
                 </article>
+                <footer className="wx-index-bottom">
+                    <ul>
+                        <li><a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.baocai.p2p">APP下载</a> <a href="tel:4006167070">客服电话</a></li>
+                        <li>&copy; 2016抱财网Baocai.com 投资有风险 选择需谨慎</li>
+                    </ul>
+                </footer>
             </div>
         );
     }
