@@ -1,5 +1,7 @@
 import React , {Component, PropTypes} from 'react';
 import Footer from '../../../components/footer/index.jsx';
+import $ from 'jquery';
+
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -10,6 +12,14 @@ class Home extends Component {
     componentWillReceiveProps(nextProps) {
     }
     componentWillUpdate(nextProps, nextState) { 
+    }
+
+    gotoList(){
+        // window.location.replace( "#/invest/list" );
+
+        window.location.href = "/invest/list" ;
+
+        // $(location).attr('href', '/#/invest/list')
     }
     render(){
         return (
@@ -98,7 +108,7 @@ class Home extends Component {
                             </div>
                             :""
                         }
-                        <div className="loading-btn">查看更多项目</div>
+                        <div className="loading-btn" onClick={this.gotoList}>查看更多项目</div>
                     </div>
                 </article>
                 <Footer />
@@ -108,7 +118,8 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-    onLoading: PropTypes.func.isRequired
+    onLoading: PropTypes.func.isRequired,
+    
 }
 
 export default Home;
