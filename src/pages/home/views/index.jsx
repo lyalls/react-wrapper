@@ -14,7 +14,7 @@ class Home extends Component {
     }
     render(){
         return (
-            <div>
+            <div className="scrollable-content k_p0">
                 <header className="wx-header wx-index-head">
                     <h1 className="logo"></h1>
                     <a href="/users/account" className="wx-index-top-my"></a>
@@ -53,7 +53,7 @@ class Home extends Component {
                                     let recommendMark = (list.is_zhiding == true) ? <img src="./images/icon-recommend.png" className="recommend-mark"/> : "";
                                     return (
                                         <li key={idx}>
-                                            <div className={ "pro-box" + list.biao_type_zi_bgcss}>
+                                            <div className={ "pro-box " + list.biao_type_zi_bgcss}>
                                                 {itemTitle}
                                                 <dl className="pro-info">
                                                     <dt>
