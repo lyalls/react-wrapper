@@ -1,6 +1,7 @@
 import React , {Component, PropTypes} from 'react';
-import Footer from '../../../components/footer/index.jsx';
 import $ from 'jquery';
+import Footer from '../../../components/footer/index.jsx';
+import Header from '../../../components/header/index.jsx';
 
 class Home extends Component {
     constructor(props) {
@@ -9,9 +10,8 @@ class Home extends Component {
     componentWillMount() {
         this.props.onLoading();
     }
-    componentWillReceiveProps(nextProps) {
-    }
-    componentWillUpdate(nextProps, nextState) { 
+    componentDidMount() {
+        $('.content-for-m-header').attr('ui-content-for', 'm-header')
     }
 
     gotoList(){
@@ -23,11 +23,11 @@ class Home extends Component {
     }
     render(){
         return (
+            <div className="scrollable">
             <div className="scrollable-content k_p0">
-                <header className="wx-header wx-index-head">
-                    <h1 className="logo"></h1>
-                    <a href="/users/account" className="wx-index-top-my"></a>
-                </header>
+                <div className="content-for-m-header">
+                    <Header/>
+                </div>
                 <article className="wx-mainbody">   
                     {
                         this.props.banner.items ? 
@@ -115,6 +115,7 @@ class Home extends Component {
                     </div>
                 </article>
                 <Footer />
+            </div>
             </div>
         );
     }
