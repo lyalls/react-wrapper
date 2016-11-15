@@ -1,4 +1,7 @@
-
+svnPath=/Users/sunl/Dev/PROJECTS/baocai/baocainet/mbaocai/App_H5_React
+ifneq "${svn}" ""
+		svnPath="${svn}"
+endif
 ##### WeChat Builder ######## 
 # Last modified: 2016-11-14 #
 # Created by: Lin Sun       #
@@ -57,3 +60,10 @@ buildWechat:
 	cp -r ${wechatTmpDir}/react ${wechatTestDir}/www/react
 	rm -rf ${wechatTmpDir}
 	cd ${wechatTestDir} && npm start
+
+syncToSVN:
+	#cd ${svnPath} && svn update && svn delete --force ./* && rm -rf ./*
+	cd ${svnPath} && svn propset svn:ignore --recursive "node_modules" .
+	cp -r ./* ${svnPath}
+	cd ${svnPath} && svn add ./* 
+	cd ${svnPath} && svn commit -m "Sync from git repository"

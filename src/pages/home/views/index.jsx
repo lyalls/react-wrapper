@@ -14,12 +14,72 @@ class Home extends Component {
         $('.content-for-m-header').attr('ui-content-for', 'm-header')
     }
 
+
+    setSessionStorage(key, value){
+        if(key === undefined || key === null) return;
+        try{
+            if(value === undefined || value === null) {
+                sessionStorage.removeItem(key);
+            }else{
+                value = (typeof value === 'string' || typeof value === 'number') ? value : JSON.stringify(value);
+                sessionStorage.setItem(key, value);
+            }
+        } catch (oException) {
+            if (oException.name == 'QuotaExceededError') {
+                alert('本网站不支持无痕浏览，访问时请关闭无痕浏览。');
+                sessionStorage.clear();
+                sessionStorage.setItem(key, value);
+            }
+        }
+    }
+
+    // 显示对话框
+    // dialog(){
+    //     var modalInstance = $modal.open({
+    //         animation: true,
+    //         templateUrl: 'xlbDialog',
+    //         controller:'homePop',
+    //         size: 20,
+    //         resolve: {
+    //             items: function () {
+    //                 return $scope.items;
+    //             }
+    //         }
+    //     });
+    //     modalInstance.result.then(function (selectedItem) {
+    //         $scope.selected = selectedItem;
+    //     }, function () {
+    //         $log.info('Modal dismissed at:' + new Date());
+    //     });
+    // };
+
+    // 投资详情
+    getInvestDetail (borrowId,pname,ifnew,limitTime) {
+        if (arguments.length >= 4 && arguments[3] > 0) {
+            // dialog();
+            return; //限量标不给跳转
+        }
+        if(pname){
+            this.setSessionStorage('Detail_tender_plan_name',pname)
+        }
+        if(ifnew==0 || ifnew==1){
+            this.setSessionStorage('Detail_tender_if_new',ifnew+'');
+        }
+        this.setSessionStorage('Detail_borrowId', borrowId);
+        window.location.href = "/#/invest/detail";
+    };
+
+    // 立即投资
+    getTenderInfoDetail(borrowId) {
+        if (arguments.length >= 2 && arguments[1] > 0) return;
+        if (borrowId) {
+            this.setSessionStorage('Detail_borrowId', borrowId);
+        }
+        window.location.href = "/#/invest";
+    };
+
     gotoList(){
-        // window.location.replace( "#/invest/list" );
-
         window.location.href = "/#/invest/list" ;
-
-        // $(location).attr('href', '/#/invest/list')
     }
     render(){
         return (
@@ -61,7 +121,7 @@ class Home extends Component {
                                     let recommendMark = (list.is_zhiding == true) ? <img src="./images/icon-recommend.png" className="recommend-mark"/> : "";
                                     return (
                                         <li key={idx}>
-                                            <div className={ "pro-box " + list.biao_type_zi_bgcss}>
+                                            <div className={ "pro-box " + list.biao_type_zi_bgcss} onClick={this.getInvestDetail.bind(this,list.id,false,list.isNew, list.limitTime)}>
                                                 {itemTitle}
                                                 <dl className="pro-info">
                                                     <dt>
@@ -95,7 +155,7 @@ class Home extends Component {
                             <div className="btn-area-com margin-t-1-5rem">
                                 {
                                     (this.props.investList.investsLen === 1 && this.props.investList.investsList[0].statusMessage=='投资中' && this.props.investList.investsList[0].biao_type_zi != '限量标')
-                                    ? <a className="orange-radius-btn wd-80">立即投资</a>
+                                    ? <a className="orange-radius-btn wd-80" onClick={this.getTenderInfoDetail.bind(this, this.props.investList.investsList[0].id)}>立即投资</a>
                                     : ""
                                 }
                                 {
@@ -105,13 +165,20 @@ class Home extends Component {
                                 }
                                 {
                                     (this.props.investList.lastTenderInfo !== false)
-                                    ? <a class="gray-radius-btn wd-80">{this.props.investList.lastTenderInfo.addtime * 1000} 抢光</a>
+                                    ? <a class="gray-radius-btn wd-80">
+                                    {
+                                        new Date(this.props.investList.lastTenderInfo.addtime * 1000).getMonth()+1  + "月" 
+                                        +new Date(this.props.investList.lastTenderInfo.addtime * 1000).getDate() +"日"
+                                        +new Date(this.props.investList.lastTenderInfo.addtime * 1000).getHours()+":"
+                                        +new Date(this.props.investList.lastTenderInfo.addtime * 1000).getMinutes()+" 抢光"
+                                    } 
+                                    </a>
                                     : ""
                                 }
                             </div>
                             :""
                         }
-                        <div className="loading-btn" onClick={this.gotoList}>查看更多项目</div>
+                        <div className="loading-btn" onClick={this.gotoList.bind(this)}>查看更多项目</div>
                     </div>
                 </article>
                 <Footer />
