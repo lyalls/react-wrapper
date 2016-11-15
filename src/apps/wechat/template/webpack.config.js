@@ -20,6 +20,13 @@ module.exports = {
         filename : "bundle.[name].js",
         chunkFilename: "[id].chunk.js"
     },
+    // plugins: [
+    //     new webpack.optimize.UglifyJsPlugin({
+    //         compress: {
+    //             warnings: false
+    //         }
+    //     })
+    // ],
     module: {
         loaders: [
             {
@@ -45,7 +52,7 @@ module.exports = {
             },
             {
                 test: /\.(jpe?g|gif|png|eot|svg|woff|woff2|ttf)([\?]?.*)$/,
-                loaders: ['file']
+                loaders: ['url-loader']
             },
         ],
     },

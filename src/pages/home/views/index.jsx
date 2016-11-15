@@ -189,8 +189,8 @@ class Home extends Component {
 }
 
 Home.propTypes = {
+    env: PropTypes.object.isRequired,
     onLoading: PropTypes.func.isRequired,
-    
 }
 
 export default Home;

@@ -9,7 +9,7 @@
                 <li ng-repeat="list in investsList">
                     <div class="pro-list-info" ng-class="(list.img_type==2||list.img_type==3||list.tenderSchedule==100)?'item-disabled':''">
                         <div class="pro-box {{list.biao_type_zi_bgcss}}" ng-click="getInvestDetail(list.id,list.planName,list.isNew, list.limitTime)">
-                            <h3 ng-if="list.isLimit != 1 || list.limitTime<=0"><em class="h3-title"><strong ng-if="list.biao_type_zi == '会员标'" class="icon-crown"></strong><span ng-if="list.isFullThreshold==1" class="red-tag">满抢</span>{{list.name}}</em><i></i></h3>
+                            <h3 ng-if="list.isLimit != 1 || list.limitTime<=0"><em class="h3-title"><span ng-if="list.isFullThreshold==1" class="red-tag">满抢</span>{{list.name}}</em><i></i></h3>
                             <h3 class="count-down" ng-if="list.isLimit == 1 && list.limitTime>0"><b></b>即将发售：<time>{{list.timer}}</time></h3>
                             <dl class="pro-info">
                                 <dt>

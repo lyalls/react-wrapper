@@ -119,7 +119,7 @@ WebApp.Instance.controller('MainController', function ($rootScope, $scope, $loca
                 $location.path() == WebApp.Router.INVEST_DETAIL
                 ) {
             $timeout(function () {
-                $location.path($location.host());
+                $location.path(WebApp.Router.HOME);
             }, 0);
             return;
         }
