@@ -1,0 +1,23 @@
+<div ui-content-for="title" >
+    <span>红包收益</span>
+</div>
+<div class="scrollable" ng-controller="AccountController">
+    <div class="scrollable-content section k_p0" ng-init="getNewBonus()" ui-scroll-bottom='getNewBonusBttom()' ui-scroll-top='getNewBonus()'>
+        <div class="k_repayment_top f_packet_profit_top" ng-init="getBonusTotal()">
+            <p>红包收益(元)</p>
+            <span>{{bonusTotal.bonusTotalMoney}}</span>
+        </div>
+        <div class="k_repayment_list f_packet_profit_list">
+            <table ng-repeat="x in bonus">
+                <tr>
+                    <td rowspan="2">{{x.bonusMoney}}元</td>
+                    <td>{{x.title}}</td>
+                </tr>
+                <tr>
+                    <td>{{x.ArriveTime}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</div>

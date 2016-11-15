@@ -1,0 +1,46 @@
+<div ui-content-for="title" >
+    <span>重设密码</span>
+</div>
+<div class="scrollable" ng-controller="ResetController">
+    <div class="scrollable-content section k_ptblr">       
+        <form role="form" name="resetVcode">
+            <fieldset>
+                <div class="k_input" bc-focus="input">
+                    <input type="text" 
+                           ng-required="true" 
+                           ng-model="phone" 
+                           onkeyup="this.value = this.value.replace(/(^\s+)|(\s+$)/g, '')"
+                           oninput="this.value = this.value.replace(/(^\s+)|(\s+$)/g, '')"
+                           placeholder="请输入您已绑定的手机号">
+                    <div ng-model="errorNoPhone"s class="k_error_msg">{{errorNoPhone.value}}</div>
+                </div>
+                <div class="k_input k_reset_v_code_yzm k_pr" bc-focus="input">
+                    <input type="text" 
+                           ng-required="true" 
+                           ng-model="code" 
+                           onkeyup="this.value = this.value.replace(/(^\s+)|(\s+$)/g, '')" 
+                           oninput="this.value = this.value.replace(/(^\s+)|(\s+$)/g, '')"
+                           placeholder="请输入手机验证码" >
+                    <div ng-show="statusClockReg == true" ng-click="getResetPhone()" class="k_yzm">
+                        <p ng-model="countdown">
+                            <span ng-show="!countdown">获取验证码</span>
+                            <span ng-show="countdown">已发送</span>
+                            <span ng-show="countdown">{{countdown}}</span>
+                        </p>
+                    </div>  
+                    <div ng-show="statusClockReg == false" class="k_yzm">
+                        <p ng-model="countdown">
+                            <span ng-show="!countdown">获取验证码</span>
+                            <span ng-show="countdown">已发送</span>
+                            <span ng-show="countdown">{{countdown}}</span>
+                        </p>
+                    </div> 
+                </div>
+            </fieldset>
+            <div class="k_btn k_reset_v_c_next" bc-focus="button">
+                <button type="button" value="下一步" ng-click="getValidatePhoneCode()">下一步</button>
+            </div> 
+        </form>
+    </div>
+</div>
+

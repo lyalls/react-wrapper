@@ -1,0 +1,38 @@
+<div ui-content-for="title" >
+    <span>详情</span>
+</div>
+
+<div class="scrollable text-center" ng-controller="InvestProductRiskController" id="p_risks">
+    <div class="scrollable-content section">
+        <div class="list-group-item list-group-item-home media text-left k_pd">
+            <h3>担保机构</h3>
+            <p>{{investsRisk.guaranteeAgencies}}</p>
+        </div>
+        <div class="list-group-item-home text-left">
+            <div>
+                <h3>借款主体信息</h3>
+                <p>{{investsRisk.loanPrincipal}}</p>
+            </div>
+            <div>
+                <h3>还款来源</h3>
+                <p>{{investsRisk.repaymentSource}}</p>
+            </div>
+            <div>
+                <h3>资产负债与财务状况</h3>
+                <p>{{investsRisk.financialSituation}}</p>
+
+            </div>
+            <div>
+                <h3>信用记录</h3>
+                <p>{{investsRisk.creditRecord}}</p>
+            </div>
+            <div>
+                <h3>风控措施</h3>
+                <div ng-bind-html="renderHtml(investsRisk.riskControl)" ></div>
+            </div>
+        </div
+    </div>
+</div>
+<!--<div ng-controller="PopupController">
+                <div ng-init="clickToOpen()"></div>
+</div>-->

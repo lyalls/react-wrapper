@@ -1,0 +1,32 @@
+<div ui-content-for="title" >
+    <span>补全银行卡信息</span>
+</div>
+<div class="scrollable" ng-controller="PresentController">
+    <div class="scrollable-content section k_ptblr" ng-init = 'getAccountBankInfo()' ng-model="bascInfo">
+        <form role="form" name="myTestForm">
+            <fieldset>
+                <div class="k_user_bank">
+                    <p><label>银行 </label><span>{{bascInfo.bankName}}</span></p>
+                    <p><label>卡号 </label><span>{{bascInfo.cardNumber}}</span></p>
+                    <p class="k_big_mb30">
+                        <label>开户所在地</label>
+                        <select  ng-model="areas.area.id"   ng-change = 'getAreaSubject()' >
+                            <option value="" >请选择</option>
+                            <option value="{{area.id}}" ng-repeat="area in bascInfo.areasList" >{{area.name}}</option>
+                        </select>
+                        <select ng-model = 'areaSubject.city.id'>
+                            <option  value=""  >请选择</option>
+                            <option value="{{ city.id}}" ng-repeat="city in areaSubject" >{{city.name}}</option>
+                        </select>
+                    </p>
+                    <p class="k_big_mb30" bc-focus="input"><label for="">开户支行</label><input type="text" ng-model='branch' placeholder="例如中关村支行" ></p>
+                </div>
+            </fieldset>
+            <div class="k_error_msg" ng-show="errorMessage" ng-model="errorMessage">{{errorMessage}}</div>
+            <div class="k_btn k_small_mt10" bc-focus="input">
+                <button ng-click="updateAccountBankInfo()" >确定</button>
+            </div> 
+        </form>
+    </div>
+</div>
+

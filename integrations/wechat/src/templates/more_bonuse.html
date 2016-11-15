@@ -1,0 +1,31 @@
+<div ui-content-for="title" >
+    <span>红包说明</span>
+</div>
+<div class="scrollable" ng-controller="AccountController" >
+    <div class="scrollable-content section k_privilege" ng-init="getUnusedBonusTicketListRules()">
+        <div class="k_privilege_head">获得红包券红包</div>
+        <div class="k_more_bonuse_main f_table_column">
+            <h2>投资时自动将最优组合的红包券转化为红包<br />(仅限带“券”字标识的项目使用)</h2>
+            <table>
+                <tr >
+                    <td>红包券类型</td>
+                    <td>使用条件</td>
+                </tr>
+                <tr ng-repeat="x in unusedBonusTicketListRules.list">
+                    <td>{{x.cat}}</td>
+                    <td>{{x.condition}}</td>
+                </tr>
+             
+            </table>
+        </div>
+        <!--
+        <div class="k_privilege_head">获得加息红包</div>
+        <div class="k_more_bonuse_content">
+            <ul>
+                <li>注册时使用邀请码，投资加息0.5%</li>
+                <li>使用邀请码邀请好友注册，投资加息0.5%</li>
+            </ul>
+        </div>
+        -->
+    </div>
+</div>

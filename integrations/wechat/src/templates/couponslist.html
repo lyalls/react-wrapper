@@ -1,0 +1,34 @@
+<div class="couplist item-detail-cont margin-t-1-2rem">
+    <div class="center info"><span>{{name}}</span></div>
+
+    <div class="txt-cont">
+        <ul class="wx-coupon-list">
+            <li ng-if="list[0]" ng-repeat='item in list' ng-click="itemClick({args:item})">
+                <div ng-if="item.id" ng-class="{0:'overdate'}[item.used]" class="wx-coupon-cont">
+                    <dl class="wx-coupon-info">
+                        <dt>{{item.title}}<span>{{item.unit}}</span></dt>
+                        <dd  ng-repeat="info in item.info">
+                            {{info}}
+                            <!--投资满 <strong>2000</strong> 元使用-->
+                        </dd>
+                        <dd>
+                            {{item.date}}
+                            <!--有效期至2016-07-17 16:53-->
+                        </dd>
+                    </dl>
+                    <span class="check-box-gold" ng-if="item.used==2"></span>
+                    <!--<span class="coupCheck" ng-if="item.used==2"></span>-->
+                    <i  ng-class="{1:'ticket-tag-jx',2:'ticket-tag-jx-overdate',3:'ticket-tag-hb',4:'ticket-tag-hb-overdate'}[item.type]" class="ticket-tag"></i>
+                </div>
+                <div ng-if="item.id == 0"  class="wx-coupon-nonuse">不使用{{title}}
+                    <span class="check-box-gold" ng-if="item.used==2"></span>
+                </div>
+            </li>
+        </ul>
+
+        <dl class="wx-tips-null" ng-if="!list[0]">
+            <dt><img src="./images/coupon-null-img.png" width="38%" /></dt>
+            <dd>暂无{{title}}</dd>
+        </dl>
+    </div>
+</div>

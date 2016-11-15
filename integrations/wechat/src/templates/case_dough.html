@@ -1,0 +1,75 @@
+<div ui-content-for="title">
+    <span>体验金</span>
+</div>
+<div class="scrollable" ng-controller="CaseDoughController">
+    <div class="scrollable-content k_p0" >
+        <div class='section k_index k_p0 k_pb70' style="min-height:100%">
+            <ui-state id='activeTab' default='2'></ui-state>            
+
+            <div ui-if="activeTab == 2" ng-init="getMoneyLog()" >
+                <div class="k_special_rights" >
+                    <div ng-init="getMoneyTotal()">
+                        <div class="k_details_rate">体验金</div>
+                        <div class="k_details_num">{{money}}<span>元</span></div>
+                        <div class="text-right" ng-click="bcChangeUrl(bcAllUrl.caseDoughRules)">查看规则>></div>
+                    </div>
+                </div>
+                <div class="k_special_rights_list" ng-repeat="increaseLog in moneyLog" >
+                    <table>
+                        <tr>
+                            <td rowspan="2">+{{increaseLog.money}}</td>
+                            <td>{{increaseLog.type}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{increaseLog.expiredTime}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- <p class="text-center k_special_rights_txt" ng-show="isMore">加载更多...</p> -->
+            </div>
+
+            <!--<div ui-if="activeTab == 2">-->
+            <!--<div>
+                <div class="k_special_rights">
+                    <div>
+                        <div class="k_special_rights_rate">小金库库存</div>
+                        <div class="k_special_rights_num">3000<span>金币</span></div>
+                        <div class="text-right">如何获得>></div>
+                    </div>
+                </div>
+                <div class="k_special_rights_coffer_list">
+                    <table>
+                        <tr>
+                            <td >+1000</td>
+                            <td>被邀请注册 151****5590</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td >+1000</td>
+                            <td>参与XXXX活动</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td >-1000</td>
+                            <td>兑换手机充值卡</td>
+                        </tr>
+                    </table>
+                </div>
+                <p class="text-center k_special_rights_txt">加载更多...</p>
+            </div>-->
+        </div>
+
+    </div>
+    <div  class=" navbar-absolute-bottom" ng-show="getMoneyTotalShow==false">
+        <div class="k_btn k_special_rights_btn k_btn_gray" bc-focus="button">
+            <button type="button" value="邀请好友获得加息">使用体验金投资</button>
+        </div> 
+    </div>
+    <div  class=" navbar-absolute-bottom" ng-show="getMoneyTotalShow==true">
+        <div class="k_btn k_special_rights_btn" bc-focus="button" ng-click="bcChangeUrl(bcAllUrl.experience)">
+            <button type="button" value="邀请好友获得加息">使用体验金投资</button>
+        </div> 
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<div ui-content-for="title" >
+    <span>用户密码设置</span>
+</div>
+<div class="scrollable" ng-controller="RegisterController">
+    <div class="scrollable-content section k_ptblr" >  
+        <form role="form" name="myForm" novalidate>
+            <fieldset>
+                <div class="k_input"  bc-focus="input">
+                    <input type="{{typePass}}"
+                           name="password" 
+                           autocomplete="off" 
+                           required
+                           onkeyup="this.value = this.value.replace(/(^\s+)|(\s+$)/g, '')"
+                           oninput="this.value = this.value.replace(/(^\s+)|(\s+$)/g, '')"
+                           placeholder="请设置登录密码"
+                           onpaste="return false"
+                           ng-model="setPassword" />
+                    <span class="pw-status"><img src="{{imgPass}}" width="50%" ng-click="showPass()"></span>
+                </div>
+                <div class="k_input" bc-focus="input">
+                    <input type="text"
+                           placeholder="邀请码，没有可不填"
+                           ng-model="invitationCode" />
+                </div>
+            </fieldset>
+            <div class="k_btn k_reg_name_next" bc-focus="input">
+                <button  ng-click="register()">完成</button>
+            </div> 
+        </form>
+    </div>
+</div>
+
+
+

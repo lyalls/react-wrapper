@@ -1,0 +1,8 @@
+<div ng-controller="ProjectsController"  ng-init="getProjectsBorrower()">
+	<div ng-if="projectBorrower.borrowerInfo.borrow_template=='v1'">
+		<div ng-include="'project_borrower_v1.html'"></div>
+	</div>
+	<div ng-if="projectBorrower.borrowerInfo.borrow_template=='v2'">
+		<div ng-include="'project_borrower_v2.html'"></div>
+	</div>
+</div>

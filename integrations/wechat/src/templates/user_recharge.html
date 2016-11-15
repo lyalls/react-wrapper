@@ -1,0 +1,146 @@
+<div ui-content-for="title" ><span>充值</span></div>
+<div ui-content-for="navbarAction">
+</div>
+<div class="scrollable k_recharge_all" ng-controller="PaymentController">  
+    <div class="scrollable-content" ng-model="info" ng-init="getRechargeInfo()">
+        <form role="form" name="rechargeMessage" ng-submit='createOrder()'>
+            <div class="k_recharge" ng-show = " !(info.type == true)"> 
+                <!-- <div class="k_recharge" style="display:none;">  -->
+                <div class="k_recharge_infor">
+                    <p>姓名：{{info.realname}}</p>
+                    <p>身份证号：{{info.cardId}}</p>
+                </div>	
+                <div class="k_recharge_input" bc-focus="input">
+                    <input type="text" 
+                           placeholder="请输入开户名与实名认证姓名一致的银行卡号"
+                           ng-model = "accountNumber"
+                           name ="accountNumber"
+                           onkeyup="this.value = this.value.replace(/\D/g, '')"
+                           ng-blur ="ckeckAccountNumber()"
+                           onpaste="return false"
+                           >
+                    </div>
+                <div class="k_recharge_input" bc-focus="input">
+                    <input type="text" 
+                           name="money"
+                           ng-model ="money"
+                           ng-change ="ckeckMoney()"
+                           onkeyup="this.value = this.value.replace(/[^0-9Xx|.]/g, '')"
+                           onpaste="return false"
+                           placeholder="请输入您要充值的金额" 
+                           >
+                </div>
+                <div class="k_recharge_btn">		
+                    <button>充值</button>
+                </div>
+                <div class="k_recharge_txt">		
+                    <p>目前支持绑卡的银行有农业银行、工商银行、招商银行、中国银行、建设银行、光大银行、华夏银行、平安银行、浦发银行、中信银行、兴业银行、邮政储蓄银行、民生银行、广发银行、交通银行</p>
+                </div>
+                <p class="k_recharge_bottom">此服务由连连支付提供</p>
+            </div>
+            <div class="k_recharge2" ng-show = " (info.type == true)">
+                <!-- <div class="k_recharge2"> -->
+                <div class="k_bank">
+                    <div class="k_bank_l">
+                        <p>{{info.bankName}}</p>
+                        <p>尾号{{info.cardNo}}</p>
+                    </div>
+                    <div class="k_bank_r">
+                        <img src="images/right.png" alt="">
+                    </div>
+                </div>
+                <div class="k_recharge2_input" bc-focus="input">
+                    <input type="text" 
+                           name="rechargeMoney"
+                           ng-model ="rechargeMoney"
+                           ng-change ="ckeckMoney()"
+                           onkeyup="this.value = this.value.replace(/[^0-9Xx|.]/g, '')"
+                           onpaste="return false"
+                           placeholder="请输入您要充值的金额" 
+                           >
+                </div>
+                <div class="k_recharge2_btn">		
+                    <button>充值</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div ng-show="false" bc-focus="input">
+        <form  id ="llpaysubmit" action="https://yintong.com.cn/llpayh5/authpay.htm" method ='POST' name="llpaysubmit" >
+            <input type='hidden' id ='llpay' name='req_data' value ='{{orderData}}'>
+            <input type='submit' value='提交'>
+        </form>
+    </div>
+</div>
+<script type="text/ng-template" id="checkMoreMoney">
+    <div class="k_layer">
+    <div class="k_layer_txt"><p>单笔限额5万元</p></div>
+    <div class="common_popup_bottom_btns"> 
+      <button ng-click="ok()" class="single_btn">确定</button>
+    </div>
+    </div>
+</script>
+<!---充值金额为空的时候--->
+<script type="text/ng-template" id="checkMoney">
+    <div class="k_layer">
+    <div class="k_layer_txt"><p>请输入充值金额</p></div>
+    <div class="common_popup_bottom_btns"> 
+        <button ng-click="ok()" class="single_btn">确定</button>
+    </div>
+    </div>
+</script>
+<!--第一次充值-->
+<script type="text/ng-template" id="firstRecharge">
+    <div class="k_layer">
+    <div class="k_layer_txt"><p class="leftp">主人，您在抱财金融管家首次充值的银行卡将作为默认银行卡，即充值、取现唯一指定银行卡。</p></div> 
+    <div class="common_popup_bottom_btns">                
+        <button ng-click="ok()" class="single_btn">确定</button>
+    </div>
+    </div>
+</script>
+<script type="text/ng-template" id="checkAccountNumber">
+    <div class="k_layer">
+    <div class="k_layer_txt"><p>请绑定连连支付支持的银行卡</p></div>
+    <div class="common_popup_bottom_btns">                
+        <button ng-click="ok()" class="single_btn">确定</button>
+    </div>
+    </div>
+</script>
+<!--提交银行卡为空-->
+<script type="text/ng-template" id="checkAccountNumberEmpty">
+    <div class="k_layer">
+    <div class="k_layer_txt"><p>请输入银行卡号</p></div>
+    <div class="common_popup_bottom_btns">                
+        <button ng-click="ok()" class="single_btn">确定</button>
+    </div>
+    </div>
+</script>
+
+<!--<script type="text/ng-template" id="rechargeS">
+    <div class="k_layer">
+    <div class="k_layer_txt"><p>充值成功</p></div>
+    <div class="common_popup_bottom_btns"> 
+    <button ng-click="toSomePlace(pathAll.enoughMoney)" class="single_btn">确定</button>
+    </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="rechargeF">
+    <div class="k_layer">
+    <div class="k_layer_txt"><p>充值失败</p></div>
+    <div class="common_popup_bottom_btns"> 
+    <button ng-click="toSomePlace(pathAll.userCenter)" class="single_btn">确定</button>
+    </div>
+    </div>
+</script>
+<script type="text/ng-template" id="rechargeE">
+    <div class="k_layer">
+    <div class="k_layer_txt"><p>充值异常</p>
+    <p>详情请联系客服 400-616-7070</p></div>
+    <div class="common_popup_bottom_btns"> 
+    <button ng-click="toSomePlace(pathAll.userCenter)" class="single_btn">确定</button>
+    </div>
+    </div>
+</script>-->
+
+

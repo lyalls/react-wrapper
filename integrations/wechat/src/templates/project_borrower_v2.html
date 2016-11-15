@@ -1,0 +1,193 @@
+
+    <div class="item-detail-cont margin-t-1-2rem" >
+        <div class="txt-cont">
+              <h2 class="title-pro-detail">借款人信息</h2>
+              <div class="cont-box-com">
+                   <ul class="pro-detail-txt">
+                   		<em ng-if="projectBorrower.borrowerInfo.userRole=='user'">
+                   			<li><label>姓名：</label><span>{{projectBorrower.borrowerInfo.userName}}</span></li>
+                       		<li><label>年龄：</label><span>{{projectBorrower.borrowerInfo.age}}岁</span></li>
+                       		<li><label>学历：</label><span>
+                       		<em ng-if="projectBorrower.borrowerInfo.degree">
+                       			{{projectBorrower.borrowerInfo.degree}}
+                       		</em>
+                       		<em ng-if="!projectBorrower.borrowerInfo.degree">
+                       			未填
+                       		</em>
+                       		</span></li>
+                       		<li><label>婚姻：</label><span>
+                       		<em ng-if="projectBorrower.borrowerInfo.marriage">
+                       			{{projectBorrower.borrowerInfo.marriage}}
+                       		</em>
+                       		<em ng-if="!projectBorrower.borrowerInfo.marriage">
+                       			未填
+                       		</em></span></li>
+                       		<li><label>户口所在地：</label><span>
+                       		<em ng-if="projectBorrower.borrowerInfo.city">
+                       			{{projectBorrower.borrowerInfo.city}}
+                       		</em>
+                       		<em ng-if="!projectBorrower.borrowerInfo.city">
+                       			未填
+                       		</em></span></li>
+                       		<li><label>职业状态：</label><span>
+                       		<em ng-if="projectBorrower.borrowerInfo.jobStatus">
+                       			{{projectBorrower.borrowerInfo.jobStatus}}
+                       		</em>
+                       		<em ng-if="!projectBorrower.borrowerInfo.jobStatus">
+                       			未填
+                       		</em></span></li>
+                       		<li><label>月收入水平：</label><span>
+                       		<em ng-if="projectBorrower.borrowerInfo.income">
+                       			{{projectBorrower.borrowerInfo.income}}
+                       		</em>
+                       		<em ng-if="!projectBorrower.borrowerInfo.income">
+                       			未填
+                       		</em>{{projectBorrower.borrowerInfo.income}}</span></li>
+                       		<li><label>公司类型：</label><span>
+                       		<em ng-if="projectBorrower.borrowerInfo.companyType">
+                       			{{projectBorrower.borrowerInfo.companyType}}
+                       		</em>
+                       		<em ng-if="!projectBorrower.borrowerInfo.companyType">
+                       			未填
+                       		</em>{{projectBorrower.borrowerInfo.companyType}}</span></li>
+                       		<li><label>公司规模：</label><span>
+                       		<em ng-if="projectBorrower.borrowerInfo.companySize">
+                       			{{projectBorrower.borrowerInfo.companySize}}
+                       		</em>
+                       		<em ng-if="!projectBorrower.borrowerInfo.companySize">
+                       			未填
+                       		</em></span></li>
+                   		</em>
+                   		<em ng-if="projectBorrower.borrowerInfo.userRole!='user'">
+                   			<li><label>企业名称：</label><span>
+                   			<em ng-if="projectBorrower.borrowerInfo.enterpriseInfo.company_alias">
+                       			{{projectBorrower.borrowerInfo.enterpriseInfo.company_alias}}
+                       		</em>
+                       		<em ng-if="!projectBorrower.borrowerInfo.enterpriseInfo.company_alias">
+                       			未填
+                       		</em></span></li>
+                       		<li><label>法定代表人：</label><span>
+                       		<em ng-if="projectBorrower.borrowerInfo.enterpriseInfo.legalperson">
+                       			{{projectBorrower.borrowerInfo.enterpriseInfo.legalperson}}
+                       		</em>
+                       		<em ng-if="!projectBorrower.borrowerInfo.enterpriseInfo.legalperson">
+                       			未填
+                       		</em></span></li>
+                       		<li><label>注册资金：</label><span>
+                       		<em ng-if="projectBorrower.borrowerInfo.enterpriseInfo.reg_capital">
+                       			{{projectBorrower.borrowerInfo.enterpriseInfo.reg_capital}}
+                       		</em>
+                       		<em ng-if="!projectBorrower.borrowerInfo.enterpriseInfo.reg_capital">
+                       			未填
+                       		</em></span></li>
+                       		<li><label>经营期限：</label><span>
+                       		<em ng-if="projectBorrower.borrowerInfo.enterpriseInfo.operation_period">
+                       			{{projectBorrower.borrowerInfo.enterpriseInfo.operation_period}}
+                       		</em>
+                       		<em ng-if="!projectBorrower.borrowerInfo.enterpriseInfo.operation_period">
+                       			未填
+                       		</em></span></li>
+                       		<li>
+	                       		<div class="item-info">
+	                       			<label>企业简介：</label>
+	                       			<span class="paragraph">
+	                             	<em ng-if="projectBorrower.borrowerInfo.enterpriseInfo.management_scope">
+	                       				<span class="paragraph" ng-bind-html="projectBorrower.borrowerInfo.enterpriseInfo.management_scope|htmlContent"></span>
+	                       			</em>
+	                       			<em ng-if="!projectBorrower.borrowerInfo.enterpriseInfo.management_scope">
+	                       				未填
+	                       			</em>
+	                       			</span>
+	                         	</div>
+                         	</li>
+                   		</em>
+                   </ul>
+              </div>
+        </div>
+		<em ng-if="projectBorrower.borrowerInfo.typeNid=='rongsan'">
+        <div class="txt-cont">
+            <h2 class="title-pro-detail">企业介绍</h2>
+            <div class="cont-box-com">
+                <a href="http://v.youku.com/v_show/id_{{projectBorrower.borrow_details.enterprise_promo_url}}.html" id="video-btn">
+                <div class="wx-video-box">
+                    <img src="{{projectBorrower.borrow_details.enterprise_promo_app_preview_url}}" width="100%">
+                    <div class="video-btn-mask"><img src="/images/play-btn.png" class="video-play-btn"></div>
+                </div>
+                </a>
+                <h3 class="title-video"><span ng-bind-html="projectBorrower.borrow_details.enterprise_promo_title|htmlContent"></span></h3>
+            </div>
+        </div>
+
+        <div class="txt-cont">
+            <h2 class="title-pro-detail">新三板企业信息</h2>
+            <div class="cont-box-com">
+                   <p class="paragraph" ng-bind-html="projectBorrower.borrow_details.three_enterprise_info|htmlContent"></p>
+                   <p class="paragraph" ng-bind-html="projectBorrower.borrow_details.three_enterprise_info_Img|htmlContent"></p>
+            </div>
+        </div>
+		</em>
+        <div class="txt-cont">
+            <h2 class="title-pro-detail">资料审核信息</h2>
+            <div class="cont-box-com">
+                <ul class="auditing-info-list">
+                	<em ng-if="projectBorrower.literatureReviewInfo.card && projectBorrower.literatureReviewInfo.card.status==1">
+                		<li><i class="auditing-icon-1"></i>身份证</li>
+                	</em>
+                    <em ng-if="projectBorrower.literatureReviewInfo.work && projectBorrower.literatureReviewInfo.work.status==1">
+                		<li><i class="auditing-icon-2"></i>工作证明</li>
+                	</em>
+                    <em ng-if="projectBorrower.literatureReviewInfo.income && projectBorrower.literatureReviewInfo.income.status==1">
+                		<li><i class="auditing-icon-3"></i>收入证明</li>
+                	</em>
+                    <em ng-if="projectBorrower.literatureReviewInfo.xinyong && projectBorrower.literatureReviewInfo.xinyong.status==1">
+                		<li><i class="auditing-icon-4"></i>信用报告</li>
+                	</em>
+                    <em ng-if="projectBorrower.literatureReviewInfo.juzhu && projectBorrower.literatureReviewInfo.juzhu.status==1">
+                		<li><i class="auditing-icon-5"></i>居住地认证</li>
+                	</em>
+                    <em ng-if="projectBorrower.literatureReviewInfo.hukou && projectBorrower.literatureReviewInfo.hukou.status==1">
+                		<li><i class="auditing-icon-6"></i>户口本</li>
+                	</em>
+                    <em ng-if="projectBorrower.literatureReviewInfo.marry && projectBorrower.literatureReviewInfo.marry.status==1">
+                		<li><i class="auditing-icon-7"></i>结婚证</li>
+                	</em>
+                    <em ng-if="projectBorrower.literatureReviewInfo.fangchan && projectBorrower.literatureReviewInfo.fangchan.status==1">
+                		<li><i class="auditing-icon-8"></i>房产证</li>
+                	</em>
+                    <em ng-if="projectBorrower.literatureReviewInfo.xingche && projectBorrower.literatureReviewInfo.xingche.status==1">
+                		<li><i class="auditing-icon-9"></i>车辆证</li>
+                	</em>
+                    <em ng-if="projectBorrower.literatureReviewInfo.edu && projectBorrower.literatureReviewInfo.edu.status==1">
+                		<li><i class="auditing-icon-10"></i>学历证</li>
+                	</em>
+                    <em ng-if="projectBorrower.literatureReviewInfo.technical && projectBorrower.literatureReviewInfo.technical.status==1">
+                		<li><i class="auditing-icon-11"></i>职称资格证书</li>
+                	</em>
+                    <em ng-if="projectBorrower.literatureReviewInfo.shidi && projectBorrower.literatureReviewInfo.shidi.status==1">
+                		<li><i class="auditing-icon-12"></i>实地认证</li>
+                	</em>
+                    <em ng-if="projectBorrower.literatureReviewInfo.video && projectBorrower.literatureReviewInfo.video.status==1">
+                		<li><i class="auditing-icon-13"></i>视频认证</li>
+                	</em>
+                    <em ng-if="projectBorrower.literatureReviewInfo.zhizhao && projectBorrower.literatureReviewInfo.zhizhao.status==1">
+                		<li><i class="auditing-icon-14"></i>企业营业执照</li>
+                	</em>
+                    <em ng-if="projectBorrower.literatureReviewInfo.zzjgdmz && projectBorrower.literatureReviewInfo.zzjgdmz.status==1">
+                		<li><i class="auditing-icon-15"></i>组织机构代码证</li>
+                	</em>
+                    <em ng-if="projectBorrower.literatureReviewInfo.nashui && projectBorrower.literatureReviewInfo.nashui.status==1">
+                		<li><i class="auditing-icon-16"></i>税务登记证</li>
+                	</em>
+                    <em ng-if="projectBorrower.literatureReviewInfo.kaihu && projectBorrower.literatureReviewInfo.kaihu.status==1">
+                		<li><i class="auditing-icon-17"></i>开户许可证</li>
+                	</em>
+                    <em ng-if="projectBorrower.literatureReviewInfo.zhangcheng && projectBorrower.literatureReviewInfo.zhangcheng.status==1">
+                		<li><i class="auditing-icon-18"></i>企业章程</li>
+                	</em>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+
+

@@ -1,0 +1,17 @@
+<div ui-content-for="title" >
+    <span>温馨提示</span>
+</div>
+<div class="scrollable" ng-controller="InvestsController">
+    <div class="scrollable-content section k_ptblr">
+        <div class="k_invest_success k_noenough" ng-init="getData()">
+            <img src="images/invest_noenough.png" alt="">
+            <p>项目剩余金额不足<span style="color:#ff7928;">{{enough_amount}}</span>元</p>
+            <p>是否继续投资剩余金额</p>
+            <p>(具体投资金额以成交金额为准)</p>
+            <div class="k_clear k_invest_success_btn" ng-model="pathAll">
+                <div class="k_col_6" ng-click="toSomePlace(pathAll.invest)"><button>取消投资</button></div>
+                <div class="k_col_6" ng-click="enough_tender()"><button>继续投资</button></div>
+            </div>
+        </div>
+    </div>
+</div>

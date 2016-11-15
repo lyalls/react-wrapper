@@ -1,0 +1,40 @@
+<div class="scrollable" ng-controller="InvestsController" >  
+    <div class="scrollable-content" ui-scroll-bottom='generalList()' ui-scroll-top='updateGeneralList()' ng-init="generalList()" >
+
+        <div class="list-group text-left" id="main">
+            <div class="list-group-item list-group-item-home">
+                <div >			
+                    <div class="k_list" ng-repeat="list in investsList"  >
+                        <div class="media-body row k_list_row " ng-class="FontColor(list.typeNid).style_l" ng-click="getInvestDetail(list.id)" >
+                            <div class="col-xs-9" >
+                                <div class="main_left">
+                                    <p class="k_head">{{list.name}}</p>
+                                    <div class="k_clear">
+                                        <div class="k_fl list_left">
+                                            <p class="k_num " ng-class="FontColor(list.typeNid).style_n" ><span>{{list.annualRate}}%</span></p>
+                                            <p>年利率</p>
+                                        </div>		
+                                        <div class="k_fl list_right">	
+                                            <p>锁定期 <span> {{list.investmentHorizon}}</span></p>
+                                            <p>可投 <span> {{list.availableAmount}}</span></p>	
+                                        </div>
+                                    </div>
+                                </div>				
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="k_pr k_fr main_right">
+                                    <progress-arc  size="60" background="#eee" complete="list.tenderSchedule/100" stroke="{{progressColor(list.typeNid, list.tenderSchedule)}}" stroke-width="5" ></progress-arc>
+                                    <p class="y_num">{{list.tenderSchedule}}%</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>		
+                </div>
+            </div>  
+        </div>
+
+
+
+
+

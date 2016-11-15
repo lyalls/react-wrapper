@@ -1,0 +1,50 @@
+<div ui-content-for="title" >
+    <span>项目列表</span>
+</div>
+<div class="scrollable" ng-controller="ProductlistController">
+    <div class="scrollable-content"  ng-init="clickaddlist()" >
+    <article class="wx-mainbody" >
+        <div class="wx-index-pro-cont">
+            <ul class="wx-index-pro-list">
+                <li ng-repeat="list in investsList">
+                    <div class="pro-list-info" ng-class="(list.img_type==2||list.img_type==3||list.tenderSchedule==100)?'item-disabled':''">
+                        <div class="pro-box {{list.biao_type_zi_bgcss}}" ng-click="getInvestDetail(list.id,list.planName,list.isNew, list.limitTime)">
+                            <h3 ng-if="list.isLimit != 1 || list.limitTime<=0"><em class="h3-title"><strong ng-if="list.biao_type_zi == '会员标'" class="icon-crown"></strong><span ng-if="list.isFullThreshold==1" class="red-tag">满抢</span>{{list.name}}</em><i></i></h3>
+                            <h3 class="count-down" ng-if="list.isLimit == 1 && list.limitTime>0"><b></b>即将发售：<time>{{list.timer}}</time></h3>
+                            <dl class="pro-info">
+                                <dt>
+                                    <strong>{{list.annualRate}}<b class="font-12">%</b><b class="font-22" ng-if="list.increaseApr>0">+{{list.increaseApr| number:2}}</b><b class="font-12" ng-if="list.increaseApr>0">%</b></strong>
+                                    <span ng-show="list.isReward==1" class="take">{{list.promotionTitle}}</span>
+                                    <span ng-show="+list.isBonusticket == 1">红包券</span>
+                                    <span ng-show="+list.isAllowIncrease == 1">加息券</span>
+                                    <span ng-show="+list.isTag == 1">{{list.tagTitle}}</span>
+                                </dt>
+                                <dd><span><b>借款期限：</b>{{list.investmentHorizon}}</span><span ng-if="list.tenderSchedule!=100"><b>可投金额：</b>{{list.availableAmount_new}} 元</span><span ng-if="list.tenderSchedule==100"><b>投资人数：</b>{{list.investmentNum}} 人</span></dd>
+                            </dl>
+                        </div>
+                        <div class="index-list-tag {{list.biaotag}}">{{list.biao_type_zi}}</div>
+                        <img src="../images/icon-recommend.png" class="recommend-mark" ng-if="list.img_type==1"/>
+                        <img src="../images/icon-repay.png" class="recommend-mark" ng-if="list.img_type==2"/> <!-- 还款中的标 -->
+                        <img src="../images/icon-recheck.png" class="recommend-mark" ng-if="list.img_type==3"/> <!--  复审中的标 -->
+                    </div>
+                </li>
+
+            </ul>
+
+            <div class="loading-btn" ng-click="clickaddlist()">查看更多项目</div>
+        </div>
+
+
+    </article>
+    </div>
+</div>
+
+
+<script type="text/ng-template" id="xlbDialog">
+    <div class="k_layer">
+        <div class="k_layer_txt"><p>即将发售，敬请期待！</p></div>
+        <div class="common_popup_bottom_btns">
+            <button ng-click="ok()" class="single_btn">确定</button>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,57 @@
+<div ui-content-for="title">
+    <span> 抱 财 </span>
+</div>
+
+<div class="scrollable" ng-controller="StagingController">
+    <div class="scrollable-content k_p0" ng-init="getFinaningData()">
+            
+        <div class="f_foot" ng-repeat="pics in banners">
+           <a ng-href="{{pics.actionUrl}}">
+               <img ng-src="{{pics.imageUrl}}">
+           </a>
+       </div>
+        
+        <div class='section k_index k_p0' ng-model="financingData">
+            <ui-state id='activeTab' default='4'></ui-state>
+            <div class="btn-group justified nav-tabs k_index_nav">
+                <a ui-set="{'activeTab': 1}" 
+                   ui-class="{'active': activeTab == 1}" class="btn btn-default" ng-click="initStatus()">月计划</a>
+
+                <a ui-set="{'activeTab': 2}" 
+                   ui-class="{'active': activeTab == 2}" class="btn btn-default"ng-click="initStatus()">季计划</a>
+
+                <a ui-set="{'activeTab': 3}" 
+                   ui-class="{'active': activeTab == 3}" class="btn btn-default" ng-click="initStatus()">年计划</a>
+
+                <a ui-set="{'activeTab': 4}"
+                   ui-class="{'active': activeTab == 4}" class="btn btn-default" ng-click="initStatus()">体验标</a>
+            </div>  
+            <div ui-if="activeTab == 1">
+                <financing-detail type="month">
+
+                </financing-detail>
+
+            </div>
+
+            <div ui-if="activeTab == 2">
+                <financing-detail type="quarter">
+                </financing-detail>
+            </div>
+
+            <div ui-if="activeTab == 3">
+                <financing-detail type="year">
+
+                </financing-detail>
+            </div>
+
+             <div ui-if="activeTab == 4">
+                 <financing-detail type="coffers">
+ 
+                 </financing-detail>
+             </div>
+
+
+        </div>
+
+    </div>
+</div>

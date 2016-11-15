@@ -1,0 +1,35 @@
+<div ui-content-for="title" >
+    <span>个人设置</span>
+</div>
+<div class="scrollable"  ng-controller="AccountController">
+    <div class="scrollable-content section k_ptblr k_user_set" ng-init="getUsersSettingInfo()">   
+        <div ng-model="accountInfo">
+            <ul class="k_clear k_mt12 k_big_mt24" ng-model="Name">
+                <li class="k_col_4">用户</li>
+                <li class="k_col_8">{{Name}}</li>
+            </ul> <ul class="k_clear" ng-model="idCard">
+                <li class="k_col_4">身份认证</li>
+
+                <li class="k_col_8 k_pr text-right" ng-show="idCard == 1">{{accountInfo.cardID}}</li>
+                <li class="k_col_8 k_pr text-right" ng-show="idCard == 0">审核中</li>
+                <li class="k_col_8 k_pr text-right" ng-show="idCard == null" ng-click="bcChangeUrl(bcAllUrl.idCard)">设置<b>></b></li>
+
+            </ul>
+            <ul class="k_clear k_mt12 k_big_mt30">
+                <li class="k_col_4">登录密码</li>
+                <li class="k_col_8 k_pr" ng-click="bcChangeUrl(bcAllUrl.changeLoginPas)">修改<b>></b></li>
+            </ul>
+            <ul class="k_clear" ng-model="paypwdStatus">
+                <li class="k_col_4">交易密码</li>
+                <li class="k_col_8 k_pr" ng-click="bcChangeUrl(bcAllUrl.changeDealPas)" ng-show="paypwdStatus == 1">修改<b>></b></li>
+                <li class="k_col_8 k_pr text-right" ng-click="bcChangeUrl(bcAllUrl.setPas)" ng-show="paypwdStatus == 0">设置<b>></b></li>
+
+            </ul>
+            <ul class="k_clear k_mt20 k_big_mt40" ng-init="getInvitationCode()">
+                <li class="k_col_4">我的邀请码</li>
+                <li class="k_col_8"><span>{{invitationCode}}</span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,18 @@
+<div class="modal" ui-if='check_realName' ui-state='check_realName'>
+    <div class="modal-backdrop in"></div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" 
+                        ui-turn-off="check_realName">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <p>您还未进行实名认证，请认证后进行投资</p>
+            </div>
+            <div class="modal-footer">
+                <a ui-turn-off="check_realName" class="btn btn-default" href="#/validate/id/card">立即认证</a>
+            </div>
+        </div>
+    </div>
+</div>

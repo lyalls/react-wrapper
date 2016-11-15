@@ -1,0 +1,96 @@
+<div>
+    <div ng-show="detailButton === false">
+        <div ng-controller="CaseDoughController">
+            <div ng-init="getExperienceBorrow()">
+                <div class="k_index_circle k_pr" ng-model="widthScreen" >
+                    <div>
+                        <progress-arc  size="{{widthScreen}}" background="#b6b6b6" complete="experienceBorrow.tenderSchedule/200" stroke="#2892ff" stroke-width="4" ></progress-arc>
+                    </div>
+                    <div class="k_circle_second">
+                        <progress-arc  size="{{widthScreen}}" background="" complete="experienceBorrow.tenderSchedule/200" stroke="#2892ff" counter-clockwise="1" stroke-width="4" ></progress-arc>
+                    </div>
+                    <ul>
+                        <li>
+                        	期限{{experienceBorrow.investmentHorizon}}天
+                        	<p>
+                        		
+                        	</p>
+                        </li>
+                        <li>{{experienceBorrow.annualRate}}<span>%</span></li>
+                        <li>年利率</li>
+                        <li ng-click="changeStatus(detailButton)">查看详情 >> </li>
+                    </ul>
+                </div>
+                <div class="k_clear k_index_txt">
+                    <!-- <div  class="k_col_8" ng-init="getMoneyTotal()" >
+                        <div  ng-show="isNew == false">注册可获体验金 <span>1000元</span></div>
+                        <div ng-init="getTAccount()" >
+                            <div  ng-show="isNew == true"class="text-left">可用体验金 <span >{{money}}元</span></div>
+                        </div>
+                    </div> -->
+                    <div class="k_col_5">可投金额 <span>{{experienceBorrow.availableAmount}}</span></div>
+                </div>
+                <div ng-show="experienceBorrowShow == false" class="k_btn k_index_btn k_btn_gray" bc-focus="button">
+                    <button>马上投资</button>
+                </div>
+                <div ng-show="experienceBorrowShow == true" class="k_btn k_index_btn " bc-focus="button" ng-click="bcChangeUrl(bcAllUrl.caseDoughInvest)">
+                    <button>马上投资</button>
+                </div>
+                <!--<div class="f_insurance_tip">携手阳光保险，账户安全升级</div>-->
+            </div>
+        </div>      
+        <div class="f_foot_con">
+            <div class="downtip">投资有风险&nbsp;&nbsp;选择需谨慎</div>
+        </div>
+
+    </div>
+    <div ng-show="detailButton === true">
+        <div ng-controller="CaseDoughController">
+            <div ng-init="getExperienceBorrow()">
+                <div class="k_details_rate k_clear" ng-init="getTenderPeopleNum()">
+                    <div class="k_col_6">年利率</div>
+                    <div class="k_col_6">累计加入<span>{{tenderPeopleNum}}</span>人</div>
+                </div>
+                <div class="k_details_num">{{experienceBorrow.annualRate}}<span>%</span></div>
+                <div class="k_clear k_index_txt">
+                    <!-- <div  class="k_col_7" ng-init="getMoneyTotal()">
+                        <div  ng-show="isNew == false">注册可获体验金 <span>1000元</span></div>
+                        <div ng-init="getTAccount()" >
+                            <div  ng-show="isNew == true"class="text-left" >可用体验金 <span>{{money}}元</span></div>
+                        </div>
+                    </div> -->
+                    <div class="k_col_5">可投金额 <span>{{experienceBorrow.availableAmount}}</span></div>
+                </div>
+            </div>
+            <div class="k_details_list" ng-init="getInvestRecord()">
+                <div class="k_clear">
+                    <div class="k_col_6">买入金额</div>
+                    <div class="k_col_6">1000元起投</div>
+                </div>
+                <div class="k_clear">
+                    <div class="k_col_6">安全保障</div>
+                    <div class="k_col_6">利息按时到账</div>
+                </div>
+                <div  ng-show="id == false">
+                    <div class="k_clear" >
+                        <div class="k_col_6">投资记录</div>
+                        <div class="k_col_6" ng-click="bcChangeUrl(bcAllUrl.listOfExperience)">{{personNum}}人次></div>
+                    </div>
+                </div> 
+                <div  ng-show="id == true">
+                    <div class="k_clear" >
+                        <div class="k_col_6">投资记录</div>
+                        <div class="k_col_6">{{personNum}}人次></div>
+                    </div>
+                </div> 
+            </div>
+            <div ng-show="experienceBorrowShow == false"  class="k_btn k_btn_gray k_details_button" bc-focus="button">
+                <button>马上投资</button>
+            </div> 
+            <div ng-show="experienceBorrowShow == true"  class="k_btn k_details_button" bc-focus="button" ng-click="bcChangeUrl(bcAllUrl.caseDoughInvest)">
+                <button>马上投资</button>
+            </div> 
+
+        </div>
+    </div>    
+</div>

@@ -1,0 +1,212 @@
+
+    <div class="item-detail-cont margin-t-1-2rem">
+    	<em ng-if="projectsIntro.borrow.borrowerInfo.typeNid=='fangchan'">
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">借款信息主体</h2>
+	            <div class="cont-box-com">
+	                <div class="item-info">
+                             <span class="paragraph" ng-bind-html="projectsIntro.loanPrincipal|htmlContent"></span>
+                             <span class="paragraph" ng-bind-html="projectsIntro.loanPrincipal_Img|htmlContent"></span>
+                    </div>
+	            </div>
+	        </div>
+	
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">还款来源</h2>
+	            <div class="cont-box-com">
+	                <div class="item-info">
+                             <span class="paragraph" ng-bind-html="projectsIntro.repaymentSource|htmlContent"></span>
+                             <span class="paragraph" ng-bind-html="projectsIntro.repaymentSource_Img_Img|htmlContent"></span>
+                         </div>
+	            </div>
+	        </div>
+	
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">资产负债与财务状况</h2>
+	            <div class="cont-box-com">
+	                <div class="item-info">
+                             <span class="paragraph" ng-bind-html="projectsIntro.financialSituation|htmlContent"></span>
+                             <span class="paragraph" ng-bind-html="projectsIntro.financialSituation_Img|htmlContent"></span>
+                         </div>
+	            </div>
+	        </div>
+	
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">信用记录</h2>
+	            <div class="cont-box-com">
+	                <div class="item-info">
+                             <span class="paragraph" ng-bind-html="projectsIntro.creditRecord|htmlContent"></span>
+                             <span class="paragraph" ng-bind-html="projectsIntro.creditRecord_Img|htmlContent"></span>
+                         </div>
+	            </div>
+	        </div>
+	
+	
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">风控措施</h2>
+	            <div class="cont-box-com">
+	                 <ul class="pro-detail-txt">
+                    <li>
+                        <div class="item-info">
+                        	<span class="paragraph" ng-bind-html="projectsIntro.borrow.borrowerInfo.riskctrl|htmlContent"></span>
+                        	<span class="paragraph" ng-bind-html="projectsIntro.borrow.borrowerInfo.riskctrl_Img|htmlContent"></span>
+                        </div>
+                    </li>
+                </ul>
+	            </div>
+	        </div>
+    	</em>
+    	<em ng-if="projectsIntro.borrow.borrowerInfo.typeNid=='gou' || projectsIntro.borrow.borrowerInfo.typeNid=='hangye'" >
+    		<div class="txt-cont">
+            <h2 class="title-pro-detail">担保机构信息</h2>
+            <div class="cont-box-com">
+                <p>{{projectsIntro.guaranteeAgencies}}</p>
+            </div>
+	        </div>
+	
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">借款信息主体</h2>
+	            <div class="cont-box-com">
+	                <div class="item-info">
+                             <span class="paragraph" ng-bind-html="projectsIntro.loanPrincipal|htmlContent"></span>
+                             <span class="paragraph" ng-bind-html="projectsIntro.loanPrincipal_Img|htmlContent"></span>
+                    </div>
+	            </div>
+	        </div>
+	
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">还款来源</h2>
+	            <div class="cont-box-com">
+	                <div class="item-info">
+                             <span class="paragraph" ng-bind-html="projectsIntro.repaymentSource|htmlContent"></span>
+                             <span class="paragraph" ng-bind-html="projectsIntro.repaymentSource_Img_Img|htmlContent"></span>
+                         </div>
+	            </div>
+	        </div>
+	
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">资产负债与财务状况</h2>
+	            <div class="cont-box-com">
+	                <div class="item-info">
+                             <span class="paragraph" ng-bind-html="projectsIntro.financialSituation|htmlContent"></span>
+                             <span class="paragraph" ng-bind-html="projectsIntro.financialSituation_Img|htmlContent"></span>
+                         </div>
+	            </div>
+	        </div>
+	
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">信用记录</h2>
+	            <div class="cont-box-com">
+	                <div class="item-info">
+                             <span class="paragraph" ng-bind-html="projectsIntro.creditRecord|htmlContent"></span>
+                             <span class="paragraph" ng-bind-html="projectsIntro.creditRecord_Img|htmlContent"></span>
+                         </div>
+	            </div>
+	        </div>
+	
+	
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">风控措施</h2>
+	            <div class="cont-box-com">
+	                 <ul class="pro-detail-txt">
+                    <li>
+                        <div class="item-info">
+                        	<span class="paragraph" ng-bind-html="projectsIntro.borrow.borrowerInfo.riskctrl|htmlContent"></span>
+                        	<span class="paragraph" ng-bind-html="projectsIntro.borrow.borrowerInfo.riskctrl_Img|htmlContent"></span>
+                        </div>
+                    </li>
+                </ul>
+	            </div>
+	        </div>
+    	</em>
+    	<em ng-if="projectsIntro.borrow.borrowerInfo.typeNid=='bld'">
+    		<div class="txt-cont">
+            <h2 class="title-pro-detail">保理公司介绍</h2>
+            <div class="cont-box-com">
+                <p>{{projectsIntro.guaranteeAgencies}}</p>
+                <div class="item-info">
+                       <p class="paragraph" ng-bind-html="projectsIntro.companyInfoOrLoanInfo|htmlContent"></p>
+                       <p class="paragraph" ng-bind-html="projectsIntro.companyInfoOrLoanInfo_Img|htmlContent"></p>
+                </div>
+            </div>
+	        </div>
+	
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">保理公司意见</h2>
+	            <div class="cont-box-com">
+	                <div class="item-info">
+                       <p class="paragraph" ng-bind-html="projectsIntro.commpanyComment|htmlContent"></p>
+                       <p class="paragraph" ng-bind-html="projectsIntro.commpanyComment_Img|htmlContent"></p>
+                	</div>
+	            </div>
+	        </div>
+	
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">还款来源</h2>
+	            <div class="cont-box-com">
+	                <div class="item-info">
+                             <p class="paragraph" ng-bind-html="projectsIntro.repaymentSource|htmlContent"></p>
+                             <p class="paragraph" ng-bind-html="projectsIntro.repaymentSource_Img_Img|htmlContent"></p>
+                         </div>
+	            </div>
+	        </div>
+	
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">资产负债与财务状况</h2>
+	            <div class="cont-box-com">
+                       <p class="paragraph" ng-bind-html="projectsIntro.financialSituation|htmlContent"></p>
+                       <p class="paragraph" ng-bind-html="projectsIntro.financialSituation_Img|htmlContent"></p>
+	            </div>
+	        </div>
+	
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">信用记录</h2>
+	            <div class="cont-box-com">
+                       <p class="paragraph" ng-bind-html="projectsIntro.creditRecord|htmlContent"></p>
+                       <p class="paragraph" ng-bind-html="projectsIntro.creditRecord_Img|htmlContent"></p>
+	            </div>
+	        </div>
+	
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">风控措施</h2>
+	            <div class="cont-box-com">
+	                    <p class="paragraph" ng-bind-html="projectsIntro.borrow.borrowerInfo.riskctrl|htmlContent"></p>
+	                    <p class="paragraph" ng-bind-html="projectsIntro.borrow.borrowerInfo.riskctrl_Img|htmlContent"></p>
+	            </div>
+	        </div>
+    	</em>
+    	<em ng-if="projectsIntro.borrow.borrowerInfo.typeNid=='rongsan'">
+    		<div class="txt-cont">
+            <h2 class="title-pro-detail">项目介绍</h2>
+            <div class="cont-box-com">
+                    <p class="paragraph" ng-bind-html="projectsIntro.equityData.projectIntroduction|htmlContent"></p>
+                    <p class="paragraph" ng-bind-html="projectsIntro.equityData.projectIntroduction_Img|htmlContent"></p>
+            </div>
+	        </div>
+	
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">风控资料</h2>
+	            <div class="cont-box-com">
+                     <p class="paragraph" ng-bind-html="projectsIntro.equityData.riskInfo|htmlContent"></p>
+                     <p class="paragraph" ng-bind-html="projectsIntro.equityData.riskInfo_Img|htmlContent"></p>
+	            </div>
+	        </div>
+	
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">还款来源</h2>
+	            <div class="cont-box-com">
+	                <p class="paragraph" ng-bind-html="projectsIntro.repaymentSource|htmlContent"></p>
+                    <p class="paragraph" ng-bind-html="projectsIntro.repaymentSource_Img|htmlContent"></p>
+	            </div>
+	        </div>
+	
+	
+	        <div class="txt-cont">
+	            <h2 class="title-pro-detail">风控措施</h2>
+	            <div class="cont-box-com">
+	                  <p class="paragraph" ng-bind-html="projectsIntro.borrow.borrowerInfo.riskctrl|htmlContent"></p>
+	                  <p class="paragraph" ng-bind-html="projectsIntro.borrow.borrowerInfo.riskctrl_Img|htmlContent"></p>
+	            </div>
+	        </div>
+    	</em>
+    </div>

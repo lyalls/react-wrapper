@@ -12,13 +12,14 @@ ifneq "${src}" ""
 	wechatSrcDir="${src}"
 endif
 # Do local test, DON'T modify original codes
-wechatTestDir=../wechat
+wechatTestDir=./integrations/wechat
 wechatTmpDir=./src/apps/wechat/tmp
 wechatTemplateDir=./src/apps/wechat/template
 wechatPages="home:newhome" # <page name>:<target template file name>
 buildWechat:
 	# Prepare the environment
 	svn update ${wechatSrcDir}
+	mkdir -p ${wechatTestDir}
 	rm -rf ${wechatTestDir}
 	cp -r ${wechatSrcDir} ${wechatTestDir}
 	rm -rf ${wechatTmpDir}
@@ -62,7 +63,7 @@ buildWechat:
 	cd ${wechatTestDir} && npm start
 
 syncToSVN:
-	#cd ${svnPath} && svn update && svn delete --force ./* && rm -rf ./*
+	cd ${svnPath} && svn update && svn delete --force ./* && rm -rf ./*
 	cd ${svnPath} && svn propset svn:ignore --recursive "node_modules" .
 	cp -r ./* ${svnPath}
 	cd ${svnPath} && svn add ./* 

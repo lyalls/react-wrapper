@@ -1,0 +1,83 @@
+<div ui-content-for="title" >
+    <span>标的详情</span>
+</div>
+<div class="scrollable" ng-controller="ProductdetailController">
+    <article class="scrollable-content wx-mainbody gray-bg has-pos-btm-body">
+        <div class="pro-detail-cont">
+            <h2><b>{{biao_type_name}}</b>{{investsDetail.name}}</h2>
+            <div class="pro-detail-tag">
+                <span class="gold-tag" ng-show="investsDetail.isReward==1">{{investsDetail.promotionTitle}}</span>
+                <span class="gold-tag" ng-show="+investsDetail.isBonusticket == 1">红包券</span>
+                <span class="gold-tag" ng-show="+investsDetail.isAllowIncrease == 1">加息券</span>
+                <span class="gold-tag" ng-show="+investsDetail.isTag == 1">{{investsDetail.tagTitle}}</span>
+            </div>
+            <ul class="wx-detail-info-com">
+                <li><label>年利率：</label><em ng-if="investsDetail.increaseApr>0" class="add-prize">+{{investsDetail.increaseApr| number:2}}%</em><span class="red-font">{{investsDetail.annualRate}}%</span></li>
+                <li><label>借款期限：</label><span>{{investsDetail.investmentHorizon}}</span></li>
+                <li><label>借款金额：</label><span class="red-font">{{investsDetail.borrowAmount}}</span></li>
+                <li><label>起投金额：</label><span>{{investsDetail.tenderAccountMin}}元</span></li>
+                <li ng-if="investsDetail.tenderAccountMax !='不限' "><label>最大投资金额：</label><span>{{investsDetail.tenderAccountMax}}元</span></li>
+                <li><label>还款方式：</label><span>{{investsDetail.paymentMethod}}</span></li>
+            </ul>
+        </div>
+        <div class="active_code_pop_con" ng-show="ifHasActiveCode == true">
+            <div class="active_code_pop" style="position: absolute;top:40%;">
+                <h3>请输入活动专享码</h3>
+                <div class="active_code_input">
+                    <input type="text" class="active_code_input_txt" ng-model="typeacode" ng-click="clearerr()">
+                </div>
+                <div class="active_code_error" ng-show="errorinfo != ''" style="top:85px;">{{errorinfo}}</div>
+                <div class="active_code_confirm">
+                    <div class="active_code_cancel" ng-click="acode_back()">取消</div>
+                    <div class="active_code_ok" ng-click="acode_confirm()">确定</div>
+                </div>
+            </div>
+            <div class="active_code_pop_mask"></div>
+        </div>
+        <ul class="wx-menu-list-com">
+            <li ng-if="typeNid=='bld'" ng-click="getBorrowerInfo(investsDetail.id)"><label>企业介绍</label></li>
+            <li ng-if="typeNid!='bld'" ng-click="getBorrowerInfo(investsDetail.id)"><label>借款人信息</label></li>
+            <li ng-click="getProjectInfo(investsDetail.id)"><label>项目风控信息</label></li>
+            <li ng-click="getRecordInfo(investsDetail.id)"><label>投资记录</label><span>{{investsDetail.investPersonNum}}人</span></li>
+        </ul>
+    </article>
+
+    <footer class="wx-invest-bottom">
+        
+        <div ng-if="investsDetail.isNew == 1 && investsDetail.tenderSchedule !=100">
+        	<div class="can-invest-cash" ng-if="investsDetail.isFullThreshold !=1">可投金额：<strong>{{investsDetail.availableAmount_num}}</strong> 元</div>
+        	<div class="can-invest-cash" ng-if="investsDetail.isFullThreshold ==1">可投金额：<strong>{{investsDetail.availableAmount_num}}</strong> 元，最后一位投资可得奖励</div>
+            <div ><button ng-click="getTenderInfoDetail(investsDetail.id)" class="orange-radius-btn wd-80 margin-t-05rem">新手专享</button></div>
+        </div>
+        <div ng-if="investsDetail.isNew != 1 && investsDetail.tenderSchedule !=100 && investsDetail.statusMessage =='投资中'">
+			<div class="can-invest-cash" ng-if="investsDetail.isFullThreshold !=1">可投金额：<strong>{{investsDetail.availableAmount_num}}</strong> 元</div>
+        	<div class="can-invest-cash" ng-if="investsDetail.isFullThreshold ==1">可投金额：<strong>{{investsDetail.availableAmount_num}}</strong> 元，最后一位投资可得奖励</div>
+            <div ng-if="investsDetail.isFullThreshold !=1"><button ng-click="getTenderInfoDetail(investsDetail.id)" class="orange-radius-btn wd-80 margin-t-05rem">立即投资</button></div>
+            <div ng-if="investsDetail.isFullThreshold ==1"><button ng-click="getTenderInfoDetail(investsDetail.id)" class="red-radius-btn wd-80 margin-t-05rem">抢满标</button></div>
+        </div>
+        <div ng-if="investsDetail.isNew != 1 && investsDetail.statusMessage !='投资中'">
+        	<div ng-if="investsDetail.lastTenderTime">
+            	<div class="can-invest-cash" time="{{investsDetail.lastTenderTime}}">
+            	{{(investsDetail.lastTenderTime)*1000|date:'MM月dd日 HH:mm'}} 抢光
+            	</div>
+            </div>
+            <button class="gray-radius-btn wd-80 margin-t-05rem">{{investsDetail.statusMessage}}</button>
+        </div>
+    </footer>
+</div>
+
+
+
+<script type="text/ng-template" id="xszxDialog">
+    <div class="k_layer">
+        <div class="k_layer_txt"><p>仅限新手用户投资</p></div>
+        <div class="common_popup_bottom_btns">
+            <button ng-click="ok()" class="single_btn">确定</button>
+        </div>
+    </div>
+</script>
+
+
+
+
+

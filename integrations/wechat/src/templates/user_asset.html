@@ -1,0 +1,78 @@
+<div ui-content-for="title" >
+    <span>个人资产</span>
+</div>
+<div class="scrollable" ng-controller="AccountController" >
+    <div class="scrollable-content section k_ptblr k_user_set" ng-init="getAccountAsset()">        
+        <ul class="k_clear k_mt12">
+            <li class="k_col_6">净资产（元）</li>
+            <li class="k_col_6">{{asset.totalAccount}}</li>
+        </ul>       
+        <ul class="k_clear">
+            <li class="k_col_6">账户余额（元）</li>
+            <li class="k_col_6">{{asset.accountBalance}}</li>
+        </ul>
+        <ul class="k_clear">
+            <li class="k_col_6">可用余额（元）</li>
+            <li class="k_col_6">{{asset.availableBalance}}</li>
+        </ul>
+        <ul class="k_clear">
+            <li class="k_col_6">冻结金额（元）</li>
+            <li class="k_col_6">{{asset.freezeAmount}}</li>
+        </ul>
+        <ul class="k_clear k_mt15 k_big_mt40">
+            <li class="k_col_6">已获收益（元）</li>
+            <li class="k_col_6">{{asset.accumulatedEarnings}}</li>
+        </ul>
+        <ul class="k_clear" ng-click="bcChangeUrl(bcAllUrl.cMoney)">
+            <li class="k_col_6">待收资金（元）</li>
+            <li class="k_col_6 k_pr">{{asset.receivingPrincipalInterest}}<b>></b></li>
+        </ul>
+        <div class="k_clear k_user_set_btn">
+            <div class="k_col_6"  ng-controller="PresentController" bc-focus="button"><button ng-click="getPresentInfo()" >取现</button></div>
+            <div class="k_col_6" bc-focus="button"><button type="button" ui-turn-on="draw" >投资中变现</button>
+        </div>
+    </div>
+</div>
+
+<div ui-content-for="modals">
+    <div ng-include="'invest_draw.html'"></div>
+</div>
+<script type="text/ng-template" id="payPassword">
+    <div class="k_layer">
+    <div class="k_layer_txt">
+    <p  class="leftp">主人，您还未设置交易密码，请设置后进行提现！</p>   
+    </div>
+    <div class="k_clear">
+    <div class="common_popup_bottom_btns">
+        <button ng-click="toSomePlace(pathAll.userCenter)" class="same_btn">取消</button>
+        <button ng-click="toSomePlace(pathAll.setPayPassword)" class="same_btn">立即设置</button>
+    </div>
+    </div>
+    </div>
+</script>
+<script type="text/ng-template" id="approveName">
+    <div class="k_layer">
+    <div class="k_layer_txt">
+    <p  class="leftp">主人，您还未进行实名认证，请认证后进行提现！</p> 
+    </div>
+    <div class="k_clear">
+    <div class="common_popup_bottom_btns">
+      <button ng-click="toSomePlace(pathAll.userCenter)" class="same_btn">取消</button>
+      <button ng-click="toSomePlace(pathAll.validateIDCard)" class="same_btn">立即认证</button>
+    </div>
+    </div>
+    </div>
+</script>
+<script type="text/ng-template" id="approveNameVerify">
+    <div class="k_layer">
+    <div class="k_layer_txt">
+    <p class="leftp">主人，您的实名认证正在审核中，请稍后！</p>    
+    </div>
+    <div class="common_popup_bottom_btns">
+        <button ng-click="toSomePlace(pathAll.userAsset)" class="single_btn">确定</button>
+    </div>
+    </div>
+    </div>
+</script>
+
+

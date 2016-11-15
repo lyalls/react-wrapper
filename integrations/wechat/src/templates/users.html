@@ -1,0 +1,137 @@
+<div ng-controller="AccountController">
+    <div ng-init="getUsersSettingInfo()">
+        <div ui-content-for="title" >
+            <span>主人{{Name}}，您好</span>
+        </div>
+        <div ui-content-for="navbarAction">
+            <div>
+                <button ng-click="bcChangeUrl(bcAllUrl.userSet)" class="f_topright_setu_icon"></button>
+            </div>
+        </div>
+        <!--<div ui-content-for="navbarAction">
+            <div ng-controller="PresentController" >
+                <input type="button" value="设置" ng-click="getPresentInfo()" class="k_top_right_input"/>
+            </div>
+        </div>-->
+        <div class="scrollable" >
+
+
+            <div class="scrollable-content k_users" ng-init="getAccountAsset()">
+
+                <div class="f_expect_income" ng-init="myAccountINfo()">
+                    <div class="f_expect_income_text">预计收益(元)</div>
+                    <div class="f_expect_income_num" ng-model="myAccountINfo">{{myAccountINfo.futureRevenue}}</div>
+                </div>
+
+                <div class="f_my_special_code" ng-init="getInvitationCode()">我的邀请码<em>{{invitationCode}}</em></div>
+
+                <div class="f_other_account_info">
+                    <div class="f_net_asset">
+                        <div class="f_net_asset_text">净资产(元)</div>
+                        <div class="f_net_asset_num">{{asset.totalAccount}}</div>
+                    </div>
+                    <div class="f_usable_balance">
+                        <div class="f_usable_balance_text">可用余额(元)</div>
+                        <div class="f_usable_balance_num">{{asset.availableBalance}}</div>
+                    </div>
+                </div>
+
+                <div class="f_users_info_links" ng-model="bcAllUrl">
+                    <div class="f_assets_links"  ng-click="bcChangeUrl(bcAllUrl.userAsset)"><em></em><span>账户资产</span></div>
+                    <div class="f_redpackage_links" ng-click="bcChangeUrl(bcAllUrl.userRedPackets)"><em></em><span>红包券</span></div>
+                    <div class="f_raise_rate_links" ng-click="bcChangeUrl(bcAllUrl.increaseList)"><em></em><span>加息券</span>
+                    <!--
+                    <em></em><span>特权加息</span>
+                    -->
+                    </div>
+                    <div class="f_trad_info_links"  ng-click="bcChangeUrl(bcAllUrl.tradeRecord)"><em></em><span>交易记录</span></div>
+                    <div class="f_case_dough_links" ng-click="bcChangeUrl(bcAllUrl.caseDough)"><em></em><span>体验金</span></div>
+                    
+                    <div class="f_future_links"></div>
+                </div>
+                
+                <!--
+                <div class="f_down_insurance_tip"><em></em>携手阳光保险，账户安全升级</div>
+                -->
+                <!--
+                <div class="" ng-model="account">
+                    <div ng-click="bcChangeUrl(bcAllUrl.userAsset)">
+                        <div class="k_users_set" >
+                            <a href=""><img src="images/set.png" alt=""></a>
+                        </div>
+                        <div class="k_user_main">
+                            <p class="k_user_main_txt">可用余额(元)</p>
+                            <p class="k_user_main_num">{{account.availableBalance}}</p>
+                        </div>
+                    </div>                   
+                    <div class="k_user_bonus" ng-model="bcAllUrl" ng-click="bcChangeUrl(bcAllUrl.userRedPackets)">
+                        <a>
+                            <span class="k_user_bonus_more"  ><img src="images/more.png" alt=""></span>
+                            <span class="k_user_bonus_txt">待领红包(元)</span>
+                            <span class="k_user_bonus_num">{{account.totalBonus}}</span>
+                        </a>
+                    </div>
+                    <div ng-click="bcChangeUrl(bcAllUrl.caseDough)" ng-controller="CaseDoughController">
+                        <div class="k_users_set k_user_money" >
+                            <a href=""><img src="images/money.png" alt=""></a>
+                        </div>
+                        <div class="k_user_main" ng-init="getMoneyTotal()">
+                            <p class="k_user_main_txt">体验金(元)</p>
+                            <p class="k_user_main_num">{{money}}</p>
+                        </div>
+                    </div>
+                    <div class="k_user_tq" >
+                        <div ng-click="privilege()" >
+                            <div class="k_clear">
+                                <div class="k_col_6 k_user_tq_txt" >特权加息</div>
+                                <div class="k_col_6 k_user_tq_mark k_pr">
+                                    <a href=""><img src="images/bei.png" alt=""></a>
+        
+                                </div>
+                            </div>
+                            <div class="k_clear k_user_zrtq">
+                                <div class="k_col_9">
+                                    <progressbar max="2" value="account.totalIncrease">                              
+                                    </progressbar>
+                                   
+                                    <ul>
+                                        <li>0</li>
+                                        <li>0.5</li>
+                                        <li>1</li>
+                                        <li>1.5</li>
+                                        <li>2</li>
+                                    </ul>
+                                </div>
+                                <div class="k_col_3" bc-focus="button"><button>加息</button></div>
+                            </div>
+                        </div>                
+                    </div>
+                </div>-->
+
+
+            </div>
+            <div class="k_user_btn k_clear navbar-absolute-bottom">
+                <div class="k_col_6" bc-focus="button">
+                    <button ng-click="toHome()">投资</button>
+                </div>
+                <div class="k_col_6" ng-controller="PaymentController" bc-focus="button" >
+                    <button  ng-click="toRecharge()">充值</button>
+                    <script type="text/ng-template" id="noValidateIDCard">
+                    <div class="k_layer">
+                    <div class="k_layer_txt">
+                    <p class="leftp">主人，您还未进行实名认证，请认证后进行充值！</p>                  
+                    </div>
+                    <div class="common_popup_bottom_btns">
+                        <button ng-click="cancel()"  class="same_btn">取消</button>   
+                        <button ng-click="toSomePlace(pathAll.validateIDCard)" class="same_btn">立即认证</button>
+                    </div>
+                    </div>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <!--Inmobi -->
+<img src="https://d.appsdt.com/download/tracker?goalName=download&appId=10dd986c1bdb46c6bf4302efb8dbcc1c&src=img&rdm=$rdm" height="1px" width="1px">
+

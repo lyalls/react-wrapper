@@ -1,0 +1,79 @@
+<div ui-content-for="title">
+    <span>主人特权</span>
+</div>
+<div class="scrollable" >
+    <div class="scrollable-content k_p0" ng-controller="AccountController">
+        <div class='section k_index k_p0 k_pb70' >
+            <ui-state id='activeTab' default='1'></ui-state>
+            <div class="btn-group justified nav-tabs k_index_nav">
+                <a ui-set="{'activeTab': 1}" 
+                   ui-class="{'active': activeTab == 1}" class="btn btn-default" ng-click="initStatus()">特权加息</a>
+
+                <a  class="btn btn-default"ng-click="bcChangeUrl(bcAllUrl.caseDough)">体验金</a>
+            </div>  
+            <div ui-if="activeTab == 1" ng-init="getIncreaseLog()">
+                <div class="k_special_rights">
+                    <div ng-init="getIncreaseTotal()">
+                        <div class="k_details_rate">已获得特权加息</div>
+                        <div class="k_details_num">{{increase}}<span>%</span></div>
+                        <div class="text-right" ng-click="bcChangeUrl(bcAllUrl.privilege)">查看规则>></div>
+                    </div>
+                </div>
+                <div class="k_special_rights_list" ng-repeat="increaseLog in increaseLogList" >
+                    <table>
+                        <tr>
+                            <td rowspan="2">{{increaseLog.apr}}</td>
+                            <td>{{increaseLog.type}}{{increaseLog.phone}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{increaseLog.expiredTime}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- <p class="text-center k_special_rights_txt" ng-show="isMore">加载更多...</p> -->
+            </div>
+
+            <!--<div ui-if="activeTab == 2">-->
+            <!--<div>
+                <div class="k_special_rights">
+                    <div>
+                        <div class="k_special_rights_rate">小金库库存</div>
+                        <div class="k_special_rights_num">3000<span>金币</span></div>
+                        <div class="text-right">如何获得>></div>
+                    </div>
+                </div>
+                <div class="k_special_rights_coffer_list">
+                    <table>
+                        <tr>
+                            <td >+1000</td>
+                            <td>被邀请注册 151****5590</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td >+1000</td>
+                            <td>参与XXXX活动</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td >-1000</td>
+                            <td>兑换手机充值卡</td>
+                        </tr>
+                    </table>
+                </div>
+                <p class="text-center k_special_rights_txt">加载更多...</p>
+            </div>-->
+        </div>
+
+        <div ui-content-for="modals">
+            <div ng-include="'share_rights.html'"></div>
+        </div>
+
+    </div>
+    <div ng-model="tenderSchedules" class=" navbar-absolute-bottom">
+        <div class="k_btn k_special_rights_btn" ng-controller="InvestsController" bc-focus="button">
+            <button type="button" value="邀请好友获得加息" ui-turn-on="shareRights">邀请好友获得加息</button>
+        </div> 
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div ui-content-for="title" >
+    <span>投资成功</span>
+</div>
+<div class="scrollable" ng-controller="InvestsController">
+    <div class="scrollable-content section k_ptblr" ng-init="getInterestTotal()">
+        <div class="k_invest_success">
+            <img src="images/tender-success.png" alt="">
+            <p>{{shareData.message}}</p>
+            <div class="btn-area margin-t-3rem" style="background: #fff;">
+              <a class="gold-btn half-btn" ng-click="toSomePlace(pathAll.toHome)">继续投资</a>
+              <a class="gold-l-btn half-btn" ng-click="toSomePlace(pathAll.investHistory)">查看投资记录</a>
+           </div>
+             <a ng-href="{{shareData.data.url}}">
+            <img  ng-show="shareData.data.show_share" ng-src="{{shareData.data.show_share_img}}" class="ad-btm" />
+             </a>
+        </div>
+    </div>
+</div>

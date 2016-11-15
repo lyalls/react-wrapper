@@ -1,0 +1,69 @@
+<div ui-content-for="title" >
+    <span>红包券</span>
+</div>
+<div class="scrollable" ng-controller="AccountController">
+    <div class="scrollable-content section k_p0" ng-init="getUnusedBonusTicketList()" ui-scroll-bottom='getUnusedBonusTicketListRefresh()' ui-scroll-top='getUnusedBonusTicketList()'>
+
+        <div class="f_exchange_top">
+            <div class="f_exchange_form">
+                <div class="f_exchange_input" bc-focus="input">
+                    <input type="text" placeholder="请输入兑换码" ng-model="exchangeCode" />
+                </div>
+                <div class="f_exchange_btn" ng-click="exchangeBonusTicket()">
+                    <button type="button" value="兑换">兑换</button>
+                </div>
+                <!--<div class="f_input_tip" >请输入正确的兑换码/该兑换码已使用</div>-->
+                <div class="f_input_tip"></div>
+
+            </div>
+        </div>
+
+        <div class="f_packets_show" ng-model="bcAllUrl" ng-init="getUnusedBonusTicketListTotal()">
+            <div class="f_packets_count" >
+                <div class="f_count_title">待领红包(元)</div>
+                <div class="f_count_detail" ng-click="bcChangeUrl(bcAllUrl.userPayments)">查看红包收益>></div>
+            </div>
+            <div  class="f_count_num">{{unusedBonusTicketListTotal.ticketTotalMoney}}</div>
+            <div class="f_packets_list" >
+                <!--<div class="packets_list_tip">恭喜您兑换成功</div>-->
+                <div class="packets_list_tip"></div>                
+                <ul class="f_packets_list_con">
+                    <li ng-repeat="x in unusedBonusTicketList">
+                        <div ng-click="goDetail(x.id)">
+                            <div class="ticket_type">
+                                <div class="c_con">
+                                    <span class="up_txt"><b>{{x.money}}</b></span>
+                                    <span class="down_txt">红包券</span>
+                                </div>
+                            </div>
+                            <div class="ticket_use_rule">
+                                <p class="top_title">标的带有红包券标识</p>
+                                <p class="top_title">单笔投资满<em>{{x.useMoney}}</em>元<span ng-show="x.catName == 'E' || x.catName == 'F'">(仅限首投)</span></p>
+                                <p ng-if="x.borrow_period">投资期限：{{x.borrow_period}}</p>
+                                <p class="time_limit">有效期至：{{x.expiredTime}}</p>
+                            </div>
+                            <div class="ticket_bg"></div>
+                        </div>
+                    </li>
+
+                    <!--<li>
+                        <div class="ticket_type">
+                            <div class="c_con">
+                                <span class="up_txt"><b>35</b>元</span>
+                                <span class="down_txt">红包券</span>
+                            </div>
+                        </div>
+                        <div class="ticket_use_rule">
+                            <p class="top_title">投资满<em>2000</em>元使用</p>
+                            <p class="time_limit">有效期至：2015-06-11  12:27:12</p>
+                        </div>
+                        <div class="ticket_bg"></div>
+                    </li>-->
+
+                </ul>    
+            </div>            
+        </div>
+
+    </div>
+</div>
+</div>

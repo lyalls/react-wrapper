@@ -1,0 +1,16 @@
+<div ui-content-for="title" >
+    <span>投资成功</span>
+</div>
+<div class="scrollable" ng-controller="CaseDoughController">
+    <div class="scrollable-content section k_ptblr" ng-init="getValueSuccess()">
+        <div class="k_invest_success">
+            <img src="images/invest_success.png" alt="">
+            <p>主人，恭喜您投资成功</p>
+            <div class="k_clear k_invest_success_btn" ng-model="pathAll">
+                <div class="k_col_6" ng-click="toSomePlace(pathAll.experience)"><button>继续投资</button></div>
+                <div class="k_col_6" ng-click="toSomePlace(pathAll.listOfExperience)"><button>查看投资记录</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+

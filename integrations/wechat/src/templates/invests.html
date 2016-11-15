@@ -1,0 +1,269 @@
+<div ui-content-for="title" >
+    <span>投资页</span>
+</div>
+<div class="scrollable invests" ng-controller="InvestsController">  
+    <div class="scrollable-content k_ptblr gray-bg" ng-controller="TenderInfoController">
+        <div class="row">
+            <div class="col-xs-12 item">
+                账户余额：<span class="color_type1">{{formatNum(tenderInfo.availableBalance)}}</span> 元
+                <button ng-controller="PaymentController" type="button" value="充值" ng-click="toRecharge()"  class="right button_type1"/>充值</button>
+            </div>
+             <div class="col-xs-12 item">项目可投金额：<span class="color_type1">{{formatNum(tenderInfo.availableAmount)}}</span> 元</div>
+        </div>
+        <div class="row inputrow">
+            <div class="col-xs-12"><span class="abs">投资金额：</span><input type="number" bc-invest
+                       id="tenderValue" 
+                       name="investMoney" 
+                       autocomplete="off"  
+                       placeholder="请输入100倍数的金额" 
+                       required 
+                       ng-model="investAmount" ng-change="investAmountChanged()"／> </div>
+        </div>
+        <div class="row couposrow" ng-if="couposshow">
+            <div class="col-xs-12" ng-click="gotoSelectCoupos()">
+                优惠劵:<span class="right color_type1">{{conusinfo}}</span>
+             </div>
+        </div>
+        <div class="row item">
+            <div class="col-xs-6">
+                可得利息:<span class="color_type1">{{data.increase}}</span>元</span>
+             </div>
+             <div class="col-xs-6 item">
+                <span class="right">可得奖励:<span class="color_type1">{{data.bouns}}</span>元</span>
+             </div>
+        </div>
+        <form role="form" name="investForm">
+            <!-- <div class="k_btn k_invests_next">
+                 <input type="button" ui-turn-on="modal1"
+                        value="马上投资" ng-click="investBc(investAmount)" />-->
+            <d  iv class="k_btn k_invests_next" ng-model="pathAll" bc-focus="button">
+                <button ng-if="tenderInfo.isFullShow == 1" ng-click="preCheck(investAmount, tenderInfo.availableAmount, tenderInfo.availableBalance)" style="background: #ff5842;">抢满标</button>
+                <button ng-if="tenderInfo.isFullShow != 1" ng-click="preCheck(investAmount, tenderInfo.availableAmount, tenderInfo.availableBalance)">立即投资</button>
+                <div style="margin-top: 20px; padding-left: 30px; padding-right: 30px; font-size: 1.5rem;">
+                	点击立即投资，即表示您已同意按
+                	 <span ng-if="typeNid!='bld'">
+                	 	<a class="blue-link" ng-href="{{contactUrl}}">《借款合同》</a>的格式和条款生成借款合同
+                	 </span>
+                	 <span ng-if="typeNid=='bld'">
+                	 	<a class="blue-link" ng-href="https://mapi.baocai.com/v2/views/contract/protocol/factoring/purchase">《保理债权购买服务协议》</a> 和 
+                	 	<a class="blue-link" ng-href="https://mapi.baocai.com/v2/views/contract/protocol/factoring/transfer_repurchase">《保理债权转让及回购合同》</a>
+                	 </span>
+                </div>
+            <div class="active_code_pop_con" ng-show="needFirstTender == true">
+                <div class="active_code_pop">
+                    <div class="active_code_input">
+                       <p>仅限新手用户投资</p>
+                    </div>
+                    <div class="active_code_confirm">
+                        <div class="active_code_cancel" ng-click="acode_back()">取消</div>
+                        <div class="active_code_ok" ng-click="acode_back()">确定</div>
+                    </div>
+                </div>
+                <div class="active_code_pop_mask"></div>
+            </div>
+            
+            <div class="active_code_pop_con" ng-show="ifHasActiveCode == true">
+                <div class="active_code_pop">
+                    <h3>请输入活动专享码</h3>
+                    <div class="active_code_input">
+                        <input type="text" class="active_code_input_txt" ng-model="typeacode" ng-click="clearerr()">
+                    </div>
+                    <div class="active_code_error" ng-show="errorinfo != ''">{{errorinfo}}</div>
+                    <div class="active_code_confirm">
+                        <div class="active_code_cancel" ng-click="acode_back()">取消</div>
+                        <div class="active_code_ok" ng-click="acode_confirm()">确定</div>
+                    </div>
+                </div>
+                <div class="active_code_pop_mask"></div>
+            </div>
+                <div class="" >
+                    <script type="text/ng-template" id="emptyInput">
+                        <div class="k_layer">
+                        <div class="k_layer_txt"><p>请输入投资金额</p></div>
+                        <div class="common_popup_bottom_btns">
+                            <button ng-click="ok()" class="single_btn">确定</button>
+                        </div>
+                        </div>
+                    </script>
+                    <script type="text/ng-template" id="mustBigThanNumber">
+                        <div class="k_layer">
+                        <div class="k_layer_txt"><p>可投金额不足</p></div>
+                        <div class="common_popup_bottom_btns">
+                            <button ng-click="gotoInvests()" class="single_btn">确定</button>
+                        </div>
+                        </div>
+                    </script>
+                    <script type="text/ng-template" id="mustBigThantenderAccountMax">
+                        <div class="k_layer">
+                        <div class="k_layer_txt"><p>当前项目最大投资金额为{{tenderAccountMax}}</p></div>
+                        <div class="common_popup_bottom_btns">
+                            <button ng-click="ok()" class="single_btn">重新输入</button>
+                        </div>
+                        </div>
+                    </script>
+                    <script type="text/ng-template" id="notMultiples">
+                        <div class="k_layer">
+                        <div class="k_layer_txt"><p>请输入100的倍数</p></div>
+                        <div class="common_popup_bottom_btns">
+                            <button ng-click="ok()" class="single_btn">确定</button>
+                        </div>
+                        </div>
+                    </script>
+<!--                    <script type="text/ng-template" id="notRightFormat">
+                        <div class="k_layer">
+                        <div class="k_layer_txt"><p>格式不对</p></div>
+                        <div class="common_popup_bottom_btns">
+                            <button ng-click="ok()" class="single_btn">确定</button>
+                        </div>
+                        </div>
+                    </script>-->
+                    <script type="text/ng-template" id="notRightPassWord">
+                        <div class="k_layer">
+                        <div class="k_layer_txt"><p style="line-height:46px;">您输入的密码不对，请重新输入！</p></div>
+                        <div class="common_popup_bottom_btns">
+                            <button ng-click="ok()" class="single_btn">确定</button>
+                        </div>
+                        </div>
+                    </script>
+                    <script type="text/ng-template"  ng-model="investNotSuccessMsg" id="investNotSuccessWithMsg">
+                        <div class="k_layer">
+                        <div class="k_layer_txt"><p class="more-line">{{ investNotSuccessMsg }}</p></div>
+                        <div class="common_popup_bottom_btns">
+                            <button ng-click="ok()" class="single_btn">重新输入</button>
+                        </div>
+                        </div>
+                    </script>
+                    <script type="text/ng-template" id="noValidateIDCard1">
+                        <div class="k_layer">
+                        <div class="k_layer_txt">
+                        <p class="leftp">主人，您还未进行实名认证，请认证后进行投资！</p>                       
+                        </div>
+                        <div class="k_clear">
+                        <div class="common_popup_bottom_btns">
+                            <button ng-click="cancel()" class="same_btn gray-font">取消</button>
+                            <button ng-click="toSomePlace(pathAll.validateIDCard)" class="same_btn">立即认证</button>                            
+                        </div>       
+                        </div>
+                        </div>
+                    </script>
+
+                    <script type="text/ng-template" id="ValidateIDCardVerify">
+                        <div class="k_layer">
+                        <div class="k_layer_txt">
+                        <p class="leftp">主人，您的实名认证正在审核中，请稍后！</p>                       
+                        </div>
+                        <div class="common_popup_bottom_btns">
+                            <button ng-click="ok()" class="single_btn">确定</button>
+                        </div>
+                        </div>
+                    </script>
+
+                     <script type="text/ng-template" id="ValidateIDCardnopass">
+                        <div class="k_layer">
+                        <div class="k_layer_txt">
+                        <p class="leftp">主人，您的实名认证未通过，请重新填写！</p>
+                        </div>
+                        <div class="k_clear">
+                        <div class="common_popup_bottom_btns">
+                            <button ng-click="cancel()" class="same_btn gray-font">取消</button>
+                            <button ng-click="toSomePlace(pathAll.validateIDCard)" class="same_btn">立即认证</button>                            
+                        </div>       
+                        </div>
+                        </div>
+                    </script>
+
+                    <script type="text/ng-template" id="noSetPayPassword">
+                        <div class="k_layer">
+                        <div class="k_layer_txt">
+                        <p class="leftp">主人，您还未设置交易密码，请设置后进行投资！</p>                    
+                        </div>
+                        <div class="k_clear">
+                            <div class="common_popup_bottom_btns">
+                            <button ng-click="cancel()" class="same_btn gray-font">取消</button>
+                            <button ng-click="toSomePlace(pathAll.setPayPassword)" class="same_btn">立即设置</button>                            
+                            </div>
+                        </div>
+                        </div>
+                    </script>
+                    <script type="text/ng-template" id="noEnoughMoney">
+                        <div class="k_layer">
+                        <div class="k_layer_txt"><p>主人，您的余额不足,请进行充值！</p></div>
+                        <div class="k_clear">
+                            <div class="common_popup_bottom_btns">
+                            <button ng-click="cancel()" class="same_btn gray-font">取消</button>
+                            <button ng-click="toSomePlace(pathAll.rechargeM)" class="same_btn">立即充值</button>
+                            </div>
+                        </div>
+                        </div>
+                    </script>
+                    <script type="text/ng-template" id="noValidateIDCard">
+                        <div class="k_layer">
+                        <div class="k_layer_txt">
+                        <p class="leftp">主人，您还未进行实名认证，请认证后再充值！</p>                        
+                        </div>
+                        <div class="k_clear">
+                        <div class="common_popup_bottom_btns">
+                            <button ng-click="cancel()" class="same_btn gray-font">取消</button>
+                            <button ng-click="toSomePlace(pathAll.validateIDCard)" class="same_btn">立即认证</button>                            
+                        </div>
+                        </div>
+                        </div>
+                    </script>
+                </div>
+
+                <script type="text/ng-template" id="investPay">
+                    <div class="k_layer">
+                    <div class="k_layer_txt">
+                     <h3>请输入交易密码</h3>
+                    <div class="k_layer_input">
+                    <input type="password" required="required" ng-model="payPassword">
+                    <div ng-model="errorPopuMessage" class="k_error_msg">{{errorPopuMessage.value}}</div>
+                    </div>
+                    </div>
+                    <div class="k_clear">
+                        <div class="common_popup_bottom_btns">
+                            <button ng-click="cancel()" class="same_btn gray-font">取消</button>
+                            <button ng-click="doTender()" class="same_btn">确定</button>                           
+                       </div>
+                    </div>
+                    </div>
+                </script>
+
+                <script type="text/ng-template" id="investSuccess">
+                    <div class="k_layer">
+                    <div class="k_layer_txt"><p>主人,恭喜您投资成功！</p></div>
+                    <div class="k_clear">
+                        <div class="common_popup_bottom_btns">
+                        <button ng-click="reload()" class="same_btn">继续投资</button>
+                        <button ng-click="toSomePlace(pathAll.investHistory)" class="k_check_log same_btn">查看投资记录</button>
+                        </div>
+                    </div>
+                    </div>
+                </script>
+                <script type="text/ng-template" id="investNotSuccess">
+                    <div class="k_layer">
+                    <div class="k_layer_txt"><p>支付密码输入错误</p></div>
+                    <div class="k_clear">
+                        <div class="common_popup_bottom_btns">
+                            <button ng-click="ok()" class="same_btn">重新输入</button>
+                            <button ng-click="cancel()" class="same_btn gray-font">撤销</button>
+                        </div>
+                    </div>
+                    </div>
+                </script>
+            </div>
+    </div>
+    
+
+    <div ui-content-for="modals">
+        <div ng-include="'invest_modal.html'"></div>
+    </div> 
+</form>    
+</div>
+</div>
+
+
+
+
+
+

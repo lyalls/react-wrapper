@@ -1,0 +1,54 @@
+
+    <div class="item-detail-cont margin-t-1-2rem">
+        <div class="txt-cont">
+            <h2 class="title-pro-detail">项目详情</h2>
+            <div class="cont-box-com">
+                   <p class="paragraph" ng-bind-html="projectsIntro.borrow.borrow_details.project_info|htmlContent"></p>
+                   <p class="paragraph" ng-bind-html="projectsIntro.borrow.borrow_details.project_info_Img|htmlContent"></p>
+            </div>
+        </div>
+
+        <div class="txt-cont">
+            <h2 class="title-pro-detail">项目风控模型</h2>
+            <div class="cont-box-com">
+                <div class="chart-layer">
+                	<div class="container-fluid" ng-controller="BigChart as vm" style="text-align: center; height:15em; padding:0;">
+    					<highchart style="width:100%; height:15em; display:block;" title='vm.charts.title' series="vm.charts.series" options="vm.charts.options">
+    					</highchart>
+					</div>
+            	</div>
+                <h3 class="title-video">该模型是由具有丰富经验的风控团队，针对新三板企业特点，构建的多维度风险评估系统。</h3>
+            </div>
+        </div>
+
+        <div class="txt-cont">
+            <h2 class="title-pro-detail">风控措施</h2>
+            <div class="cont-box-com">
+                    <p class="paragraph" ng-bind-html="projectsIntro.borrow.borrowerInfo.riskctrl|htmlContent"></p>
+                    <p class="paragraph" ng-bind-html="projectsIntro.borrow.borrowerInfo.riskctrl_Img|htmlContent"></p>
+            </div>
+        </div>
+
+        <div class="txt-cont">
+            <h2 class="title-pro-detail">财务健康指数</h2>
+            <div class="cont-box-com">
+                <div class="assess-cont">
+                    <dl>
+                        <dt>{{projectsIntro.borrow.borrow_details.rating_index}}</dt>
+                        <dd><span style="float:left;">数据时间：<time>{{projectsIntro.borrow.borrow_details.rating_index_date}}</time>  [ 快照 ]  </span><span style="float:right;">满分值：100</span></dd>
+                    </dl>
+                </div>
+                <ul class="pro-detail-txt margin-t-10rem">
+                    <li class="describe-txt">{{projectsIntro.borrow.borrow_details.rating_index_describe}}</li>
+                    <li class="describe-txt">易指数是由易三板研究院提供，从盈利能力、经营能力、偿债能力、市值管理4个角度考察企业的综合投资价值。</li>
+                  </ul>
+            </div>
+        </div>
+
+        <div class="txt-cont">
+            <h2 class="title-pro-detail">图片资料</h2>
+            <div class="cont-box-com" ng-click="gotoImageView($event)">
+                <div ng-bind-html="projectsIntro.borrow.borrow_details.image_info_Img|htmlContent"></div>
+            </div>
+        </div>
+    </div>
