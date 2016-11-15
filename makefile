@@ -16,6 +16,7 @@ wechatTestDir=./integrations/wechat
 wechatTmpDir=./src/apps/wechat/tmp
 wechatTemplateDir=./src/apps/wechat/template
 wechatPages="home:newhome" # <page name>:<target template file name>
+
 buildWechat:
 	# Prepare the environment
 	svn update ${wechatSrcDir}
@@ -25,6 +26,14 @@ buildWechat:
 	rm -rf ${wechatTmpDir}
 	mkdir -p ${wechatTmpDir}
 	cp ${wechatTemplateDir}/webpack.config.js ${wechatTmpDir}
+	# Copy CSS & image files
+	cp ${wechatSrcDir}/src/images/* ./src/images
+	cp ${wechatSrcDir}/src/less/* ./src/css
+	# Fix less import problem
+	for file in `ls ./src/css`; do \
+		sed 's/@import "mobile-angular-ui/@import "../../bower_components/mobile-angular-ui/' ./src/css/$${file} > ${wechatTmpDir}/tmp.less;\
+		mv ${wechatTmpDir}/tmp.less ./src/css/$${file};\
+	done
 	# Prepare the webpack config file
 	rm -rf ${wechatTmpDir}/tmp.js ${wechatTmpDir}/tmpHead.js ${wechatTmpDir}/tmpTail.js
 	sed '/index: __dirname/,$$ d' ${wechatTemplateDir}/webpack.config.js > ${wechatTmpDir}/tmpHead.js
