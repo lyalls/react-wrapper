@@ -19,7 +19,7 @@ WebApp.Instance.controller('ProductlistController', function ($rootScope, $scope
             pageIndex: 1
         }, function (data) {
             $scope.investsList = [];
-            var biao_tag = {'xins':'yellow-tag','xianl':'orange-tag','bld':'purple-tag','gou':'blue-tag','rongsan':'orange-l-tag','fangchan':'yellow-l-tag','newb':'red-dark-tag','memb':'member-tag'};
+            var biao_tag = {'xins':'yellow-tag','xianl':'orange-tag','bld':'purple-tag','gou':'blue-tag','rongsan':'orange-l-tag','fangchan':'yellow-l-tag','newb':'red-dark-tag'};
             var biao_typenid ={'rongsan':'融三板','bld':'保理贷','fangchan':'房抵贷','gou':'担保贷'};
             //根据不同的标的类型显示不同的底色图标
             var biao_typenid_bgcss ={'rongsan':'bg-06','bld':'bg-03','fangchan':'bg-05','gou':'bg-04'};
@@ -49,12 +49,6 @@ WebApp.Instance.controller('ProductlistController', function ($rootScope, $scope
                     biao_type_zi = '限量标';
                     biao_type_zi_bgcss = 'bg-02';
                     biao_type_zi_type = 'xianl';
-                }
-                if(data.list[i].tenderSchedule !=100 && data.list[i].isMember ==1)
-                {
-                    biao_type_zi = '会员标';
-                    biao_type_zi_bgcss = 'bg-08';
-                    biao_type_zi_type = 'memb';
                 }
                 if (data.list[i].isLimit==1 && data.list[i].limitTime > 0) {
 
@@ -169,14 +163,9 @@ WebApp.Instance.controller('ProductdetailController', function ($routeParams, $r
     $scope.iftender = false;
     $scope.fnew = false;
     $scope.ismonth = false;
-    
+
     var zxmts = false; //专享标，弹框 关闭是否跳转；
-    var borrowId = $routeParams.id;
-    if(borrowId == null || borrowId == '')
-    {
-        borrowId = WebApp.Value.getStoreVal('Detail_borrowId', '', $location, $timeout) ;
-    }
-    console.log(borrowId);
+    var borrowId = WebApp.Value.getStoreVal('Detail_borrowId', '', $location, $timeout);
     var biao_typenid ={'rongsan':'融三板','bld':'保理贷','fangchan':'房抵贷','gou':'担保贷'};
     InvestsService.getProductInfo(borrowId, function (data) {
         data.tenderSchedule = WebApp.Utils.toReverse(data.tenderSchedule);
@@ -190,10 +179,6 @@ WebApp.Instance.controller('ProductdetailController', function ($routeParams, $r
         if(biao_type_zi == 'undefined' || typeof(biao_type_zi) == 'undefined')
             biao_type_zi = '新项目';
 
-        if(data.tenderSchedule !=100 && data.isMember ==1)
-        {
-            biao_type_zi = '会员标';
-        }
         if(data.tenderSchedule !=100 && data.isNew ==1)
         {
             biao_type_zi = '新手标';
@@ -293,7 +278,7 @@ WebApp.Instance.controller('ProductdetailController', function ($routeParams, $r
                UserInfo = data;
             }, function (data) {
                 notify.closeAll();
-                $cookies.put('login_url', WebApp.Router.INVEST_DETAIL);
+                $cookies.put('login_url', WebApp.Router.INVEST);
                 notify({message: WebApp.dealHttp(data, $location, $timeout), duration: WebApp.duration});
                 return ;
             });

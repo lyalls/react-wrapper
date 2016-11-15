@@ -145,10 +145,7 @@ WebApp.Instance.controller('RegisterController', function ($scope, $location, md
             return false;
         }
         var exp = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
-        var card = document.getElementById('IDCard').value;
-        card = card.toUpperCase();
-        $scope.IDCard = card;
-        var validity = exp.test(card);
+        var validity = exp.test($scope.IDCard);
         if (!validity) {
             notify.closeAll();
             notify({message: '身份证号格式不正确', duration: WebApp.duration});
@@ -272,9 +269,7 @@ WebApp.Instance.controller('RegisterController', function ($scope, $location, md
 
     $scope.registerRealnameStatus = 0;
     $scope.registerRealname = function () {
-        var card = document.getElementById('IDCard').value
-        card = card.toUpperCase();
-        $scope.IDCard = card;
+        $scope.IDCard = $scope.IDCard.toUpperCase();
         if (!$scope.realName) {
             notify.closeAll();
             notify({message: '真实姓名不能为空', duration: WebApp.duration});
@@ -305,7 +300,7 @@ WebApp.Instance.controller('RegisterController', function ($scope, $location, md
 
         var realName = $scope.realName;
         var IDCard = $scope.IDCard;
-        RegisterService.registerRealname({realName: realName, IDCard: card}, function (data) {
+        RegisterService.registerRealname({realName: realName, IDCard: IDCard}, function (data) {
             $scope.registerRealnameStatus = 0;
             notify.closeAll();
             //WebApp.ClientStorage.setCurrentUser(data).realNameAuth = true;

@@ -31,7 +31,7 @@ buildWechat:
 	cp ${wechatSrcDir}/src/less/* ./src/css
 	# Fix less import problem
 	for file in `ls ./src/css`; do \
-		sed 's/@import "mobile-angular-ui/@import "../../bower_components/mobile-angular-ui/' ./src/css/$${file} > ${wechatTmpDir}/tmp.less;\
+		sed 's/import "mobile-angular-ui/import "\.\.\/\.\.\/bower_components\/mobile-angular-ui/g' ./src/css/$${file} > ${wechatTmpDir}/tmp.less;\
 		mv ${wechatTmpDir}/tmp.less ./src/css/$${file};\
 	done
 	# Prepare the webpack config file
