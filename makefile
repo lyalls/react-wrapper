@@ -16,7 +16,7 @@ wechatTestDir=./integrations/wechat
 wechatTmpDir=./src/apps/wechat/tmp
 wechatTemplateDir=./src/apps/wechat/template
 wechatPages="home:newhome" # <page name>:<target template file name>
-export PATH=$PATH:`pwd`/node_modules/.bin
+
 buildWechat:
 	# Prepare the environment
 	svn update ${wechatSrcDir}
