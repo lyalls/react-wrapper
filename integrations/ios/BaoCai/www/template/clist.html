@@ -1,0 +1,27 @@
+<div class="couplist scrollable-content">
+	<div class="center info"><span>{{name}}</span></div>	
+	<div ng-if="list[0]" ng-class="{1:'c1',2:'c2'}[item.used]" class="item" ng-repeat='item in list' ng-click="itemClick({args:item})">
+	   	<div class="col-xs-4" ng-class="{0:'nouse'}[item.id]">
+	   		<div class="coup_name"><span>{{item.pre}}</span>{{item.title}}</div>
+	   		 <div class="coup_title"> {{title}}</div>
+	   	</div>
+	    <div class="col-xs-8" ng-class="{0:'nouse'}[item.id]">
+	    	<span class="coupCheck" ng-if="item.used==2"></span>
+	    	<div class="coup_info">
+	    		<ul class="coup_ul">
+	    			<li ng-repeat="info in item.info">
+	    				{{info}}
+	    			</li>
+	    		</ul>
+	    	</div>
+	    	<div class="coup_date">
+	    		{{item.date}}
+	    	</div>
+	   	</div>
+	</div>	
+	<div class="couponsnone" ng-if="!list[0]">
+		<div class="img">
+		</div>
+		<div class="info">暂 无 {{title}}</div> 
+	</div>
+</div>

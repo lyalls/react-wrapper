@@ -164,7 +164,7 @@ WebApp.Instance.controller('ProjectsAmountController', function ($rootScope, $sc
                 UserInfo = data;
             }, function (data) {
                 notify.closeAll();
-                $cookies.put('login_url', WebApp.Router.INVEST);
+                $cookies.put('login_url', WebApp.Router.PROJECT_INTRO);
                 notify({message: WebApp.dealHttp(data, $location, $timeout), duration: WebApp.duration});
                 return ;
             });

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MyTenderCapitalCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="59"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="100" height="59"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asO-z9-spY">
+                        <rect key="frame" x="10" y="11" width="85" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="29.5" id="NOf-DD-nxf"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="1" green="0.42352941179999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="NOf-DD-nxf"/>
+                            </mask>
+                        </variation>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sma-79-MU3">
+                        <rect key="frame" x="10" y="34" width="85" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="29.5" id="0hK-xc-pGH"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="0.52941176470588236" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="0hK-xc-pGH"/>
+                            </mask>
+                        </variation>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Th-a3-6ft">
+                        <rect key="frame" x="99" y="5" width="1" height="49"/>
+                        <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="1" id="mIE-Rl-fWw"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="asO-z9-spY" secondAttribute="trailing" constant="5" id="8tt-l0-RPv"/>
+                <constraint firstItem="sma-79-MU3" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="LQa-88-w3E"/>
+                <constraint firstItem="asO-z9-spY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="YLt-9Z-8Va"/>
+                <constraint firstAttribute="bottom" secondItem="sma-79-MU3" secondAttribute="bottom" constant="11" id="a8e-eF-vqv"/>
+                <constraint firstItem="asO-z9-spY" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="11" id="hEe-Tc-tH2"/>
+                <constraint firstAttribute="bottom" secondItem="2Th-a3-6ft" secondAttribute="bottom" constant="5" id="jL8-Mm-WEl"/>
+                <constraint firstAttribute="bottom" secondItem="sma-79-MU3" secondAttribute="bottom" id="maN-ti-pOv"/>
+                <constraint firstItem="asO-z9-spY" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ooG-0m-C89"/>
+                <constraint firstAttribute="trailing" secondItem="2Th-a3-6ft" secondAttribute="trailing" id="qn1-kf-zoU"/>
+                <constraint firstItem="2Th-a3-6ft" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="sis-y2-wpD"/>
+                <constraint firstAttribute="trailing" secondItem="sma-79-MU3" secondAttribute="trailing" constant="5" id="wem-kH-lwu"/>
+            </constraints>
+            <size key="customSize" width="256" height="50"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="ooG-0m-C89"/>
+                    <exclude reference="maN-ti-pOv"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="lineView" destination="2Th-a3-6ft" id="2es-G2-Vof"/>
+                <outlet property="nameLabel" destination="sma-79-MU3" id="p8O-Sp-BMv"/>
+                <outlet property="valueLabel" destination="asO-z9-spY" id="4ao-9f-yga"/>
+            </connections>
+            <point key="canvasLocation" x="846" y="335.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

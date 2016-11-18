@@ -1,0 +1,26 @@
+platform:ios, '7.0'
+target 'BaoCai' do
+    source 'https://github.com/CocoaPods/Specs.git'
+    pod 'AFNetworking'
+    pod 'JSONKit-NoWarning'
+    pod 'MBProgressHUD'
+    pod 'FMDB'
+    pod 'SDWebImage'
+    pod 'MJRefresh'
+    pod 'Toast'
+    pod 'libqrencode'
+    pod 'MWPhotoBrowser', '~>2.1.2'
+    pod 'JSONModel'
+    pod 'SDCycleScrollView'
+    pod 'MarqueeLabel'
+    pod 'KMNavigationBarTransition'
+    pod 'TTTAttributedLabel'
+    pod 'RCDraggableButton'
+    pod 'HyphenateSDK'
+    
+    pod 'UMengAnalytics'
+    pod 'UMengSocialCOM'
+    
+    source 'https://git.oschina.net/rarexray/LLPaySDKSpecs.git'
+    pod 'LLPaySDK'
+end

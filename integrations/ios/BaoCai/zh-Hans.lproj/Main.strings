@@ -1,0 +1,633 @@
+
+/* Class = "UIBarButtonItem"; title = "取消"; ObjectID = "02G-55-6VY"; */
+"02G-55-6VY.title" = "取消";
+
+/* Class = "UINavigationItem"; title = "我的债权转让"; ObjectID = "0Pw-0S-3Lj"; */
+"0Pw-0S-3Lj.title" = "我的债权转让";
+
+/* Class = "UITextField"; placeholder = "输入新的交易密码"; ObjectID = "0o0-9k-0fw"; */
+"0o0-9k-0fw.placeholder" = "输入新的交易密码";
+
+/* Class = "UILabel"; text = " "; ObjectID = "0u5-mj-Kir"; */
+"0u5-mj-Kir.text" = " ";
+
+/* Class = "UIButton"; normalTitle = "投资记录"; ObjectID = "17y-jk-eQs"; */
+"17y-jk-eQs.normalTitle" = "投资记录";
+
+/* Class = "UITabBarItem"; title = "理财"; ObjectID = "18e-R9-tEx"; */
+"18e-R9-tEx.title" = "理财";
+
+/* Class = "UILabel"; text = "充值金额"; ObjectID = "1AJ-Dr-wm2"; */
+"1AJ-Dr-wm2.text" = "充值金额";
+
+/* Class = "UITextField"; placeholder = "请输入充值金额"; ObjectID = "1Ks-ua-OC0"; */
+"1Ks-ua-OC0.placeholder" = "请输入充值金额";
+
+/* Class = "UIButton"; normalTitle = "规则"; ObjectID = "1ef-c4-BME"; */
+"1ef-c4-BME.normalTitle" = "规则";
+
+/* Class = "UILabel"; text = "交易密码"; ObjectID = "1oq-hz-JxA"; */
+"1oq-hz-JxA.text" = "交易密码";
+
+/* Class = "UILabel"; text = "您还未绑定手机号，请先绑定手机号"; ObjectID = "1s5-or-Qmf"; */
+"1s5-or-Qmf.text" = "您还未绑定手机号，请先绑定手机号";
+
+/* Class = "UIButton"; normalTitle = "充值记录"; ObjectID = "22K-cl-7ud"; */
+"22K-cl-7ud.normalTitle" = "充值记录";
+
+/* Class = "UILabel"; text = "银行卡号"; ObjectID = "2IF-15-jGn"; */
+"2IF-15-jGn.text" = "银行卡号";
+
+/* Class = "UINavigationItem"; title = "消息"; ObjectID = "2SM-RE-b14"; */
+"2SM-RE-b14.title" = "消息";
+
+/* Class = "UILabel"; text = "姓名"; ObjectID = "2Vt-w7-YL7"; */
+"2Vt-w7-YL7.text" = "姓名";
+
+/* Class = "UILabel"; text = " "; ObjectID = "39y-9D-SnA"; */
+"39y-9D-SnA.text" = " ";
+
+/* Class = "UILabel"; text = "姓名"; ObjectID = "3Se-21-TN3"; */
+"3Se-21-TN3.text" = "姓名";
+
+/* Class = "UILabel"; text = " "; ObjectID = "3bs-Iu-KyY"; */
+"3bs-Iu-KyY.text" = " ";
+
+/* Class = "UILabel"; text = "选择银行"; ObjectID = "3gX-zb-zsS"; */
+"3gX-zb-zsS.text" = "选择银行";
+
+/* Class = "UILabel"; text = "手机号"; ObjectID = "41V-MK-mNb"; */
+"41V-MK-mNb.text" = "手机号";
+
+/* Class = "UILabel"; text = "交易密码"; ObjectID = "483-vc-XQp"; */
+"483-vc-XQp.text" = "交易密码";
+
+/* Class = "UILabel"; text = "银行卡信息"; ObjectID = "5LO-HC-dsw"; */
+"5LO-HC-dsw.text" = "银行卡信息";
+
+/* Class = "UIButton"; normalTitle = "获取验证码"; ObjectID = "5UB-nK-Yzm"; */
+"5UB-nK-Yzm.normalTitle" = "获取验证码";
+
+/* Class = "UINavigationItem"; title = "添加银行卡"; ObjectID = "5cj-yn-0H2"; */
+"5cj-yn-0H2.title" = "添加银行卡";
+
+/* Class = "UILabel"; text = "https://m.baocai.com"; ObjectID = "5dc-Y8-3jc"; */
+"5dc-Y8-3jc.text" = "https://m.baocai.com";
+
+/* Class = "UIButton"; normalTitle = "转让中"; ObjectID = "6YG-9d-QdP"; */
+"6YG-9d-QdP.normalTitle" = "转让中";
+
+/* Class = "UILabel"; text = "开户支行"; ObjectID = "6gM-TY-b7T"; */
+"6gM-TY-b7T.text" = "开户支行";
+
+/* Class = "UILabel"; text = "新登录密码"; ObjectID = "6ya-fG-Ytt"; */
+"6ya-fG-Ytt.text" = "新登录密码";
+
+/* Class = "UILabel"; text = "充值金额"; ObjectID = "7EI-Jn-JPO"; */
+"7EI-Jn-JPO.text" = "充值金额";
+
+/* Class = "UILabel"; text = "修改"; ObjectID = "7HH-By-z08"; */
+"7HH-By-z08.text" = "修改";
+
+/* Class = "UITabBarItem"; title = "发现"; ObjectID = "7Vl-oU-HeQ"; */
+"7Vl-oU-HeQ.title" = "发现";
+
+/* Class = "UINavigationItem"; title = "投资"; ObjectID = "7n1-6X-HSh"; */
+"7n1-6X-HSh.title" = "投资";
+
+/* Class = "UIButton"; normalTitle = "未使用"; ObjectID = "83K-X1-t0I"; */
+"83K-X1-t0I.normalTitle" = "未使用";
+
+/* Class = "UINavigationItem"; title = "充值"; ObjectID = "8mU-6b-1ru"; */
+"8mU-6b-1ru.title" = "充值";
+
+/* Class = "UINavigationItem"; title = "邀请好友"; ObjectID = "99x-Pi-2yt"; */
+"99x-Pi-2yt.title" = "邀请好友";
+
+/* Class = "UINavigationItem"; title = "理财"; ObjectID = "9Df-dU-0vg"; */
+"9Df-dU-0vg.title" = "理财";
+
+/* Class = "UIButton"; normalTitle = "已回收"; ObjectID = "9Lr-zh-7eX"; */
+"9Lr-zh-7eX.normalTitle" = "已回收";
+
+/* Class = "UINavigationItem"; title = "绑定手机"; ObjectID = "AHF-hD-ZKf"; */
+"AHF-hD-ZKf.title" = "绑定手机";
+
+/* Class = "UINavigationItem"; title = "已转出资产详情"; ObjectID = "AUF-Ct-40o"; */
+"AUF-Ct-40o.title" = "已转出资产详情";
+
+/* Class = "UITextField"; placeholder = "输入重复新的交易密码"; ObjectID = "AUF-cj-zDf"; */
+"AUF-cj-zDf.placeholder" = "输入重复新的交易密码";
+
+/* Class = "UITextField"; placeholder = "与开户名一致的银行卡"; ObjectID = "Bi1-zH-gaw"; */
+"Bi1-zH-gaw.placeholder" = "与开户名一致的银行卡";
+
+/* Class = "UIButton"; normalTitle = "说明"; ObjectID = "BpJ-55-Wt3"; */
+"BpJ-55-Wt3.normalTitle" = "说明";
+
+/* Class = "UILabel"; text = " "; ObjectID = "C1P-Vr-HPj"; */
+"C1P-Vr-HPj.text" = " ";
+
+/* Class = "UIButton"; normalTitle = "充值"; ObjectID = "CLx-cb-Bby"; */
+"CLx-cb-Bby.normalTitle" = "充值";
+
+/* Class = "UILabel"; text = "手机号"; ObjectID = "CSx-FE-KlC"; */
+"CSx-FE-KlC.text" = "手机号";
+
+/* Class = "UILabel"; text = "身份证号"; ObjectID = "DCv-GO-f8X"; */
+"DCv-GO-f8X.text" = "身份证号";
+
+/* Class = "UILabel"; text = " "; ObjectID = "DaO-bV-qtW"; */
+"DaO-bV-qtW.text" = " ";
+
+/* Class = "UINavigationItem"; title = "找回交易密码"; ObjectID = "DfD-7U-4H1"; */
+"DfD-7U-4H1.title" = "找回交易密码";
+
+/* Class = "UILabel"; text = " "; ObjectID = "E9K-Lh-5kh"; */
+"E9K-Lh-5kh.text" = " ";
+
+/* Class = "UITextField"; placeholder = "输入您的手机号"; ObjectID = "EGg-f3-TPv"; */
+"EGg-f3-TPv.placeholder" = "输入您的手机号";
+
+/* Class = "UILabel"; text = "开户所在地"; ObjectID = "EMT-OL-7l9"; */
+"EMT-OL-7l9.text" = "开户所在地";
+
+/* Class = "UINavigationItem"; title = "我的散标"; ObjectID = "Eox-FR-hm3"; */
+"Eox-FR-hm3.title" = "我的散标";
+
+/* Class = "UIBarButtonItem"; title = "确定"; ObjectID = "FMG-dh-d0Z"; */
+"FMG-dh-d0Z.title" = "确定";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "FkM-2c-nAN"; */
+"FkM-2c-nAN.text" = "Label";
+
+/* Class = "UILabel"; text = "新交易密码"; ObjectID = "GND-U0-BzE"; */
+"GND-U0-BzE.text" = "新交易密码";
+
+/* Class = "UILabel"; text = "银行卡号"; ObjectID = "GNX-dO-omL"; */
+"GNX-dO-omL.text" = "银行卡号";
+
+/* Class = "UITextField"; placeholder = "输入当前登录密码"; ObjectID = "GXS-bm-6or"; */
+"GXS-bm-6or.placeholder" = "输入当前登录密码";
+
+/* Class = "UIButton"; normalTitle = "分享我的邀请码"; ObjectID = "H2V-NZ-tff"; */
+"H2V-NZ-tff.normalTitle" = "分享我的邀请码";
+
+/* Class = "UILabel"; text = " "; ObjectID = "HTd-ff-dYQ"; */
+"HTd-ff-dYQ.text" = " ";
+
+/* Class = "UIButton"; normalTitle = "找回交易密码"; ObjectID = "HVM-DY-Vfn"; */
+"HVM-DY-Vfn.normalTitle" = "找回交易密码";
+
+/* Class = "UIButton"; normalTitle = "规则"; ObjectID = "Hl6-rG-Kc3"; */
+"Hl6-rG-Kc3.normalTitle" = "规则";
+
+/* Class = "UINavigationItem"; title = "找回交易密码"; ObjectID = "Hux-rs-In5"; */
+"Hux-rs-In5.title" = "找回交易密码";
+
+/* Class = "UIButton"; normalTitle = "186****1234"; ObjectID = "I9G-2U-PyA"; */
+"I9G-2U-PyA.normalTitle" = "186****1234";
+
+/* Class = "UILabel"; text = "原交易密码"; ObjectID = "J9E-bn-eTZ"; */
+"J9E-bn-eTZ.text" = "原交易密码";
+
+/* Class = "UILabel"; text = "400-616-7070"; ObjectID = "JAl-ZO-v4k"; */
+"JAl-ZO-v4k.text" = "400-616-7070";
+
+/* Class = "UILabel"; text = " "; ObjectID = "Ju2-uM-IKy"; */
+"Ju2-uM-IKy.text" = " ";
+
+/* Class = "UILabel"; text = "实名认证"; ObjectID = "K0F-sX-1dV"; */
+"K0F-sX-1dV.text" = "实名认证";
+
+/* Class = "UIButton"; normalTitle = "非大陆居民请联系客服采用人工认证"; ObjectID = "KDf-7R-66D"; */
+"KDf-7R-66D.normalTitle" = "非大陆居民请联系客服采用人工认证";
+
+/* Class = "UILabel"; text = "重复交易密码"; ObjectID = "Kgj-Fd-ZRX"; */
+"Kgj-Fd-ZRX.text" = "重复交易密码";
+
+/* Class = "UIButton"; normalTitle = "退出登录"; ObjectID = "Kpv-Nt-DLk"; */
+"Kpv-Nt-DLk.normalTitle" = "退出登录";
+
+/* Class = "UILabel"; text = "开户支行"; ObjectID = "L26-xG-Xoc"; */
+"L26-xG-Xoc.text" = "开户支行";
+
+/* Class = "UILabel"; text = "登录"; ObjectID = "L9C-BM-0pP"; */
+"L9C-BM-0pP.text" = "登录";
+
+/* Class = "UILabel"; text = "银行"; ObjectID = "LJV-Cr-Xid"; */
+"LJV-Cr-Xid.text" = "银行";
+
+/* Class = "UILabel"; text = "5"; ObjectID = "LZE-Oc-1FS"; */
+"LZE-Oc-1FS.text" = "5";
+
+/* Class = "UITextField"; placeholder = "输入新密码"; ObjectID = "M9X-mG-LTD"; */
+"M9X-mG-LTD.placeholder" = "输入新密码";
+
+/* Class = "UILabel"; text = "请选择银行"; ObjectID = "MJN-sM-ria"; */
+"MJN-sM-ria.text" = "请选择银行";
+
+/* Class = "UILabel"; text = "已获总奖励（元）"; ObjectID = "N1g-bJ-dX0"; */
+"N1g-bJ-dX0.text" = "已获总奖励（元）";
+
+/* Class = "UILabel"; text = "请选择开户所在地"; ObjectID = "N41-WW-f34"; */
+"N41-WW-f34.text" = "请选择开户所在地";
+
+/* Class = "UILabel"; text = "账户可用余额"; ObjectID = "Ni8-ON-51Y"; */
+"Ni8-ON-51Y.text" = "账户可用余额";
+
+/* Class = "UINavigationItem"; title = "标的详情"; ObjectID = "NoC-NV-xcj"; */
+"NoC-NV-xcj.title" = "标的详情";
+
+/* Class = "UIButton"; normalTitle = "找回交易密码"; ObjectID = "O2a-wd-XwT"; */
+"O2a-wd-XwT.normalTitle" = "找回交易密码";
+
+/* Class = "UILabel"; text = "我邀请的好友"; ObjectID = "O6M-bJ-c5s"; */
+"O6M-bJ-c5s.text" = "我邀请的好友";
+
+/* Class = "UILabel"; text = "开户名"; ObjectID = "OI0-0T-AEJ"; */
+"OI0-0T-AEJ.text" = "开户名";
+
+/* Class = "UILabel"; text = "V1.0"; ObjectID = "OKE-xk-Z0W"; */
+"OKE-xk-Z0W.text" = "V1.0";
+
+/* Class = "UILabel"; text = "目前暂不支持更换银行卡号，请绑定常用银行卡！"; ObjectID = "Oq0-0A-5if"; */
+"Oq0-0A-5if.text" = "目前暂不支持更换银行卡号，请绑定常用银行卡！";
+
+/* Class = "UITextField"; placeholder = "例如中关村支行"; ObjectID = "P5k-vB-iwG"; */
+"P5k-vB-iwG.placeholder" = "例如中关村支行";
+
+/* Class = "UIButton"; normalTitle = "投标中"; ObjectID = "PbI-7i-JGD"; */
+"PbI-7i-JGD.normalTitle" = "投标中";
+
+/* Class = "UIButton"; normalTitle = "确定"; ObjectID = "PuC-Jq-Q0t"; */
+"PuC-Jq-Q0t.normalTitle" = "确定";
+
+/* Class = "UINavigationItem"; title = "找回交易密码"; ObjectID = "QEp-Ie-s7N"; */
+"QEp-Ie-s7N.title" = "找回交易密码";
+
+/* Class = "UIButton"; normalTitle = "已购入"; ObjectID = "QVp-rZ-Rah"; */
+"QVp-rZ-Rah.normalTitle" = "已购入";
+
+/* Class = "UILabel"; text = "剩余可投"; ObjectID = "QXq-fz-9Zk"; */
+"QXq-fz-9Zk.text" = "剩余可投";
+
+/* Class = "UINavigationItem"; title = "设置交易密码"; ObjectID = "QYE-ZD-Xdl"; */
+"QYE-ZD-Xdl.title" = "设置交易密码";
+
+/* Class = "UILabel"; text = "微信号：vbaocai"; ObjectID = "Qji-gE-lPR"; */
+"Qji-gE-lPR.text" = "微信号：vbaocai";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "SRe-Gg-0vs"; */
+"SRe-Gg-0vs.normalTitle" = "Button";
+
+/* Class = "UITextField"; placeholder = "请输入验证码"; ObjectID = "SfG-cF-OXR"; */
+"SfG-cF-OXR.placeholder" = "请输入验证码";
+
+/* Class = "UILabel"; text = "验证码"; ObjectID = "SiW-Sa-anI"; */
+"SiW-Sa-anI.text" = "验证码";
+
+/* Class = "UINavigationItem"; title = "项目详情"; ObjectID = "TNT-XE-8Xk"; */
+"TNT-XE-8Xk.title" = "项目详情";
+
+/* Class = "UILabel"; text = "验证码"; ObjectID = "TSn-6b-kz0"; */
+"TSn-6b-kz0.text" = "验证码";
+
+/* Class = "UILabel"; text = "邀请好友记录"; ObjectID = "TqX-5W-ZWU"; */
+"TqX-5W-ZWU.text" = "邀请好友记录";
+
+/* Class = "UILabel"; text = " "; ObjectID = "TsD-ek-O92"; */
+"TsD-ek-O92.text" = " ";
+
+/* Class = "UIButton"; normalTitle = "取  消"; ObjectID = "U3l-aP-1gV"; */
+"U3l-aP-1gV.normalTitle" = "取  消";
+
+/* Class = "UILabel"; text = "新交易密码"; ObjectID = "UAW-j2-2kE"; */
+"UAW-j2-2kE.text" = "新交易密码";
+
+/* Class = "UILabel"; text = "第一次设置，原密码为登录密码"; ObjectID = "UKb-8k-07B"; */
+"UKb-8k-07B.text" = "第一次设置，原密码为登录密码";
+
+/* Class = "UITabBarItem"; title = "首页"; ObjectID = "V26-tk-8rx"; */
+"V26-tk-8rx.title" = "首页";
+
+/* Class = "UILabel"; text = " "; ObjectID = "Ve5-km-Es3"; */
+"Ve5-km-Es3.text" = " ";
+
+/* Class = "UILabel"; text = "身份证号"; ObjectID = "WX8-pB-mCx"; */
+"WX8-pB-mCx.text" = "身份证号";
+
+/* Class = "UILabel"; text = " "; ObjectID = "Wdh-zJ-adv"; */
+"Wdh-zJ-adv.text" = " ";
+
+/* Class = "UILabel"; text = "请"; ObjectID = "Wf0-uK-GjW"; */
+"Wf0-uK-GjW.text" = "请";
+
+/* Class = "UITextField"; placeholder = "请输入姓名"; ObjectID = "X87-BI-wCW"; */
+"X87-BI-wCW.placeholder" = "请输入姓名";
+
+/* Class = "UITextField"; placeholder = "提现金额50元起"; ObjectID = "XAj-O3-SVw"; */
+"XAj-O3-SVw.placeholder" = "提现金额50元起";
+
+/* Class = "UIButton"; normalTitle = "已读"; ObjectID = "XGB-3Z-gqX"; */
+"XGB-3Z-gqX.normalTitle" = "已读";
+
+/* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "Xep-bp-eQX"; */
+"Xep-bp-eQX.normalTitle" = "下一步";
+
+/* Class = "UINavigationItem"; title = "充值"; ObjectID = "YoW-WR-HbO"; */
+"YoW-WR-HbO.title" = "充值";
+
+/* Class = "UILabel"; text = "投资金额"; ObjectID = "Z69-lZ-Dbn"; */
+"Z69-lZ-Dbn.text" = "投资金额";
+
+/* Class = "UITextField"; placeholder = "重复新密码"; ObjectID = "Zr1-Xh-WJK"; */
+"Zr1-Xh-WJK.placeholder" = "重复新密码";
+
+/* Class = "UINavigationItem"; title = "兑换红包券"; ObjectID = "Zx0-Jf-kl1"; */
+"Zx0-Jf-kl1.title" = "兑换红包券";
+
+/* Class = "UIButton"; normalTitle = "充值"; ObjectID = "aKb-2P-iRH"; */
+"aKb-2P-iRH.normalTitle" = "充值";
+
+/* Class = "UILabel"; text = "待收总奖励(元)"; ObjectID = "b6c-su-3Dx"; */
+"b6c-su-3Dx.text" = "待收总奖励(元)";
+
+/* Class = "UIButton"; normalTitle = "未读"; ObjectID = "bKR-58-H3x"; */
+"bKR-58-H3x.normalTitle" = "未读";
+
+/* Class = "UIButton"; normalTitle = "获取验证码"; ObjectID = "bQv-cB-V05"; */
+"bQv-cB-V05.normalTitle" = "获取验证码";
+
+/* Class = "UINavigationItem"; title = "消息详情"; ObjectID = "bXo-H3-1yd"; */
+"bXo-H3-1yd.title" = "消息详情";
+
+/* Class = "UITextField"; placeholder = "请输入身份证号"; ObjectID = "bg1-pd-7LE"; */
+"bg1-pd-7LE.placeholder" = "请输入身份证号";
+
+/* Class = "UITextField"; placeholder = "第一次设置，原密码为登录密码"; ObjectID = "bp7-ZE-RgO"; */
+"bp7-ZE-RgO.placeholder" = "第一次设置，原密码为登录密码";
+
+/* Class = "UIButton"; normalTitle = "提现记录"; ObjectID = "cMW-t6-Hoa"; */
+"cMW-t6-Hoa.normalTitle" = "提现记录";
+
+/* Class = "UILabel"; text = "交易密码"; ObjectID = "cPd-XK-9aP"; */
+"cPd-XK-9aP.text" = "交易密码";
+
+/* Class = "UINavigationItem"; title = "充值记录"; ObjectID = "cZr-JH-qdb"; */
+"cZr-JH-qdb.title" = "充值记录";
+
+/* Class = "UITabBarItem"; title = "我的"; ObjectID = "cbl-bB-fSR"; */
+"cbl-bB-fSR.title" = "我的";
+
+/* Class = "UILabel"; text = "银行卡号"; ObjectID = "chw-V0-kwn"; */
+"chw-V0-kwn.text" = "银行卡号";
+
+/* Class = "UILabel"; text = "客服热线"; ObjectID = "dD1-U6-3gG"; */
+"dD1-U6-3gG.text" = "客服热线";
+
+/* Class = "UIButton"; normalTitle = "充值"; ObjectID = "dJP-mA-vkC"; */
+"dJP-mA-vkC.normalTitle" = "充值";
+
+/* Class = "UILabel"; text = "元"; ObjectID = "dW4-wR-7V3"; */
+"dW4-wR-7V3.text" = "元";
+
+/* Class = "UIButton"; normalTitle = "登录"; ObjectID = "diG-Za-tek"; */
+"diG-Za-tek.normalTitle" = "登录";
+
+/* Class = "UITextField"; placeholder = "例如中关村支行"; ObjectID = "dqt-ta-YS5"; */
+"dqt-ta-YS5.placeholder" = "例如中关村支行";
+
+/* Class = "UIButton"; normalTitle = "获取验证码"; ObjectID = "dwa-lH-Vyx"; */
+"dwa-lH-Vyx.normalTitle" = "获取验证码";
+
+/* Class = "UILabel"; text = " "; ObjectID = "e8I-6V-Cyc"; */
+"e8I-6V-Cyc.text" = " ";
+
+/* Class = "UISegmentedControl"; f7A-b7-E9D.segmentTitles[0] = "回收中"; ObjectID = "f7A-b7-E9D"; */
+"f7A-b7-E9D.segmentTitles[0]" = "回收中";
+
+/* Class = "UISegmentedControl"; f7A-b7-E9D.segmentTitles[1] = "已回收"; ObjectID = "f7A-b7-E9D"; */
+"f7A-b7-E9D.segmentTitles[1]" = "已回收";
+
+/* Class = "UINavigationItem"; title = "提现"; ObjectID = "fv1-pX-6az"; */
+"fv1-pX-6az.title" = "提现";
+
+/* Class = "UILabel"; text = "可提现金额"; ObjectID = "g5w-L0-jVm"; */
+"g5w-L0-jVm.text" = "可提现金额";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "g7k-kt-ewz"; */
+"g7k-kt-ewz.text" = "Detail";
+
+/* Class = "UIButton"; normalTitle = " "; ObjectID = "geE-Da-cXb"; */
+"geE-Da-cXb.normalTitle" = " ";
+
+/* Class = "UILabel"; text = "版本号"; ObjectID = "gg7-b0-TzX"; */
+"gg7-b0-TzX.text" = "版本号";
+
+/* Class = "UILabel"; text = "官方微信"; ObjectID = "goE-sT-Big"; */
+"goE-sT-Big.text" = "官方微信";
+
+/* Class = "UINavigationItem"; title = "提现记录"; ObjectID = "hSJ-6D-qlE"; */
+"hSJ-6D-qlE.title" = "提现记录";
+
+/* Class = "UILabel"; text = "登录密码"; ObjectID = "hWk-F8-yX4"; */
+"hWk-F8-yX4.text" = "登录密码";
+
+/* Class = "UINavigationItem"; title = "实名认证"; ObjectID = "hvh-hc-Iqe"; */
+"hvh-hc-Iqe.title" = "实名认证";
+
+/* Class = "UIButton"; normalTitle = "确定"; ObjectID = "hzg-b2-Jh2"; */
+"hzg-b2-Jh2.normalTitle" = "确定";
+
+/* Class = "UIButton"; normalTitle = "立即提现"; ObjectID = "iE6-OS-cO5"; */
+"iE6-OS-cO5.normalTitle" = "立即提现";
+
+/* Class = "UILabel"; text = "开户行所在地"; ObjectID = "iEv-eB-fjI"; */
+"iEv-eB-fjI.text" = "开户行所在地";
+
+/* Class = "UILabel"; text = "后查看"; ObjectID = "iLp-WM-sbl"; */
+"iLp-WM-sbl.text" = "后查看";
+
+/* Class = "UIButton"; normalTitle = "下一步"; ObjectID = "iZm-64-4vE"; */
+"iZm-64-4vE.normalTitle" = "下一步";
+
+/* Class = "UILabel"; text = "请选择开户行所在地"; ObjectID = "jg0-jb-zF0"; */
+"jg0-jb-zF0.text" = "请选择开户行所在地";
+
+/* Class = "UIButton"; normalTitle = "回收中"; ObjectID = "jsr-Fz-Goy"; */
+"jsr-Fz-Goy.normalTitle" = "回收中";
+
+/* Class = "UILabel"; text = "金融管家"; ObjectID = "kCh-ZJ-5BF"; */
+"kCh-ZJ-5BF.text" = "金融管家";
+
+/* Class = "UITextField"; placeholder = "请输入兑换码"; ObjectID = "lB6-Sf-frN"; */
+"lB6-Sf-frN.placeholder" = "请输入兑换码";
+
+/* Class = "UITextField"; placeholder = "请输入100整数倍金额"; ObjectID = "lH1-UW-cBJ"; */
+"lH1-UW-cBJ.placeholder" = "请输入100整数倍金额";
+
+/* Class = "UIButton"; normalTitle = "立即投资"; ObjectID = "lUp-T3-wAK"; */
+"lUp-T3-wAK.normalTitle" = "立即投资";
+
+/* Class = "UINavigationItem"; title = "发现"; ObjectID = "lf6-tt-ZOh"; */
+"lf6-tt-ZOh.title" = "发现";
+
+/* Class = "UIButton"; normalTitle = "立即兑换红包券"; ObjectID = "mLw-EP-YNW"; */
+"mLw-EP-YNW.normalTitle" = "立即兑换红包券";
+
+/* Class = "UILabel"; text = "关于我们"; ObjectID = "mQu-Yv-IdC"; */
+"mQu-Yv-IdC.text" = "关于我们";
+
+/* Class = "UILabel"; text = "注册时间"; ObjectID = "mRA-Bq-19U"; */
+"mRA-Bq-19U.text" = "注册时间";
+
+/* Class = "UINavigationItem"; title = "散标详情"; ObjectID = "mVD-eY-nQB"; */
+"mVD-eY-nQB.title" = "散标详情";
+
+/* Class = "UINavigationItem"; title = "关于我们"; ObjectID = "maB-6g-UOl"; */
+"maB-6g-UOl.title" = "关于我们";
+
+/* Class = "UILabel"; text = " "; ObjectID = "mdO-Sp-0MK"; */
+"mdO-Sp-0MK.text" = " ";
+
+/* Class = "UILabel"; text = "提现金额"; ObjectID = "mgq-0w-cMn"; */
+"mgq-0w-cMn.text" = "提现金额";
+
+/* Class = "UILabel"; text = " "; ObjectID = "nEt-Lx-IBW"; */
+"nEt-Lx-IBW.text" = " ";
+
+/* Class = "UINavigationItem"; title = "抱财"; ObjectID = "nF4-9i-3OI"; */
+"nF4-9i-3OI.title" = "抱财";
+
+/* Class = "UILabel"; text = "当前登录密码"; ObjectID = "nFx-yn-4yv"; */
+"nFx-yn-4yv.text" = "当前登录密码";
+
+/* Class = "UILabel"; text = "400-616-7070"; ObjectID = "nPU-yU-pbd"; */
+"nPU-yU-pbd.text" = "400-616-7070";
+
+/* Class = "UILabel"; text = "手势密码"; ObjectID = "o2d-BB-R3f"; */
+"o2d-BB-R3f.text" = "手势密码";
+
+/* Class = "UILabel"; text = " "; ObjectID = "o4W-ld-MpU"; */
+"o4W-ld-MpU.text" = " ";
+
+/* Class = "UINavigationItem"; title = "我的红包券"; ObjectID = "o8K-GC-1md"; */
+"o8K-GC-1md.title" = "我的红包券";
+
+/* Class = "UILabel"; text = "身份证号"; ObjectID = "oM7-zS-oRO"; */
+"oM7-zS-oRO.text" = "身份证号";
+
+/* Class = "UIButton"; normalTitle = "已使用"; ObjectID = "oWN-Ch-WxD"; */
+"oWN-Ch-WxD.normalTitle" = "已使用";
+
+/* Class = "UITextField"; placeholder = "重新输入新密码"; ObjectID = "oqa-YA-wGL"; */
+"oqa-YA-wGL.placeholder" = "重新输入新密码";
+
+/* Class = "UITextField"; placeholder = "请输入您的银行卡号"; ObjectID = "oyy-BJ-fPU"; */
+"oyy-BJ-fPU.placeholder" = "请输入您的银行卡号";
+
+/* Class = "UINavigationItem"; title = "充值"; ObjectID = "p98-6G-S0w"; */
+"p98-6G-S0w.title" = "充值";
+
+/* Class = "UILabel"; text = "服务时间：9:00-22:00"; ObjectID = "qa8-cR-7U0"; */
+"qa8-cR-7U0.text" = "服务时间：9:00-22:00";
+
+/* Class = "UILabel"; text = "此服务由连连支付提供"; ObjectID = "rF5-xq-ZyB"; */
+"rF5-xq-ZyB.text" = "此服务由连连支付提供";
+
+/* Class = "UILabel"; text = "元"; ObjectID = "rLm-cx-FJ6"; */
+"rLm-cx-FJ6.text" = "元";
+
+/* Class = "UINavigationItem"; title = "账户安全"; ObjectID = "rl0-BI-tP1"; */
+"rl0-BI-tP1.title" = "账户安全";
+
+/* Class = "UITextField"; placeholder = "请输入充值金额"; ObjectID = "rpj-lp-vi4"; */
+"rpj-lp-vi4.placeholder" = "请输入充值金额";
+
+/* Class = "UILabel"; text = "修改"; ObjectID = "rwl-Ds-Jdg"; */
+"rwl-Ds-Jdg.text" = "修改";
+
+/* Class = "UIButton"; normalTitle = "完成"; ObjectID = "s54-Xw-DhH"; */
+"s54-Xw-DhH.normalTitle" = "完成";
+
+/* Class = "UILabel"; text = " "; ObjectID = "sDx-7z-12c"; */
+"sDx-7z-12c.text" = " ";
+
+/* Class = "UIButton"; normalTitle = "确定"; ObjectID = "sK1-sk-UMY"; */
+"sK1-sk-UMY.normalTitle" = "确定";
+
+/* Class = "UILabel"; text = "手机绑定"; ObjectID = "sbw-yg-gbb"; */
+"sbw-yg-gbb.text" = "手机绑定";
+
+/* Class = "UINavigationItem"; title = "修改登录密码"; ObjectID = "t3p-t1-MsA"; */
+"t3p-t1-MsA.title" = "修改登录密码";
+
+/* Class = "UINavigationItem"; title = "设置"; ObjectID = "u4F-Il-sii"; */
+"u4F-Il-sii.title" = "设置";
+
+/* Class = "UILabel"; text = " "; ObjectID = "vhZ-6E-o7r"; */
+"vhZ-6E-o7r.text" = " ";
+
+/* Class = "UIButton"; normalTitle = "确定"; ObjectID = "wLU-nO-LKg"; */
+"wLU-nO-LKg.normalTitle" = "确定";
+
+/* Class = "UINavigationItem"; title = "补全银行卡"; ObjectID = "wXZ-5Q-IOM"; */
+"wXZ-5Q-IOM.title" = "补全银行卡";
+
+/* Class = "UILabel"; text = " "; ObjectID = "wdh-Fc-PYj"; */
+"wdh-Fc-PYj.text" = " ";
+
+/* Class = "UILabel"; text = "客服热线"; ObjectID = "wsQ-QA-jJh"; */
+"wsQ-QA-jJh.text" = "客服热线";
+
+/* Class = "UILabel"; text = "分享给好友"; ObjectID = "wu3-XX-Xvh"; */
+"wu3-XX-Xvh.text" = "分享给好友";
+
+/* Class = "UIButton"; normalTitle = "已过期"; ObjectID = "x0K-XV-W5L"; */
+"x0K-XV-W5L.normalTitle" = "已过期";
+
+/* Class = "UILabel"; text = "重复新交易密码"; ObjectID = "x8L-bF-ZHi"; */
+"x8L-bF-ZHi.text" = "重复新交易密码";
+
+/* Class = "UIButton"; normalTitle = "提交"; ObjectID = "xDs-6f-d03"; */
+"xDs-6f-d03.normalTitle" = "提交";
+
+/* Class = "UITextField"; placeholder = "输入验证码"; ObjectID = "xph-mN-Ad8"; */
+"xph-mN-Ad8.placeholder" = "输入验证码";
+
+/* Class = "UIButton"; normalTitle = "确定"; ObjectID = "y3a-sU-bsY"; */
+"y3a-sU-bsY.normalTitle" = "确定";
+
+/* Class = "UILabel"; text = "重复新密码"; ObjectID = "yDq-Fc-3a1"; */
+"yDq-Fc-3a1.text" = "重复新密码";
+
+/* Class = "UILabel"; text = "跳过"; ObjectID = "yTC-0t-FMI"; */
+"yTC-0t-FMI.text" = "跳过";
+
+/* Class = "UITextField"; placeholder = "请输入交易密码"; ObjectID = "ygE-r4-h0d"; */
+"ygE-r4-h0d.placeholder" = "请输入交易密码";
+
+/* Class = "UITextField"; placeholder = "请输入身份证号"; ObjectID = "yiQ-eq-aWn"; */
+"yiQ-eq-aWn.placeholder" = "请输入身份证号";
+
+/* Class = "UINavigationItem"; title = "已购入资产详情"; ObjectID = "yna-0b-pVZ"; */
+"yna-0b-pVZ.title" = "已购入资产详情";
+
+/* Class = "UILabel"; text = "待收邀请奖励（元）"; ObjectID = "ytx-AS-fj8"; */
+"ytx-AS-fj8.text" = "待收邀请奖励（元）";
+
+/* Class = "UILabel"; text = "元"; ObjectID = "z00-Zw-d5g"; */
+"z00-Zw-d5g.text" = "元";
+
+/* Class = "UITextField"; placeholder = "输入验证码"; ObjectID = "z54-Fg-gfx"; */
+"z54-Fg-gfx.placeholder" = "输入验证码";
+
+/* Class = "UIButton"; normalTitle = "已转出"; ObjectID = "zBn-X7-0Ry"; */
+"zBn-X7-0Ry.normalTitle" = "已转出";
+
+/* Class = "UIButton"; normalTitle = "确定"; ObjectID = "zZk-1P-UK3"; */
+"zZk-1P-UK3.normalTitle" = "确定";
+
+/* Class = "UITextField"; placeholder = "输入新登录密码"; ObjectID = "za7-U7-ewU"; */
+"za7-U7-ewU.placeholder" = "输入新登录密码";

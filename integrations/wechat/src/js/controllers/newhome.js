@@ -35,7 +35,7 @@ WebApp.Instance.controller('NewhomeController',function($scope,$modal,md5,Stagin
     $scope.getInvestsList = function(){
         NowhomeService.getTopInverstsList(function (data) {
             $scope.investsList = [];
-            var biao_tag = {'xins':'yellow-tag','xianl':'orange-tag','bld':'purple-tag','gou':'blue-tag','rongsan':'orange-l-tag','fangchan':'yellow-l-tag','newb':'red-dark-tag'};
+            var biao_tag = {'xins':'yellow-tag','xianl':'orange-tag','bld':'purple-tag','gou':'blue-tag','rongsan':'orange-l-tag','fangchan':'yellow-l-tag','newb':'red-dark-tag','memb':'member-tag'};
             var biao_typenid ={'rongsan':'融三板','bld':'保理贷','fangchan':'房抵贷','gou':'担保贷'};
             //根据不同的标的类型显示不同的底色图标
             var biao_typenid_bgcss ={'rongsan':'bg-06','bld':'bg-03','fangchan':'bg-05','gou':'bg-04'};
@@ -82,6 +82,13 @@ WebApp.Instance.controller('NewhomeController',function($scope,$modal,md5,Stagin
                     biao_type_zi_bgcss = 'bg-02';
                     biao_type_zi_type = 'xianl';
                 }
+                if(data.tenderList[i].isMember == 1 && data.tenderList[i].tenderSchedule !=100)
+                {
+                    //会员标
+                    biao_type_zi = '会员标';
+                    biao_type_zi_bgcss = 'bg-08';
+                    biao_type_zi_type = 'memb';
+                }
                 if (data.tenderList[i].isLimit == 1 && data.tenderList[i].limitTime > 0) {
 
                     data.tenderList[i].timer = returnTime(data.tenderList[i]);
@@ -92,6 +99,14 @@ WebApp.Instance.controller('NewhomeController',function($scope,$modal,md5,Stagin
                         }, 1000);
                     })(i);
                 }
+
+                //起投金额
+                var StartInvestTag = data.tenderList[i].tenderAccountMin;
+                if(StartInvestTag>=10000)
+                {
+                    StartInvestTag = parseInt(StartInvestTag/10000)+"万";
+                }
+                data.tenderList[i].StartInvestTag = StartInvestTag;
 
                 data.tenderList[i].biao_type_zi = biao_type_zi;
                 data.tenderList[i].biao_type_zi_bgcss = biao_type_zi_bgcss;

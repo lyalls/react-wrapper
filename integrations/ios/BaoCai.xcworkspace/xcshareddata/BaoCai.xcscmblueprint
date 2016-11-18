@@ -1,0 +1,32 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "9C84A8D0F938E844E0478DD0DB9775D1BB525E43",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "7a883c44-b526-4cb8-956f-b4f28e1007ee" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "7a883c44-b526-4cb8-956f-b4f28e1007ee" : 9223372036854775807,
+    "9C84A8D0F938E844E0478DD0DB9775D1BB525E43" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "14F922F5-0C45-478E-A9B4-25704AD688AC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "7a883c44-b526-4cb8-956f-b4f28e1007ee" : "..",
+    "9C84A8D0F938E844E0478DD0DB9775D1BB525E43" : "h5React\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "BaoCai",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "integrations\/ios\/BaoCai.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/192.168.5.158\/baocainet",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7a883c44-b526-4cb8-956f-b4f28e1007ee"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "192.168.5.108:mbaocai\/h5React.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9C84A8D0F938E844E0478DD0DB9775D1BB525E43"
+    }
+  ]
+}

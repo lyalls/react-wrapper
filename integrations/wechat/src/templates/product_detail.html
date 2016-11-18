@@ -15,7 +15,7 @@
                 <li><label>年利率：</label><em ng-if="investsDetail.increaseApr>0" class="add-prize">+{{investsDetail.increaseApr| number:2}}%</em><span class="red-font">{{investsDetail.annualRate}}%</span></li>
                 <li><label>借款期限：</label><span>{{investsDetail.investmentHorizon}}</span></li>
                 <li><label>借款金额：</label><span class="red-font">{{investsDetail.borrowAmount}}</span></li>
-                <li><label>起投金额：</label><span>{{investsDetail.tenderAccountMin}}元</span></li>
+                <li><label>{{investsDetail.availableAmount_num_new}}起投金额：</label><span>{{investsDetail.tenderAccountMin}}元</span></li>
                 <li ng-if="investsDetail.tenderAccountMax !='不限' "><label>最大投资金额：</label><span>{{investsDetail.tenderAccountMax}}元</span></li>
                 <li><label>还款方式：</label><span>{{investsDetail.paymentMethod}}</span></li>
             </ul>
@@ -52,8 +52,14 @@
         <div ng-if="investsDetail.isNew != 1 && investsDetail.tenderSchedule !=100 && investsDetail.statusMessage =='投资中'">
 			<div class="can-invest-cash" ng-if="investsDetail.isFullThreshold !=1">可投金额：<strong>{{investsDetail.availableAmount_num}}</strong> 元</div>
         	<div class="can-invest-cash" ng-if="investsDetail.isFullThreshold ==1">可投金额：<strong>{{investsDetail.availableAmount_num}}</strong> 元，最后一位投资可得奖励</div>
-            <div ng-if="investsDetail.isFullThreshold !=1"><button ng-click="getTenderInfoDetail(investsDetail.id)" class="orange-radius-btn wd-80 margin-t-05rem">立即投资</button></div>
-            <div ng-if="investsDetail.isFullThreshold ==1"><button ng-click="getTenderInfoDetail(investsDetail.id)" class="red-radius-btn wd-80 margin-t-05rem">抢满标</button></div>
+            <div ng-if="investsDetail.availableAmount_num_new<=investsDetail.tenderAccountMin">
+                <div ng-if="investsDetail.isFullThreshold !=1"><button ng-click="getTenderInfoDetail(investsDetail.id)" class="orange-radius-btn wd-80 margin-t-05rem">投资{{investsDetail.availableAmount_num_new}}元</button></div>
+                <div ng-if="investsDetail.isFullThreshold ==1"><button ng-click="getTenderInfoDetail(investsDetail.id)" class="red-radius-btn wd-80 margin-t-05rem">投资{{investsDetail.availableAmount_num_new}}元</button></div>
+            </div>
+            <div ng-if="investsDetail.availableAmount_num_new > investsDetail.tenderAccountMin">
+                <div ng-if="investsDetail.isFullThreshold !=1"><button ng-click="getTenderInfoDetail(investsDetail.id)" class="orange-radius-btn wd-80 margin-t-05rem">立即投资</button></div>
+                <div ng-if="investsDetail.isFullThreshold ==1"><button ng-click="getTenderInfoDetail(investsDetail.id)" class="red-radius-btn wd-80 margin-t-05rem">抢满标</button></div>
+            </div>
         </div>
         <div ng-if="investsDetail.isNew != 1 && investsDetail.statusMessage !='投资中'">
         	<div ng-if="investsDetail.lastTenderTime">

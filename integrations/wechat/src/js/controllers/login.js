@@ -36,20 +36,21 @@ WebApp.Instance.controller('LoginController', function ($rootScope, $scope, $loc
 
             $scope.validateLoginName = false;
             $scope.checked = "true";
-            //保存登录用户Token
             
-            WebApp.ClientStorage.setCurrentToken(data.token);
-
-            //保存登录用户信息
-            WebApp.ClientStorage.setCurrentUser(data);
-            WebApp.tmpValue.setOrGetStoreVal('Detail_currentUser', data);
             //页面跳转
-
             if(data.phone=="")
             {
                 $scope.has_phone_check = false;
                 return false;
             };
+            
+            //保存登录用户Token
+            WebApp.ClientStorage.setCurrentToken(data.token);
+
+            //保存登录用户信息
+            WebApp.ClientStorage.setCurrentUser(data);
+            WebApp.tmpValue.setOrGetStoreVal('Detail_currentUser', data);
+
             // login_url 
             var login_url = $cookies.get('login_url');
             if(login_url)

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+    <meta name="format-detection" content="telphone=no, email=no"/>
+    <title>首页</title>
+    <link rel="stylesheet" href="css/mobile-angular-ui-base.min.css"/>
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+
+  <body ng-app="baocaiApp" ng-controller="MainController">
+    <div class='app-body'>
+      <div class='app-content container-fluid'>
+        <ng-view></ng-view>
+      </div>
+    </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="js/mobile-angular-ui.min.js"></script>
+    <script src="js/base.js"></script>
+    <script src="js/platform.js"></script> 
+    <script src="js/router.js"></script>
+    <script src="js/mydirective.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
