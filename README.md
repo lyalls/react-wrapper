@@ -15,7 +15,10 @@ H5 App of Baocai
 1.  浏览器访问 [http://localhost:2999](http://localhost:2999)
 
 ### 与微信融合
-`make buildWechat src=...`，其中 `src` 指向微信代码目录，如 `...WebApp/trunk/resources/web`
+`make wechat h5src=...`，其中 `h5src` 指向微信代码目录，如 `...WebApp/trunk/resources/web`
+
+### 与 iOS 融合
+`make ios src=...`，其中 `src` 指向微信代码目录，如 `...client_v2/trunk/iOS_Dev`
 
 ### 代码结构
 ```shell

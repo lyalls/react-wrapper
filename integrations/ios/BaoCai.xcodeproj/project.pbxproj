@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21D1C84E1DDED76C00AC9D29 /* Components in Resources */ = {isa = PBXBuildFile; fileRef = 21D1C84D1DDED76C00AC9D29 /* Components */; };
 		280786DD1D78528C0072B1FD /* tenderTip_orange_0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 280786D31D78528C0072B1FD /* tenderTip_orange_0@2x.png */; };
 		280786DE1D78528C0072B1FD /* tenderTip_orange_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 280786D41D78528C0072B1FD /* tenderTip_orange_3@2x.png */; };
 		280786DF1D78528C0072B1FD /* tenderTip_red_0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 280786D51D78528C0072B1FD /* tenderTip_red_0@2x.png */; };
@@ -435,7 +434,6 @@
 /* Begin PBXFileReference section */
 		173CEB975CE2B307FDD8C169 /* Pods-BaoCai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaoCai.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaoCai/Pods-BaoCai.release.xcconfig"; sourceTree = "<group>"; };
 		1D2157ACDF3542C9A0341766 /* libPods-BaoCai.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BaoCai.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		21D1C84D1DDED76C00AC9D29 /* Components */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Components; sourceTree = "<group>"; };
 		280786D31D78528C0072B1FD /* tenderTip_orange_0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tenderTip_orange_0@2x.png"; sourceTree = "<group>"; };
 		280786D41D78528C0072B1FD /* tenderTip_orange_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tenderTip_orange_3@2x.png"; sourceTree = "<group>"; };
 		280786D51D78528C0072B1FD /* tenderTip_red_0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tenderTip_red_0@2x.png"; sourceTree = "<group>"; };
@@ -1751,7 +1749,6 @@
 		7B54BD4A1CF81D8000E29BD0 /* BaoCai */ = {
 			isa = PBXGroup;
 			children = (
-				21D1C84D1DDED76C00AC9D29 /* Components */,
 				283A51091D9D70A80081477A /* BaoCai.entitlements */,
 				BB2A1A481D8106CD0073FEA5 /* Base */,
 				BBF1D4EC1D7D4E190058383D /* lib */,
@@ -2733,7 +2730,6 @@
 				7B165E701D52172C00199120 /* guide2_736@2x.png in Resources */,
 				7B6680CD1D2F3E4C00EEC63B /* MessageItemTableViewCell.xib in Resources */,
 				9C566BEF1DB763A400153AC6 /* Main.storyboard in Resources */,
-				21D1C84E1DDED76C00AC9D29 /* Components in Resources */,
 				7B66811F1D3097BF00EEC63B /* RechargeRecordItemTableViewCell.xib in Resources */,
 				7B6680991D2E23FC00EEC63B /* LoginRegister.storyboard in Resources */,
 				7B156AD01D2B5CDF00336F4D /* tenderStatus@2x.png in Resources */,
