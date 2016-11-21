@@ -10,6 +10,10 @@ ifneq "${h5src}" ""
 	h5SrcDir="${h5src}"
 endif
 
+appSrcDir=/Users/sunl/Dev/PROJECTS/baocai/baocainet/mbaocai/client_v2/iOS/trunk/BaoCai_Dev
+ifneq "${src}" "" 
+	appSrcDir = "${src}"
+endif
 
 webpackConfigFile=./src/apps/webpack.config.js
 # Do local test, DON'T modify original codes
@@ -21,7 +25,6 @@ wechat: components="home:newhome" # "<component name>:<target template file name
 wechat: target=wechat
 wechat: syncFromH5=true
 
-ios: appSrcDir=/Users/sunl/Dev/PROJECTS/baocai/baocainet/mbaocai/client_v2/iOS/trunk/BaoCai_Dev
 ios: appIntegrationDir=./integrations/ios
 ios: appTmpDir=./src/apps/ios/tmp
 ios: appTemplateDir=./src/apps/ios/templates
@@ -29,12 +32,10 @@ ios: components="home"
 ios: target=ios
 ios: syncFromH5=false
 
-ifneq "${src}" ""
-	appSrcDir = "${src}"
-endif
 
 wechat ios:
 	# Prepare the environment
+	echo "SRC: " ${appSrcDir}
 	svn update ${appSrcDir};
 	mkdir -p ${appIntegrationDir}
 	rm -rf ${appIntegrationDir}
