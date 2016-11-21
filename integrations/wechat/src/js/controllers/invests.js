@@ -740,7 +740,7 @@ WebApp.Instance.controller('InvestRecordController', function ($routeParams, $ro
 		    return h + '时' + m + '分' + s + '秒';
 		}
 });
-WebApp.Instance.controller('TenderInfoController', function ($routeParams, $modal, $rootScope, $scope, $location, md5, InvestsService, $window, $timeout,$cookies) {
+WebApp.Instance.controller('TenderInfoController', function ($routeParams, $modal, $rootScope, $scope, $location, md5, InvestsService, notify , $window, $timeout,$cookies) {
     $scope.nid = '';
     $scope.errorinfo = '';
     $scope.data={};
@@ -831,8 +831,16 @@ WebApp.Instance.controller('TenderInfoController', function ($routeParams, $moda
             });
      };
      //投资金额改变，
-    $scope.investAmountChanged = function()
+    $scope.investAmountChanged = function(notifyState)
     {
+        //添加最低可投额限制
+        if(WebApp.minLimitStatus == 1 && notifyState != 0)
+        {
+            notify.closeAll();
+            $scope.investAmount = WebApp.projectData.availableAmount_num_new;
+            notify({message: WebApp.minLimitMsg, duration: WebApp.duration});
+            return;
+        }
         proj.investCount = $scope.investAmount;
         //计算优惠券
         $scope.bouns = $scope.autoSelect($scope.investAmount);
@@ -1267,6 +1275,16 @@ WebApp.Instance.controller('TenderInfoController', function ($routeParams, $moda
         // 获取详情
         getTenderInfo(id);
     }
+    
+    WebApp.minLimitStatus = 0;
+    if(WebApp.projectData.tenderAccountMin > 100 && WebApp.projectData.availableAmount_num_new < WebApp.projectData.tenderAccountMin)
+    {
+        $scope.investAmount = WebApp.projectData.availableAmount_num_new;
+        WebApp.minLimitStatus = 1;
+        WebApp.minLimitMsg = '可投金额为'+$scope.investAmount+'元';
+        $scope.investAmountChanged(0);
+    }
+    $scope.projectData = WebApp.projectData;
 });
 
 

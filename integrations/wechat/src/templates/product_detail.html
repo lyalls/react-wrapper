@@ -15,7 +15,7 @@
                 <li><label>年利率：</label><em ng-if="investsDetail.increaseApr>0" class="add-prize">+{{investsDetail.increaseApr| number:2}}%</em><span class="red-font">{{investsDetail.annualRate}}%</span></li>
                 <li><label>借款期限：</label><span>{{investsDetail.investmentHorizon}}</span></li>
                 <li><label>借款金额：</label><span class="red-font">{{investsDetail.borrowAmount}}</span></li>
-                <li><label>{{investsDetail.availableAmount_num_new}}起投金额：</label><span>{{investsDetail.tenderAccountMin}}元</span></li>
+                <li><label>起投金额：</label><span>{{investsDetail.tenderAccountMin}}元</span></li>
                 <li ng-if="investsDetail.tenderAccountMax !='不限' "><label>最大投资金额：</label><span>{{investsDetail.tenderAccountMax}}元</span></li>
                 <li><label>还款方式：</label><span>{{investsDetail.paymentMethod}}</span></li>
             </ul>

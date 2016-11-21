@@ -10,10 +10,6 @@ ifneq "${h5src}" ""
 	h5SrcDir="${h5src}"
 endif
 
-appSrcDir=""
-ifneq "${src}" ""
-	appSrcDir = "${src}"
-endif
 
 webpackConfigFile=./src/apps/webpack.config.js
 # Do local test, DON'T modify original codes
@@ -32,6 +28,10 @@ ios: appTemplateDir=./src/apps/ios/templates
 ios: components="home"
 ios: target=ios
 ios: syncFromH5=false
+
+ifneq "${src}" ""
+	appSrcDir = "${src}"
+endif
 
 wechat ios:
 	# Prepare the environment
