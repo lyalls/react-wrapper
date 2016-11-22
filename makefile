@@ -15,6 +15,11 @@ ifneq "${src}" ""
 	appSrcDir = "${src}"
 endif
 
+doUpdateSourceFile=false
+ifeq "${updateSrc}" "true"
+	doUpdateSourceFile=true
+endif
+
 webpackConfigFile=./src/apps/webpack.config.js
 # Do local test, DON'T modify original codes
 wechat: appSrcDir=${h5SrcDir}
@@ -36,7 +41,7 @@ ios: syncFromH5=false
 wechat ios:
 	# Prepare the environment
 	echo "SRC: " ${appSrcDir}
-	svn update ${appSrcDir};
+	if [[ ${doUpdateSourceFile} == true ]];then svn update ${appSrcDir}; fi
 	mkdir -p ${appIntegrationDir}
 	rm -rf ${appIntegrationDir}
 	cp -r ${appSrcDir} ${appIntegrationDir}

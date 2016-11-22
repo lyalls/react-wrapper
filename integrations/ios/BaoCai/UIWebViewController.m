@@ -25,18 +25,12 @@
     NSMutableDictionary* _eventDict;
     NSString* _logPath;
     NSTimer * timer;
-    BOOL isViewLoaded;
-    NSURLRequest *_req;
 }
 @property (nonatomic, strong) UIWebView* webView;
 @end
 
 @implementation UIWebViewController
 
--(void)loadView{
-    isViewLoaded = false;
-    [super loadView];
-}
 
 - (void)viewDidLoad
 {
@@ -63,9 +57,10 @@
     [self.view addSubview: _webView];
     _queue = dispatch_queue_create("com.baocai.jscall",0);
     
-    // if(self.req){
-    //     [_webView loadRequest:self.req];
-    // }
+    if(self.req)
+    {
+        [_webView loadRequest:self.req];
+    }
     
     self.leftBt = [UIButton buttonWithType:UIButtonTypeCustom];
     self.leftBt.frame = CGRectMake(0, 0, 16, 16);
@@ -78,27 +73,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccess) name:LogoutNotification object:nil];
 
-    isViewLoaded = YES;
-}
 
--(void)setReq:(NSURLRequest *)req {
-    if(req == nil){
-        _req = nil;
-    }else if(_req == nil || ![req.URL.absoluteString isEqualToString: _req.URL.absoluteString]){
-        NSLog(@"req.URL=%@, _req.URL=%@, isEqual: %d", req.URL.absoluteString, _req.URL.absoluteString, [req.URL.absoluteString isEqualToString:_req.URL.absoluteString]);
-        _req = req;
-        if( isViewLoaded ){
-            NSError *error = nil;
-            NSString *content = [NSString stringWithContentsOfURL:req.URL encoding:NSUTF8StringEncoding error:&error];
-            NSLog(@"Loading HTML file [%@], content: { %@ }, error: %@", req.URL.absoluteString, content, error);
-            [_webView loadRequest:req];
-            
-            if (![self.view.subviews containsObject:_webView]){
-                [self.view addSubview:_webView];
-            }
-            [self.view bringSubviewToFront:_webView];
-        }
-    }
 }
 
 - (void)dealloc
@@ -106,7 +81,7 @@
     NSLog(@"dealloc");
 }
 
-//默认左边导航栏按钮动作
+//默认左边导航蓝按钮动作
 -(void)leftButtonPress:(id)sender
 {
     if([self.webView canGoBack])
@@ -428,54 +403,6 @@
     NSString* url = _webView.request.URL.absoluteString;
     self.req = [self getWebBrowserRequestWithUrl:url];
     [self reLoad:nil callId:nil];
-}
-
-
-#pragma mark - 拷贝 H5 代码到 documents 文件夹
-+(NSString*) documentsPath{
-    NSString *g_docPath = nil;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    if (paths.count) {
-        g_docPath = [[paths objectAtIndex:0] stringByAppendingString:@"/"];
-    }
-    else{
-        g_docPath = [NSHomeDirectory() stringByAppendingString:@"/Documents/"];
-    }
-    return g_docPath;
-}
-+(BOOL) checkLocalUpdate{
-    NSString* oldver = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@/Components/version.txt",[[self class] documentsPath]]
-                                                 encoding:NSUTF8StringEncoding error:nil];
-    NSString* newver = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"/Components/version"] ofType:@"txt"]
-                                                 encoding:NSUTF8StringEncoding error:nil];
-    if(!oldver || !newver) return YES;
-    return (NSOrderedDescending == [newver compare:oldver]);
-}
-+(NSString *)componentBasePath{
-    return [NSString stringWithFormat:@"%@Components",[[self class] documentsPath]];
-}
-+(NSString *)componentIndex: (NSString *)componentName{
-    return [NSString stringWithFormat:@"file://%@Components/%@.html",[[self class] documentsPath], componentName];
-}
-+(BOOL) copySrcToDoc {
-    //copy component source files to doc
-    NSString * path = [[self class]componentBasePath];
-    NSFileManager *fm = [NSFileManager defaultManager];
-    if(![fm fileExistsAtPath:path] || [[self class] checkLocalUpdate]){
-        [fm removeItemAtPath:path error:nil];
-        NSString* source = [[NSBundle mainBundle] pathForResource:@"/Components" ofType:@""];
-        NSLog(@"Copy source files from [%@] to [%@]",source, path);
-        NSError* error;
-        BOOL res = [fm copyItemAtPath:source toPath:path error:&error];
-        if(!res){
-            NSLog(@"ERROR when copying source files from [%@] to [%@]: %@",source, path, error);
-            return NO;
-        }else{
-            // Remove all caches
-//            [[NSURLCache sharedURLCache] removeAllCachedResponses];
-        }
-    }
-    return YES;
 }
 
 @end
