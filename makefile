@@ -20,8 +20,6 @@ ifeq "${updateSrc}" "true"
 	doUpdateSourceFile=true
 endif
 
-PATH:=`pwd`/node_modules/.bin:${PATH}
-
 webpackConfigFile=./src/apps/webpack.config.js
 # Do local test, DON'T modify original codes
 wechat: appSrcDir=${h5SrcDir}
@@ -42,6 +40,7 @@ ios: syncFromH5=false
 
 wechat ios:
 	# Prepare the environment
+	export PATH=`pwd`/node_modules/.bin:${PATH}
 	echo "PATH: " ${PATH}
 	which webpack
 	echo "SRC: " ${appSrcDir}
