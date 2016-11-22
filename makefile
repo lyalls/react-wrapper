@@ -40,9 +40,6 @@ ios: syncFromH5=false
 
 wechat ios:
 	# Prepare the environment
-	export PATH=`pwd`/node_modules/.bin:${PATH}
-	echo "PATH: " ${PATH}
-	which webpack
 	echo "SRC: " ${appSrcDir}
 	if [[ ${doUpdateSourceFile} == true ]];then svn update ${appSrcDir}; fi
 	mkdir -p ${appIntegrationDir}
@@ -81,7 +78,7 @@ wechat ios:
 	cat ${appTmpDir}/tmpHead.js ${appTmpDir}/tmp.js ${appTmpDir}/tmpTail.js > ${appTmpDir}/webpack.config.js
 	rm -rf ${appTmpDir}/tmp.js ${appTmpDir}/tmpHead.js ${appTmpDir}/tmpTail.js
 	# Run the webpack to build target components
-	cd ${appTmpDir} && webpack --config webpack.config.js --progress --colors --inline
+	export PATH=`pwd`/node_modules/.bin:$${PATH} && cd ${appTmpDir} && which webpack && webpack --config webpack.config.js --progress --colors --inline
 	# Post-process for WeChat: 
 		# Move the template files to wechat template direcotory; 
 		# Modify index.html; 
