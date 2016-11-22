@@ -2,13 +2,14 @@
 //  UIHomeTableViewController.h
 //  BaoCai
 //
-//  Created by 刘国龙 on 16/5/27.
-//  Copyright © 2016年 Beijing KuaiYiJianKang Management Co., Ltd. All rights reserved.
+//  Created by Lin Sun on 16/11/16.
+//  Copyright © 2016年 Baocai Co., Ltd. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "UIWebViewController.h"
 
-@interface UIHomeTableViewController : UIViewController
+@interface UIHomeTableViewController : UIWebViewController
 
 
 @end

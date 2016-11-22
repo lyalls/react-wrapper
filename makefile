@@ -1,24 +1,26 @@
 ######## Src Builder ######## 
 # Created at:    2016-11-14 #
 # Created by: Lin Sun       #
-# Last modified: 2016-11-17 #
+# Last modified: 2016-11-22 #
 # Modified by: Lin Sun      #
 #############################
 # Please modify the src dir path
 h5SrcDir=/Users/sunl/Dev/PROJECTS/baocai/baocainet/mbaocai/webapp/trunk/resources/web
 ifneq "${h5src}" ""
-	h5SrcDir="${h5src}"
+	h5SrcDir=${h5src}
 endif
 
 appSrcDir=/Users/sunl/Dev/PROJECTS/baocai/baocainet/mbaocai/client_v2/iOS/trunk/BaoCai_Dev
 ifneq "${src}" "" 
-	appSrcDir = "${src}"
+	appSrcDir = ${src}
 endif
 
 doUpdateSourceFile=false
 ifeq "${updateSrc}" "true"
 	doUpdateSourceFile=true
 endif
+
+PATH:=`pwd`/node_modules/.bin:${PATH}
 
 webpackConfigFile=./src/apps/webpack.config.js
 # Do local test, DON'T modify original codes
@@ -40,6 +42,9 @@ ios: syncFromH5=false
 
 wechat ios:
 	# Prepare the environment
+	echo "PATH: " ${PATH}
+	which webpack
+	which babel-node
 	echo "SRC: " ${appSrcDir}
 	if [[ ${doUpdateSourceFile} == true ]];then svn update ${appSrcDir}; fi
 	mkdir -p ${appIntegrationDir}

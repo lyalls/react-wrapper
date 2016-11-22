@@ -35,4 +35,11 @@ typedef void(^WebEventHandller)(id param,NSString* callbackId);
 //添加事件处理
 -(void) addEventHandler:(NSString*)eventName WebEventHandller:(WebEventHandller)handller;
 
+#pragma mark - Source files
++(NSString*) documentsPath;
++(BOOL) checkLocalUpdate;
++(NSString *)componentBasePath;
++(NSString *)componentIndex: (NSString *)componentName;
++(BOOL) copySrcToDoc ;
+
 @end

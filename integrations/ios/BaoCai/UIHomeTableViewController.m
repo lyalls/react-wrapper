@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Beijing KuaiYiJianKang Management Co., Ltd. All rights reserved.
 //
 
+
 #import "UIHomeTableViewController.h"
 #import "UIWebBrowserViewController.h"
 #import "UITenderDetailViewController.h"
@@ -91,11 +92,6 @@ NSString *HomeBottomCell = @"HomeBottomCell";
             [self setLoginBtnHidden];
         }
     }];
-    [self.tableView.mj_header endRefreshingWithCompletionBlock:^
-     {
-         [UITableView randSlogan];
-         [self resetSlogan];
-     }];
     [self.tableView setRefreshGifHeader:FROM_HOME];
     
     self.tenderArray = [NSMutableArray arrayWithCapacity:0];
@@ -143,6 +139,13 @@ NSString *HomeBottomCell = @"HomeBottomCell";
     self.loginBtn.hidden = [UserInfoModel sharedModel].token ? YES : NO;
     
     [self reloadTableView];
+
+    // 加载 H5 页面
+	if([[self class] copySrcToDoc]){
+		[self setReq:[NSURLRequest requestWithURL:[NSURL URLWithString:[[self class] componentIndex: @"home"]]]];
+	}else{
+		NSLog(@"Can't load component: [%@]", @"home");
+	}
 }
 
 - (void)didReceiveMemoryWarning {
