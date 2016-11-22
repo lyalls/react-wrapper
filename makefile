@@ -44,7 +44,6 @@ wechat ios:
 	# Prepare the environment
 	echo "PATH: " ${PATH}
 	which webpack
-	which babel-node
 	echo "SRC: " ${appSrcDir}
 	if [[ ${doUpdateSourceFile} == true ]];then svn update ${appSrcDir}; fi
 	mkdir -p ${appIntegrationDir}
