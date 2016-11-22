@@ -1107,7 +1107,7 @@ WebApp.Instance.controller('TenderInfoController', function ($routeParams, $moda
             for(var i=0;i<bounsList.length;i++)
             {
                 //检查是否首投
-                if(bounsList[i].catName == "E" || bounsList[i].catName == "F")
+                if(bounsList[i].catName == "E" || bounsList[i].catName == "F" || bounsList[i].catName == "K")
                 {
                     if(!proj.isFirstTender)
                     {
@@ -1277,7 +1277,7 @@ WebApp.Instance.controller('TenderInfoController', function ($routeParams, $moda
     }
     
     WebApp.minLimitStatus = 0;
-    if(WebApp.projectData.tenderAccountMin > 100 && WebApp.projectData.availableAmount_num_new < WebApp.projectData.tenderAccountMin)
+    if(WebApp.projectData.tenderAccountMin > 100 && WebApp.projectData.availableAmount_num_new <= WebApp.projectData.tenderAccountMin)
     {
         $scope.investAmount = WebApp.projectData.availableAmount_num_new;
         WebApp.minLimitStatus = 1;

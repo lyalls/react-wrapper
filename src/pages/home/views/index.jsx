@@ -11,9 +11,10 @@ class Home extends Component {
         this.props.onLoading();
     }
     componentDidMount() {
-        $('.content-for-m-header').attr('ui-content-for', 'm-header')
+        if(this.props.env.platform.isWechat){
+            $('.content-for-m-header').attr('ui-content-for', 'm-header')
+        }
     }
-
 
     setSessionStorage(key, value){
         if(key === undefined || key === null) return;
@@ -85,9 +86,9 @@ class Home extends Component {
         return (
             <div className="scrollable">
             <div className="scrollable-content k_p0">
-                <div className="content-for-m-header">
-                    <Header/>
-                </div>
+                {
+                    (this.props.env.platform.isWechat)?<div className="content-for-m-header"><Header/></div>:""
+                }
                 <article className="wx-mainbody">   
                     {
                         this.props.banner.items ? 

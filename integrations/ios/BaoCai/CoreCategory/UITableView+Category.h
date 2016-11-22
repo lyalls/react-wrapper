@@ -19,4 +19,5 @@ typedef NS_ENUM(NSInteger, FromType) {
 - (void)registerCellNibWithClass:(Class)className;
 
 - (void)setRefreshGifHeader:(NSInteger)fromType;
++(void)randSlogan;
 @end

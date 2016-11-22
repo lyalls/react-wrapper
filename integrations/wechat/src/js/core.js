@@ -435,7 +435,7 @@ WebApp.Instance.config(function (cfpLoadingBarProvider) {
     cfpLoadingBarProvider.latencyThreshold = 50;
 });
 
-WebApp.Instance.run(['$rootScope', '$window', '$location', '$log', '$timeout', function ($rootScope, $window, $location, $log, $timeout) {
+WebApp.Instance.run(['$rootScope', '$window', '$location', '$log', '$timeout', 'AccountService', function ($rootScope, $window, $location, $log, $timeout, AccountService) {
 
         var locationChangeStartOff = $rootScope.$on('$locationChangeStart', locationChangeStart);
 
@@ -447,6 +447,12 @@ WebApp.Instance.run(['$rootScope', '$window', '$location', '$log', '$timeout', f
             }
 
             var Uphone = WebApp.ClientStorage.getCurrentUser();
+            if(!Uphone){
+                AccountService.myAccountINfo(function (data) {
+                    Uphone = data;
+             }, function (data) {
+             });
+            }
             var nowUrl = $location.absUrl();
             var spliturl = nowUrl.split('baocai.com')[1];
 

@@ -10,10 +10,7 @@ injectTapEventPlugin();
 
 // Env Settings
 const envSettings = {
-    // baseUrl: "http://m224.baocai.com"
-    parseValue: function(val){
-        if(!val || val.length == 0) return "";
-    },
+    baseUrl: "/",
     platform: {
         isWechat: true,
         isIOS: false,

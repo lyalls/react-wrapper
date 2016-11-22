@@ -11,7 +11,7 @@
 				<dt>有效日期：</dt>
 				<dd>{{bonusTicketDetail.startExpiredTime}}至{{bonusTicketDetail.endExpiredTime}}</dd>
 				<dt>使用条件：</dt>
-				<dd>投资满{{bonusTicketDetail.useMoney}}元<span ng-show="bonusTicketDetail.catName=='E' || bonusTicketDetail.catName=='F'">(仅限首投)</span> <br />(仅限带“红包券”字标识的项目)</dd>
+				<dd>投资满{{bonusTicketDetail.useMoney}}元<span ng-show="bonusTicketDetail.catName=='E' || bonusTicketDetail.catName=='F' || bonusTicketDetail.catName=='K' ">(仅限首投)</span> <br />(仅限带“红包券”字标识的项目)</dd>
 				<dt ng-if="bonusTicketDetail.borrow_period">使用条件：</dt>
 				<dd ng-if="bonusTicketDetail.borrow_period">{{bonusTicketDetail.borrow_period}}</dd>
 				<dt>补充说明：</dt>

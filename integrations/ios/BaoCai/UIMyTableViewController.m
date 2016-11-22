@@ -78,7 +78,11 @@ NSString *MyBottomCell = @"MyBottomCell";
     self.tableView.mj_header = [MJRefreshGifHeader headerWithRefreshingBlock:^{
         [self getData];
     }];
-    
+    [self.tableView.mj_header endRefreshingWithCompletionBlock:^
+     {
+         [UITableView randSlogan];
+         [self resetSlogan];
+     }];
     [self.tableView setRefreshGifHeader:FROM_MY];
     //背景
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, -300, self.view.bounds.size.width, 300)];

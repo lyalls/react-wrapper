@@ -10,13 +10,15 @@ injectTapEventPlugin();
 
 // Env Settings
 const envSettings = {
-    // baseUrl: "http://m224.baocai.com"
-    parseValue: function(val){
-        if(!val || val.length == 0) return "";
+    baseUrl: "/",
+    server:{
+        host: "localhost",
+        port: 2999,
+        protocal: "http"
     },
     platform: {
-        isWechat: true,
-        isIOS: false,
+        isWechat: false,
+        isIOS: true,
         isAndroid: false,
         isMobile: false
     }

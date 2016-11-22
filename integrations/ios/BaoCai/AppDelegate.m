@@ -81,17 +81,6 @@
         
     }];
     
-    [GeneralRequest getSloganRequestWithVersion:[UserDefaultsHelper sharedManager].sloganVersion success:^(NSDictionary *dic, BCError *error)
-    {
-        if (error.code == 0)
-        {
-            [[UserDefaultsHelper sharedManager] setSlogan:[dic objectForKey:@"slogan"]];
-            [[NSNotificationCenter defaultCenter] postNotificationName:RefreshSloganNotification object:nil];
-        }
-    } failure:^(NSError *error) {
-        
-    }];
-    
     if (![UserDefaultsHelper sharedManager].isFirstEnter) {
         [UserDefaultsHelper sharedManager].isFirstEnter = YES;
         

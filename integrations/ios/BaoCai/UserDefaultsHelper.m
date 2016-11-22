@@ -186,23 +186,23 @@
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"isShowMoney"];
 }
 
--(void)setSlogan:(NSDictionary *)slogan
-{
-    [UserDefaultsHelper saveUserDefaultObject:slogan key:@"slogan"];
-}
--(NSDictionary*)slogan
-{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"slogan"];
-}
+//-(void)setSlogan:(NSDictionary *)slogan
+//{
+//    [UserDefaultsHelper saveUserDefaultObject:slogan key:@"slogan"];
+//}
+//-(NSDictionary*)slogan
+//{
+//    return [[NSUserDefaults standardUserDefaults] objectForKey:@"slogan"];
+//}
 -(NSString *)sloganVersion
 {
     if (![self.slogan objectForKey:@"sloganVersion"])
         return @"";
     return [NSString stringWithFormat:@"%@",[self.slogan objectForKey:@"sloganVersion"]];
 }
--(NSString *)strSlogan
-{
-    
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"strSlogan"];
-}
+//-(NSString *)strSlogan
+//{
+//    
+//    return [[NSUserDefaults standardUserDefaults] objectForKey:@"strSlogan"];
+//}
 @end

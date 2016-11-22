@@ -26,6 +26,7 @@
     NSString* _logPath;
     NSTimer * timer;
     BOOL isViewLoaded;
+    NSURLRequest *_req;
 }
 @property (nonatomic, strong) UIWebView* webView;
 @end
@@ -62,9 +63,9 @@
     [self.view addSubview: _webView];
     _queue = dispatch_queue_create("com.baocai.jscall",0);
     
-    if(self.req){
-        [_webView loadRequest:self.req];
-    }
+    // if(self.req){
+    //     [_webView loadRequest:self.req];
+    // }
     
     self.leftBt = [UIButton buttonWithType:UIButtonTypeCustom];
     self.leftBt.frame = CGRectMake(0, 0, 16, 16);
@@ -83,10 +84,14 @@
 -(void)setReq:(NSURLRequest *)req {
     if(req == nil){
         _req = nil;
-    }else if(_req == nil || ![req isEqual: _req]){
+    }else if(_req == nil || ![req.URL.absoluteString isEqualToString: _req.URL.absoluteString]){
+        NSLog(@"req.URL=%@, _req.URL=%@, isEqual: %d", req.URL.absoluteString, _req.URL.absoluteString, [req.URL.absoluteString isEqualToString:_req.URL.absoluteString]);
         _req = req;
         if( isViewLoaded ){
-            [_webView loadRequest:self.req];
+            NSError *error = nil;
+            NSString *content = [NSString stringWithContentsOfURL:req.URL encoding:NSUTF8StringEncoding error:&error];
+            NSLog(@"Loading HTML file [%@], content: { %@ }, error: %@", req.URL.absoluteString, content, error);
+            [_webView loadRequest:req];
             
             if (![self.view.subviews containsObject:_webView]){
                 [self.view addSubview:_webView];
@@ -450,7 +455,7 @@
     return [NSString stringWithFormat:@"%@Components",[[self class] documentsPath]];
 }
 +(NSString *)componentIndex: (NSString *)componentName{
-    return [NSString stringWithFormat:@"%@Components/%@.html",[[self class] documentsPath], componentName];
+    return [NSString stringWithFormat:@"file://%@Components/%@.html",[[self class] documentsPath], componentName];
 }
 +(BOOL) copySrcToDoc {
     //copy component source files to doc
@@ -467,7 +472,7 @@
             return NO;
         }else{
             // Remove all caches
-            [[NSURLCache sharedURLCache] removeAllCachedResponses];
+//            [[NSURLCache sharedURLCache] removeAllCachedResponses];
         }
     }
     return YES;

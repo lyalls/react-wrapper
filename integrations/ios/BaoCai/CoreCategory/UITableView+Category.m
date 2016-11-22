@@ -37,7 +37,7 @@
              
          }];
     });
-
+    
     NSArray *startArray;
     NSArray *ImageArray;
     NSArray *endArray;
@@ -45,10 +45,10 @@
     {
         startArray = @[[UIImage imageNamed:@"home_refresh_01"]];
         ImageArray = @[[UIImage imageNamed:@"home_refresh_01"],
-                        [UIImage imageNamed:@"home_refresh_02"],
-                        [UIImage imageNamed:@"home_refresh_03"],
-                        [UIImage imageNamed:@"home_refresh_04"]
-                        ];
+                       [UIImage imageNamed:@"home_refresh_02"],
+                       [UIImage imageNamed:@"home_refresh_03"],
+                       [UIImage imageNamed:@"home_refresh_04"]
+                       ];
         endArray = @[[UIImage imageNamed:@"home_refresh_04"]];
     }
     else
@@ -70,14 +70,16 @@
     MJRefreshGifHeader *refreshStateHeader = (MJRefreshGifHeader *)self.mj_header;
     [refreshStateHeader lastUpdatedTimeLabel].hidden = YES;//textColor = RGB_COLOR(255, 255, 255);
     refreshStateHeader.stateLabel.hidden = NO;//textColor = RGB_COLOR(255, 255, 255);
-   // refreshStateHeader.labelLeftInset = 10;
-    [refreshStateHeader setTitle:slogn forState:MJRefreshStateIdle];
+    // refreshStateHeader.labelLeftInset = 10;
     [refreshStateHeader setTitle:slogn forState:MJRefreshStatePulling];
     [refreshStateHeader setTitle:slogn forState:MJRefreshStateRefreshing];
+    [refreshStateHeader setTitle:slogn forState:MJRefreshStateIdle];
     
-    [(MJRefreshGifHeader*)(self.mj_header) setImages:startArray forState:MJRefreshStateIdle];
+    
     [(MJRefreshGifHeader*)(self.mj_header) setImages:ImageArray forState:MJRefreshStateRefreshing];
     [(MJRefreshGifHeader*)(self.mj_header) setImages:endArray forState:MJRefreshStatePulling];
+    [(MJRefreshGifHeader*)(self.mj_header) setImages:startArray forState:MJRefreshStateIdle];
+    
 }
 
 +(void)randSlogan
@@ -106,7 +108,8 @@
         }
         [NSUserDefaults saveUserDefaultObject:[NSNumber numberWithInteger:random] key:@"random"];
     }
-    [NSUserDefaults saveUserDefaultObject:strSlogan key:@"strSlogan"];
+    //[NSUserDefaults saveUserDefaultObject:strSlogan key:@"strSlogan"];
+    [UserDefaultsHelper sharedManager].strSlogan = strSlogan;
 }
 
 @end

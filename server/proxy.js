@@ -35,6 +35,8 @@ function proxy(address,port,basePath)
             if(i != 'host')
             {
                 headers[i] = req.headers[i];
+            }else{
+                console.log('replacing original host:', req.headers[i], 'to proxy host:', app.proxyaddress);
             }
         }
         console.log("path:"+app.basePath + req.originalUrl);

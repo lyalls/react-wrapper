@@ -73,6 +73,8 @@ NSString *TenderBottomCell = @"TenderBottomCell";
     [self.tableView.mj_header beginRefreshing];
     [self refreshBanner];
     [self reloadTableView];
+    
+    [self performSelector:@selector(endRefreshingBlock) withObject:nil afterDelay:2.0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -119,6 +121,18 @@ NSString *TenderBottomCell = @"TenderBottomCell";
 -(void)resetSlogan
 {
     [self.tableView setRefreshGifHeader:FROM_HOME];
+}
+-(void)endRefreshingBlock
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView.mj_header endRefreshingWithCompletionBlock:^{
+            
+            [UITableView randSlogan];
+            [self resetSlogan];
+            
+        }];
+    });
+    
 }
 - (void)getData {
     [TenderRequest getTenderListWithPageIndex:self.pageIndex success:^(NSDictionary *dic, BCError *error) {

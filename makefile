@@ -104,6 +104,7 @@ wechat ios:
 		done;\
 		cp ${appTemplateDir}/UIWebViewController.* ${appIntegrationDir}/BaoCai ;\
 		cp -r ${appTmpDir}/react ${appIntegrationDir}/BaoCai/Components/react ;\
+		npm run server ;\
 	fi
 	rm -rf ${appTmpDir}
 	# Start the integrated system for WeChat

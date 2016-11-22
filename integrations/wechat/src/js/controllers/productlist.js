@@ -209,6 +209,10 @@ WebApp.Instance.controller('ProductdetailController', function ($routeParams, $r
         if(data.isLimit ==1)
         {
             biao_type_zi = '限量标';
+             if(borrowId != '' && data.limitTime > 0)
+             {
+                 $location.path($location.host());
+             }
         }
         data.availableAmount_num_new = data.availableAmount_num.replace(',','').slice(0,-3)
         data.availableAmount_num_new = parseInt(data.availableAmount_num_new);

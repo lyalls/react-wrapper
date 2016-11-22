@@ -183,7 +183,7 @@
         		data.bounsList[i].date = new Date(data.bounsList[i].expiredTime*1000).pattern("yyyy年MM月dd日HH:mm过期");
         		var info = [];
         		info[0] = "";
-        		if(item.catName == 'E' || item.catName == "F")
+        		if(item.catName == 'E' || item.catName == "F" ||  item.catName == "K")
         		{
         			info[0] = "仅限首投，";
         		}
@@ -208,7 +208,7 @@
                 data.bounsList[i].unit = "元";
         		data.bounsList[i].title = data.bounsList[i].money;
                //检查是否首投
-    			if(data.bounsList[i].catName == "E" || data.bounsList[i].catName == "F")
+    			if(data.bounsList[i].catName == "E" || data.bounsList[i].catName == "F" || data.bounsList[i].catName == "K")
     			{
     				if(!data.isFirstTender)
     				{

@@ -48,5 +48,5 @@
 
 @property (nonatomic,strong) NSDictionary *slogan;
 @property (nonatomic,strong,readonly)NSString *sloganVersion;
-@property (nonatomic,strong,readonly)NSString *strSlogan;
+@property (nonatomic,strong)NSString *strSlogan;
 @end
