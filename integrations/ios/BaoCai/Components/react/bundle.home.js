@@ -83,6 +83,56 @@
 	        isIOS: true,
 	        isAndroid: false,
 	        isMobile: false
+	    },
+	    sessionStorage: window.sessionStorage || {},
+	    keys: {
+	        TOKEN: 'X-Authorization',
+	        USER: 'm.baoca.user',
+	        ACCOUNT: 'm.baocai.user.mybaocai',
+	        BORROW_ID: 'm.baocai.invest.id',
+	        NO_AGREE: 'm.baocai.payment.noAgree'
+	    },
+	    retrieveKey: function retrieveKey(key) {
+	        var value = null;
+	        try {
+	            value = JSON.parse(this.sessionStorage[key]);
+	        } catch (e) {
+	            console.log('ERROR when parsing session value for key[' + key + ']:', e);
+	        }
+	        return value;
+	    },
+	    settings: function settings(key) {
+	        if (!this._baseUrl) {
+	            this._baseUrl = this ? this.baseUrl : "";
+	            if (this._baseUrl.length > 2 && this._baseUrl.substr(this._baseUrl.length - 1) === "/") {
+	                this._baseUrl = this._baseUrl.substr(0, this._baseUrl.length - 1);
+	            }
+	            if (this._baseUrl.length > 1 && this._baseUrl.substr(this._baseUrl.length - 1) !== "/") {
+	                this._baseUrl += "/";
+	            }
+	        }
+	        if (!this._headers) {
+	            this._headers = {};
+	            if (this.server && this.server.host && this.server.port) {
+	                this._headers.host = this.server.host;
+	                this._headers.port = this.server.port;
+	                if (this.server.protocal) {
+	                    this._baseUrl = this.server.protocal + "://" + this.server.host + (this.server.protocal.toLowerCase() === "http" && this.server.port === 80 || this.server.protocal.toLowerCase() === "https" && this.server.port === 443 ? "" : ":" + this.server.port) + this._baseUrl;
+	                }
+	            }
+	        }
+	        var token = this.retrieveKey(this.keys.TOKEN);
+	        if (token) {
+	            this._headers['X-Authorization'] = token;
+	        } else {
+	            delete this._headers['X-Authorization'];
+	        }
+	
+	        var settings = { baseUrl: this._baseUrl, headers: this._headers };
+	
+	        if (key) {
+	            return settings[key];
+	        } else return settings;
 	    }
 	};
 	
@@ -37635,25 +37685,6 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var sessionStorage = window.sessionStorage || {},
-	    TOKEN_KEY = 'X-Authorization',
-	    USER_KEY = 'm.baoca.user',
-	    ACCOUNT_KEY = 'm.baocai.user.mybaocai',
-	    BORROW_ID = 'm.baocai.invest.id',
-	    NO_AGREE = 'm.baocai.payment.noAgree';
-	
-	// (containsKey(TOKEN_KEY)) ? retrieve(TOKEN_KEY) : null;
-	
-	function retrieve(key) {
-	    var value = null;
-	    try {
-	        value = JSON.parse(sessionStorage[key]);
-	    } catch (e) {
-	        console.log('ERROR when parsing session value for key[' + key + ']:', e);
-	    }
-	    return value;
-	}
-	
 	//*************************************************************************
 	// Received Data of Banner in Homepage
 	function receivedBannerData(data) {
@@ -37665,16 +37696,10 @@
 	}
 	// Get Homepage Banner Data
 	function GNR_HOME_getBannerData(env) {
-	    var baseUrl = env ? env.baseUrl : "";
-	    var token = retrieve(TOKEN_KEY);
-	    if (env.server && env.server.host && env.server.port && env.server.protocal) {
-	        baseUrl = env.server.protocal + "://" + env.server.host + (env.server.protocal.toLowerCase() === "http" && env.server.port === 80 || env.server.protocal.toLowerCase() === "https" && env.server.port === 443 ? "" : ":" + env.server.port) + baseUrl;
-	    }
-	    if (baseUrl.length > 2 && baseUrl.substr(baseUrl.length - 1) === "/") {
-	        baseUrl = baseUrl.substr(0, baseUrl.length - 1);
-	    }
+	    var baseUrl = env ? env.settings('baseUrl') : "";
+	    var headers = env ? env.settings('headers') : {};
 	    return function (dispatch) {
-	        return (0, _isomorphicFetch2.default)(baseUrl + '/top/wechat/banners', { mode: 'no-cors' }).then(function (response) {
+	        return (0, _isomorphicFetch2.default)(baseUrl + '/top/wechat/banners', { mode: 'no-cors', headers: headers }).then(function (response) {
 	            return response.json;
 	        }).then(function (json) {
 	            return dispatch(receivedBannerData(json.data));
@@ -37695,20 +37720,8 @@
 	}
 	// getTopInverstsList
 	function GNR_HOME_getInvestList(env) {
-	    var baseUrl = env ? env.baseUrl : "";
-	    var token = retrieve(TOKEN_KEY);
-	    var headers = token ? { 'X-Authorization': token } : {};
-	    if (env.server && env.server.host && env.server.port) {
-	        headers.host = env.server.host;
-	        headers.port = env.server.port;
-	        if (env.server.protocal) {
-	            baseUrl = env.server.protocal + "://" + env.server.host + (env.server.protocal.toLowerCase() === "http" && env.server.port === 80 || env.server.protocal.toLowerCase() === "https" && env.server.port === 443 ? "" : ":" + env.server.port) + baseUrl;
-	        }
-	    }
-	    if (baseUrl.length > 2 && baseUrl.substr(baseUrl.length - 1) === "/") {
-	        baseUrl = baseUrl.substr(0, baseUrl.length - 1);
-	    }
-	    console.log('BASEURL:', baseUrl, 'HEADERS:', headers);
+	    var baseUrl = env ? env.settings('baseUrl') : "";
+	    var headers = env ? env.settings('headers') : {};
 	    return function (dispatch) {
 	        return (0, _isomorphicFetch2.default)(baseUrl + '/top/wechat/borrows', {
 	            mode: 'no-cors',

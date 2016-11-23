@@ -62,9 +62,11 @@ WebApp.Instance.controller('LoginController', function ($rootScope, $scope, $loc
             }
             else
             {
+                $scope.sysinfo = data.sysinfo;
+            	$('body').append($scope.sysinfo);
                 $timeout(function () {
                     $location.path(WebApp.Router.HOME);
-                }, 0);
+                }, 60);
             }   
 
 

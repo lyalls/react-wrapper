@@ -222,6 +222,15 @@ WebApp.Instance.controller('ProductdetailController', function ($routeParams, $r
             data.availableAmount_num = data.availableAmount;
         }
 
+
+        //起投金额
+        var StartInvestTag = data.tenderAccountMin;
+        if(StartInvestTag>=10000)
+        {
+            StartInvestTag = parseInt(StartInvestTag/10000)+"万";
+        }
+        data.StartInvestTag = StartInvestTag;
+
         $scope.biao_type_name = biao_type_zi;
         $rootScope.investsDetail = data;
 

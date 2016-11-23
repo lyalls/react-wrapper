@@ -10,6 +10,7 @@
                 <span class="gold-tag" ng-show="+investsDetail.isBonusticket == 1">红包券</span>
                 <span class="gold-tag" ng-show="+investsDetail.isAllowIncrease == 1">加息券</span>
                 <span class="gold-tag" ng-show="+investsDetail.isTag == 1">{{investsDetail.tagTitle}}</span>
+                <span class="gold-tag" ng-show="+investsDetail.tenderAccountMin > 100">{{investsDetail.StartInvestTag}}元起投</span>
             </div>
             <ul class="wx-detail-info-com">
                 <li><label>年利率：</label><em ng-if="investsDetail.increaseApr>0" class="add-prize">+{{investsDetail.increaseApr| number:2}}%</em><span class="red-font">{{investsDetail.annualRate}}%</span></li>

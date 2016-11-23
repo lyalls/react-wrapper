@@ -1026,6 +1026,14 @@ WebApp.Instance.controller('TenderInfoController', function ($routeParams, $moda
             bounsList = data.bounsList;
             proj.increaseList = increaselist;
             proj.bounsList = bounsList;
+            
+            if (WebApp.projectData.tenderAccountMin > 100 && WebApp.projectData.availableAmount_num_new <= WebApp.projectData.tenderAccountMin)
+            {
+                $scope.investAmount = WebApp.projectData.availableAmount_num_new;
+                WebApp.minLimitStatus = 1;
+                WebApp.minLimitMsg = '可投金额为' + $scope.investAmount + '元';
+                $scope.investAmountChanged(0);
+            }
         })
     }
     WebApp.proj = null;
@@ -1282,7 +1290,6 @@ WebApp.Instance.controller('TenderInfoController', function ($routeParams, $moda
         $scope.investAmount = WebApp.projectData.availableAmount_num_new;
         WebApp.minLimitStatus = 1;
         WebApp.minLimitMsg = '可投金额为'+$scope.investAmount+'元';
-        $scope.investAmountChanged(0);
     }
     $scope.projectData = WebApp.projectData;
 });

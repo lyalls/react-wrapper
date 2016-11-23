@@ -448,8 +448,20 @@ WebApp.Instance.run(['$rootScope', '$window', '$location', '$log', '$timeout', '
 
             var Uphone = WebApp.ClientStorage.getCurrentUser();
             if(!Uphone){
+                // 处理异步请求数据造成的不跳转问题
                 AccountService.myAccountINfo(function (data) {
-                    Uphone = data;
+                Uphone = data;
+                var nowUrl = $location.absUrl();
+                var spliturl = nowUrl.split('baocai.com')[1];
+                if (Uphone != null)
+                {
+                    if ((Uphone.phone == null || Uphone.phone == "") && spliturl != '/#/phone/check')
+                    {
+                        $timeout(function () {
+                            $location.path(WebApp.Router.PHONE_CHECK);
+                        }, 0);
+                    }
+                }
              }, function (data) {
              });
             }
@@ -458,7 +470,7 @@ WebApp.Instance.run(['$rootScope', '$window', '$location', '$log', '$timeout', '
 
             if (Uphone != null)
             {
-                if (Uphone.phone == "" && spliturl != '/#/phone/check')
+                if ((Uphone.phone == null || Uphone.phone == "") && spliturl != '/#/phone/check')
                 {
                     $timeout(function () {
                         $location.path(WebApp.Router.PHONE_CHECK);
