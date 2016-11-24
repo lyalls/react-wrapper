@@ -15,10 +15,9 @@ function receivedBannerData(data){
 // Get Homepage Banner Data
 export function GNR_HOME_getBannerData(env){
     let baseUrl = env ? env.settings('baseUrl') : "";
-    let headers = env ? env.settings('headers') : {};
     return function(dispatch) {
-        return fetch(`${baseUrl}/top/wechat/banners`, {mode: 'no-cors', headers: headers})
-            .then(response => response.json)
+        return fetch(`${baseUrl}/top/wechat/banners`, {mode: 'no-cors'})
+            .then(response => response.json())
             .then(json=> {
                 return dispatch(receivedBannerData(json.data))
             })

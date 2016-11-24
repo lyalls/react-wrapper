@@ -21,6 +21,7 @@ ifeq "${updateSrc}" "true"
 endif
 
 webpackConfigFile=./src/apps/webpack.config.js
+appIndexFile=./src/apps/index.js
 # Do local test, DON'T modify original codes
 wechat: appSrcDir=${h5SrcDir}
 wechat: appIntegrationDir=./integrations/wechat
@@ -28,6 +29,7 @@ wechat: appTmpDir=./src/apps/wechat/tmp
 wechat: appTemplateDir=./src/apps/wechat/templates
 wechat: components="home:newhome" # "<component name>:<target template file name> <component name>:<target template file name> ..."
 wechat: target=wechat
+wechat: targetNameInAppIndex=Wechat
 wechat: syncFromH5=true
 
 ios: appIntegrationDir=./integrations/ios
@@ -35,6 +37,7 @@ ios: appTmpDir=./src/apps/ios/tmp
 ios: appTemplateDir=./src/apps/ios/templates
 ios: components="home"
 ios: target=ios
+ios: targetNameInAppIndex=IOS
 ios: syncFromH5=false
 
 
@@ -72,9 +75,16 @@ wechat ios:
 		targetFileName=$${compName} ;\
 		if [[ "$${templateFileName}" != "" ]];then targetFileName=$${templateFileName} ; fi ; \
 		sed "s/bundle.index.js/bundle.$${targetFileName}.js/g" ${appTemplateDir}/index.html > ${appTmpDir}/$${targetFileName}.html ;\
-		sed "s/pages\/home/pages\/$${compName}/g" ${appTemplateDir}/index.js > ${appTmpDir}/$${targetFileName}.js ;\
+		if [[ ${target} == wechat ]]; then \
+			sed "15,19 d; s/pages\/home/pages\/$${compName}/g" ${appIndexFile} > ${appTmpDir}/$${targetFileName}.js ;\
+		else \
+			sed "s/pages\/home/pages\/$${compName}/g" ${appIndexFile} > ${appTmpDir}/$${targetFileName}.js ;\
+		fi ; \
+		sed "s/is${targetNameInAppIndex}: false/is${targetNameInAppIndex}: true/g" ${appTmpDir}/$${targetFileName}.js > ${appTmpDir}/tmp.js ;\
+		mv ${appTmpDir}/tmp.js ${appTmpDir}/$${targetFileName}.js;\
 		echo "        $${targetFileName}: __dirname + '/$${targetFileName}.js'," >> ${appTmpDir}/tmp.js ;\
 	done
+	# Compose the webpack.config.js and delete the temporary files
 	cat ${appTmpDir}/tmpHead.js ${appTmpDir}/tmp.js ${appTmpDir}/tmpTail.js > ${appTmpDir}/webpack.config.js
 	rm -rf ${appTmpDir}/tmp.js ${appTmpDir}/tmpHead.js ${appTmpDir}/tmpTail.js
 	# Run the webpack to build target components
@@ -97,7 +107,7 @@ wechat ios:
 		echo '<link ref="stylesheet" tyle="text/css" href="react/bundle.style.css">' >> ${appTmpDir}/tmp.html ;\
 		sed '1,/<script src="js\/app.min.js/ d' ${appIntegrationDir}/src/html/index.html >> ${appTmpDir}/tmp.html ;\
 		mv ${appTmpDir}/tmp.html ${appIntegrationDir}/src/html/index.html ;\
-		cd ${appIntegrationDir} && gulp build_q ;\
+		export PATH=`pwd`/node_modules/.bin:$${PATH} && cd ${appIntegrationDir} && gulp build_q ;\
 		cd - && cp ${appTemplateDir}/jquery-3.1.1.min.js ${appIntegrationDir}/www/js ;\
 		cp -r ${appTmpDir}/react ${appIntegrationDir}/www/react ;\
 	elif [[ ${target} == ios ]]; then \
