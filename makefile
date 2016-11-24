@@ -43,6 +43,7 @@ ios: syncFromH5=false
 
 wechat ios:
 	# Prepare the environment
+	npm i
 	echo "SRC: " ${appSrcDir}
 	if [[ ${doUpdateSourceFile} == true ]];then svn update ${appSrcDir}; fi
 	mkdir -p ${appIntegrationDir}
