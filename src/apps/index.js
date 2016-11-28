@@ -86,7 +86,11 @@ const envSettings = {
             delete this._headers['X-Authorization'];
         }
         
-        let settings = Object.assign({ baseUrl: this._baseUrl, headers: this._headers}, this);
+        let settings = { 
+            baseUrl: this._baseUrl, 
+            headers: this._headers,
+            setSessionStorage: this.setSessionStorage,
+        };
         let value = null;
         if(key){
             value = settings[key];

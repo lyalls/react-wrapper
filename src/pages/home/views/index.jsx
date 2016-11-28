@@ -10,11 +10,13 @@ class Home extends Component {
     componentWillMount() {
         this.props.onLoading();
     }
+    componentWillReceiveProps(nextProps) {
+        this.setSessionStorage = nextProps.env.setSessionStorage;
+    }
     componentDidMount() {
         if(this.props.env.platform.isWechat){
             $('.content-for-m-header').attr('ui-content-for', 'm-header')
         }
-        this.setSessionStorage = this.props.env.setSessionStorage;
     }
 
     // 显示对话框

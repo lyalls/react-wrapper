@@ -46,6 +46,10 @@
 
 	'use strict';
 	
+	var _stringify = __webpack_require__(687);
+	
+	var _stringify2 = _interopRequireDefault(_stringify);
+	
 	var _react = __webpack_require__(105);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -54,11 +58,11 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _reactTapEventPlugin = __webpack_require__(687);
+	var _reactTapEventPlugin = __webpack_require__(689);
 	
 	var _reactTapEventPlugin2 = _interopRequireDefault(_reactTapEventPlugin);
 	
-	var _home = __webpack_require__(692);
+	var _home = __webpack_require__(694);
 	
 	var _home2 = _interopRequireDefault(_home);
 	
@@ -86,6 +90,23 @@
 	        isMobile: false
 	    },
 	    sessionStorage: window.sessionStorage || {},
+	    setSessionStorage: function setSessionStorage(key, value) {
+	        if (key === undefined || key === null) return;
+	        try {
+	            if (value === undefined || value === null) {
+	                sessionStorage.removeItem(key);
+	            } else {
+	                value = typeof value === 'string' || typeof value === 'number' ? value : (0, _stringify2.default)(value);
+	                sessionStorage.setItem(key, value);
+	            }
+	        } catch (oException) {
+	            if (oException.name == 'QuotaExceededError') {
+	                alert('本网站不支持无痕浏览，访问时请关闭无痕浏览。');
+	                sessionStorage.clear();
+	                sessionStorage.setItem(key, value);
+	            }
+	        }
+	    },
 	    keys: {
 	        TOKEN: 'X-Authorization',
 	        USER: 'm.baoca.user',
@@ -129,7 +150,11 @@
 	            delete this._headers['X-Authorization'];
 	        }
 	
-	        var settings = { baseUrl: this._baseUrl, headers: this._headers };
+	        var settings = {
+	            baseUrl: this._baseUrl,
+	            headers: this._headers,
+	            setSessionStorage: this.setSessionStorage
+	        };
 	        var value = null;
 	        if (key) {
 	            value = settings[key];
@@ -36492,8 +36517,24 @@
 /* 687 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = { "default": __webpack_require__(688), __esModule: true };
+
+/***/ },
+/* 688 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(175)
+	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
+	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
+	  return $JSON.stringify.apply($JSON, arguments);
+	};
+
+/***/ },
+/* 689 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(process) {var invariant = __webpack_require__(112);
-	var defaultClickRejectionStrategy = __webpack_require__(688);
+	var defaultClickRejectionStrategy = __webpack_require__(690);
 	
 	var alreadyInjected = false;
 	
@@ -36515,14 +36556,14 @@
 	  alreadyInjected = true;
 	
 	  __webpack_require__(286).injection.injectEventPluginsByName({
-	    'TapEventPlugin':       __webpack_require__(689)(shouldRejectClick)
+	    'TapEventPlugin':       __webpack_require__(691)(shouldRejectClick)
 	  });
 	};
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(107)))
 
 /***/ },
-/* 688 */
+/* 690 */
 /***/ function(module, exports) {
 
 	module.exports = function(lastTouchEvent, clickTimestamp) {
@@ -36533,7 +36574,7 @@
 
 
 /***/ },
-/* 689 */
+/* 691 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -36561,10 +36602,10 @@
 	var EventPluginUtils = __webpack_require__(288);
 	var EventPropagators = __webpack_require__(285);
 	var SyntheticUIEvent = __webpack_require__(319);
-	var TouchEventUtils = __webpack_require__(690);
+	var TouchEventUtils = __webpack_require__(692);
 	var ViewportMetrics = __webpack_require__(320);
 	
-	var keyOf = __webpack_require__(691);
+	var keyOf = __webpack_require__(693);
 	var topLevelTypes = EventConstants.topLevelTypes;
 	
 	var isStartish = EventPluginUtils.isStartish;
@@ -36710,7 +36751,7 @@
 
 
 /***/ },
-/* 690 */
+/* 692 */
 /***/ function(module, exports) {
 
 	/**
@@ -36758,7 +36799,7 @@
 
 
 /***/ },
-/* 691 */
+/* 693 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -36797,7 +36838,7 @@
 	module.exports = keyOf;
 
 /***/ },
-/* 692 */
+/* 694 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36825,7 +36866,7 @@
 	    return (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_index2.default);
 	};
 	
-	var _index = __webpack_require__(693);
+	var _index = __webpack_require__(695);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
@@ -36866,7 +36907,7 @@
 	// Generate the App Tag according to env settings
 
 /***/ },
-/* 693 */
+/* 695 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36874,10 +36915,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	
-	var _stringify = __webpack_require__(694);
-	
-	var _stringify2 = _interopRequireDefault(_stringify);
 	
 	var _getPrototypeOf = __webpack_require__(212);
 	
@@ -36931,29 +36968,15 @@
 	            this.props.onLoading();
 	        }
 	    }, {
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            this.setSessionStorage = nextProps.env.setSessionStorage;
+	        }
+	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            if (this.props.env.platform.isWechat) {
 	                (0, _jquery2.default)('.content-for-m-header').attr('ui-content-for', 'm-header');
-	            }
-	        }
-	    }, {
-	        key: 'setSessionStorage',
-	        value: function setSessionStorage(key, value) {
-	            if (key === undefined || key === null) return;
-	            try {
-	                if (value === undefined || value === null) {
-	                    sessionStorage.removeItem(key);
-	                } else {
-	                    value = typeof value === 'string' || typeof value === 'number' ? value : (0, _stringify2.default)(value);
-	                    sessionStorage.setItem(key, value);
-	                }
-	            } catch (oException) {
-	                if (oException.name == 'QuotaExceededError') {
-	                    alert('本网站不支持无痕浏览，访问时请关闭无痕浏览。');
-	                    sessionStorage.clear();
-	                    sessionStorage.setItem(key, value);
-	                }
 	            }
 	        }
 	
@@ -37220,22 +37243,6 @@
 	};
 	
 	exports.default = Home;
-
-/***/ },
-/* 694 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(695), __esModule: true };
-
-/***/ },
-/* 695 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var core  = __webpack_require__(175)
-	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
-	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
-	  return $JSON.stringify.apply($JSON, arguments);
-	};
 
 /***/ },
 /* 696 */
