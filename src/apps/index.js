@@ -24,6 +24,23 @@ const envSettings = {
         isMobile: false
     },
     sessionStorage: window.sessionStorage || {},
+    setSessionStorage: function(key, value){
+        if(key === undefined || key === null) return;
+        try{
+            if(value === undefined || value === null) {
+                sessionStorage.removeItem(key);
+            }else{
+                value = (typeof value === 'string' || typeof value === 'number') ? value : JSON.stringify(value);
+                sessionStorage.setItem(key, value);
+            }
+        } catch (oException) {
+            if (oException.name == 'QuotaExceededError') {
+                alert('本网站不支持无痕浏览，访问时请关闭无痕浏览。');
+                sessionStorage.clear();
+                sessionStorage.setItem(key, value);
+            }
+        }
+    },
     keys:{
         TOKEN: 'X-Authorization',
         USER: 'm.baoca.user',
@@ -69,7 +86,7 @@ const envSettings = {
             delete this._headers['X-Authorization'];
         }
         
-        let settings = { baseUrl: this._baseUrl, headers: this._headers};
+        let settings = Object.assign({ baseUrl: this._baseUrl, headers: this._headers}, this);
         let value = null;
         if(key){
             value = settings[key];

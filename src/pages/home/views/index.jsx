@@ -14,24 +14,7 @@ class Home extends Component {
         if(this.props.env.platform.isWechat){
             $('.content-for-m-header').attr('ui-content-for', 'm-header')
         }
-    }
-
-    setSessionStorage(key, value){
-        if(key === undefined || key === null) return;
-        try{
-            if(value === undefined || value === null) {
-                sessionStorage.removeItem(key);
-            }else{
-                value = (typeof value === 'string' || typeof value === 'number') ? value : JSON.stringify(value);
-                sessionStorage.setItem(key, value);
-            }
-        } catch (oException) {
-            if (oException.name == 'QuotaExceededError') {
-                alert('本网站不支持无痕浏览，访问时请关闭无痕浏览。');
-                sessionStorage.clear();
-                sessionStorage.setItem(key, value);
-            }
-        }
+        this.setSessionStorage = this.props.env.setSessionStorage;
     }
 
     // 显示对话框
