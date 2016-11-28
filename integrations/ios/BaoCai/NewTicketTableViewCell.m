@@ -14,9 +14,7 @@
 @interface NewTicketTableViewCell()
 @property (weak,nonatomic) IBOutlet UILabel *symbolLabel;
 @property (weak,nonatomic) IBOutlet UILabel *ratioLabel;
-@property (weak,nonatomic) IBOutlet UILabel *couponWord1;
-@property (weak,nonatomic) IBOutlet UILabel *couponWord2;
-@property (weak,nonatomic) IBOutlet UILabel *couponWord3;
+@property (weak,nonatomic) IBOutlet UILabel *couponTypeLabel;
 @property (weak,nonatomic) IBOutlet UILabel *textDetailLabel;
 @property (weak,nonatomic) IBOutlet UILabel *projectDetailLabel;;
 @property (weak,nonatomic) IBOutlet UIImageView *markImageView;
@@ -38,7 +36,7 @@
 {
     [super updateConstraints];
     self.view1PositionX.constant = self.view1PositionX.constant*(Screen_width/320);
-    self.view2PositionX.constant = (Screen_width >320)?(self.view2PositionX.constant+15*(Screen_width/320)):self.view2PositionX.constant;
+    self.view2PositionX.constant = self.view2PositionX.constant*(Screen_width/320);
     
 }
 
@@ -51,7 +49,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 -(void)reloadData:(id)model type:(NSInteger)type
@@ -64,9 +62,7 @@
         RaiseRatesCoupon *rmodel = model;
         _symbolLabel.text = @"+";
         _ratioLabel.text = [NSString stringWithFormat:@"%@",rmodel.apr] ;
-        _couponWord1.text = @"加";
-        _couponWord2.text = @"息";
-        _couponWord3.text = @"券";
+        _couponTypeLabel.text = @"加    息    券";
         _textDetailLabel.text = [NSString stringWithFormat:@"● %@",rmodel.useMoney];
         
         _dateDetailLabel.text = rmodel.AppExpiredTime;
@@ -79,33 +75,27 @@
     {
         
         RedBagCoupon *rmodel = model;
-         _projectDetailLabel.hidden = NO;
+        _projectDetailLabel.hidden = NO;
         _symbolLabel.text = @"￥";
         _ratioLabel.text = [NSString stringWithFormat:@"%@",rmodel.money] ;
-        //_couponTypeLabel.text = @"红    包    券";
-        _couponWord1.text = @"红";
-        _couponWord2.text = @"包";
-        _couponWord3.text = @"券";
+        _couponTypeLabel.text = @"红    包    券";
         _textDetailLabel.text = [NSString stringWithFormat:@"● %@",rmodel.ticketDesc];
         _projectDetailLabel.text = [rmodel.ticketDurationDesc isEqualToString:@""]?@"":[NSString stringWithFormat:@"● %@",rmodel.ticketDurationDesc];
         
         _dateDetailLabel.text = rmodel.expiredTime;
-       
-
+        
+        
     }
     if(type == TicketListTypeUsed)
     {
         _symbolLabel.textColor = RGB_COLOR(204, 204, 204);;
         _ratioLabel.textColor = RGB_COLOR(204, 204, 204);;//RGB(197,197,197);
         
-        //_couponTypeLabel.textColor = RGB_COLOR(204, 204, 204);
-        _couponWord1.textColor = RGB_COLOR(204, 204, 204);
-        _couponWord2.textColor = RGB_COLOR(204, 204, 204);
-        _couponWord3.textColor = RGB_COLOR(204, 204, 204);
+        _couponTypeLabel.textColor = RGB_COLOR(204, 204, 204);;
         _textDetailLabel.textColor = RGB_COLOR(204, 204, 204);;
         _dateDetailLabel.textColor = RGB_COLOR(204, 204, 204);;
         _projectDetailLabel.textColor = RGB_COLOR(204, 204, 204);;
-
+        
         _markImageView.image = [[UIImage imageNamed:@"invalid.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,220,0,Screen_width) resizingMode:UIImageResizingModeStretch];
         
     }
@@ -113,18 +103,15 @@
     {
         _symbolLabel.textColor = RGB_COLOR(228, 0, 18);
         _ratioLabel.textColor = RGB_COLOR(228, 0, 18);
-        //_couponTypeLabel.textColor = RGB_COLOR(228, 0, 18);
-        _couponWord1.textColor = RGB_COLOR(228, 0, 18);
-        _couponWord2.textColor = RGB_COLOR(228, 0, 18);
-        _couponWord3.textColor = RGB_COLOR(228, 0, 18);
+        _couponTypeLabel.textColor = RGB_COLOR(228, 0, 18);
         _textDetailLabel.textColor = RGB_COLOR(228, 0, 18);
         _dateDetailLabel.textColor = RGB_COLOR(228, 0, 18);
         _projectDetailLabel.textColor = RGB_COLOR(228, 0, 18);
         _markImageView.image = [[UIImage imageNamed:@"valid.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,220,0,Screen_width) resizingMode:UIImageResizingModeStretch];
     }
-
- 
-  
+    
+    
+    
 }
 
 @end

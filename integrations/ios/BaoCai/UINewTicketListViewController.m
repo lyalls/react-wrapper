@@ -504,7 +504,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([NewTicketTableViewCell class]) forIndexPath:indexPath];
         [cell reloadData:[self.redUsedArray objectSafeAtIndex: indexPath.row] type:_redRateCurrentStatus];
     }
-    NSLog(@"end.....");
+   
     
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

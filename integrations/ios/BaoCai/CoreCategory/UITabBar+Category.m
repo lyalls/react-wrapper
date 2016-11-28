@@ -17,18 +17,11 @@
     //移除之前的小红点
     [self removeBadgeOnItemIndex:index];
     
-    //新建小红点
-    UIView *badgeView = [[UIView alloc]init];
+    CGFloat itemWidth = self.frame.size.width / TabbarItemNums;
+    CGFloat itemCenterWidth = itemWidth / 2;
+    CGFloat y = ceilf(0.101 * self.frame.size.height);
+    BadgePointView *badgeView = [[BadgePointView alloc] initWithFrame:CGRectMake((itemWidth * index) + itemCenterWidth + 4, y, 8, 8)];
     badgeView.tag = 888 + index;
-    badgeView.layer.cornerRadius = 5;//圆形
-    badgeView.backgroundColor = [UIColor redColor];//颜色：红色
-    CGRect tabFrame = self.frame;
-    
-    //确定小红点的位置
-    float percentX = (index + 0.6) / TabbarItemNums;
-    CGFloat x = ceilf(percentX * tabFrame.size.width);
-    CGFloat y = ceilf(0.1 * tabFrame.size.height);
-    badgeView.frame = CGRectMake(x, y, 10, 10);//圆形大小为10
     [self addSubview:badgeView];
 }
 
@@ -45,6 +38,27 @@
             [subView removeFromSuperview];
         }
     }
+}
+
+@end
+
+@implementation BadgePointView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+    }
+    return self;
+}
+
+- (void)drawRect:(CGRect)rect {
+    UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0.5, 0.5, self.frame.size.width - 1, self.frame.size.width - 1)];
+    [path setLineWidth:0.5];
+    [[UIColor redColor] set];
+    [path fill];
+    [[UIColor whiteColor] set];
+    [path stroke];
 }
 
 @end

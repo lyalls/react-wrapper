@@ -90,7 +90,7 @@
         if( isViewLoaded ){
             NSError *error = nil;
             NSString *content = [NSString stringWithContentsOfURL:req.URL encoding:NSUTF8StringEncoding error:&error];
-            NSLog(@"Loading HTML file [%@], content: { %@ }, error: %@", req.URL.absoluteString, content, error);
+            NSLog(@"%@ is Loading HTML file [%@], content: { %@ }, error: %@",[self class], req.URL.absoluteString, content, error);
             [_webView loadRequest:req];
             
             if (![self.view.subviews containsObject:_webView]){
@@ -412,7 +412,8 @@
 
 - (void)loginSuccess {
     //刷新
-    NSString* url = _webView.request.URL.absoluteString;
+    // NSString* url = _webView.request.URL.absoluteString;
+    NSString *url = self.req.URL.absoluteString;
     if(_logPath)
     {
         url = _logPath;
@@ -420,12 +421,14 @@
     }
     
     self.req = [self getWebBrowserRequestWithUrl:url];
+    NSLog(@"%@ is going to reload when login success to url: %@", [self class], url);
     [self reLoad:nil callId:nil];
 }
 
 - (void)logoutSuccess {
     //刷新
-    NSString* url = _webView.request.URL.absoluteString;
+    // NSString* url = _webView.request.URL.absoluteString;
+    NSString *url = self.req.URL.absoluteString;
     self.req = [self getWebBrowserRequestWithUrl:url];
     [self reLoad:nil callId:nil];
 }
@@ -472,7 +475,7 @@
             return NO;
         }else{
             // Remove all caches
-//            [[NSURLCache sharedURLCache] removeAllCachedResponses];
+            [[NSURLCache sharedURLCache] removeAllCachedResponses];
         }
     }
     return YES;

@@ -37,6 +37,7 @@
 #import "LoginRegisterRequest.h"
 
 #import <MJRefresh/MJRefresh.h>
+#import "BCRefreshGifHeader.h"
 
 NSString *MyTopCell = @"MyTopCell";
 NSString *MyFunctionCell = @"MyFunctionCell";
@@ -75,15 +76,11 @@ NSString *MyBottomCell = @"MyBottomCell";
     [self.tableView registerCellNibWithClass:[MyItemTableViewCell class]];
     [self.tableView registerCellNibWithClass:[BottomTableViewCell class]];
     
-    self.tableView.mj_header = [MJRefreshGifHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [BCRefreshGifHeader headerWithRefreshingBlock:^{
         [self getData];
     }];
-    [self.tableView.mj_header endRefreshingWithCompletionBlock:^
-     {
-         [UITableView randSlogan];
-         [self resetSlogan];
-     }];
-    [self.tableView setRefreshGifHeader:FROM_MY];
+
+    [(BCRefreshGifHeader*)self.tableView.mj_header setRefreshGifHeaderType:FROM_MY];
     //背景
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, -300, self.view.bounds.size.width, 300)];
     view.backgroundColor = RGB_COLOR(248, 164, 62);
@@ -95,7 +92,7 @@ NSString *MyBottomCell = @"MyBottomCell";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getData) name:RefreshTicketNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(myLogoutMethod) name:LogoutNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetSlogan) name:RefreshSloganNotification object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetSlogan) name:RefreshSloganNotification object:nil];
     NSString *phoneStr = [UserInfoModel sharedModel].phone;
     phoneStr = [phoneStr stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
     [self.securityBtn setTitle:phoneStr forState:UIControlStateNormal];
@@ -138,10 +135,7 @@ NSString *MyBottomCell = @"MyBottomCell";
     [MobClick event:@"my_ui_safe" label:@"我的_账户安全"];
 }
 
--(void)resetSlogan
-{
-    [self.tableView setRefreshGifHeader:FROM_MY];
-}
+
 #pragma mark - Custom Method
 
 - (void)getData {

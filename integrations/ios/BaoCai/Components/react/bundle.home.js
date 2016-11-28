@@ -72,7 +72,8 @@
 	
 	// Env Settings
 	var envSettings = {
-	    baseUrl: "/",
+	    baseUrl: "",
+	    // server 这几行不要动位置，保持行号15~19行不变，否则影响打包
 	    server: {
 	        host: "localhost",
 	        port: 2999,
@@ -129,10 +130,12 @@
 	        }
 	
 	        var settings = { baseUrl: this._baseUrl, headers: this._headers };
-	
+	        var value = null;
 	        if (key) {
-	            return settings[key];
-	        } else return settings;
+	            value = settings[key];
+	        } else value = settings;
+	        console.log('Getting settings[' + key + '] = ' + value);
+	        return value;
 	    }
 	};
 	
@@ -37697,10 +37700,9 @@
 	// Get Homepage Banner Data
 	function GNR_HOME_getBannerData(env) {
 	    var baseUrl = env ? env.settings('baseUrl') : "";
-	    var headers = env ? env.settings('headers') : {};
 	    return function (dispatch) {
-	        return (0, _isomorphicFetch2.default)(baseUrl + '/top/wechat/banners', { mode: 'no-cors', headers: headers }).then(function (response) {
-	            return response.json;
+	        return (0, _isomorphicFetch2.default)(baseUrl + '/top/wechat/banners', { mode: 'no-cors' }).then(function (response) {
+	            return response.json();
 	        }).then(function (json) {
 	            return dispatch(receivedBannerData(json.data));
 	        }).catch(function (e) {

@@ -17,6 +17,7 @@
 #import "TenderRequest.h"
 
 #import <MJRefresh/MJRefresh.h>
+#import "BCRefreshGifHeader.h"
 
 NSString *TenderBannerCell = @"TenderBannerCell";
 NSString *TenderBottomCell = @"TenderBottomCell";
@@ -52,29 +53,27 @@ NSString *TenderBottomCell = @"TenderBottomCell";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshBanner) name:RefreshBannerNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTender) name:RefreshTenderNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetSlogan) name:RefreshSloganNotification object:nil];
-    self.pageIndex = 0;
+     self.pageIndex = 0;
     
     self.displayArray = [NSMutableArray arrayWithCapacity:0];
     self.tenderArray = [NSMutableArray arrayWithCapacity:0];
     
-    self.tableView.mj_header = [MJRefreshGifHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [BCRefreshGifHeader headerWithRefreshingBlock:^{
         self.pageIndex = 1;
         
         [self getData];
     }];
-    [self.tableView setRefreshGifHeader:FROM_HOME];
+    
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         self.pageIndex++;
         
         [self getData];
     }];
     
-    [self.tableView.mj_header beginRefreshing];
+    [(BCRefreshGifHeader*)self.tableView.mj_header beginRefreshing];
     [self refreshBanner];
     [self reloadTableView];
     
-    [self performSelector:@selector(endRefreshingBlock) withObject:nil afterDelay:2.0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -117,22 +116,6 @@ NSString *TenderBottomCell = @"TenderBottomCell";
 
 - (void)refreshTender {
     [self.tableView.mj_header beginRefreshing];
-}
--(void)resetSlogan
-{
-    [self.tableView setRefreshGifHeader:FROM_HOME];
-}
--(void)endRefreshingBlock
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView.mj_header endRefreshingWithCompletionBlock:^{
-            
-            [UITableView randSlogan];
-            [self resetSlogan];
-            
-        }];
-    });
-    
 }
 - (void)getData {
     [TenderRequest getTenderListWithPageIndex:self.pageIndex success:^(NSDictionary *dic, BCError *error) {

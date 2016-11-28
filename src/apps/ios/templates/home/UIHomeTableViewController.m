@@ -6,7 +6,6 @@
 //  Copyright © 2016年 Beijing KuaiYiJianKang Management Co., Ltd. All rights reserved.
 //
 
-
 #import "UIHomeTableViewController.h"
 #import "UIWebBrowserViewController.h"
 #import "UITenderDetailViewController.h"
@@ -25,6 +24,7 @@
 #import "HomeRequest.h"
 #import "TenderRequest.h"
 #import "GeneralRequest.h"
+#import "BCRefreshGifHeader.h"
 
 #import "DTouchButton.h"
 #import <SDWebImage/UIButton+WebCache.h>
@@ -79,20 +79,18 @@ NSString *HomeBottomCell = @"HomeBottomCell";
     [self.tableView registerCellNibWithClass:[HomeNoviceTableViewCell class]];
     [self.tableView registerCellNibWithClass:[TenderItemTableViewCell class]];
     [self.tableView registerCellNibWithClass:[BottomTableViewCell class]];
-    
     self.touchButton = [[DTouchButton alloc] initWithFrame:CGRectMake(Screen_width - 60, (self.view.height - 75) / 2, 60, 75)];
     self.touchButton.delegate = self;
     self.touchButton.userInteractionEnabled_DT = YES;
     self.touchButton.hidden = YES;
     
-    self.tableView.mj_header = [MJRefreshGifHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [BCRefreshGifHeader headerWithRefreshingBlock:^{
         [self getData];
         
         if ([UserInfoModel sharedModel].token) {
             [self setLoginBtnHidden];
         }
     }];
-    [self.tableView setRefreshGifHeader:FROM_HOME];
     
     self.tenderArray = [NSMutableArray arrayWithCapacity:0];
     
@@ -105,7 +103,6 @@ NSString *HomeBottomCell = @"HomeBottomCell";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setLoginBtnHidden) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setLoginBtnHidden) name:LogoutNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetSlogan) name:RefreshSloganNotification object:nil];
     
     [GeneralRequest checkVersionWithSuccess:^(NSDictionary *dic, BCError *error) {
         if (error.code == 0) {
@@ -139,13 +136,13 @@ NSString *HomeBottomCell = @"HomeBottomCell";
     self.loginBtn.hidden = [UserInfoModel sharedModel].token ? YES : NO;
     
     [self reloadTableView];
-
+    
     // 加载 H5 页面
-	if([[self class] copySrcToDoc]){
-		[self setReq:[NSURLRequest requestWithURL:[NSURL URLWithString:[[self class] componentIndex: @"home"]]]];
-	}else{
-		NSLog(@"Can't load component: [%@]", @"home");
-	}
+    if([[self class] copySrcToDoc]){
+        [self setReq:[NSURLRequest requestWithURL:[NSURL URLWithString:[[self class] componentIndex: @"home"]]]];
+    }else{
+        NSLog(@"Can't load component: [%@]", @"home");
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -242,10 +239,6 @@ NSString *HomeBottomCell = @"HomeBottomCell";
             [self.tabBarController.tabBar hideBadgeOnItemIndex:3];
         }
     }
-}
--(void)resetSlogan
-{
-    [self.tableView setRefreshGifHeader:FROM_HOME];
 }
 - (IBAction)loginBtnClick:(id)sender {
    [self toLoginViewController];

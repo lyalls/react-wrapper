@@ -10,14 +10,6 @@
 
 @interface UITableView (Category)
 
-typedef NS_ENUM(NSInteger, FromType) {
-    FROM_HOME,
-    FROM_MY,
-};
-
-
 - (void)registerCellNibWithClass:(Class)className;
 
-- (void)setRefreshGifHeader:(NSInteger)fromType;
-+(void)randSlogan;
 @end

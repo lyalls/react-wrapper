@@ -21,7 +21,9 @@ ifeq "${updateSrc}" "true"
 endif
 
 webpackConfigFile=./src/apps/webpack.config.js
-appIndexFile=./src/apps/index.js
+appIndexTemplateFile=./src/apps/index.js
+platformPolygonFile=./src/apps/platform.js
+
 # Do local test, DON'T modify original codes
 wechat: appSrcDir=${h5SrcDir}
 wechat: appIntegrationDir=./integrations/wechat
@@ -43,7 +45,7 @@ ios: syncFromH5=false
 
 wechat ios:
 	# Prepare the environment
-	npm i
+	npm install
 	echo "SRC: " ${appSrcDir}
 	if [[ ${doUpdateSourceFile} == true ]];then svn update ${appSrcDir}; fi
 	mkdir -p ${appIntegrationDir}
@@ -77,9 +79,9 @@ wechat ios:
 		if [[ "$${templateFileName}" != "" ]];then targetFileName=$${templateFileName} ; fi ; \
 		sed "s/bundle.index.js/bundle.$${targetFileName}.js/g" ${appTemplateDir}/index.html > ${appTmpDir}/$${targetFileName}.html ;\
 		if [[ ${target} == wechat ]]; then \
-			sed "15,19 d; s/pages\/home/pages\/$${compName}/g" ${appIndexFile} > ${appTmpDir}/$${targetFileName}.js ;\
+			sed "15,19 d; s/pages\/home/pages\/$${compName}/g" ${appIndexTemplateFile} > ${appTmpDir}/$${targetFileName}.js ;\
 		else \
-			sed "s/pages\/home/pages\/$${compName}/g" ${appIndexFile} > ${appTmpDir}/$${targetFileName}.js ;\
+			sed "s/pages\/home/pages\/$${compName}/g" ${appIndexTemplateFile} > ${appTmpDir}/$${targetFileName}.js ;\
 		fi ; \
 		sed "s/is${targetNameInAppIndex}: false/is${targetNameInAppIndex}: true/g" ${appTmpDir}/$${targetFileName}.js > ${appTmpDir}/tmp.js ;\
 		mv ${appTmpDir}/tmp.js ${appTmpDir}/$${targetFileName}.js;\
@@ -104,6 +106,7 @@ wechat ios:
 		sed '/<script src="js\/app.min.js/,$$ d' ${appIntegrationDir}/src/html/index.html > ${appTmpDir}/tmp.html ;\
 		echo '<script src="/js/jquery-3.1.1.min.js"></script>' >> ${appTmpDir}/tmp.html ;\
 		echo '<script src="/js/app.min.js"></script>' >> ${appTmpDir}/tmp.html ;\
+		echo '<script src="/react/platform.js"></script>' >> ${appTmpDir}/tmp.html ;\
 		echo '<script src="/react/bundle.common.js"></script>' >> ${appTmpDir}/tmp.html ;\
 		echo '<link ref="stylesheet" tyle="text/css" href="react/bundle.style.css">' >> ${appTmpDir}/tmp.html ;\
 		sed '1,/<script src="js\/app.min.js/ d' ${appIntegrationDir}/src/html/index.html >> ${appTmpDir}/tmp.html ;\
@@ -111,6 +114,7 @@ wechat ios:
 		export PATH=`pwd`/node_modules/.bin:$${PATH} && cd ${appIntegrationDir} && gulp build_q ;\
 		cd - && cp ${appTemplateDir}/jquery-3.1.1.min.js ${appIntegrationDir}/www/js ;\
 		cp -r ${appTmpDir}/react ${appIntegrationDir}/www/react ;\
+		cp ${platformPolygonFile} ${appIntegrationDir}/www/react ;\
 	elif [[ ${target} == ios ]]; then \
 		mkdir -p ${appIntegrationDir}/BaoCai/Components ;\
 		for comp in `echo ${components}`; do \
@@ -120,6 +124,7 @@ wechat ios:
 		done;\
 		cp ${appTemplateDir}/UIWebViewController.* ${appIntegrationDir}/BaoCai ;\
 		cp -r ${appTmpDir}/react ${appIntegrationDir}/BaoCai/Components/react ;\
+		cp ${platformPolygonFile} ${appIntegrationDir}/BaoCai/Components/react ;\
 		npm run server ;\
 	fi
 	rm -rf ${appTmpDir}

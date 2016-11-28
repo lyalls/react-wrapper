@@ -10,7 +10,8 @@ injectTapEventPlugin();
 
 // Env Settings
 const envSettings = {
-    baseUrl: "/",
+    baseUrl: "",
+    // server 这几行不要动位置，保持行号15~19行不变，否则影响打包
     server:{
         host: "localhost",
         port: 2999,
@@ -69,10 +70,12 @@ const envSettings = {
         }
         
         let settings = { baseUrl: this._baseUrl, headers: this._headers};
-
+        let value = null;
         if(key){
-            return settings[key];
-        }else return settings;
+            value = settings[key];
+        }else value = settings;
+        console.log(`Getting settings[${key}] = ${value}`);
+        return value;
     }
 };
 

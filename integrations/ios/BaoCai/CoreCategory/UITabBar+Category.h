@@ -15,3 +15,7 @@
 - (void)hideBadgeOnItemIndex:(int)index;
 
 @end
+
+@interface BadgePointView : UIView
+
+@end
