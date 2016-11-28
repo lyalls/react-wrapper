@@ -125,11 +125,11 @@ wechat ios:
 		cp ${appTemplateDir}/UIWebViewController.* ${appIntegrationDir}/BaoCai ;\
 		cp -r ${appTmpDir}/react ${appIntegrationDir}/BaoCai/Components/react ;\
 		cp ${platformPolygonFile} ${appIntegrationDir}/BaoCai/Components/react ;\
-		npm run server ;\
 	fi
 	rm -rf ${appTmpDir}
 	# Start the integrated system for WeChat
 	if [[ ${target} == wechat ]]; then cd ${appIntegrationDir} && npm start ; fi
+	if [[ ${target} == ios ]]; then npm run server ; fi
 
 ######## Sync to SVN ######## 
 # Last modified: 2016-11-14 #
