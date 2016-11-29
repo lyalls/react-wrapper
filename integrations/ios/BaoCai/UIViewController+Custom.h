@@ -28,4 +28,6 @@
 
 - (void)openWebBrowserWithUrl:(NSString *)url model:(id)model;
 
+- (void)openWebWithUrl:(NSString *)url;
+
 @end

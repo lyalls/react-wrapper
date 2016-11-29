@@ -8,8 +8,6 @@
 
 #import "UIDiscoverViewController.h"
 
-#import "UIWebBrowserViewController.h"
-
 #import "UIViewController+WebView.h"
 
 @interface UIDiscoverViewController () <UIWebViewDelegate>
@@ -21,6 +19,7 @@
 - (void)viewDidLoad {
     self.canScroll = YES;
     self.showLoading = YES;
+    self.staticTitle = YES;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)])

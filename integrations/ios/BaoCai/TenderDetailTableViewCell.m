@@ -46,6 +46,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tip2BtnWidthConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *tip3Btn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tip3BtnWidthConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *tip4Btn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tip4BtnWidthConstraint;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -126,6 +128,7 @@
         self.tip1Btn.hidden = YES;
         self.tip2Btn.hidden = YES;
         self.tip3Btn.hidden = YES;
+        self.tip4Btn.hidden = YES;
     } else {
         NSInteger currentTimeInterval = (NSInteger)[[NSDate date] timeIntervalSince1970];
         //现在开标剩余时间 = 请求开标剩余时间 - (现在时间 - 请求时间)
@@ -171,65 +174,100 @@
         self.tip1Btn.hidden = YES;
         self.tip2Btn.hidden = YES;
         self.tip3Btn.hidden = YES;
+        self.tip4Btn.hidden = YES;
         //存在红包券和加息券
         if (model.isBonusticket && model.isAllowIncrease) {
             self.tip1Btn.hidden = NO;
             [self setButton:self.tip1Btn layoutConstraint:self.tip1BtnWidthConstraint title:@"红包券" imageName:@"tenderTip_red_1.png" type:1];
             self.tip2Btn.hidden = NO;
-            if (model.isTag) {
+            if (model.isTag || model.isMin) {
                 [self setButton:self.tip2Btn layoutConstraint:self.tip2BtnWidthConstraint title:@"加息券" imageName:@"tenderTip_red_2.png" type:2];
                 self.tip3Btn.hidden = NO;
-                [self setButton:self.tip3Btn layoutConstraint:self.tip3BtnWidthConstraint title:model.tagTitle imageName:@"tenderTip_orange_3.png" type:3];
-            }
-            else {
+                if (model.isTag && model.isMin) {
+                    [self setButton:self.tip3Btn layoutConstraint:self.tip3BtnWidthConstraint title:model.tagTitle imageName:@"tenderTip_orange_2.png" type:2];
+                    self.tip4Btn.hidden = NO;
+                    [self setButton:self.tip4Btn layoutConstraint:self.tip4BtnWidthConstraint title:model.minAccountText imageName:@"tenderTip_main_3.png" type:3];
+                } else if (model.isTag) {
+                    [self setButton:self.tip3Btn layoutConstraint:self.tip3BtnWidthConstraint title:model.tagTitle imageName:@"tenderTip_orange_3.png" type:3];
+                } else if (model.isMin) {
+                    [self setButton:self.tip3Btn layoutConstraint:self.tip3BtnWidthConstraint title:model.minAccountText imageName:@"tenderTip_main_3.png" type:3];
+                }
+            } else {
                 [self setButton:self.tip2Btn layoutConstraint:self.tip2BtnWidthConstraint title:@"加息券" imageName:@"tenderTip_red_3.png" type:3];
             }
         }
         //存在红包券或加息券
         else if (model.isBonusticket || model.isAllowIncrease) {
             self.tip1Btn.hidden = NO;
-            if (model.isReward || model.isTag) {
+            if (model.isReward || model.isTag || model.isMin) {
                 if (model.isBonusticket) {
                     [self setButton:self.tip1Btn layoutConstraint:self.tip1BtnWidthConstraint title:@"红包券" imageName:@"tenderTip_red_1.png" type:1];
-                }
-                else if (model.isAllowIncrease) {
+                } else if (model.isAllowIncrease) {
                     [self setButton:self.tip1Btn layoutConstraint:self.tip1BtnWidthConstraint title:@"加息券" imageName:@"tenderTip_red_1.png" type:1];
                 }
                 self.tip2Btn.hidden = NO;
                 if (model.isReward && model.isTag) {
                     [self setButton:self.tip2Btn layoutConstraint:self.tip2BtnWidthConstraint title:model.promotionTitle imageName:@"tenderTip_yellow_2.png" type:2];
                     self.tip3Btn.hidden = NO;
-                    [self setButton:self.tip3Btn layoutConstraint:self.tip3BtnWidthConstraint title:model.tagTitle imageName:@"tenderTip_orange_3.png" type:3];
-                }
-                else if (model.isReward) {
+                    if (model.isMin) {
+                        [self setButton:self.tip3Btn layoutConstraint:self.tip3BtnWidthConstraint title:model.tagTitle imageName:@"tenderTip_orange_2.png" type:2];
+                        self.tip4Btn.hidden = NO;
+                        [self setButton:self.tip4Btn layoutConstraint:self.tip4BtnWidthConstraint title:model.minAccountText imageName:@"tenderTip_main_3.png" type:3];
+                    } else {
+                        [self setButton:self.tip3Btn layoutConstraint:self.tip3BtnWidthConstraint title:model.tagTitle imageName:@"tenderTip_orange_3.png" type:3];
+                    }
+                } else if (model.isReward && model.isMin) {
+                    [self setButton:self.tip2Btn layoutConstraint:self.tip2BtnWidthConstraint title:model.promotionTitle imageName:@"tenderTip_yellow_2.png" type:2];
+                    self.tip3Btn.hidden = NO;
+                    [self setButton:self.tip3Btn layoutConstraint:self.tip3BtnWidthConstraint title:model.minAccountText imageName:@"tenderTip_main_3.png" type:3];
+                } else if (model.isTag && model.isMin) {
+                    [self setButton:self.tip2Btn layoutConstraint:self.tip2BtnWidthConstraint title:model.tagTitle imageName:@"tenderTip_orange_2.png" type:2];
+                    self.tip3Btn.hidden = NO;
+                    [self setButton:self.tip3Btn layoutConstraint:self.tip3BtnWidthConstraint title:model.minAccountText imageName:@"tenderTip_main_3.png" type:3];
+                } else if (model.isReward) {
                     [self setButton:self.tip2Btn layoutConstraint:self.tip2BtnWidthConstraint title:model.promotionTitle imageName:@"tenderTip_yellow_3.png" type:3];
-                }
-                else if (model.isTag) {
+                } else if (model.isTag) {
                     [self setButton:self.tip2Btn layoutConstraint:self.tip2BtnWidthConstraint title:model.tagTitle imageName:@"tenderTip_orange_3.png" type:3];
+                } else if (model.isMin) {
+                    [self setButton:self.tip2Btn layoutConstraint:self.tip2BtnWidthConstraint title:model.minAccountText imageName:@"tenderTip_main_3.png" type:3];
                 }
-            }
-            else {
+            } else {
                 if (model.isBonusticket) {
                     [self setButton:self.tip1Btn layoutConstraint:self.tip1BtnWidthConstraint title:@"红包券" imageName:@"tenderTip_red_0.png" type:0];
-                }
-                else if (model.isAllowIncrease) {
+                } else if (model.isAllowIncrease) {
                     [self setButton:self.tip1Btn layoutConstraint:self.tip1BtnWidthConstraint title:@"加息券" imageName:@"tenderTip_red_0.png" type:0];
                 }
             }
         }
         //不存在红包券和加息券
-        else if (model.isReward || model.isTag) {
-            self.tip1Btn.hidden = NO;
-            if (model.isReward && model.isTag) {
-                [self setButton:self.tip1Btn layoutConstraint:self.tip1BtnWidthConstraint title:model.promotionTitle imageName:@"tenderTip_yellow_1.png" type:1];
-                self.tip2Btn.hidden = NO;
-                [self setButton:self.tip2Btn layoutConstraint:self.tip2BtnWidthConstraint title:model.tagTitle imageName:@"tenderTip_orange_3.png" type:3];
-            }
-            else if (model.isReward) {
-                [self setButton:self.tip1Btn layoutConstraint:self.tip1BtnWidthConstraint title:model.promotionTitle imageName:@"tenderTip_yellow_0.png" type:0];
-            }
-            else if (model.isTag) {
-                [self setButton:self.tip1Btn layoutConstraint:self.tip1BtnWidthConstraint title:model.tagTitle imageName:@"tenderTip_orange_0.png" type:0];
+        else {
+            if (model.isReward || model.isTag || model.isMin) {
+                self.tip1Btn.hidden = NO;
+                if (model.isReward && model.isTag) {
+                    [self setButton:self.tip1Btn layoutConstraint:self.tip1BtnWidthConstraint title:model.promotionTitle imageName:@"tenderTip_yellow_1.png" type:1];
+                    self.tip2Btn.hidden = NO;
+                    if (model.isMin) {
+                        [self setButton:self.tip2Btn layoutConstraint:self.tip2BtnWidthConstraint title:model.tagTitle imageName:@"tenderTip_orange_2.png" type:2];
+                        self.tip3Btn.hidden = NO;
+                        [self setButton:self.tip3Btn layoutConstraint:self.tip3BtnWidthConstraint title:model.minAccountText imageName:@"tenderTip_main_3.png" type:3];
+                    } else {
+                        [self setButton:self.tip2Btn layoutConstraint:self.tip2BtnWidthConstraint title:model.tagTitle imageName:@"tenderTip_orange_3.png" type:3];
+                    }
+                } else if (model.isReward && model.isMin) {
+                    [self setButton:self.tip1Btn layoutConstraint:self.tip1BtnWidthConstraint title:model.promotionTitle imageName:@"tenderTip_yellow_1.png" type:1];
+                    self.tip2Btn.hidden = NO;
+                    [self setButton:self.tip2Btn layoutConstraint:self.tip2BtnWidthConstraint title:model.minAccountText imageName:@"tenderTip_main_3.png" type:3];
+                } else if (model.isTag && model.isMin) {
+                    [self setButton:self.tip1Btn layoutConstraint:self.tip1BtnWidthConstraint title:model.tagTitle imageName:@"tenderTip_orange_1.png" type:1];
+                    self.tip2Btn.hidden = NO;
+                    [self setButton:self.tip2Btn layoutConstraint:self.tip2BtnWidthConstraint title:model.minAccountText imageName:@"tenderTip_main_3.png" type:3];
+                } else if (model.isReward) {
+                    [self setButton:self.tip1Btn layoutConstraint:self.tip1BtnWidthConstraint title:model.promotionTitle imageName:@"tenderTip_yellow_0.png" type:0];
+                } else if (model.isTag) {
+                    [self setButton:self.tip1Btn layoutConstraint:self.tip1BtnWidthConstraint title:model.tagTitle imageName:@"tenderTip_orange_0.png" type:0];
+                } else if (model.isMin) {
+                    [self setButton:self.tip1Btn layoutConstraint:self.tip1BtnWidthConstraint title:model.minAccountText imageName:@"tenderTip_main_0.png" type:0];
+                }
             }
         }
     }

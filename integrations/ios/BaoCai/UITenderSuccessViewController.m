@@ -75,6 +75,7 @@
     [self presentTranslucentViewController:view animated:YES];
 }
 - (IBAction)touziClick:(id)sender {
+    [MobClick event:@"investment_genre1_ui_invest_ui_result_for_success_continued_investment" label:@"散标投资页_投资按钮_结果_投资成功_继续投资按钮"];
     if(self.callback)
     {
         self.callback(0);
@@ -87,6 +88,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)touziListClick:(id)sender {
+    [MobClick event:@"investment_genre1_ui_invest_ui_result_for_success_see_record" label:@"散标投资页_投资按钮_结果_投资成功_查看投资记录按钮"];
     if(self.callback)
     {
         self.callback(1);

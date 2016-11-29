@@ -53,7 +53,7 @@ const envSettings = {
         try {
             value = JSON.parse(this.sessionStorage[key]);
         } catch (e) {
-            console.log(`ERROR when parsing session value for key[${key}]:`,e);
+            console.log(`ERROR when parsing sessionStorage for key[${key}]:`,e);
         }
         return value;
     },
@@ -95,7 +95,7 @@ const envSettings = {
         if(key){
             value = settings[key];
         }else value = settings;
-        console.log(`Getting settings[${key}] = ${value}`);
+        console.log(`Getting settings[${key}]:`, value);
         return value;
     }
 };

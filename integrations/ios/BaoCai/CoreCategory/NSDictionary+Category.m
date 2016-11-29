@@ -84,7 +84,9 @@
 
 -(NSString*) toString
 {
-    return [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:self options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding];
+    NSError *err = NULL;
+    NSString *result = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:self options:NSJSONWritingPrettyPrinted error:&err] encoding:NSUTF8StringEncoding];
+    return result;
 }
 
 - (CGRect)rectForKey:(id)key {

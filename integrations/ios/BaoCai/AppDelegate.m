@@ -61,6 +61,8 @@
     
     [[UITabBar appearance] setTintColor:RGB_COLOR(253, 149, 44)];
     
+    [[UITableView appearance] setSeparatorColor:RGB_COLOR(229, 229, 229)];
+    
     [UserDefaultsHelper sharedManager].isShow401Alert = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerSuccess) name:RegisterSuccessNotification object:nil];
@@ -368,12 +370,12 @@
                     [controller.visibleViewController isKindOfClass:[UIShareViewController class]]) {
                     [controller.visibleViewController dismissViewControllerAnimated:NO completion:^{
                         UITransferListViewController *view = [controller.visibleViewController getControllerByMainStoryWithIdentifier:@"UITransferListViewController"];
-                        view.showPageIndex = 3;
+                        view.showPageIndex = 2;
                         [controller.visibleViewController.navigationController pushViewController:view animated:YES];
                     }];
                 } else {
                     UITransferListViewController *view = [controller.visibleViewController getControllerByMainStoryWithIdentifier:@"UITransferListViewController"];
-                    view.showPageIndex = 3;
+                    view.showPageIndex = 2;
                     [controller.visibleViewController.navigationController pushViewController:view animated:YES];
                 }
             }
@@ -443,13 +445,13 @@
     if (self.isCheckGesture) {
         self.openUrl = url;
     } else {
-        [self openWebBrowserWithUrl:url];
+        [self openWebWithUrl:url];
     }
 }
 
-- (void)openWebBrowserWithUrl:(NSString *)url {
+- (void)openWebWithUrl:(NSString *)url {
     UINavigationController *controller = (UINavigationController *)[self.tabbarController.viewControllers objectAtIndex:0];
-    [controller.visibleViewController openWebBrowserWithUrl:url];
+    [controller.visibleViewController openWebWithUrl:url];
 }
 
 #pragma mark - UIGesturePwdDelegate
@@ -461,7 +463,7 @@
         self.userInfo = nil;
     }
     if (self.openUrl) {
-        [self openWebBrowserWithUrl:self.openUrl];
+        [self openWebWithUrl:self.openUrl];
         self.openUrl = nil;
     }
 }

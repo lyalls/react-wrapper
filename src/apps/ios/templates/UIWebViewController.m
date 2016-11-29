@@ -16,6 +16,7 @@
 #import "UIAlertView+Category.h"
 #import "UIPlayViewController.h"
 #import <MWPhotoBrowser/MWPhotoBrowser.h>
+#import "HTTPRequest.h"
 
 @interface UIWebViewController()<UIWebViewDelegate,NJKWebViewProgressDelegate>
 {
@@ -33,6 +34,7 @@
 
 @implementation UIWebViewController
 
+// MARK: View Controller Lifecycle
 -(void)loadView{
     isViewLoaded = false;
     [super loadView];
@@ -81,6 +83,31 @@
     isViewLoaded = YES;
 }
 
+//
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if(self.showLoading)
+    {
+        [self.navigationController.navigationBar addSubview:_progressView];
+    }
+}
+
+//
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    // Remove progress view
+    // because UINavigationBar is shared with other ViewControllers
+    [_progressView removeFromSuperview];
+}
+
+- (void)dealloc
+{
+    NSLog(@"dealloc");
+}
+
+// MARK: 设置Web请求、响应Web请求
 -(void)setReq:(NSURLRequest *)req {
     if(req == nil){
         _req = nil;
@@ -101,9 +128,58 @@
     }
 }
 
-- (void)dealloc
+//页面加载完成
+- (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    NSLog(@"dealloc");
+    if(!self.staticTitle)
+        self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+}
+
+//UIWebViewDelegate
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    if (navigationType == UIWebViewNavigationTypeLinkClicked && self.openInNewWindow) {
+        UIWebViewController* view = [[UIWebViewController alloc] init];
+        view.canScroll = YES;
+        view.req = [self getWebBrowserRequestWithUrl:request.URL.absoluteString];
+        view.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:view animated:YES];
+        return NO;
+    }
+    NSURL* url = [request URL];
+    if ([[url scheme] isEqualToString:@"jscall"]) {
+        //获取调用内容
+        NSString* jsstr = [_webView stringByEvaluatingJavaScriptFromString:@"App.platform.fetchMessage()"];
+        [self exec:[jsstr cdv_JSONObject]];
+        
+        return NO;
+    }
+    else
+    {
+        return [self handelWebBrowserJsonMethod:url.absoluteString];
+    }
+}
+
+//添加事件处理
+-(void) addEventHandler:(NSString*)eventName WebEventHandller:(WebEventHandller)handller
+{
+    if(!_eventDict)
+    {
+        _eventDict = [[NSMutableDictionary alloc] init];
+    }
+    
+    _eventDict[eventName] = handller;
+}
+
+
+// MARK: WebView Controller 全局动作
+//初始化
+-(void) AppInit:(id)parmas callId:(NSString*)callId
+{
+    if(callId)
+    {
+        [self JSCallback:callId param:@""];
+    }
 }
 
 //默认左边导航栏按钮动作
@@ -118,15 +194,6 @@
     }
 }
 
-
-//初始化
--(void) AppInit:(id)parmas callId:(NSString*)callId
-{
-    if(callId)
-    {
-        [self JSCallback:callId param:@""];
-    }
-}
 //分享
 -(void) openShare:(id)parmas callId:(NSString*)callId
 {
@@ -143,16 +210,6 @@
         }
     };
     [self presentTranslucentViewController:view animated:YES];
-}
-
-//title改变
--(void) titleChanged:(id)parmas callId:(NSString*)callId
-{
-    self.title = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    if(callId)
-    {
-        [self JSCallback:callId param:@""];
-    }
 }
 
 //显示提示信息
@@ -225,6 +282,41 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+// MARK: WebView消息 及 NSNotificationCenter相关业务消息
+//title改变
+-(void) titleChanged:(id)parmas callId:(NSString*)callId
+{
+    self.title = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    if(callId)
+    {
+        [self JSCallback:callId param:@""];
+    }
+}
+
+- (void)loginSuccess {
+    //刷新
+    // NSString* url = _webView.request.URL.absoluteString;
+    NSString *url = self.req.URL.absoluteString;
+    if(_logPath)
+    {
+        url = _logPath;
+        _logPath = nil;
+    }
+    
+    self.req = [self getWebBrowserRequestWithUrl:url];
+    NSLog(@"%@ is going to reload when login success to url: %@", [self class], url);
+    [self reLoad:nil callId:nil];
+}
+
+- (void)logoutSuccess {
+    //刷新
+    // NSString* url = _webView.request.URL.absoluteString;
+    NSString *url = self.req.URL.absoluteString;
+    self.req = [self getWebBrowserRequestWithUrl:url];
+    [self reLoad:nil callId:nil];
+}
+
+// MARK: Native 页面跳转
 //打开登录页面
 -(void) openLoginPage:(id)parmas callId:(NSString*)callId
 {
@@ -247,17 +339,80 @@
     
     [_webView loadRequest:self.req];
 }
-//添加事件处理
--(void) addEventHandler:(NSString*)eventName WebEventHandller:(WebEventHandller)handller
-{
-    if(!_eventDict)
-    {
-        _eventDict = [[NSMutableDictionary alloc] init];
+
+// MARK: 本地数据 与 API 请求
+// 获取本地数据版本
+-(void) getLocalDataVersion:(id)dataName callId:(NSString*)callId{
+    NSString *dataVersion = @"";
+    if([dataName isEqualToString:@"banner"]){
+        dataVersion = [UserDefaultsHelper sharedManager].bannerVersion;
     }
-    
-    _eventDict[eventName] = handller;
+    [self JSCallback:callId param:dataVersion];
 }
 
+// 设置本地数据版本
+-(void) setLocalDataVersion:(id)params callId:(NSString*)callId{
+    NSString *success = @"0";
+    NSString *dataName = [params objectForKey:@"name"];
+    NSString *dataVersion = [params objectForKey:@"version"];
+    if([dataName isEqualToString:@"banner"]){
+        [UserDefaultsHelper sharedManager].bannerVersion = dataVersion;
+        success = @"1";
+    }
+    [self JSCallback:callId param:success];
+}
+
+// 获取本地数据
+-(void) getLocalData:(id)dataName callId:(NSString *)callId{
+    id data = nil;
+    if([dataName isEqualToString:@"banner"]){
+        data = [UserDefaultsHelper sharedManager].bannerInfo;
+    }
+    [self JSCallback:callId param:data];
+}
+
+// 设置本地数据
+-(void) setLocalData:(id)params callId:(NSString *)callId{
+    NSString *success = @"0";
+    NSString *name = [params objectForKey:@"name"];
+    id data = [params objectForKey:@"data"];
+    if([name isEqualToString:@"banner"] && [data isMemberOfClass:[NSDictionary class]]){
+        [UserDefaultsHelper sharedManager].bannerInfo = data;
+        success = @"1";
+    }
+    [self JSCallback:callId param:success];
+}
+
+
+//执行 NativeAPI 请求
+-(void)requestAPI:(id)params callId:(NSString*)callId{
+    if(params == nil || params == NULL) return;
+    NSMutableDictionary *args = [(NSDictionary *)params mutableCopy];
+    NSString *url = [args objectForKey:@"_api_"];
+    [args removeObjectForKey:@"_api_"];
+    if(!url || url.length == 0) {
+        if(callId && callId.length > 0){
+            [self JSCallback:callId param:@{@"error": @"URL is empty"}];
+        }
+    }else{
+        NSLog(@"%@ is requesting API from webview, url: %@, params: %@", [self class], url, args);
+        [HTTPRequest send:url args:args success:^(NSDictionary *data, BCError *error) {
+            if(callId && callId.length > 0){
+                if(error && error.code != 0){
+                    [self JSCallback:callId param:@{@"error": error}];
+                }else{
+                    [self JSCallback:callId param:@{@"data": data}];
+                }
+            }
+        } failure:^(NSError *error) {
+            if(callId && callId.length > 0){
+                [self JSCallback:callId param:@{@"error": error}];
+            }
+        }];
+    }
+}
+
+// MARK: 与WebView交互方法
 -(NSString*) strTrans:(NSString*)param{
     //处理特殊字符
     NSMutableString* str = [[NSMutableString alloc] init];
@@ -290,9 +445,10 @@
     return [NSString stringWithFormat:@"\"%@\"",str];
 }
 
+// 执行 JS 回调方法
 -(void) JSCallback:(NSString*)callId param:(id)param
 {
-    NSString* str = @"";
+    NSString* str = @"''";
     if([param isKindOfClass:[NSString class]])
     {
         str = [self strTrans:param];
@@ -305,34 +461,10 @@
     {
         str = [param stringValue];
     }
-    else
-    {
-        str = @"''";
-    }
     
     str = [NSString stringWithFormat:@"App.platform.callback('%@',%@)",callId,str];
     NSLog(@"callback:%@",str);
     [self.webView stringByEvaluatingJavaScriptFromString:str];
-}
-
-//
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    if(self.showLoading)
-    {
-        [self.navigationController.navigationBar addSubview:_progressView];
-    }
-}
-
-//
--(void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    // Remove progress view
-    // because UINavigationBar is shared with other ViewControllers
-    [_progressView removeFromSuperview];
 }
 
 //private method
@@ -340,6 +472,7 @@
 {
     dispatch_async(_queue, ^{
          for (NSArray* params in jsArray) {
+             NSLog(@"%@ is going to execute native method from H5 invocation, params: %@", [self class], params);
              SEL sel = NSSelectorFromString([NSString stringWithFormat:@"%@:callId:",params[0]]);
              NSString* callId = nil;
              if([params[2] isKindOfClass:[NSString class]])
@@ -349,7 +482,10 @@
              if([self respondsToSelector:sel])
              {
                  dispatch_async(dispatch_get_main_queue(), ^{
+                    #pragma clang diagnostic push
+                    #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
                     [self performSelector:sel withObject:params[1] withObject:callId];
+                    #pragma clang diagnostic pop
                  });
              }
              else
@@ -370,69 +506,11 @@
     });
 }
 
-//页面加载完成
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    if(!self.staticTitle)
-        self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-}
-
-//UIWebViewDelegate
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    if (navigationType == UIWebViewNavigationTypeLinkClicked && self.openInNewWindow) {
-        UIWebViewController* view = [[UIWebViewController alloc] init];
-        view.canScroll = YES;
-        view.req = [self getWebBrowserRequestWithUrl:request.URL.absoluteString];
-        view.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:view animated:YES];
-        return NO;
-    }
-    NSURL* url = [request URL];
-    if ([[url scheme] isEqualToString:@"jscall"]) {
-        //获取调用内容
-        NSString* jsstr = [_webView stringByEvaluatingJavaScriptFromString:@"App.platform.fetchMessage()"];
-        [self exec:[jsstr cdv_JSONObject]];
-
-        return NO;
-    }
-    else
-    {
-        return [self handelWebBrowserJsonMethod:url.absoluteString];
-    }
-}
-
 #pragma mark - NJKWebViewProgressDelegate
 -(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress
 {
     [_progressView setProgress:progress animated:YES];
 }
-
-#pragma mark - NSNotificationCenter
-
-- (void)loginSuccess {
-    //刷新
-    // NSString* url = _webView.request.URL.absoluteString;
-    NSString *url = self.req.URL.absoluteString;
-    if(_logPath)
-    {
-        url = _logPath;
-        _logPath = nil;
-    }
-    
-    self.req = [self getWebBrowserRequestWithUrl:url];
-    NSLog(@"%@ is going to reload when login success to url: %@", [self class], url);
-    [self reLoad:nil callId:nil];
-}
-
-- (void)logoutSuccess {
-    //刷新
-    // NSString* url = _webView.request.URL.absoluteString;
-    NSString *url = self.req.URL.absoluteString;
-    self.req = [self getWebBrowserRequestWithUrl:url];
-    [self reLoad:nil callId:nil];
-}
-
 
 #pragma mark - 拷贝 H5 代码到 documents 文件夹
 +(NSString*) documentsPath{
@@ -480,5 +558,4 @@
     }
     return YES;
 }
-
 @end

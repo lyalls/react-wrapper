@@ -31,8 +31,6 @@ NSString *TenderDetailEmptyCell = @"TenderDetailEmptyCell";
 
 @property (nonatomic, strong) NSString *activityCode;
 
-@property (nonatomic, assign) NSInteger minute;
-
 @property (nonatomic, assign) BOOL isLoadFinish;
 
 @end
@@ -52,18 +50,6 @@ NSString *TenderDetailEmptyCell = @"TenderDetailEmptyCell";
     self.doneBtn.userInteractionEnabled = NO;
     
     [self reloadTableView];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    if (self.isLoadFinish)
-        return;
     
     SHOWPROGRESSHUD;
     [TenderRequest getTenderDetailWithTenderId:self.itemModel ? self.itemModel.tenderId : self.tenderId success:^(NSDictionary *dic, BCError *error) {
@@ -95,14 +81,18 @@ NSString *TenderDetailEmptyCell = @"TenderDetailEmptyCell";
                     self.availableAmountLabel.hidden = NO;
                     if (self.itemModel.isFull && self.itemModel.isFullThreshold) {
                         self.availableAmountLabel.text = [NSString stringWithFormat:@"剩余可投金额%@元，最后一位投资可得奖励", self.itemModel.availableAmount];
-                        [self.doneBtn setTitle:@"抢满标" forState:UIControlStateNormal];
                     } else {
                         self.availableAmountLabel.text = [NSString stringWithFormat:@"剩余可投金额%@元", self.itemModel.availableAmount];
-                        if (self.itemModel.borrowType && [self.itemModel.borrowType isEqualToString:@"1"]) {
-                            [self.doneBtn setTitle:@"新手投资" forState:UIControlStateNormal];
-                        } else {
-                            [self.doneBtn setTitle:@"立即投资" forState:UIControlStateNormal];
-                        }
+                    }
+                    if (self.itemModel.availableAmountCal.integerValue < self.itemModel.tenderMin.integerValue) {
+                        NSString *string = [NSString stringWithFormat:@"投资%ld元", self.itemModel.availableAmountCal.integerValue];
+                        [self.doneBtn setTitle:string forState:UIControlStateNormal];
+                    } else if (self.itemModel.isFull && self.itemModel.isFullThreshold) {
+                        [self.doneBtn setTitle:@"抢满标" forState:UIControlStateNormal];
+                    } else if (self.itemModel.borrowType && [self.itemModel.borrowType isEqualToString:@"1"]) {
+                        [self.doneBtn setTitle:@"新手投资" forState:UIControlStateNormal];
+                    } else {
+                        [self.doneBtn setTitle:@"立即投资" forState:UIControlStateNormal];
                     }
                     self.doneBtn.backgroundColor = [UIColor getColorWithRGBStr:self.itemModel.tenderTypeBorderColor];
                     self.doneBtn.userInteractionEnabled = YES;
@@ -122,6 +112,11 @@ NSString *TenderDetailEmptyCell = @"TenderDetailEmptyCell";
     } failure:^(NSError *error) {
         HIDDENPROGRESSHUD;
     }];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -186,6 +181,7 @@ NSString *TenderDetailEmptyCell = @"TenderDetailEmptyCell";
                         view.activityCode = self.activityCode;
                         [self.navigationController pushViewController:view animated:YES];
                     } else {
+                        [MobClick event:@"detail_genre1_ui_invest_result_for_novice" label:@"散标详情页_投资按钮_仅限新手"];
                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"仅限新手用户投资" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                         [alertView show];
                     }

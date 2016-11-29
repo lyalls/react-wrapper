@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MyTop_new.png" translatesAutoresizingMaskIntoConstraints="NO" id="96T-Rp-YPZ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="135.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="136"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vd1-vn-IJn">
@@ -30,13 +30,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="净资产(元)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7RM-ft-hB8">
-                        <rect key="frame" x="122" y="45" width="76.5" height="19.5"/>
+                        <rect key="frame" x="122" y="45" width="77" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q6j-qE-dG5">
-                        <rect key="frame" x="206.5" y="40.5" width="29" height="29"/>
+                        <rect key="frame" x="207" y="40" width="29" height="29"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="29" id="g7G-8g-X2g"/>
                             <constraint firstAttribute="height" constant="29" id="yfn-r5-06b"/>
@@ -48,10 +48,10 @@
                         </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0av-0R-xZB">
-                        <rect key="frame" x="0.0" y="79.5" width="159.5" height="56"/>
+                        <rect key="frame" x="0.0" y="80" width="159.5" height="56"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EeL-9o-AEJ">
-                                <rect key="frame" x="0.0" y="8" width="159.5" height="21.5"/>
+                                <rect key="frame" x="0.0" y="8" width="159.5" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -75,10 +75,10 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mae-vT-ytw">
-                        <rect key="frame" x="160.5" y="79.5" width="159.5" height="56"/>
+                        <rect key="frame" x="160.5" y="80" width="159.5" height="56"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oo3-JN-cqr">
-                                <rect key="frame" x="0.0" y="8" width="159.5" height="21.5"/>
+                                <rect key="frame" x="0.0" y="8" width="159.5" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -101,14 +101,13 @@
                             <constraint firstAttribute="height" constant="56" id="oNu-Db-cWu"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Qc-e7-EsS">
-                        <rect key="frame" x="159.5" y="89.5" width="1" height="36"/>
-                        <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MyTopLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="ihw-xc-RNK">
+                        <rect key="frame" x="159.5" y="88" width="0.5" height="39"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="36" id="mWy-Pu-fd4"/>
-                            <constraint firstAttribute="width" constant="1" id="njJ-9m-b6V"/>
+                            <constraint firstAttribute="width" constant="0.5" id="00d-dh-7Hp"/>
+                            <constraint firstAttribute="height" constant="39" id="lwq-nQ-V8t"/>
                         </constraints>
-                    </view>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="96T-Rp-YPZ" secondAttribute="bottom" id="4PU-Km-OfO"/>
@@ -118,15 +117,15 @@
                     <constraint firstAttribute="trailing" secondItem="vd1-vn-IJn" secondAttribute="trailing" id="CWP-Vt-lZc"/>
                     <constraint firstItem="7RM-ft-hB8" firstAttribute="centerX" secondItem="Seu-qy-OfB" secondAttribute="centerX" id="ETM-qY-lCH"/>
                     <constraint firstItem="vd1-vn-IJn" firstAttribute="leading" secondItem="Seu-qy-OfB" secondAttribute="leading" id="FMK-jX-gHe"/>
+                    <constraint firstItem="0av-0R-xZB" firstAttribute="leading" secondItem="Seu-qy-OfB" secondAttribute="leading" id="G4j-QP-jhC"/>
+                    <constraint firstItem="ihw-xc-RNK" firstAttribute="leading" secondItem="0av-0R-xZB" secondAttribute="trailing" id="Ky7-cL-Iy8"/>
                     <constraint firstAttribute="bottom" secondItem="0av-0R-xZB" secondAttribute="bottom" id="MKs-0a-ADy"/>
-                    <constraint firstItem="0Qc-e7-EsS" firstAttribute="leading" secondItem="0av-0R-xZB" secondAttribute="trailing" id="Prl-E9-stm"/>
                     <constraint firstItem="Q6j-qE-dG5" firstAttribute="centerY" secondItem="7RM-ft-hB8" secondAttribute="centerY" id="S7R-Aa-e3H"/>
                     <constraint firstAttribute="trailing" secondItem="96T-Rp-YPZ" secondAttribute="trailing" id="WAe-ss-Qpj"/>
-                    <constraint firstItem="Mae-vT-ytw" firstAttribute="leading" secondItem="0av-0R-xZB" secondAttribute="trailing" constant="1" id="aF6-G8-eMt"/>
+                    <constraint firstItem="Mae-vT-ytw" firstAttribute="leading" secondItem="0av-0R-xZB" secondAttribute="trailing" constant="0.5" id="aF6-G8-eMt"/>
                     <constraint firstAttribute="bottom" secondItem="Mae-vT-ytw" secondAttribute="bottom" id="cPi-G4-bw8"/>
-                    <constraint firstItem="0av-0R-xZB" firstAttribute="leading" secondItem="vd1-vn-IJn" secondAttribute="leading" id="ggV-Z8-EsI"/>
                     <constraint firstItem="vd1-vn-IJn" firstAttribute="top" secondItem="Seu-qy-OfB" secondAttribute="top" constant="10" id="k2Y-fI-g5A"/>
-                    <constraint firstAttribute="bottom" secondItem="0Qc-e7-EsS" secondAttribute="bottom" constant="10" id="nUX-JM-T8G"/>
+                    <constraint firstAttribute="bottom" secondItem="ihw-xc-RNK" secondAttribute="bottom" constant="8" id="r9e-sp-PvF"/>
                     <constraint firstItem="96T-Rp-YPZ" firstAttribute="leading" secondItem="Seu-qy-OfB" secondAttribute="leading" id="skk-dd-Wlr"/>
                     <constraint firstAttribute="trailing" secondItem="Mae-vT-ytw" secondAttribute="trailing" id="uIN-L2-Znk"/>
                     <constraint firstItem="96T-Rp-YPZ" firstAttribute="top" secondItem="Seu-qy-OfB" secondAttribute="top" id="y3x-QH-nDd"/>
@@ -144,6 +143,7 @@
     <resources>
         <image name="MyHide.png" width="19" height="19"/>
         <image name="MyShow.png" width="19" height="19"/>
+        <image name="MyTopLine.png" width="1" height="1"/>
         <image name="MyTop_new.png" width="375" height="136"/>
     </resources>
 </document>

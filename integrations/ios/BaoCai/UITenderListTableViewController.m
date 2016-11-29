@@ -90,6 +90,18 @@ NSString *TenderBottomCell = @"TenderBottomCell";
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [MobClick event:@"financial_list_ui" label:@"理财列表页"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [MobClick endEvent:@"financial_list_ui" label:@"理财列表页"];
+}
+
 #pragma mark - Service method
 
 - (void)reloadTableView {
@@ -164,7 +176,7 @@ NSString *TenderBottomCell = @"TenderBottomCell";
         if ([cellName isEqualToString:TenderBannerCell]) {
             HomeBannerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([HomeBannerTableViewCell class]) forIndexPath:indexPath];
             [cell setupView:self.bannerImageArray bannerItemClickBlock:^(NSDictionary *dic) {
-                [self openWebBrowserWithUrl:[dic objectForKey:@"actionUrl"]];
+                [self openWebWithUrl:[dic objectForKey:@"actionUrl"]];
             }];
             
             return cell;

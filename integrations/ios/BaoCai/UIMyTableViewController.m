@@ -375,7 +375,7 @@ NSString *MyBottomCell = @"MyBottomCell";
         if ([cellName isEqualToString:MyTopCell]) {
             return 136;
         } else if ([cellName isEqualToString:MyFunctionCell]) {
-            return 44;
+            return 50;
         } else if ([cellName isEqualToString:MyEmptyCell]) {
             return 10;
         } else if ([cellName isEqualToString:MyBottomCell]) {

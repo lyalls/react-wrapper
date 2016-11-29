@@ -125,7 +125,7 @@ App.investing =
             for(var i=0;i<this.bonuslist.length;i++)
             {
                 //检查是否首投
-                if(this.bonuslist[i].catName == "E" || this.bonuslist[i].catName == "F")
+                if(this.bonuslist[i].catName == "E" || this.bonuslist[i].catName == "F" || this.bonuslist[i].catName == "K")
                 {
                     if(!this.proj.isFirstTender)
                     {

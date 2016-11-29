@@ -60,6 +60,13 @@ App.platform =
        {
            var fun = App.platform[callbackId];
            var pa = param;
+           if(param && typeof param === 'string'){
+             try{
+                pa = JSON.parse(param);
+             }catch(e){
+                pa = param;
+             }
+           }
            setTimeout(function()
            {
              fun(pa);
@@ -71,7 +78,7 @@ App.platform =
     },
     pushMessage:function(msg)
     {
-       if($.type(msg) != 'string')
+       if(typeof msg !== 'string')
        {
           msg = JSON.stringify(msg)
        }

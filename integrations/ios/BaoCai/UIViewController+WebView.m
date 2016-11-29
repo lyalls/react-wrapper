@@ -51,6 +51,7 @@ static const void *TitleLabelBlockKey = &TitleLabelBlockKey;
     }
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[url toURL] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:15];
     [request setValue:@"3" forHTTPHeaderField:@"X-Authorization-From"];
+    [request setValue:SHORTVERSION forHTTPHeaderField:@"X-Authorization-Version"];
     if ([UserDefaultsHelper sharedManager].userInfo)
         [request setValue:[UserInfoModel sharedModel].token forHTTPHeaderField:@"X-Authorization"];
     

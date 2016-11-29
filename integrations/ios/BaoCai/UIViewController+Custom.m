@@ -10,6 +10,8 @@
 
 #import "UILoginViewController.h"
 #import "UIWebBrowserViewController.h"
+#import "UIWebViewController.h"
+#import "UIViewController+WebView.h"
 
 #import "LoginRegisterRequest.h"
 
@@ -101,6 +103,15 @@
     webBrowser.url = url;
     webBrowser.inviteFirends = model;
     [self.navigationController pushViewController:webBrowser animated:YES];
+}
+
+- (void)openWebWithUrl:(NSString *)url {
+    if (url.length == 0) return;
+    UIWebViewController *web = [[UIWebViewController alloc] init];
+    web.hidesBottomBarWhenPushed = YES;
+    web.req = [self getWebBrowserRequestWithUrl:url];
+    web.canScroll = YES;
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 @end

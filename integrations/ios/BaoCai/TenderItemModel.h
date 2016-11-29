@@ -47,9 +47,21 @@
  */
 @property (nonatomic, strong) NSString *tenderTypeImageUrl;
 /**
+ *  标的右上角图片
+ */
+@property (nonatomic, strong) NSString *tenderRightImageUrl;
+/**
+ *  标的王冠图片
+ */
+@property (nonatomic, strong) NSString *tenderCrownImageUrl;
+/**
  *  标的类型边框颜色RGB形式
  */
 @property (nonatomic, strong) NSString *tenderTypeBorderColor;
+/**
+ *  标的实线边框颜色RGB形式
+ */
+@property (nonatomic, strong) NSString *tenderSolidBorderColor;
 /**
  *  标的Tip列表
  */
@@ -79,6 +91,14 @@
  *  标签内容
  */
 @property (nonatomic, strong) NSString *tagTitle;
+/**
+ *  是否存在起投标签
+ */
+@property (nonatomic, assign) BOOL isMin;
+/**
+ *  起投标签内容
+ */
+@property (nonatomic, strong) NSString *minAccountText;
 /**
  *  是否是限量标
  */
@@ -129,6 +149,7 @@
  *  可投金额
  */
 @property (nonatomic, strong) NSString *availableAmount;
+@property (nonatomic, strong) NSString *availableAmountCal;
 /**
  *  起投金额
  */

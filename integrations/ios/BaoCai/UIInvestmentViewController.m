@@ -44,6 +44,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *checkBtn;
 @property (weak, nonatomic) IBOutlet TTTAttributedLabel *protocolLabel;
 
+@property (nonatomic, assign) BOOL isLoadFinish;
+
 @property (nonatomic, strong) NSDictionary *dic;
 
 @end
@@ -82,84 +84,105 @@
     [self setupForDismissKeyboard];
     
     self.doneBtn.layer.cornerRadius = 4;
-    if (self.itemModel.isFull && self.itemModel.isFullThreshold) {
-        [self.doneBtn setTitle:@"抢满标" forState:UIControlStateNormal];
-    } else {
-        [self.doneBtn setTitle:@"立即投资" forState:UIControlStateNormal];
-    }
+    self.doneBtn.userInteractionEnabled = NO;
     
     SHOWPROGRESSHUD;
-    [TenderRequest getTenderAvailableAmountAndBalanceWithTenderId:self.itemModel.tenderId success:^(NSDictionary *dic, BCError *error) {
-        HIDDENPROGRESSHUD;
+    [TenderRequest getIncreaseList:^(NSDictionary *dic, BCError *error) {
         if (error.code == 0) {
-            self.availableAmountLabel.text = [NSString stringWithFormat:@"%@元", [dic objectForKey:@"availableAmount"]];
-            self.availableBalanceLabel.text = [NSString stringWithFormat:@"%@元", [dic objectForKey:@"availableBalance"]];
-            
-            _couponInfo.isFirstTender = [dic boolForKey:@"isFirstTender"];
-            [TenderRequest getIncreaseList:^(NSDictionary *dic, BCError *error) {
+            _couponInfo.increaseList = [dic mutableArrayValueForKey:@"list"];
+            [TenderRequest getBonusList:^(NSDictionary *dic, BCError *error) {
                 if (error.code == 0) {
-                    _couponInfo.increaseList = [dic mutableArrayValueForKey:@"list"];
-                    [TenderRequest getBonusList:^(NSDictionary *dic, BCError *error) {
+                    _couponInfo.bounsList = [dic mutableArrayValueForKey:@"list"];
+                    [TenderRequest getTenderAvailableAmountAndBalanceWithTenderId:self.itemModel.tenderId success:^(NSDictionary *dic, BCError *error) {
+                        HIDDENPROGRESSHUD;
                         if (error.code == 0) {
-                            _couponInfo.bounsList = [dic mutableArrayValueForKey:@"list"];
+                            _couponInfo.isFirstTender = [dic boolForKey:@"isFirstTender"];
                             //初始化
                             NSString *cmd = [NSString stringWithFormat:@"App.investing.init(%@,%@,%@)", [_couponInfo.transToDict toString], [_couponInfo.bounsList toString], [_couponInfo.increaseList toString]];
                             [_webView stringByEvaluatingJavaScriptFromString:cmd];
+                            
+                            self.isLoadFinish = YES;
+                            
+                            self.availableAmountLabel.text = [NSString stringWithFormat:@"%@元", [dic objectForKey:@"availableAmount"]];
+                            self.availableBalanceLabel.text = [NSString stringWithFormat:@"%@元", [dic objectForKey:@"availableBalance"]];
+                            if (self.availableAmountLabel.text.integerValue < self.itemModel.tenderMin.integerValue) {
+                                NSString *string = [NSString stringWithFormat:@"投资%ld元", self.availableAmountLabel.text.integerValue];
+                                [self.doneBtn setTitle:string forState:UIControlStateNormal];
+                                
+                                self.borrowAmountTextFiled.text = [NSString stringWithFormat:@"%ld", self.availableAmountLabel.text.integerValue];
+                                self.borrowAmountTextFiled.userInteractionEnabled = NO;
+                                _couponInfo.investCount = self.borrowAmountTextFiled.text.integerValue;
+                                [self selectSouponAndAnticipatedIncome];
+                            } else if (self.itemModel.isFull && self.itemModel.isFullThreshold) {
+                                [self.doneBtn setTitle:@"抢满标" forState:UIControlStateNormal];
+                            } else {
+                                [self.doneBtn setTitle:@"立即投资" forState:UIControlStateNormal];
+                            }
+                            self.doneBtn.backgroundColor = RGB_COLOR(255, 108, 0);
+                            self.doneBtn.userInteractionEnabled = YES;
+                            
+                            self.protocolLabel.delegate = self;
+                            self.protocolLabel.textColor = RGB_COLOR(153, 153, 153);
+                            self.protocolLabel.font = [UIFont systemFontOfSize:14.0f];
+                            self.protocolLabel.linkAttributes = [NSDictionary dictionaryWithObjectsAndKeys:RGB_COLOR(0, 122, 255), (__bridge NSString *)kCTForegroundColorAttributeName, nil];
+                            if ([dic mutableArrayValueForKey:@"protocolList"].count == 1) {
+                                NSDictionary *protocolDic = [[dic mutableArrayValueForKey:@"protocolList"] objectAtIndex:0];
+                                self.protocolLabel.text = [NSString stringWithFormat:@"我同意按《%@》的格式和条款生成借款合同", [protocolDic objectForKey:@"protocolName"]];
+                                NSRange range = [self.protocolLabel.text rangeOfString:[NSString stringWithFormat:@"《%@》", [protocolDic objectForKey:@"protocolName"]]];
+                                [self.protocolLabel addLinkToURL:[[protocolDic objectForKey:@"protocolUrl"] toURL] withRange:range];
+                            } else {
+                                NSDictionary *protocolDic1 = [[dic mutableArrayValueForKey:@"protocolList"] objectAtIndex:0];
+                                NSDictionary *protocolDic2 = [[dic mutableArrayValueForKey:@"protocolList"] objectAtIndex:1];
+                                self.protocolLabel.text = [NSString stringWithFormat:@"我同意按《%@》和《%@》的格式和条款生成借款合同", [protocolDic1 objectForKey:@"protocolName"], [protocolDic2 objectForKey:@"protocolName"]];
+                                NSRange range = [self.protocolLabel.text rangeOfString:[NSString stringWithFormat:@"《%@》", [protocolDic1 objectForKey:@"protocolName"]]];
+                                [self.protocolLabel addLinkToURL:[[protocolDic1 objectForKey:@"protocolUrl"] toURL] withRange:range];
+                                
+                                NSRange range1 = [self.protocolLabel.text rangeOfString:[NSString stringWithFormat:@"《%@》", [protocolDic2 objectForKey:@"protocolName"]]];
+                                [self.protocolLabel addLinkToURL:[[protocolDic2 objectForKey:@"protocolUrl"] toURL] withRange:range1];
+                            }
+                            [self.protocolLabel sizeToFit];
+                        } else {
+                            SHOWTOAST(error.message);
                         }
                     } failure:^(NSError *error) {
-                        
+                        HIDDENPROGRESSHUD;
+                        SHOWTOAST(@"获取数据失败，请稍后再试");
                     }];
+                } else {
+                    HIDDENPROGRESSHUD;
+                    SHOWTOAST(error.message);
                 }
             } failure:^(NSError *error) {
-                
+                HIDDENPROGRESSHUD;
+                SHOWTOAST(@"获取数据失败，请稍后再试");
             }];
-            
-            self.protocolLabel.delegate = self;
-            self.protocolLabel.textColor = RGB_COLOR(153, 153, 153);
-            self.protocolLabel.font = [UIFont systemFontOfSize:14.0f];
-            self.protocolLabel.linkAttributes =[NSDictionary dictionaryWithObjectsAndKeys:RGB_COLOR(0, 122, 255), (__bridge NSString *)kCTForegroundColorAttributeName, nil];
-            if ([dic mutableArrayValueForKey:@"protocolList"].count == 1) {
-                NSDictionary *protocolDic = [[dic mutableArrayValueForKey:@"protocolList"] objectAtIndex:0];
-                self.protocolLabel.text = [NSString stringWithFormat:@"我同意按《%@》的格式和条款生成借款合同", [protocolDic objectForKey:@"protocolName"]];
-                NSRange range = [self.protocolLabel.text rangeOfString:[NSString stringWithFormat:@"《%@》", [protocolDic objectForKey:@"protocolName"]]];
-                [self.protocolLabel addLinkToURL:[[protocolDic objectForKey:@"protocolUrl"] toURL] withRange:range];
-            } else {
-                NSDictionary *protocolDic1 = [[dic mutableArrayValueForKey:@"protocolList"] objectAtIndex:0];
-                NSDictionary *protocolDic2 = [[dic mutableArrayValueForKey:@"protocolList"] objectAtIndex:1];
-                self.protocolLabel.text = [NSString stringWithFormat:@"我同意按《%@》和《%@》的格式和条款生成借款合同", [protocolDic1 objectForKey:@"protocolName"], [protocolDic2 objectForKey:@"protocolName"]];
-                NSRange range = [self.protocolLabel.text rangeOfString:[NSString stringWithFormat:@"《%@》", [protocolDic1 objectForKey:@"protocolName"]]];
-                [self.protocolLabel addLinkToURL:[[protocolDic1 objectForKey:@"protocolUrl"] toURL] withRange:range];
-                
-                NSRange range1 = [self.protocolLabel.text rangeOfString:[NSString stringWithFormat:@"《%@》", [protocolDic2 objectForKey:@"protocolName"]]];
-                [self.protocolLabel addLinkToURL:[[protocolDic2 objectForKey:@"protocolUrl"] toURL] withRange:range1];
-            }
-            [self.protocolLabel sizeToFit];
+        } else {
+            HIDDENPROGRESSHUD;
+            SHOWTOAST(error.message);
         }
     } failure:^(NSError *error) {
         HIDDENPROGRESSHUD;
-    }];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [self getTenderAvailableAmountAndBalance];
-}
-
-- (void)getTenderAvailableAmountAndBalance {
-    [TenderRequest getTenderAvailableAmountAndBalanceWithTenderId:self.itemModel.tenderId success:^(NSDictionary *dic, BCError *error) {
-        if (error.code == 0) {
-            self.availableAmountLabel.text = [NSString stringWithFormat:@"%@元", [dic objectForKey:@"availableAmount"]];
-            self.availableBalanceLabel.text = [NSString stringWithFormat:@"%@元", [dic objectForKey:@"availableBalance"]];
-        }
-    } failure:^(NSError *error) {
-        
+        SHOWTOAST(@"获取数据失败，请稍后再试");
     }];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [MobClick event:@"investment_genre1_ui_invest_ui" label:@"散标投资页_投资页"];
+    
+    [self refreshAvailableBalance];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [MobClick endEvent:@"investment_genre1_ui_invest_ui" label:@"散标投资页_投资页"];
 }
 
 #pragma mark - Custom Method
@@ -200,20 +223,23 @@
         return;
     }
     
-    [MobClick event:@"investment_genre1_ui_invest" label:@"散标投资页_投资按钮"];
+    [MobClick event:@"investment_genre1_ui_invest_ui_invest" label:@"散标投资页_投资页_立即投资按钮"];
     SHOWPROGRESSHUD;
     [TenderRequest getTenderUserStatusWithSuccess:^(NSDictionary *dic, BCError *error) {
         HIDDENPROGRESSHUD;
         if (error.code == 0) {
-            if (self.availableBalanceLabel.text.floatValue < borrowAmount.floatValue) {
+            if (borrowAmount.floatValue > self.availableBalanceLabel.text.floatValue) {
+                [MobClick event:@"investment_genre1_ui_invest_ui_result_for_upload_funds_ui" label:@"散标投资页_投资页_结果_充值弹框"];
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"你的可用金额不足，是否立即充值？" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"前往", nil];
                 [alertView show];
                 [alertView clickedButtonEvent:^(NSInteger buttonIndex) {
                     if (buttonIndex == 1) {
-                        [self toRechargeBtnClick:nil];
+                        [MobClick event:@"investment_genre1_ui_invest_ui_result_for_upload_funds_ui_recharge" label:@"散标投资页_投资页_结果_充值弹框_去充值"];
+                        [self toRecharge];
                     }
                 }];
             } else {
+                [MobClick event:@"investment_genre1_ui_invest_ui_transaction_password_ui" label:@"散标投资页_投资页_交易密码弹框"];
                 UITraderPasswordViewController *view = [self getControllerByMainStoryWithIdentifier:@"UITraderPasswordViewController"];
                 view.itemModel = self.itemModel;
                 view.borrowAmount = self.borrowAmountTextFiled.text;
@@ -246,10 +272,10 @@
                     [self presentViewController:nav animated:YES completion:nil];
                 };
                 view.cancelRecharge = ^() {
-                    [self getTenderAvailableAmountAndBalance];
+                    [self refreshAvailableBalance];
                 };
                 view.toRecharge = ^() {
-                    [self toRechargeBtnClick:nil];
+                    [self toRecharge];
                 };
                 view.backTenderList = ^() {
                     [self.tabBarController setSelectedIndex:1];
@@ -260,16 +286,19 @@
                     [self.navigationController popViewControllerAnimated:YES];
                 };
                 view.forgetPasswordBlock = ^() {
+                    [MobClick event:@"investment_genre1_ui_invest_ui_transaction_password_ui_retrieve_transaction_password" label:@"散标投资页_投资页_交易密码弹框_找回交易密码"];
                     UICheckIDCardViewController *viewController = [self getControllerByMainStoryWithIdentifier:@"UICheckIDCardViewController"];
                     [self.navigationController pushViewController:viewController animated:YES];
                 };
                 [self presentTranslucentViewController:view animated:YES];
             }
         } else if (error.code == 2001) {
+            [MobClick event:@"investment_genre1_ui_invest_ui_result_for_authentication_set_ui" label:@"散标投资页_投资页_结果_实名认证弹框"];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"未进行实名认证" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"立即认证", nil];
             [alertView show];
             [alertView clickedButtonEvent:^(NSInteger buttonIndex) {
                 if (buttonIndex == 1) {
+                    [MobClick event:@"investment_genre1_ui_invest_ui_result_for_authentication_set_ui_authentication" label:@"散标投资页_投资页_结果_实名认证弹框_去认证"];
                     UIRealNameViewController *view = [self getControllerByMainStoryWithIdentifier:@"UIRealNameViewController"];
                     [self.navigationController pushViewController:view animated:YES];
                 }
@@ -277,10 +306,12 @@
         } else if (error.code == 2002) {
             SHOWTOAST(@"实名认证审核中");
         } else if (error.code == 2003) {
+            [MobClick event:@"investment_genre1_ui_invest_ui_result_for_transaction_password_set_ui" label:@"散标投资页_投资页_结果_交易密码弹框"];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"请先设置交易密码" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"立即设置", nil];
             [alertView show];
             [alertView clickedButtonEvent:^(NSInteger buttonIndex) {
                 if (buttonIndex == 1) {
+                    [MobClick event:@"investment_genre1_ui_invest_ui_result_for_transaction_password_set_ui_set" label:@"散标投资页_投资页_结果_交易密码弹框_去设置交易密码"];
                     UISetTraderPasswordViewController *view = [self getControllerByMainStoryWithIdentifier:@"UISetTraderPasswordViewController"];
                     [self.navigationController pushViewController:view animated:YES];
                 }
@@ -307,6 +338,7 @@
         return;
     }
     
+    [MobClick event:@"investment_genre1_ui_invest_ui_reckon" label:@"散标投资页_投资页_收益预估按钮"];
     CustomIOSAlertView *alertView = [[CustomIOSAlertView alloc] init];
     [alertView show:@"收益计算" message:[[self.dic mutableArrayValueForKey:@"gainCalcDesc"] componentsJoinedByString:@"\n"]];
 }
@@ -316,6 +348,22 @@
 }
 
 - (IBAction)toRechargeBtnClick:(id)sender {
+    [MobClick event:@"investment_genre1_ui_invest_ui_upload_funds" label:@"散标投资页_投资页_充值按钮"];
+    [self toRecharge];
+}
+
+- (void)refreshAvailableBalance {
+    if (!self.isLoadFinish) return;
+    [TenderRequest getTenderAvailableAmountAndBalanceWithTenderId:self.itemModel.tenderId success:^(NSDictionary *dic, BCError *error) {
+        if (error.code == 0) {
+            self.availableBalanceLabel.text = [NSString stringWithFormat:@"%@元", [dic objectForKey:@"availableBalance"]];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+- (void)toRecharge {
     SHOWPROGRESSHUD;
     [UserRequest userCheckAuthenticationStatus:^(NSDictionary *dic, BCError *error) {
         if (error.code == 0 || error.code == 2003) {
@@ -337,6 +385,7 @@
                 }
             } failure:^(NSError *error) {
                 HIDDENPROGRESSHUD;
+                SHOWTOAST(@"充值失败，请稍后再试");
             }];
         } else if (error.code == 2001) {
             HIDDENPROGRESSHUD;
@@ -353,9 +402,11 @@
             SHOWTOAST(@"实名认证审核中");
         } else {
             HIDDENPROGRESSHUD;
+            SHOWTOAST(error.message);
         }
     } failure:^(NSError *error) {
         HIDDENPROGRESSHUD;
+        SHOWTOAST(@"充值失败，请稍后再试");
     }];
 }
 
@@ -371,13 +422,19 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if (textField == self.borrowAmountTextFiled) {
         if ([textField.text length]) {
-            textField.text = [NSString stringWithFormat:@"%d", [textField.text intValue]];
+            textField.text = [NSString stringWithFormat:@"%ld", textField.text.integerValue];
         }
     }
 }
 
 - (void)textFieldDidChange:(UITextField *)textField {
-    _couponInfo.investCount = [textField.text integerValue];
+    if (textField == self.borrowAmountTextFiled) {
+        _couponInfo.investCount = textField.text.integerValue;
+        [self selectSouponAndAnticipatedIncome];
+    }
+}
+
+- (void)selectSouponAndAnticipatedIncome {
     //选择优惠券
     NSString *cmd = [NSString stringWithFormat:@"App.investing.showBonus(%ld)", _couponInfo.investCount];
     NSDictionary *res = [[_webView stringByEvaluatingJavaScriptFromString:cmd] cdv_JSONObject];
@@ -418,6 +475,7 @@
 
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
     if (url) {
+        [MobClick event:@"investment_genre1_ui_invest_ui_contract" label:@"散标投资页_投资页_合同按钮"];
         [self openWebBrowserWithUrl:url.absoluteString];
     }
 }
@@ -442,7 +500,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row == 6) {
+    if (indexPath.row == 4) {
+        if (self.availableAmountLabel.text.integerValue < self.itemModel.tenderMin.integerValue) {
+            NSString *string = [NSString stringWithFormat:@"可投金额为%ld元", self.availableAmountLabel.text.integerValue];
+            SHOWTOAST(string);
+        }
+    } else if (indexPath.row == 6) {
+        [MobClick event:@"investment_genre1_ui_invest_ui_coupon" label:@"散标投资页_投资页_优惠券按钮"];
         UIWebViewController *view = [[UIWebViewController alloc] init];
         view.title = [NSString stringWithFormat:@"投资%ld元", _couponInfo.investCount];
         view.staticTitle = YES;

@@ -22,7 +22,10 @@
         self.typeNid = [dic stringForKey:@"typeNid"];
         self.statusMessage = [dic stringForKey:@"statusMessage"];
         self.tenderTypeImageUrl = [dic stringForKey:@"tenderTypeImageUrl"];
+        self.tenderRightImageUrl = [dic stringForKey:@"tenderRightImageUrl"];
+        self.tenderCrownImageUrl = [dic stringForKey:@"tenderCrownImageUrl"];
         self.tenderTypeBorderColor = [dic stringForKey:@"tenderTypeBorderColor"];
+        self.tenderSolidBorderColor = [dic stringForKey:@"tenderSolidBorderColor"];
         self.tenderTipsList = [dic mutableArrayValueForKey:@"tenderTipsList"];
         
         self.isBonusticket = [dic boolForKey:@"isBonusticket"];
@@ -31,6 +34,8 @@
         self.promotionTitle = [dic stringForKey:@"promotionTitle"];
         self.isTag = [dic boolForKey:@"isTag"];
         self.tagTitle = [dic stringForKey:@"tagTitle"];
+        self.isMin = [dic boolForKey:@"isMin"];
+        self.minAccountText = [dic stringForKey:@"minAccountText"];
         self.isLimit = [dic boolForKey:@"isLimit"];
         self.limitTime = [dic stringForKey:@"limitTime"];
         self.limitTimeInterval = (NSInteger)[[NSDate date] timeIntervalSince1970];
@@ -49,6 +54,7 @@
     self.remainTime = [dic stringForKey:@"remainTime"];
     self.remainTimeInterval = (NSInteger)[[NSDate date] timeIntervalSince1970];
     self.availableAmount = [dic stringForKey:@"availableAmount"];
+    self.availableAmountCal = [dic stringForKey:@"availableAmountCal"];
     self.tenderMin = [dic stringForKey:@"tenderAccountMin"];
     self.tenderMax = [dic stringForKey:@"tenderAccountMax"];
     self.tenderAccount = [dic stringForKey:@"tenderAccount"];
