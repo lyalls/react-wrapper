@@ -22,7 +22,7 @@
 
 #TX-1{font-color:#333333}
 #TX-2{font-color:#ff0000}
-#TX-3{font-color:#fe5000}
+#TX-3{font-color:#fe5000} /*短信弹框确认文字颜色，购买信息价格文字颜色*/
 #TX-4{font-color:#999999}
 #TX-5{font-color:#5aa5e9}
 #TX-6{font-color:#28b615}
@@ -47,9 +47,11 @@ UITableView{width:320px;height:200px;}
 LLInfoView{left:14px;top:14px;width:292px;}
 
 NavBar {left:0px;top:0px;width:320px;height:44px;font-size:19px;font-color:#ffffff;
-	font-style:bold;background-color:#ffffff;background-image:shoushi3.png;background-image-7:shoushi3.png;titleIconName:logo.png;}
+    font-style:bold;background-color:#ffffff;background-image:ll_nav_bg3.png;background-image-7:ll_nav_bg3.png;titleIconName:logo.png;titleIconName2:logo2.png}
 
-/*titleText,当自定义导航条title的时候，可以在NavBar后面添加titleText，格式为titleText:xxx即可*/
+/*titleIconName: 绑卡支付界面的标题图标
+ titleIconName2: 历史卡支付界面的标题图标
+ titleText,当自定义导航条title的时候，可以在NavBar后面添加titleText，格式为titleText:xxx即可*/
     
 .numText{keyboard-type:num;}
 .splitLine{width:320px;height:1px;image:examSplitline.png;}
@@ -117,9 +119,9 @@ basePage{}
 
 /*
  支付显示方式
- 分别为快捷支付，认证支付，预授权，随心付
+ 分别为快捷支付，认证支付，预授权，随心付，实名快捷
  */
-#LLPay-Style{style:quickPay}//quickPay，verifyPay,preAuthorizePay,superPay
+#LLPay-Style{style:quickPay}//quickPay，verifyPay,preAuthorizePay,superPay,travelPay,realNamePay,carPay
 
 
 /*去掉横屏支持*/

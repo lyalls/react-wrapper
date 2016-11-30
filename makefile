@@ -10,7 +10,7 @@ ifneq "${h5src}" ""
 	h5SrcDir=${h5src}
 endif
 
-appSrcDir=/Users/sunl/Dev/PROJECTS/baocai/baocainet/mbaocai/client_v2/iOS/trunk/BaoCai_Dev
+appSrcDir=/Users/sunl/Dev/PROJECTS/baocai/baocainet/mbaocai/client_v2/iOS/trunk/BaoCai_New_Test
 ifneq "${src}" "" 
 	appSrcDir = ${src}
 endif
@@ -120,9 +120,11 @@ wechat ios:
 		for comp in `echo ${components}`; do \
 			targetFileName=`echo $${comp}|awk '{print $1}' FS=":"`; \
 			mv ${appTmpDir}/$${targetFileName}.html ${appIntegrationDir}/BaoCai/Components ;\
-			cp ${appTemplateDir}/$${comp}/* ${appIntegrationDir}/BaoCai ;\
+			if [[ $${comp} == home ]];then \
+				cp ${appTemplateDir}/$${comp}/* ${appIntegrationDir}/BaoCai/UI/Home/Controller ;\
+			fi ;\
 		done;\
-		cp ${appTemplateDir}/UIWebViewController.* ${appIntegrationDir}/BaoCai ;\
+		cp ${appTemplateDir}/UIWebViewController.* ${appIntegrationDir}/BaoCai/UI/Base/Controller ;\
 		cp -r ${appTmpDir}/react ${appIntegrationDir}/BaoCai/Components/react ;\
 		cp ${platformPolygonFile} ${appIntegrationDir}/BaoCai/Components/react ;\
 	fi

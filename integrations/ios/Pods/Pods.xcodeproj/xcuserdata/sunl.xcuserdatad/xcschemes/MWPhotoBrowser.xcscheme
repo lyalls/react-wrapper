@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E2FE87384A67337831E53490EEA8BF11"
+               BlueprintIdentifier = "2596169E954907C07413FA0DF674480A"
                BuildableName = "libMWPhotoBrowser.a"
                BlueprintName = "MWPhotoBrowser"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E2FE87384A67337831E53490EEA8BF11"
+            BlueprintIdentifier = "2596169E954907C07413FA0DF674480A"
             BuildableName = "libMWPhotoBrowser.a"
             BlueprintName = "MWPhotoBrowser"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -63,7 +63,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E2FE87384A67337831E53490EEA8BF11"
+            BlueprintIdentifier = "2596169E954907C07413FA0DF674480A"
             BuildableName = "libMWPhotoBrowser.a"
             BlueprintName = "MWPhotoBrowser"
             ReferencedContainer = "container:Pods.xcodeproj">

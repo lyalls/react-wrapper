@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E89EA0620E22EDB775A7C107518644DD"
+               BlueprintIdentifier = "55E3CFFEDC2629EE0C17B343EC00595B"
                BuildableName = "libJSONModel.a"
                BlueprintName = "JSONModel"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E89EA0620E22EDB775A7C107518644DD"
+            BlueprintIdentifier = "55E3CFFEDC2629EE0C17B343EC00595B"
             BuildableName = "libJSONModel.a"
             BlueprintName = "JSONModel"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -63,7 +63,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E89EA0620E22EDB775A7C107518644DD"
+            BlueprintIdentifier = "55E3CFFEDC2629EE0C17B343EC00595B"
             BuildableName = "libJSONModel.a"
             BlueprintName = "JSONModel"
             ReferencedContainer = "container:Pods.xcodeproj">

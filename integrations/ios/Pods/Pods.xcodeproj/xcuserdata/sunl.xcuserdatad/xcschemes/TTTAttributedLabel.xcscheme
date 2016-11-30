@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "23A2FE120460C509AC1D6987FF8843E2"
+               BlueprintIdentifier = "8D93C0ACBF30891DDE8A0A7BBC9B90D5"
                BuildableName = "libTTTAttributedLabel.a"
                BlueprintName = "TTTAttributedLabel"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "23A2FE120460C509AC1D6987FF8843E2"
+            BlueprintIdentifier = "8D93C0ACBF30891DDE8A0A7BBC9B90D5"
             BuildableName = "libTTTAttributedLabel.a"
             BlueprintName = "TTTAttributedLabel"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -63,7 +63,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "23A2FE120460C509AC1D6987FF8843E2"
+            BlueprintIdentifier = "8D93C0ACBF30891DDE8A0A7BBC9B90D5"
             BuildableName = "libTTTAttributedLabel.a"
             BlueprintName = "TTTAttributedLabel"
             ReferencedContainer = "container:Pods.xcodeproj">

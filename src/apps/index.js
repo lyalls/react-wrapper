@@ -21,7 +21,48 @@ const envSettings = {
         isWechat: false,
         isIOS: false,
         isAndroid: false,
-        isMobile: false
+        isMobile: false,
+        RootAPI: "https://mapi.baocai.com/v2",
+        canInvokeNativeMethod: function(){ 
+            return (
+                App && App.platform && typeof App.platform.exec === 'function' 
+                && (this.isIOS || this.isAndroid)
+            )
+        },
+        exec: function(cmd, param){
+            let that = this;
+            return new Promise(function(resolve, reject){
+                if(that.canInvokeNativeMethod()){
+                    App.platform.exec(cmd, param, function(res){
+                        resolve(res);
+                    });
+                }else{
+                    reject('ERROR: Can not invoke native method');
+                }
+            });
+        },
+        requestAPI: function(route, param){
+            if(!route || route === "") return Promise.reject("ERROR when requesting API via native request: API route is empty");
+            let _param_ = {_api_: this.RootAPI + (route.substr(0,1) === '/' ? route : '/' + route), ...param};
+            return this.exec('requestAPI', _param_)
+                    .then(function(res){
+                        return new Promise(function(resolve, reject){
+                            if(typeof res === 'object'){
+                                if(res.error){
+                                    let err = (typeof res.error === 'object')? res.error : {error: res.error};
+                                    err._description = {desc: `ERROR when invoking native method [${cmd}]`, cmd, param}
+                                    reject(err);
+                                }else{
+                                    resolve(res.data);
+                                }
+                            }else{
+                                let err = {error: 'Response type error, expected object, got '+ typeof res};
+                                err._description = {desc: `ERROR when invoking native method [${cmd}]`, cmd, param, res}
+                                reject(err)
+                            }
+                        });
+                    });
+        }
     },
     sessionStorage: window.sessionStorage || {},
     setSessionStorage: function(key, value){

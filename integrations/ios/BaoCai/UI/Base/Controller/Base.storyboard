@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Start Advert View Controller-->
+        <scene sceneID="8aI-ow-z3J">
+            <objects>
+                <viewController storyboardIdentifier="UIStartAdvertViewController" id="eEG-wh-T6U" customClass="UIStartAdvertViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Vb-H6-hQy"/>
+                        <viewControllerLayoutGuide type="bottom" id="Evd-LA-2Z9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YwL-QX-A9b">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YPc-j2-yJz">
+                                <rect key="frame" x="0.0" y="577" width="375" height="90"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="startAdvertLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="kO6-cd-a8v">
+                                        <rect key="frame" x="141" y="27" width="94" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="apg-95-i8p"/>
+                                            <constraint firstAttribute="width" constant="94" id="cg4-Ri-7iv"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="3ku-5l-RMp"/>
+                                    <constraint firstItem="kO6-cd-a8v" firstAttribute="centerY" secondItem="YPc-j2-yJz" secondAttribute="centerY" id="DpU-uL-2xr"/>
+                                    <constraint firstItem="kO6-cd-a8v" firstAttribute="centerX" secondItem="YPc-j2-yJz" secondAttribute="centerX" id="c17-1m-D6v"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TMM-Tp-KDs">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="577"/>
+                                <connections>
+                                    <action selector="advertBtnClick:" destination="eEG-wh-T6U" eventType="touchUpInside" id="FVr-76-VJU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7e-Hv-FFI">
+                                <rect key="frame" x="295" y="35" width="70" height="25"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="6NC-6D-CJ7"/>
+                                    <constraint firstAttribute="height" constant="25" id="PTl-B5-h9V"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="jumpBtnClick:" destination="eEG-wh-T6U" eventType="touchUpInside" id="DYB-sL-wxU"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="69V-JA-oSb">
+                                <rect key="frame" x="295" y="35" width="24" height="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.97647058819999999" green="0.75294117650000003" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="跳过" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zfc-UU-AC3">
+                                <rect key="frame" x="321" y="35" width="44" height="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="TMM-Tp-KDs" firstAttribute="leading" secondItem="YwL-QX-A9b" secondAttribute="leading" id="7UL-g8-zh9"/>
+                            <constraint firstItem="Zfc-UU-AC3" firstAttribute="bottom" secondItem="F7e-Hv-FFI" secondAttribute="bottom" id="Dge-xL-QG7"/>
+                            <constraint firstAttribute="trailing" secondItem="TMM-Tp-KDs" secondAttribute="trailing" id="E1l-c5-Ifn"/>
+                            <constraint firstAttribute="trailing" secondItem="F7e-Hv-FFI" secondAttribute="trailing" constant="10" id="Ge5-JS-clB"/>
+                            <constraint firstItem="TMM-Tp-KDs" firstAttribute="top" secondItem="YwL-QX-A9b" secondAttribute="top" id="JgF-Fg-tpL"/>
+                            <constraint firstItem="YPc-j2-yJz" firstAttribute="top" secondItem="TMM-Tp-KDs" secondAttribute="bottom" id="PQf-iv-0qG"/>
+                            <constraint firstItem="Evd-LA-2Z9" firstAttribute="top" secondItem="YPc-j2-yJz" secondAttribute="bottom" id="RgI-sA-Ri8"/>
+                            <constraint firstItem="Zfc-UU-AC3" firstAttribute="width" secondItem="69V-JA-oSb" secondAttribute="width" constant="20" id="WF3-dc-WeQ"/>
+                            <constraint firstItem="Zfc-UU-AC3" firstAttribute="leading" secondItem="69V-JA-oSb" secondAttribute="trailing" constant="2" id="ba5-aK-eYE"/>
+                            <constraint firstItem="69V-JA-oSb" firstAttribute="leading" secondItem="F7e-Hv-FFI" secondAttribute="leading" id="eSU-qE-yZv"/>
+                            <constraint firstItem="Zfc-UU-AC3" firstAttribute="top" secondItem="F7e-Hv-FFI" secondAttribute="top" id="hrx-RN-RC3"/>
+                            <constraint firstItem="YPc-j2-yJz" firstAttribute="leading" secondItem="YwL-QX-A9b" secondAttribute="leading" id="m4M-ba-vb4"/>
+                            <constraint firstItem="69V-JA-oSb" firstAttribute="top" secondItem="F7e-Hv-FFI" secondAttribute="top" id="nJ6-dP-fU6"/>
+                            <constraint firstItem="Zfc-UU-AC3" firstAttribute="trailing" secondItem="F7e-Hv-FFI" secondAttribute="trailing" id="npG-lB-Cl3"/>
+                            <constraint firstItem="F7e-Hv-FFI" firstAttribute="top" secondItem="YwL-QX-A9b" secondAttribute="top" constant="35" id="pw7-Ov-Z1C"/>
+                            <constraint firstItem="69V-JA-oSb" firstAttribute="bottom" secondItem="F7e-Hv-FFI" secondAttribute="bottom" id="rm4-va-iT8"/>
+                            <constraint firstAttribute="trailing" secondItem="YPc-j2-yJz" secondAttribute="trailing" id="t8t-Zy-d6Y"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="TMM-Tp-KDs" id="UPI-1t-n7m"/>
+                        <outlet property="bottomView" destination="YPc-j2-yJz" id="Njc-Dg-SIL"/>
+                        <outlet property="jumpBtn" destination="F7e-Hv-FFI" id="imw-u6-9o8"/>
+                        <outlet property="jumpLabel" destination="Zfc-UU-AC3" id="hAL-pg-e0w"/>
+                        <outlet property="secondLabel" destination="69V-JA-oSb" id="xoJ-6M-p2E"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dJc-lw-tq3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="778"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="startAdvertLogo.png" width="94" height="36"/>
+    </resources>
+</document>

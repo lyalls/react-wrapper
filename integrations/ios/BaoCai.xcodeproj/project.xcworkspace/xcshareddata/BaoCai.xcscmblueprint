@@ -8,13 +8,13 @@
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "7a883c44-b526-4cb8-956f-b4f28e1007ee++1315" : 9223372036854775807
   },
-  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "6CB7D031-8DE4-4676-83A8-E407CBEABCA7",
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B6C77915-E06C-4E2F-A283-A80B5EFC937B",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "7a883c44-b526-4cb8-956f-b4f28e1007ee++1315" : "mbaocai\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "BaoCai",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
-  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "client_v2\/iOS\/trunk\/BaoCai_Dev\/BaoCai.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "client_v2\/iOS\/trunk\/BaoCai_New_Test\/BaoCai.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/192.168.5.158\/baocainet",

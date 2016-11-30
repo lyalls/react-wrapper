@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7B54BD471CF81D8000E29BD0"
+               BlueprintIdentifier = "7B58B6AC1DAF7733007FFA6C"
                BuildableName = "BaoCai.app"
                BlueprintName = "BaoCai"
                ReferencedContainer = "container:BaoCai.xcodeproj">
@@ -32,9 +32,19 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7B54BD631CF81D8000E29BD0"
+               BlueprintIdentifier = "7B58B6C81DAF7733007FFA6C"
                BuildableName = "BaoCaiTests.xctest"
                BlueprintName = "BaoCaiTests"
+               ReferencedContainer = "container:BaoCai.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7B58B6D31DAF7733007FFA6C"
+               BuildableName = "BaoCaiUITests.xctest"
+               BlueprintName = "BaoCaiUITests"
                ReferencedContainer = "container:BaoCai.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -42,7 +52,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7B54BD471CF81D8000E29BD0"
+            BlueprintIdentifier = "7B58B6AC1DAF7733007FFA6C"
             BuildableName = "BaoCai.app"
             BlueprintName = "BaoCai"
             ReferencedContainer = "container:BaoCai.xcodeproj">
@@ -65,7 +75,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7B54BD471CF81D8000E29BD0"
+            BlueprintIdentifier = "7B58B6AC1DAF7733007FFA6C"
             BuildableName = "BaoCai.app"
             BlueprintName = "BaoCai"
             ReferencedContainer = "container:BaoCai.xcodeproj">
@@ -84,7 +94,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7B54BD471CF81D8000E29BD0"
+            BlueprintIdentifier = "7B58B6AC1DAF7733007FFA6C"
             BuildableName = "BaoCai.app"
             BlueprintName = "BaoCai"
             ReferencedContainer = "container:BaoCai.xcodeproj">
