@@ -50,6 +50,12 @@
     [self setTopViewBorder:BackViewColor];
 }
 
+- (void)setNeedsLayout {
+    [super setNeedsLayout];
+    
+    [self setTopViewBorder:BackViewColor];
+}
+
 - (void)setupView {
     self.backgroundColor = BackViewColor;
     self.contentView.backgroundColor = BackViewColor;
@@ -116,6 +122,8 @@
 #pragma mark - Custom method
 
 - (void)reloadData:(MyTenderListItemModel *)model myTenderItemTableViewCellType:(MyTenderItemTableViewCellType)type {
+    [self layoutIfNeeded];
+    
     self.tenderNameLabel.text = model.name;
     
     self.displayArray = [NSMutableArray arrayWithCapacity:0];
@@ -170,6 +178,8 @@
 }
 
 - (void)reloadData:(MyTransferListItemModel *)model myTransferItemTableViewCellType:(MyTransferItemTableViewCellType)type {
+    [self layoutIfNeeded];
+    
     self.tenderNameLabel.text = model.name;
     
     self.displayArray = [NSMutableArray arrayWithCapacity:0];
@@ -297,7 +307,7 @@
     border1.frame = self.collectionView.bounds;
     border1.lineWidth = 1;
     border1.lineCap = @"square";
-    border1.lineDashPattern = @[@1, @2];
+    border1.lineDashPattern = @[@2, @2];
     if (self.border) {
         [self.border removeFromSuperlayer];
     }

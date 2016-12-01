@@ -1,7 +1,7 @@
 ######## Src Builder ######## 
 # Created at:    2016-11-14 #
 # Created by: Lin Sun       #
-# Last modified: 2016-11-22 #
+# Last modified: 2016-11-30 #
 # Modified by: Lin Sun      #
 #############################
 # Please modify the src dir path
@@ -32,7 +32,7 @@ wechat: appTemplateDir=./src/apps/wechat/templates
 wechat: components="home:newhome" # "<component name>:<target template file name> <component name>:<target template file name> ..."
 wechat: target=wechat
 wechat: targetNameInAppIndex=Wechat
-wechat: syncFromH5=true
+wechat: syncFromH5=false
 
 ios: appIntegrationDir=./integrations/ios
 ios: appTmpDir=./src/apps/ios/tmp
@@ -131,7 +131,6 @@ wechat ios:
 	rm -rf ${appTmpDir}
 	# Start the integrated system for WeChat
 	if [[ ${target} == wechat ]]; then cd ${appIntegrationDir} && npm start ; fi
-	if [[ ${target} == ios ]]; then npm run server ; fi
 
 ######## Sync to SVN ######## 
 # Last modified: 2016-11-14 #

@@ -9,11 +9,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>CustomIOSAlertView.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>DACircularProgress.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -132,6 +127,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>02F733DC309A626DD74EC73DA048D831</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>04CF549EBEEE7BC87AEAE35397184D94</key>
 		<dict>
 			<key>primary</key>
@@ -142,7 +142,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>19D58481947373C8DA7858A70C636AC7</key>
+		<key>1AF88A50C1247D8457C7CCA9916C76F1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -152,17 +152,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>1DBF653146C1A8CE6B03A7A8AE15BCF0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2596169E954907C07413FA0DF674480A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>296AAD7CFFBE49906F0841496484F8B6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>540742053155AE562D523ECED7DFEE08</key>
+		<key>32DD9EE3B5291FDFAD94FB0AB85366E6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -182,7 +182,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8D93C0ACBF30891DDE8A0A7BBC9B90D5</key>
+		<key>8AB36B682FBF4F7E6746DB06DD083AD6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -197,7 +197,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9F27B8374E583CE5AB493A72C3722B72</key>
+		<key>A698B4C4F238F38FA2856FFA4BBBB9DF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B3CBDEEB98242CD1FBF7F7513C842CFD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -212,17 +217,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C6A102D75105BFEC4D538FF1A84E7D82</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>C791F0A928C1A8FE97074DFC9ACF4E75</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CA0D8BB4C55308A0482DC60F13EC13A1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -248,11 +243,6 @@
 			<true/>
 		</dict>
 		<key>FB28D7C92AE37BE1CD24391FC9AAAD26</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FB6AD910B7A35779C0158974B41A3378</key>
 		<dict>
 			<key>primary</key>
 			<true/>

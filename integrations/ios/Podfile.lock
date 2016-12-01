@@ -14,7 +14,6 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - CustomIOSAlertView (0.9.5)
   - DACircularProgress (2.3.1)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
@@ -69,7 +68,6 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
-  - CustomIOSAlertView
   - FMDB
   - HyphenateLite_CN
   - JPFPSStatus
@@ -99,7 +97,6 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  CustomIOSAlertView: cc4fa8e36219be3fd5ebcd40789f5b4aaae0f38e
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   HyphenateLite_CN: 4df8ca7f075610e512a9f4a9e570cc46ec098e01
@@ -124,6 +121,6 @@ SPEC CHECKSUMS:
   UMengAnalytics: 0bde5737767dfc18afb03a4cd6ba9d57bb2ad10d
   UMengUShare: f231fc086d789d4e560a5090dcc13a2db15c686d
 
-PODFILE CHECKSUM: ecd6ef5ccf7d894192a16b75f98fe7ddcb2307c9
+PODFILE CHECKSUM: fb464dc3decf3ae983f8471e9d5daa9fac04c3a6
 
 COCOAPODS: 1.2.0.beta.1

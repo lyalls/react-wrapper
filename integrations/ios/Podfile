@@ -16,7 +16,6 @@ target 'BaoCai' do
     pod 'KMNavigationBarTransition'
     pod 'TTTAttributedLabel'
     pod 'HyphenateLite_CN'
-    pod 'CustomIOSAlertView'
     pod 'SSZipArchive'
     pod 'NJKWebViewProgress'
     pod 'PSTCollectionView'

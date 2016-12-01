@@ -1,7 +1,8 @@
 import React , {Component, PropTypes} from 'react';
 import $ from 'jquery';
-import Footer from '../../../components/footer/index.jsx';
-import Header from '../../../components/header/index.jsx';
+import Carousel from '../../../components/Carousel/index.jsx';
+import Footer from '../../../components/Footer/index.jsx';
+import Header from '../../../components/Header/index.jsx';
 
 class Home extends Component {
     constructor(props) {
@@ -75,19 +76,7 @@ class Home extends Component {
                     (this.props.env.platform.isWechat)?<div className="content-for-m-header"><Header/></div>:""
                 }
                 <article className="wx-mainbody">   
-                    {
-                        this.props.banner.items ? 
-                        this.props.banner.items.map( (item, i) => (
-                            <div key={i} className="wx-banner">
-                                <div className="index-banner">
-                                    <a href={item.actionUrl}>
-                                        <img src={item.imageUrl} />
-                                    </a>
-                                </div>
-                            </div>
-                        )) 
-                        : "" 
-                    }
+                    <Carousel items={this.props.banner.items} />
                     <div className="wx-index-pro-cont">
                         <ul className="wx-index-pro-list" >
                             {

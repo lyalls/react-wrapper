@@ -27,6 +27,8 @@
 }
 -(void)initData
 {
+    self.stateLabel.textColor = RGB_COLOR(153, 153, 153);
+    self.stateLabel.font = [UIFont boldSystemFontOfSize:12];
     _formType = FROM_HOME;
     [self setRefreshGifHeader];
     [BCRefreshGifHeader getSloganData];
@@ -88,6 +90,8 @@
         slogn = @"值得信赖的投资理财平台";
     }
     self.labelLeftInset = 10;
+ 
+
     [self lastUpdatedTimeLabel].hidden = YES;
     self.stateLabel.hidden = NO;
     [self setTitle:slogn forState:MJRefreshStatePulling];

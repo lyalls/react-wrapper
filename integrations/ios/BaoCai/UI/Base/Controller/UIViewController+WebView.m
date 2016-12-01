@@ -36,7 +36,7 @@ static const void *TitleLabelBlockKey = &TitleLabelBlockKey;
 }
 
 - (NSString *) webPath {
-    return [NSString stringWithFormat:@"%@%@", kDocumentsPath,@"www/"];
+    return [NSString stringWithFormat:@"%@%@", kDocumentsPath, @"www/"];
 }
 
 - (NSMutableURLRequest *)getWebBrowserRequestWithUrl:(NSString *)url {

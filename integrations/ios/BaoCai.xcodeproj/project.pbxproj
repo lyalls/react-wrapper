@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21297CD71DEE9CEE0054BBAC /* Components in Resources */ = {isa = PBXBuildFile; fileRef = 21297CD61DEE9CEE0054BBAC /* Components */; };
+		218CFBF41DEFCFAF0013C070 /* Components in Resources */ = {isa = PBXBuildFile; fileRef = 218CFBF31DEFCFAF0013C070 /* Components */; };
 		515BF5F47FB56CE6CBDDB112 /* libPods-BaoCai.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6564FE1865D38A24932A5D87 /* libPods-BaoCai.a */; };
 		7B1053FE1DD4078F0082248C /* Base.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B1053FD1DD4078F0082248C /* Base.storyboard */; };
 		7B174C821DDAB7CC005EE9EC /* BCBaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B174C811DDAB7CC005EE9EC /* BCBaseTest.m */; };
@@ -31,6 +31,7 @@
 		7B4877591DD2CC1E00F8AAE1 /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B4877581DD2CC1E00F8AAE1 /* My.storyboard */; };
 		7B48775B1DD2D0CA00F8AAE1 /* Tender.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B48775A1DD2D0CA00F8AAE1 /* Tender.storyboard */; };
 		7B48C7CA1DD9C66B005B0B64 /* TenderRequestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B48C7C91DD9C66B005B0B64 /* TenderRequestTest.m */; };
+		7B4E81BC1DEEA8CB0053BCB6 /* CustomIOSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4E81BB1DEEA8CB0053BCB6 /* CustomIOSAlertView.m */; };
 		7B5516621DE2B76900A6DB21 /* EaseUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5515A41DE2B76800A6DB21 /* EaseUI.m */; };
 		7B5516631DE2B76900A6DB21 /* EMAudioPlayerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5515AE1DE2B76800A6DB21 /* EMAudioPlayerUtil.m */; };
 		7B5516641DE2B76900A6DB21 /* EMAudioRecorderUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B5515B01DE2B76800A6DB21 /* EMAudioRecorderUtil.m */; };
@@ -388,7 +389,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		21297CD61DEE9CEE0054BBAC /* Components */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Components; sourceTree = "<group>"; };
+		218CFBF31DEFCFAF0013C070 /* Components */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Components; sourceTree = "<group>"; };
 		2AF3DC517BA101EF4E574145 /* Pods-BaoCaiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaoCaiTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaoCaiTests/Pods-BaoCaiTests.release.xcconfig"; sourceTree = "<group>"; };
 		4CA7468F5A264F9FCB759F61 /* Pods-BaoCaiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaoCaiTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaoCaiTests/Pods-BaoCaiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6564FE1865D38A24932A5D87 /* libPods-BaoCai.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BaoCai.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -427,6 +428,8 @@
 		7B4877581DD2CC1E00F8AAE1 /* My.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = My.storyboard; sourceTree = "<group>"; };
 		7B48775A1DD2D0CA00F8AAE1 /* Tender.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tender.storyboard; sourceTree = "<group>"; };
 		7B48C7C91DD9C66B005B0B64 /* TenderRequestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TenderRequestTest.m; sourceTree = "<group>"; };
+		7B4E81BA1DEEA8CB0053BCB6 /* CustomIOSAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomIOSAlertView.h; sourceTree = "<group>"; };
+		7B4E81BB1DEEA8CB0053BCB6 /* CustomIOSAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomIOSAlertView.m; sourceTree = "<group>"; };
 		7B5515A31DE2B76800A6DB21 /* EaseUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EaseUI.h; sourceTree = "<group>"; };
 		7B5515A41DE2B76800A6DB21 /* EaseUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EaseUI.m; sourceTree = "<group>"; };
 		7B5515A91DE2B76800A6DB21 /* EMCDDeviceManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMCDDeviceManagerDelegate.h; sourceTree = "<group>"; };
@@ -1039,6 +1042,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		7B4E81B91DEEA8CB0053BCB6 /* CustomIOSAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				7B4E81BA1DEEA8CB0053BCB6 /* CustomIOSAlertView.h */,
+				7B4E81BB1DEEA8CB0053BCB6 /* CustomIOSAlertView.m */,
+			);
+			path = CustomIOSAlertView;
+			sourceTree = "<group>";
+		};
 		7B5515A51DE2B76800A6DB21 /* EMUIKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1454,7 +1466,7 @@
 		7B58B6AF1DAF7733007FFA6C /* BaoCai */ = {
 			isa = PBXGroup;
 			children = (
-				21297CD61DEE9CEE0054BBAC /* Components */,
+				218CFBF31DEFCFAF0013C070 /* Components */,
 				7B58BFA21DB0889A007FFA6C /* BaoCai.entitlements */,
 				7B58B70A1DAF77DD007FFA6C /* Unit */,
 				7B58B6E61DAF77DC007FFA6C /* UI */,
@@ -2156,6 +2168,7 @@
 		7B58B70E1DAF77DD007FFA6C /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				7B4E81B91DEEA8CB0053BCB6 /* CustomIOSAlertView */,
 				7B58BE2A1DB07BE6007FFA6C /* EaseUI */,
 				7B58BA641DAF7C9A007FFA6C /* TouchButton */,
 				7B58BA681DAF7C9A007FFA6C /* UMessageSDK */,
@@ -2595,7 +2608,7 @@
 				7B58B85C1DAF792B007FFA6C /* addTicket@2x.png in Resources */,
 				7B4877571DD2CAAB00F8AAE1 /* Withdrawals.storyboard in Resources */,
 				7B58BF921DB08589007FFA6C /* launch568.png in Resources */,
-				21297CD71DEE9CEE0054BBAC /* Components in Resources */,
+				218CFBF41DEFCFAF0013C070 /* Components in Resources */,
 				7B58BF821DB08589007FFA6C /* dot_selected@2x.png in Resources */,
 				7B58B7871DAF7883007FFA6C /* loginViewClose@2x.png in Resources */,
 				7B58B8751DAF792B007FFA6C /* myIcon5@2x.png in Resources */,
@@ -2838,6 +2851,7 @@
 				7B5516641DE2B76900A6DB21 /* EMAudioRecorderUtil.m in Sources */,
 				7B58B94D1DAF7A65007FFA6C /* UIBindPhoneViewController.m in Sources */,
 				7B55168F1DE2B76900A6DB21 /* EaseEmotionManager.m in Sources */,
+				7B4E81BC1DEEA8CB0053BCB6 /* CustomIOSAlertView.m in Sources */,
 				7B5516701DE2B76900A6DB21 /* EMSDWebImageCompat.m in Sources */,
 				7B48774B1DD1B26900F8AAE1 /* BCMessageDetailTopTableViewCell.m in Sources */,
 				7B5516851DE2B76900A6DB21 /* NSDateFormatter+Category.m in Sources */,

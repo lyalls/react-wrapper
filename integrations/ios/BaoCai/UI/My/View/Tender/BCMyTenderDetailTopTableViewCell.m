@@ -289,6 +289,8 @@
 #pragma mark - Custom method
 
 - (void)reloadData:(MyTenderListItemModel *)model {
+    [self layoutIfNeeded];
+    
     self.nameLabel.text = model.name;
     self.investmentAmountLabel.text = model.investmentAmount;
     self.principalInterestLabel.text = model.tenderInterest;
@@ -301,6 +303,8 @@
 }
 
 - (void)reloadDataWithTransfer:(MyTransferListItemModel *)model {
+    [self layoutIfNeeded];
+    
     self.nameLabel.text = model.name;
     self.investmentAmountLabel.text = model.investmentAmount;
     self.principalInterestLabel.text = model.tenderInterest;
