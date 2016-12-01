@@ -5,7 +5,6 @@ class BaseComponent extends Component {
         super(props);
         
     }
-    
     render(){
         let style = {};
         if(this.props.x !== undefined && this.props.y !== undefined){
@@ -32,6 +31,13 @@ class BaseComponent extends Component {
 BaseComponent.propTypes = {
     x: PropTypes.number,
     y: PropTypes.number,
+    width: PropTypes.number,
+    height: PropTypes.number,
+    fullWidth: PropTypes.bool,
+    insetTop: PropTypes.number,
+    insetBottom: PropTypes.number,
+    insetLeft: PropTypes.number,
+    insetRight: PropTypes.number
 }
 
 export default BaseComponent;

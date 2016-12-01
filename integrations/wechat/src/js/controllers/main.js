@@ -74,6 +74,7 @@ WebApp.Instance.controller('MainController', function ($rootScope, $scope, $loca
         moreBonuse: WebApp.Router.MORE_BONUSE,
         home:WebApp.Router.HOME,
         tradeRecord: WebApp.Router.TRADE_RECORD,
+        TRAN_RECORD: WebApp.Router.TRANRECORD,
        	increaseList: WebApp.Router.INCREASE_LIST,
        	investList: WebApp.Router.INVEST_LIST,
        	increaseRules: WebApp.Router.INCREASE_RULES,
@@ -81,6 +82,13 @@ WebApp.Instance.controller('MainController', function ($rootScope, $scope, $loca
        	projectIntro: WebApp.Router.PROJECT_INTRO,
        	projectBorrower: WebApp.Router.PROJECT_BORROWER,
        	projectRecords: WebApp.Router.PROJECT_RECORDS,
+       	realNameAuth:WebApp.Router.VALIDATE_ID_CARD,
+       	CONPUS_RULE:WebApp.Router.CONPUS_RULE,
+       	INVITE:WebApp.Router.INVITE,
+       	INVEST:WebApp.Router.INVEST,
+       	INVEST_COUPONS:WebApp.Router.INVEST_COUPONS,
+       	MY_COUPON:WebApp.Router.MY_COUPON,
+        MY_INVEST:WebApp.Router.MY_INVEST,
     };
 
     $scope.bcChangeUrl = function (path) {
@@ -119,7 +127,7 @@ WebApp.Instance.controller('MainController', function ($rootScope, $scope, $loca
                 $location.path() == WebApp.Router.INVEST_DETAIL
                 ) {
             $timeout(function () {
-                $location.path($location.host());
+                $location.path(WebApp.Router.HOME);
             }, 0);
             return;
         }

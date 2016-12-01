@@ -1,0 +1,68 @@
+<div class="scrollable" ng-controller="InviteController">
+<div class="scrollable-content section k_ptblr">
+    
+<div ui-content-for="m-header" >
+<header class="wx-header wx-common-head">
+    <i class="go-back" ng-click="goHistory()" ></i><h1>邀请好友</h1><span><a href="/#/invite/rule" >规则</a></span>
+</header>
+</div>
+    
+<article class="wx-mainbody gray-bg">
+    <div class="article-cont">
+        <dl ng-click="getInviteList()" class="earn-sum margin-t-1rem">
+            <dt>好友为我赚取</dt>
+            <dd><strong>{{allReward}}</strong>元</dd>
+        </dl>
+    </div>
+
+    <dl class="qr-code-invite-cont">
+        <dt>我的邀请二维码</dt>
+        <dd>
+            <img src="/validator/inviteqrcode?inviteCode={{inviteCode}}" width="100%" class="qr-code-style">
+            <p>面对面扫码或发送二维码给好友即可邀请</p>
+        </dd>
+    </dl>
+
+    <div class="invest-tab-wrap">
+        <div class="invest-title margin-t-1-2rem margin-b-1rem">邀请排行榜</div>
+        <table cellpadding="0" cellspacing="0" class="invest-info-tab">
+            <tr>
+                <th>排名</th>
+                <th>用户</th>
+                <th class="last">奖励金额（元）</th>
+            </tr>
+            <tr ng-repeat="(key, value) in rewardRank">
+                <td>{{(key + 1)}}</td>
+                <td>{{value.phone}}</td>
+                <td>{{value.money}}</td>
+            </tr>
+        </table>
+    </div>
+</article>
+    
+<div class="" >
+<script type="text/ng-template" id="inviteUrlCopy">
+<div ng-controller="InviteController">
+        <div class="k_layer">
+        <div class="k_layer_txt">
+        <p class="leftp">邀请链接已经生成，点击复制，发送给好友吧<br/>
+        </p>
+        </div>
+        <div class="common_popup_bottom_btns">
+            <button ng-click="inviteCopyFuc()" data-clipboard-text="{{inviteUrl}}" class="btn single_btn">我要复制</button>
+        </div>
+        </div>
+</div>
+</script>
+</div>
+    
+<footer ng-if="isWeChat" class="ui-footer btn-area-com btm-btn-space">
+    <!--wechat jump -->
+    <a href="{{inviteUrl}}" class="orange-radius-btn wd-94 font-18">立即邀请好友</a>
+</footer>
+<footer ng-if="!isWeChat" class="ui-footer btn-area-com btm-btn-space">
+    <!--other -->
+    <a ng-click="inviteShare(inviteCode)" class="orange-radius-btn wd-94 font-18">立即邀请好友</a>
+</footer>
+</div>
+</div>

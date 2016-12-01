@@ -1,0 +1,96 @@
+<div class="scrollable">
+    <div class="scrollable-content">
+
+        <div ui-content-for="m-header" >
+            <div class="wx-header wx-common-head">
+                <i class="go-back" ng-click="goHistory()"></i><h1>我的优惠券</h1><span><a ng-click="bcChangeUrl(bcAllUrl.CONPUS_RULE)">规则</a></span>
+            </div>
+        </div>
+
+        <div ng-controller="MycouponController">
+            <article class="wx-mainbody">
+                <ul class="tab-list two-tab margin-t-1-2rem tabs">
+                    <li ng-class="{true:'current', false:''}[optiontag =='hong']" ng-click="changetag('hong')">红包券</li>
+                    <li ng-class="{true:'current', false:''}[optiontag =='jia']" ng-click="changetag('jia')">加息券</li>
+                </ul>
+                <div class="item-detail-cont margin-t-1-2rem">
+                    <div class="txt-cont" ng-class="{true:'', false:'item-hide'}[optiontag =='hong']">
+                        <ul class="wx-coupon-list" id="hbList" ng-init="getBounsList()">
+                            <li ng-repeat="list in BounsList">
+                                <div class="wx-coupon-cont">
+                                    <dl class="wx-coupon-info">
+                                        <dt>{{list.money}}<span>元</span></dt>
+                                        <dd>投资满 <strong>{{list.useMoney}}</strong> 元使用</dd>
+                                        <dd ng-if="list.borrowPeriod !=0">投资期限：{{list.borrowPeriodName}}</dd>
+                                        <dd>有效期至{{list.expiredTime2}}</dd>
+                                    </dl>
+                                    <i class="ticket-tag ticket-tag-hb"></i>
+                                </div>
+                            </li>
+
+                            <!--
+                            <li>
+                                <div class="wx-coupon-cont overdate">
+                                    <dl class="wx-coupon-info">
+                                        <dt>200<span>元</span></dt>
+                                        <dd>投资满 <strong>2000</strong> 元使用</dd>
+                                        <dd>投资期限：1-3个月项目可用</dd>
+                                        <dd>有效期至2016-07-17 16:53</dd>
+                                    </dl>
+                                    <i class="ticket-tag ticket-tag-hb-overdate"></i>
+                                </div>
+                            </li> -->
+                        </ul>
+
+                        <dl class="wx-tips-null" ng-class="{true:'', false:'item-hide'}[Bouns_pageCount =='0']">
+                            <dt><img src="../images/coupon-null-img.png" width="38%" /></dt>
+                            <dd>暂无红包券</dd>
+                        </dl>
+                        <div class="loading-btn" ng-if="Bouns_more==1" ng-click="getBounsList()">点击加载更多</div>
+                    </div>
+
+                    <div class="txt-cont" ng-class="{true:'', false:'item-hide'}[optiontag =='jia']">
+                        <ul class="wx-coupon-list" id="jxList" ng-init="getIncreaseList()">
+                            <li ng-repeat="list in IncreaseList">
+                                <div class="wx-coupon-cont">
+                                    <dl class="wx-coupon-info">
+                                        <dt>+{{list.apr}}<span>%</span></dt>
+                                        <dd>投资满 <strong>{{list.useMoney}}</strong> 元使用</dd>
+                                        <dd>有效期至{{list.endtime2}}</dd>
+                                    </dl>
+                                    <i class="ticket-tag ticket-tag-jx"></i>
+                                </div>
+                            </li>
+                            <!--
+                            <li>
+                                <div class="wx-coupon-cont overdate">
+                                    <dl class="wx-coupon-info">
+                                        <dt>+2.0<span>%</span></dt>
+                                        <dd>投资满 <strong>2000</strong> 元使用</dd>
+                                        <dd>投资期限：1-3个月项目可用</dd>
+                                        <dd>有效期至2016-07-17 16:53</dd>
+                                    </dl>
+                                    <i class="ticket-tag ticket-tag-jx-overdate"></i>
+                                </div>
+                            </li> -->
+                        </ul>
+
+                        <dl class="wx-tips-null" ng-class="{true:'', false:'item-hide'}[Increase_pageCount =='0']">
+                            <dt><img src="../images/coupon-null-img.png" width="38%" /></dt>
+                            <dd>暂无加息券</dd>
+                        </dl>
+                        <div class="loading-btn" ng-if="Increase_more==1" ng-click="getIncreaseList()">点击加载更多</div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            <footer class="wx-coupon-bottom" ng-if="coupon_shiyong==1">
+                <button class="orange-radius-btn wd-94" ng-click="gohome()">去使用</button>
+            </footer>
+
+        </div>
+    </div>
+</div>

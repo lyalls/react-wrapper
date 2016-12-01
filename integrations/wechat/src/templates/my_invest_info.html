@@ -1,0 +1,20 @@
+<div ui-content-for="title" >
+    <span>投资详情</span>
+</div>
+<div class="scrollable">
+    <div class="scrollable-content">
+        <div ng-controller="MyinvestinfoController">
+            <div ng-if="MyinvestsType == 'roamNo'">
+                <div ng-include="'my_invest_info_roamno.html'"></div>
+            </div>
+            <div ng-if="MyinvestsType == 'loan'">
+                <div ng-include="'my_invest_info_loan.html'"></div>
+            </div>
+            <div ng-if="MyinvestsType == 'roamYes'">
+                <div ng-include="'my_invest_info_roamyes.html'"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

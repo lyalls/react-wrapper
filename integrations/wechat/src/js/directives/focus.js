@@ -45,7 +45,6 @@ WebApp.Instance.directive('toBottom', function () {
         restrict: 'A',
         link: function(scope, element, attr){          
             
-           //console.log(element);
            document.addEventListener('touchmove', function(ev){
              element[0].style.bottom = 0+'px';
            })

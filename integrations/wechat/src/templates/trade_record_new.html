@@ -1,0 +1,50 @@
+<div class="scrollable" ng-controller="StagingController"> 
+    <div class="scrollable-content">
+        <div ng-controller="TradeRecordController"   ng-init="accountLogs()">  
+            <div ui-content-for="m-header" >
+                <div class="wx-header wx-common-head">
+                    <i class="go-back" ng-click="goHistory()" ></i><h1>交易记录</h1><span><a href="" ng-click="tradeRecordFilterShow()">筛选</a></span>
+                </div>
+            </div>
+            <article class="wx-mainbody">
+                <div class="article-cont"  ng-init="change()">
+                    <div class="tab-th">
+                        <span class="first-th">交易类型/时间</span>
+                        <span class="last-th">交易金额/可用余额（元）</span>
+                    </div>
+                    <ul class="record-list" id="tradeRecordList">
+                        <li ng-repeat="accountLog in accountLogs">
+                            <dl>
+                                <dt>{{accountLog.type}}</dt>
+                                <dd>{{accountLog.addTime}}</dd>
+                            </dl>
+                            <dl>
+                                <dt class="pay-sum">{{accountLog.account}}</dt>
+                                <dd>{{accountLog.balance}}</dd>
+                            </dl>
+                        </li>
+
+                    </ul>
+                    <div class="loading-btn" ng-if="recordMore == 1" ng-click="bottom()">点击加载更多</div>
+                    <dl ng-if="recordMore == 0" class="wx-tips-null">
+                        <dt><img src="../images/invest-null-img.png" width="20%" /></dt>
+                        <dd>暂无投资记录</dd>
+                    </dl>
+                </div>
+                <div ng-if="recordMenu == 1" class="body-mask"></div>
+            </article>
+            <div ng-if="recordMenu == 1" class="filter-box">
+                <div class="filter-cont">
+                    <span ng-class="{true:'current', false:''}[recordMenuType =='']" ng-click="changeType()">全部</span>
+                    <span ng-class="{true:'current', false:''}[recordMenuType =='recharge']" ng-click="changeType('recharge')">充值</span>
+                    <span ng-class="{true:'current', false:''}[recordMenuType =='tender']" ng-click="changeType('tender')">投资</span>
+                    <span ng-class="{true:'current', false:''}[recordMenuType =='tender_recover_yes']" ng-click="changeType('tender_recover_yes')">还款</span>
+                    <span ng-class="{true:'current', false:''}[recordMenuType =='cash_success']" ng-click="changeType('cash_success')">提现</span>
+                    <span ng-class="{true:'current', false:''}[recordMenuType =='reward']" ng-click="changeType('reward')">奖励</span>
+                    <span ng-class="{true:'current', false:''}[recordMenuType =='other']" ng-click="changeType('other')">其他</span>
+                </div>
+                <b class="closed-btn" ng-click="tradeRecordFilterHide()"></b>
+            </div>
+        </div>
+    </div>
+</div>

@@ -13,7 +13,7 @@
                             <h3 class="count-down" ng-if="list.isLimit == 1 && list.limitTime>0"><b></b>即将发售：<time>{{list.timer}}</time></h3>
                             <dl class="pro-info">
                                 <dt>
-                                    <strong>{{list.annualRate}}<b class="font-12">%</b><b class="font-22" ng-if="list.increaseApr>0">+{{list.increaseApr| number:2}}</b><b class="font-12" ng-if="list.increaseApr>0">%</b></strong>
+                                    <strong ng-class="{'only-data':(list.isReward!=1 && list.isBonusticket!=1 && list.isAllowIncrease != 1 && list.isTag!=1 && list.tenderAccountMin <= 100)}">{{list.annualRate}}<b class="font-12">%</b><b class="font-22" ng-if="list.increaseApr>0">+{{list.increaseApr| number:2}}</b><b class="font-12" ng-if="list.increaseApr>0">%</b></strong>
                                     <span ng-show="list.isReward==1" class="take">{{list.promotionTitle}}</span>
                                     <span ng-show="+list.isBonusticket == 1">红包券</span>
                                     <span ng-show="+list.isAllowIncrease == 1">加息券</span>

@@ -121,19 +121,17 @@ WebApp.Instance.controller('AccountController', function ($rootScope, $scope, $l
         AccountService.getUsersSettingInfo(function (data) {
             var re = /^\d{3}(\d{4})/;
             $scope.accountInfo = data;
-            $scope.Name = data.phone;
-            $scope.phoneShow = data.phone;
+            $scope.userName = data.userName;
             $scope.userPhone = data.phone;
             if (data.phone) {
                 var found = data.phone.match(re);
-                $scope.Name = data.phone.replace(found[1], "****");
+                $scope.phoneShow = data.phone.replace(found[1], "****");
             }
             WebApp.tmpValue.setOrGetStoreVal("value_phone", data.phone);
-            if (!data.phone) {
-                $scope.Name = data.userName;
-            }
             $scope.idCard = data.cardStatus;
             $scope.paypwdStatus = data.paypwdStatus;
+            $scope.realNameStatus = data.realNameStatus;
+            $scope.realName = data.realName;
         }, function (data) {
             notify.closeAll();
             notify({message: WebApp.dealHttp(data, $location, $timeout), duration: WebApp.duration});
@@ -310,7 +308,6 @@ WebApp.Instance.controller('AccountController', function ($rootScope, $scope, $l
                 $scope.bonusTicketList.push(data.list[i]);
             }
             $scope.unusedBonusTicketList = $scope.bonusTicketList;
-            console.log($scope.unusedBonusTicketList);
             $scope.index++;
         }, function (data) {
             notify.closeAll();

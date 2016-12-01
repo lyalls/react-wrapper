@@ -1,31 +1,50 @@
 <div class="scrollable" ng-controller="StagingController"> 
 <div class="scrollable-content">
 <div ng-controller="AccountController"  ng-init="userAccountInfo()">
-<div ui-content-for="title" >
-    <span>{{userAccountInfo.phone}}</span>
+<div ui-content-for="m-header" >
+    <div class="wx-header wx-account-head">
+    <i class="go-home" ng-click="bcChangeUrl(bcAllUrl.home)"></i><h1>{{userAccountInfo.phone}}</h1> <b class="go-detail" ng-click="bcChangeUrl(bcAllUrl.userSet)"></b>
+    </div>
 </div>
 <article class="wx-mainbody" >
-     <div class="account-bar">
+
+	<div class="account-bar">
          <dl>
              <dt>累计收益</dt>
              <dd><strong>{{userAccountInfo.accumulatedEarnings}}</strong>元</dd>
          </dl>
+         <ul class="account-info">
+             <li>
+                 <label>待收本息</label>
+                 <p><strong>{{userAccountInfo.allRecover}}</strong>元</p>
+             </li>
+             <li>
+                 <label>可用余额</label>
+                 <p><strong>{{userAccountInfo.availableBalance}}</strong>元</p>
+             </li>
+         </ul>
      </div>
-     <ul class="account-info">
+
+     <ul class="account-ser-list">
          <li>
-             <label>待收本息</label>
-             <p><strong>{{userAccountInfo.allRecover}}</strong>元</p>
+             <div ng-click="bcChangeUrl(bcAllUrl.MY_INVEST)"><i class="icon-acc-01"></i>我的投资</div>
+             <div ng-click="bcChangeUrl(bcAllUrl.TRAN_RECORD)"><i class="icon-acc-02"></i>交易记录</div>
          </li>
          <li>
-             <label>可用余额</label>
-             <p><strong>{{userAccountInfo.availableBalance}}</strong>元</p>
+             <div ng-click="bcChangeUrl(bcAllUrl.MY_COUPON)"><i class="icon-acc-03"></i>我的优惠券</div>
+             <div ng-click="bcChangeUrl(bcAllUrl.INVITE)"><i class="icon-acc-04"></i>邀请好友</div>
          </li>
      </ul>
      <div class="btn-area-com margin-t-2rem">
-			<a class="orange-radius-btn w-half" ng-controller="PaymentController" ng-click="toRecharge()" >充值</a>
-     		<a class="orange-l-radius-btn w-half"  ng-controller="PresentController" ng-click="getPresentInfo()">提现</a>
-     </div>
+		<a href="javascript:void(0)" class="orange-radius-btn w-half" ng-controller="PaymentController" ng-click="toRecharge()">充值</a>
+		<a href="javascript:void(0)" class="orange-l-radius-btn w-half" ng-controller="PresentController" ng-click="getPresentInfo()">提现</a>
+	 </div>
+	 
 </article>
+<div ng-controller="MyinvesToolsController">
+		<div ng-include="'public_footer.html'"></div>
+        <div class="download-bar" ng-if="isDownShow == 1"><i></i>下载APP，轻松理财 <span class="download-closed" ng-click="close_down()"></span></div>
+</div>
 </div>
 </div>
 </div>
@@ -214,4 +233,3 @@
 	</div>
 	</div>
 </script>
-<footer class="gray-btm"><a ng-href="http://a.app.qq.com/o/simple.jsp?pkgname=com.baocai.p2p"><i class="logo-icon"></i>下载App，查看更多账户信息</a></footer>

@@ -32,7 +32,7 @@ wechat: appTemplateDir=./src/apps/wechat/templates
 wechat: components="home:newhome" # "<component name>:<target template file name> <component name>:<target template file name> ..."
 wechat: target=wechat
 wechat: targetNameInAppIndex=Wechat
-wechat: syncFromH5=false
+wechat: syncFromH5=${doUpdateSourceFile}
 
 ios: appIntegrationDir=./integrations/ios
 ios: appTmpDir=./src/apps/ios/tmp
@@ -64,6 +64,9 @@ wechat ios:
 			mv ${appTmpDir}/tmp.less ./src/css/$${file};\
 			if [[ $${file} == baocai.less ]]; then \
 				sed '12,19 s/^/\/\//' ./src/css/$${file} > ${appTmpDir}/tmp.less && mv ${appTmpDir}/tmp.less ./src/css/$${file};\
+			elif [[ $${file} == app.less ]]; then \
+				echo '@import "slick.less";' >> ./src/css/$${file} ;\
+				echo '@import "slick-theme.less";' >> ./src/css/$${file} ;\
 			fi ;\
 		done; \
 	fi
@@ -91,7 +94,10 @@ wechat ios:
 	cat ${appTmpDir}/tmpHead.js ${appTmpDir}/tmp.js ${appTmpDir}/tmpTail.js > ${appTmpDir}/webpack.config.js
 	rm -rf ${appTmpDir}/tmp.js ${appTmpDir}/tmpHead.js ${appTmpDir}/tmpTail.js
 	# Run the webpack to build target components
-	export PATH=`pwd`/node_modules/.bin:$${PATH} && cd ${appTmpDir} && which webpack && webpack --config webpack.config.js --progress --colors --inline
+	export PATH=`pwd`/node_modules/.bin:$${PATH} ;\
+	cd ${appTmpDir} && which webpack ;\ 
+	webpack --config webpack.config.js --progress --colors --inline
+	cp ${platformPolygonFile} ${appTmpDir}/react
 	# Post-process for WeChat: 
 		# Move the template files to wechat template direcotory; 
 		# Modify index.html; 
@@ -114,7 +120,6 @@ wechat ios:
 		export PATH=`pwd`/node_modules/.bin:$${PATH} && cd ${appIntegrationDir} && gulp build_q ;\
 		cd - && cp ${appTemplateDir}/jquery-3.1.1.min.js ${appIntegrationDir}/www/js ;\
 		cp -r ${appTmpDir}/react ${appIntegrationDir}/www/react ;\
-		cp ${platformPolygonFile} ${appIntegrationDir}/www/react ;\
 	elif [[ ${target} == ios ]]; then \
 		mkdir -p ${appIntegrationDir}/BaoCai/Components ;\
 		for comp in `echo ${components}`; do \
@@ -126,7 +131,6 @@ wechat ios:
 		done;\
 		cp ${appTemplateDir}/UIWebViewController.* ${appIntegrationDir}/BaoCai/UI/Base/Controller ;\
 		cp -r ${appTmpDir}/react ${appIntegrationDir}/BaoCai/Components/react ;\
-		cp ${platformPolygonFile} ${appIntegrationDir}/BaoCai/Components/react ;\
 	fi
 	rm -rf ${appTmpDir}
 	# Start the integrated system for WeChat
@@ -146,3 +150,16 @@ syncToSVN:
 	cp -r ./* ${svnPath}
 	cd ${svnPath} && svn add ./* 
 	cd ${svnPath} && svn commit -m "Sync from git repository"
+
+########### Clear ###########
+# Last modified: 2016-12-1  #
+# Created by: Lin Sun       #
+#############################
+clear:
+	rm -rf node_modules integrations
+	for app in `ls ./src/apps`; do \
+		if [[ -d ./src/apps/$${app}/tmp ]]; then \
+			rm -rf ./src/apps/$${app}/tmp ;\
+		fi ;\
+	done
+

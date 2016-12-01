@@ -60,13 +60,18 @@ WebApp.Router = {
     SET_PAY_PASSWORD: '/set/pay/password', //设置交易密码
     PRIVILEGE: '/privilege', //加息规则
     ABOUTUS: '/aboutus',
+    ABOUTUS_INDEX: '/aboutus/index',//了解抱财
+    ABOUTUS_SAFE: '/aboutus/safe',//安全保障
+    ABOUTUS_TEAM: '/aboutus/team',//管理团队
+    ABOUTUS_SUMMARY: '/aboutus/summary',//抱财简介
+    ABOUTUS_DATA: '/aboutus/data',//抱财简介
     APP_DOWNLOAD: '/download',
     USER_RECHARGE: '/users/recharge', //充值
     POPUP_ID_CARD: '/popup/id/card',
     BANK_RETURNS: '/bank/returns', //40倍银行收益
     HOLDING: '/holding', //上市公司控股
     SAFEGUARD: '/safeguard', //100%本息保障
-    USER_SET: '/user/set', //个人设置
+    USER_SET: '/user/set', //账号信息
     USER_ASSET: '/user/asset', //个人资产
     MORE_BONUSE: '/more/bonuse', //更多红包
     CHANGE_LOGIN_PASSWORD: '/change/login/password', //修改登录密码
@@ -104,6 +109,14 @@ WebApp.Router = {
     PROJECT_BORROWER:'/project/borrower',	//项目详情-借款人信息
     PROJECT_RECORDS:'/project/records',	//项目详情-投资记录
     PICTURE_VIEW:'/image/view',
+    INVITE:'/invite',
+    INVITE_LIST:'/invite/list',
+    INVITE_RULE:'/invite/rule',
+    MY_INVEST:'/my/invest', //我的投资列表
+    MY_INVEST_INFO:'/my/invest/info', //我的投资列表 详细页（还款中，投资中，已还清）
+    MY_COUPON:'/my/coupon', //我的优惠券
+    DISCOVERY:'/discovery', //发现
+    TRANRECORD: '/users/tran/record', //交易记录
     go: function (page, $location) {
         var uri = WebApp.Router[page.toUpperCase()];
         if (uri) {
@@ -118,6 +131,18 @@ WebApp.Router = {
 WebApp.Instance.config(function ($routeProvider) {
     // Baocai Project router
     $routeProvider
+            .when(WebApp.Router.MY_INVEST, {
+                templateUrl: 'my_invest.html',
+                reloadOnSearch: false
+            })
+            .when(WebApp.Router.MY_INVEST_INFO, {
+                templateUrl: 'my_invest_info.html',
+                reloadOnSearch: false
+            })
+            .when(WebApp.Router.MY_COUPON, {
+                templateUrl: 'my_coupon.html',
+                reloadOnSearch: false
+            })
             .when(WebApp.Router.HOME, {
                 //templateUrl: 'financing.html',
                 templateUrl: 'newhome.html',
@@ -227,6 +252,26 @@ WebApp.Instance.config(function ($routeProvider) {
             })
             .when(WebApp.Router.ABOUTUS, {
                 templateUrl: 'aboutus.html',
+                reloadOnSearch: false
+            })
+            .when(WebApp.Router.ABOUTUS_INDEX, {
+                templateUrl: 'aboutus_index.html',
+                reloadOnSearch: false
+            })
+            .when(WebApp.Router.ABOUTUS_SAFE, {
+                templateUrl: 'aboutus_safe.html',
+                reloadOnSearch: false
+            })
+            .when(WebApp.Router.ABOUTUS_TEAM, {
+                templateUrl: 'aboutus_team.html',
+                reloadOnSearch: false
+            })
+            .when(WebApp.Router.ABOUTUS_SUMMARY, {
+                templateUrl: 'aboutus_summary.html',
+                reloadOnSearch: false
+            })
+            .when(WebApp.Router.ABOUTUS_DATA, {
+                templateUrl: 'aboutus_data.html',
                 reloadOnSearch: false
             })
             .when(WebApp.Router.USER_RECHARGE, {
@@ -398,10 +443,30 @@ WebApp.Instance.config(function ($routeProvider) {
                 templateUrl: 'imageView.html',
                 reloadOnSearch: false
             })
+            .when(WebApp.Router.INVITE, {
+                templateUrl: 'invite.html',
+                reloadOnSearch: false
+            })
+            .when(WebApp.Router.INVITE_LIST, {
+                templateUrl: 'invite_firend_list.html',
+                reloadOnSearch: false
+            })
+            .when(WebApp.Router.INVITE_RULE, {
+                templateUrl: 'invite_rule.html',
+                reloadOnSearch: false
+            })
+            .when(WebApp.Router.DISCOVERY, {
+                templateUrl: 'discovery.html',
+                reloadOnSearch: false
+            })
+            .when(WebApp.Router.TRANRECORD, {
+                templateUrl: 'trade_record_new.html',
+                reloadOnSearch: false
+            })
             .otherwise({
                 redirectTo: '/'
             });
-
+            
 });
 /*----------------------------------------------------------------------------------------------------------------------
  APPLICATION CONFIG

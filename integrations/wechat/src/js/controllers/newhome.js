@@ -5,22 +5,65 @@ WebApp.Instance.controller('NewhomeController',function($scope,$modal,md5,Stagin
     $scope.goToUser = "#"+WebApp.Router.USERS_ACCOUNT;
     $scope.investsList = [];
     $scope.investsLen = 0;
+    $scope.isLoginint = 0;
+    $scope.isDownShow = 1;
 
-    StagingService.getBannerData(function (data) {
-        //最多显示4张轮播图片
-        var len = data.length;
-        if(len>4)
-        {
-            for(var i=0;i<len-4;i++)
-            data.pop();
-        }
-        $scope.banners = data;
-    }, function (data) {
-        notify.closeAll();
-        notify({message: WebApp.dealHttp(data, $location, $timeout), duration: WebApp.duration});
-    });
+    var isDownshowDate = $cookies.get("isDownshowDate");
+    //如过有cookie 就隐藏
+    var getday = (new Date()).getDate();
+    if(isDownshowDate && getday == isDownshowDate)
+    {
+        $scope.isDownShow = 0;
+    }
+
+    //判断有没有登陆
+    var UserInfo = WebApp.ClientStorage.getCurrentUser();
+    if(!UserInfo)
+    {
+        AccountService.myAccountINfo(function (data) {
+            UserInfo = data;
+        }, function (data) {
+            UserInfo = null;
+        });
+    }
+
+    if(UserInfo)
+    {
+        $scope.isLoginint = 1;
+        //已登陆
+        StagingService.getBannerData(function (data) {
+            //最多显示4张轮播图片
+            var len = data.length;
+            if(len>4)
+            {
+                for(var i=0;i<len-4;i++)
+                    data.pop();
+            }
+            $scope.banners = data;
+        }, function (data) {
+            notify.closeAll();
+            notify({message: WebApp.dealHttp(data, $location, $timeout), duration: WebApp.duration});
+        });
+    }
+    else
+    {
+        //未登陆
+        StagingService.getNologinBannerData(function (data) {
+            $scope.banners = data;
+        }, function (data) {
+            notify.closeAll();
+            notify({message: WebApp.dealHttp(data, $location, $timeout), duration: WebApp.duration});
+        });
+    }
+
 
     $scope.financingData = {};
+
+    $scope.close_down = function()
+    {
+        $scope.isDownShow = 0;
+        $cookies.put("isDownshowDate",(new Date()).getDate());
+    }
 
 
     //跳转到列表页
@@ -116,7 +159,6 @@ WebApp.Instance.controller('NewhomeController',function($scope,$modal,md5,Stagin
             }
 
             $scope.investsLen = data.tenderList.length;
-            //console.log($scope.investsList);
         });
     }
 
@@ -190,6 +232,31 @@ WebApp.Instance.controller('NewhomeController',function($scope,$modal,md5,Stagin
             $log.info('Modal dismissed at:' + new Date());
         });
     };
+
+
+    $scope.gotopage = function (type) {
+        var urlpath = WebApp.Router.HOME;
+        if(type == 'my')
+        {
+            urlpath = WebApp.Router.USERS_ACCOUNT;
+        }
+        else if(type == 'coupon')
+        {
+            urlpath = WebApp.Router.MY_COUPON;
+        }
+        else if(type == 'find')
+        {
+            urlpath = WebApp.Router.DISCOVERY;
+        }
+        else if (type == 'liaojie')
+        {
+            urlpath = WebApp.Router.ABOUTUS_INDEX; //了解
+        }
+
+        $timeout(function () {
+            $location.path(urlpath);
+        }, 0);
+    }
 
 });
 

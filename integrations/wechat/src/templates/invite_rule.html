@@ -1,0 +1,114 @@
+<div ui-content-for="title" >
+    <span>邀请好友规则</span>
+</div>
+<div class="scrollable"  ng-controller="InviteController">
+<div class="scrollable-content section k_ptblr">
+<article class="wx-mainbody gray-bg">
+    <footer ng-if="isWeChat" class="ui-footer ui-footer-invit">
+        <a href="{{inviteUrl}}" class="btn btn-share"  id="share-btn">立即邀请好友</a>
+    </footer>
+    <footer ng-if="!isWeChat" class="ui-footer ui-footer-invit">
+        <button class="btn btn-share"  ng-click="inviteShare(inviteCode)"  id="share-btn">立即邀请好友</button>
+    </footer>
+    
+    <div class="invitation-holder" style="padding:0 0 50px; background: #fff;">
+        <div class="banner">
+            <img src="../images/banner.jpg" width="100%" height="" alt="" />
+        </div>
+        <div class="content">
+            <div class="title">被邀请好友首笔投资≥<span id="f_user_first_tender01">2000</span>元，邀请关系成立，<br />方可享有投资额奖励。</div>
+            <div class="computation">
+                <div class="computation_title">
+                    <strong>邀请奖励计算规则</strong><p></p>
+                </div>
+                <div class="data">
+                    <div class="inviter circle ui-center">邀请人<br>奖励</div>
+                    <div class="years">
+                        <ul>
+                            <li>
+                                <h5 class="circle ui-center">第一年</h5>
+                                <p class="ui-center">一级好友投资额<br />年化收益0.50%</p>
+                                <p class="ui-center">二级好友投资额<br />年化收益0.20%</p>
+                            </li>
+                            <li>
+                                <h5 class="circle ui-center">第二年</h5>
+                                <p class="ui-center">一级好友投资额<br />年化收益0.25%</p>
+                                <p class="ui-center">二级好友投资额<br />年化收益0.10%</p>
+                            </li>
+                            <li>
+                                <h5 class="circle ui-center">第三年</h5>
+                                <p class="last ui-center">邀请关系结束，<br />不再享有奖励。<br />(同一邀请关系)</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="annotation">
+                <div class="data_item">
+                    <div class="item_title">注：</div>
+                    <div class="item_content">
+                        <div class="content_list">
+                            <div class="td_title">1、</div>
+                            <div class="td_content">您直接邀请的好友为一级好友，好友再邀请的好友为二级好友（邀请关系非无限循环，仅限两层关系）；</div>
+                        </div>
+
+                        <div class="content_list">
+                            <div class="td_title">2、</div>
+                            <div class="td_content">邀请关系有效期为2个非自然年，第三年清除；</div>
+                        </div>
+
+                        <div class="content_list">
+                            <div class="td_title">3、</div>
+                            <div class="td_content">散标转让、活期理财、体验标不参加此邀请活动；</div>
+                        </div>
+
+                        <div class="content_list">
+                            <div class="td_title">4、</div>
+                            <div class="td_content">按所购标的标期期限进行奖励，按月奖励，还息日的第2天发放；</div>
+                        </div>
+
+                        <div class="content_list">
+                            <div class="td_title">5、</div>
+                            <div class="td_content">以本活动开始之日起新增的邀请关系为准。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data_item">
+                    <div class="item_title">其他：</div>
+                    <div class="item_content">
+                        <div class="content_list">
+                            <div class="td_title">1、</div>
+                            <div class="td_content">如邀请人采用某些特殊技术手段，或是邀请的用户身份异常，一经核实，抱财网保留拒绝支付奖励的权利；</div>
+                        </div>
+
+                        <div class="content_list">
+                            <div class="td_title">2、</div>
+                            <div class="td_content">活动规则将根据实际情况调整，请关注官网活动通知。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom" style="">详询400-616-7070<br>投资有风险，选择需谨慎</div>
+            </div>
+        </div>
+    </div>
+</article>
+ <div class="" >
+<script type="text/ng-template" id="inviteUrlCopy">
+<div ng-controller="InviteController">
+        <div class="k_layer">
+        <div class="k_layer_txt">
+        <p class="leftp">邀请链接已经生成，点击复制，发送给好友吧<br/>
+        </p>
+        </div>
+        <div class="common_popup_bottom_btns">
+            <button ng-click="inviteCopyFuc()" data-clipboard-text="{{inviteUrl}}" class="btn single_btn">我要复制</button>
+        </div>
+        </div>
+</div>
+</script>
+</div>	
+</div>
+</div>

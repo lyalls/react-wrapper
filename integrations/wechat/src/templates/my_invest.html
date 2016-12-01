@@ -1,0 +1,104 @@
+<div ui-content-for="title" >
+    <span>我的投资</span>
+</div>
+<div class="scrollable">
+    <div class="scrollable-content">
+        <div ng-controller="MyinvestController">
+        <article class="wx-mainbody">
+            <ul class="tab-list three-tab margin-t-1-2rem">
+                <li ng-class="{true:'current', false:''}[optiontag =='repaymenting']" ng-click="changetag('repaymenting')">还款中</li>
+                <li ng-class="{true:'current', false:''}[optiontag =='investing']" ng-click="changetag('investing')">投资中</li>
+                <li ng-class="{true:'current', false:''}[optiontag =='repaymentend']" ng-click="changetag('repaymentend')">已还清</li>
+            </ul>
+            <div class="tab-cont-wrap margin-t-1-2rem">
+                <div class="txt-cont-invest" ng-class="{true:'', false:'item-hide'}[optiontag =='repaymenting']">
+                    <ul class="wx-my-invest-list" ng-init="getRepaymenting()">
+                        <li ng-repeat="list in ing_datalist">
+                            <div class="pro-box" ng-click="getMyInvestDetail(ing_type,list.id,list.tenderId)">
+                                <h3><em><b class="{{list.typeNidCss}}">{{list.typeNidZi}}</b>{{list.name}}</em><i></i></h3>
+                                <table cellspacing="0" cellpadding="0" class="my-invest-tab">
+                                    <tr><td><span class="gold-font">{{list.investmentAmount}}</span></td><td><span class="green-font">{{list.receivingPrincipalInterest}}</span></td><td><span class="blue-font">{{list.stayPrincipalInterest}}</span></td></tr>
+                                    <tr><td>投资本金（元）</td><td>已收利息（元）</td><td>待收本息（元）</td></tr>
+                                </table>
+                                <div class="other-info">
+                                    <span>下期还款时间：<time>{{list.recoverTime}}</time></span>
+                                    <span>还款金额：<time>{{list.repay_next_account}}</time>元</span>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                    <div class="txt-cont" ng-class="{true:'', false:'item-hide'}[ing_tou ==1]">
+                        <dl class="wx-tips-null">
+                            <dt><img src="../images/invest-null-img.png" width="20%" /></dt>
+                            <dd class="small-font">暂无还款中资产，<a href="#/">去投一笔</a></dd>
+                        </dl>
+                    </div>
+                    <div class="loading-btn" ng-if="ing_more == 1" ng-click="getRepaymenting()">点击加载更多</div>
+                </div>
+
+                <div class="txt-cont-invest" ng-class="{true:'', false:'item-hide'}[optiontag =='investing']">
+
+                    <ul class="wx-my-invest-list" ng-init="getLoaning()">
+                        <li ng-repeat="list in loaning_datalist">
+                            <div class="pro-box" ng-click="getMyInvestDetail(loaning_type,list.id,list.tenderId)">
+                                <h3><em><b class="{{list.typeNidCss}}">{{list.typeNidZi}}</b>{{list.name}}</em><i></i></h3>
+                                <table cellspacing="0" cellpadding="0" class="my-invest-tab two-data">
+                                    <tr><td><span class="gold-font">{{list.investmentAmount}}</span></td><td><span class="blue-font">{{list.stayPrincipalInterest}}</span></td></tr>
+                                    <tr><td>投资本金（元）</td><td>待收本息（元）</td></tr>
+                                </table>
+                                <div class="other-info">
+                                    <span>投资时间：<time>{{list.tenderTime2}}</time></span>
+                                    <span>标的进度：<strong>{{list.tenderSchedule}}</strong></span>
+                                </div>
+                            </div>
+                        </li>
+                        <div class="txt-cont" ng-class="{true:'', false:'item-hide'}[loaning_tou ==1]">
+                            <dl class="wx-tips-null">
+                                <dt><img src="../images/invest-null-img.png" width="20%" /></dt>
+                                <dd class="small-font">暂无还款中资产，<a href="#/">去投一笔</a></dd>
+                            </dl>
+                        </div>
+                        <div class="loading-btn" ng-if="loaning_more == 1" ng-click="getLoaning()">点击加载更多</div>
+                    </ul>
+
+                </div>
+
+                <div class="txt-cont-invest" ng-class="{true:'', false:'item-hide'}[optiontag =='repaymentend']">
+
+                    <ul class="wx-my-invest-list" ng-init="GetRepaymentend()">
+                        <li ng-repeat="list in end_datalist">
+                            <div class="pro-box" ng-click="getMyInvestDetail(end_type,list.id,list.tenderId)">
+                                <h3><em><b class="{{list.typeNidCss}}">{{list.typeNidZi}}</b>{{list.name}}</em><i></i></h3>
+                                <table cellspacing="0" cellpadding="0" class="my-invest-tab">
+                                    <tr><td><span class="gold-font">{{list.investmentAmount}}</span></td><td><span class="green-font">{{list.receivingPrincipalInterest}}</span></td></tr>
+                                    <tr><td>投资本金（元）</td><td>已收本息（元）</td></tr>
+                                </table>
+                                <div class="other-info">
+                                    <span>结清时间：<time>{{list.repayLastTime}}</time></span>
+                                    <span>共 <b class="import-14">{{list.borrowPeriod}}</b> 期</span>
+                                </div>
+                            </div>
+                        </li>
+                        <div class="txt-cont" ng-class="{true:'', false:'item-hide'}[end_tou ==1]">
+                            <dl class="wx-tips-null">
+                                <dt><img src="../images/invest-null-img.png" width="20%" /></dt>
+                                <dd class="small-font">暂无还款中资产，<a href="#/">去投一笔</a></dd>
+                            </dl>
+                        </div>
+                        <div class="loading-btn" ng-if="end_more == 1" ng-click="GetRepaymentend()">点击加载更多</div>
+
+                    </ul>
+
+                </div>
+
+
+
+            </div>
+
+        </article>
+        </div>
+    </div>
+</div>
+
+

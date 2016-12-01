@@ -99,12 +99,11 @@ WebApp.Instance.controller('ProductlistController', function ($rootScope, $scope
                 }
                 data.list[i].StartInvestTag = StartInvestTag;
 
-                data.list[i].biao_type_zi = biao_type_zi;
+				data.list[i].biao_type_zi = biao_type_zi;
                 data.list[i].biao_type_zi_bgcss = biao_type_zi_bgcss;
                 data.list[i].biaotag = biao_tag[biao_type_zi_type];
                 $scope.investsList.push(data.list[i]);
             }
-            //console.log(data);
             $scope.nowPage++;
         });
     }
@@ -177,14 +176,13 @@ WebApp.Instance.controller('ProductdetailController', function ($routeParams, $r
     $scope.iftender = false;
     $scope.fnew = false;
     $scope.ismonth = false;
-    
+	
     var zxmts = false; //专享标，弹框 关闭是否跳转；
     var borrowId = $routeParams.id;
     if(borrowId == null || borrowId == '')
     {
         borrowId = WebApp.Value.getStoreVal('Detail_borrowId', '', $location, $timeout) ;
     }
-    //console.log(borrowId);
     var biao_typenid ={'rongsan':'融三板','bld':'保理贷','fangchan':'房抵贷','gou':'担保贷'};
     InvestsService.getProductInfo(borrowId, function (data) {
         data.tenderSchedule = WebApp.Utils.toReverse(data.tenderSchedule);
@@ -273,7 +271,6 @@ WebApp.Instance.controller('ProductdetailController', function ($routeParams, $r
             }
         }
 
-        //console.log(data);
     });
 
 

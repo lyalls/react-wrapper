@@ -1,0 +1,26 @@
+<div ui-content-for="title" >
+    <h1>发现</h1>
+</div>
+<div class="scrollable">
+    <div class="scrollable-content">
+        <div ng-controller="DiscoverController" ng-init="activeList()">
+            <article class="wx-mainbody">
+                <div class="forum-enter"><i></i>官方论坛</div>
+                <div class="wx-wrap-com"   ng-init="change()">
+                    <div class="title-discover"><h2>活动专区</h2></div>
+                    <ul class="active-list"  id="activeRecordList">
+                        <li ng-repeat="activeList in activeLists">
+                            <div class="title"></div>
+                            <h3 ng-if="activeList.status == 1">活动剩余时间：{{activeList.restTime}}</h3> 
+                            <div ng-if="activeList.status == 0" class="over-tips">活动已结束</div>
+                            <img src="{{activeList.imageUrl}}" />
+                            <span ng-if="activeList.status == 1" class="tag-state"></span>
+                            <div ng-if="activeList.status == 0" class="over-mask"></div>
+                        </li>
+                    </ul>
+                </div>
+                <div  ng-if="activeMore == 1"  ng-click="bottom()" class="loading-btn">点击加载更多</div>
+            </article>
+        </div>
+    </div>
+</div>

@@ -51,6 +51,15 @@ WebApp.Instance.factory('StagingService', function ($http, $location, $timeout) 
             }).error(function (response, status, headers, config) {
                 error(response);
             });
+        },
+        getNologinBannerData: function (success, error) {
+            //未登陆获取的 banner
+            $http.get('/top/wechat/nologin/banners')
+                .success(function (response, status, config) {
+                    success(response.data);
+                }).error(function (response, status, headers, config) {
+                error(response);
+            });
         }
 
     };

@@ -22,6 +22,7 @@ export function GNR_HOME_getBannerData(env){
                         .then(localBannerInfo =>{
                             console.log('Local banner info:', localBannerInfo);        
                             dispatch(receivedBannerData(localBannerInfo.homeBannerList));
+                            dispatch(receivedIntroInfo(localBannerInfo.introduceUrl));
                             return env.platform.exec('getLocalDataVersion', 'banner'); 
                         })
                         .then(version =>{
@@ -35,6 +36,18 @@ export function GNR_HOME_getBannerData(env){
                             if(remoteBannerInfo.bannerVersion && remoteBannerInfo.bannerVersion != localBannerVersion){
                                 console.log('Remote banner version:', remoteBannerInfo.bannerVersion, ', local banner version:', localBannerVersion);
                                 dispatch(receivedBannerData(remoteBannerInfo.homeBannerList));
+                                dispatch(receivedIntroInfo(remoteBannerInfo.introduceUrl));
+                                return env.platform.exec('setLocalDataVersion', {name: 'banner', version: remoteBannerInfo.bannerVersion})
+                                        .then(success => {
+                                                if(Number(success)){
+                                                    return exec.platform.exec('setLocalData', {
+                                                        name: 'banner',
+                                                        data: remoteBannerInfo
+                                                    });
+                                                }else{
+                                                    throw new Error('ERROR: failed to set local data version for banner');
+                                                }
+                                        })
                             }
                         })
                         .catch(function(error){
@@ -65,16 +78,34 @@ function receivedInvestList(data){
         receivedAt: new Date()
     }
 }
+// Received Data of Novice item in Homepage
+function receivedNoviceItem(data){
+    return {
+        type: actionTypes.GNR_HOME_UpdateNoviceItem,
+        data: data,
+        receivedAt: new Date()
+    }
+}
+// Received Introduction infomation in Homepage
+function receivedIntroInfo(data){
+    return {
+        type: actionTypes.GNR_HOME_UpdateIntroInfo,
+        data: data,
+        receivedAt: new Date()
+    }   
+}
 // getTopInverstsList
 export function GNR_HOME_getInvestList(env){
     if(env.platform.canInvokeNativeMethod()){
         return function(dispatch){
             return env.platform.requestAPI('top/borrow/manage/list')
                                 .then(function(data){
-                                    if(data && data.tenderList && data.tenderList.length > 0){
+                                    if(data && data.tenderList && data.tenderList.length > 1){
+                                        dispatch(receivedNoviceItem(data.tenderList.slice(0,1)));
+                                        data.tenderList.splice(0,1)
                                         dispatch(receivedInvestList(data));
                                     }else{
-                                        console.log('ERROR: tender list returned from native api is empty')
+                                        throw new Error('ERROR: tender list returned from native api is empty');
                                     }
                                 })
                                 .catch(function(error){

@@ -2,7 +2,7 @@ import actionTypes from '../actions/actionTypes';
 
 function returnTime(data) {
     var time = data.limitTime;
-    if (time <= 0) $interval.cancel(data.TimerId);
+    if (time <= 0) clearInterval(data.TimerId);
     var h = Math.floor(time/3600);
     var m = Math.floor(time%3600/60);
     var s = Math.floor(time%3600%60);

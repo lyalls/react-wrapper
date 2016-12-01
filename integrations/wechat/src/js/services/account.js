@@ -22,6 +22,21 @@ WebApp.Instance.factory('AccountService', function ($http, $location, $log, $tim
                 error(response);
             });
         },
+        accountLogsH5: function (data, success, error) {
+            $http.get('/users/account/logs/h5', {
+                params: {
+                    type: data.type,
+                    pageSize: data.pageSize,
+                    pageIndex: data.pageIndex},
+                headers: {
+                    'X-Authorization': WebApp.ClientStorage.getCurrentToken()
+                }
+            }).success(function (response, status, headers, config) {
+                success(response.data);
+            }).error(function (response, status, headers, config) {
+                error(response);
+            });
+        },
         //我的抱财
         myAccountINfo: function (success, error) {
             $http.get('/users', {
@@ -106,7 +121,7 @@ WebApp.Instance.factory('AccountService', function ($http, $location, $log, $tim
                 error(response);
             });
         },
-        //个人设置
+        //账号信息
         getUsersSettingInfo: function (success, error) {
             $http.get('/users/setting', {
                 headers: {

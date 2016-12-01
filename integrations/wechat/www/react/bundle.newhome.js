@@ -37699,6 +37699,10 @@
 	
 	var _index6 = _interopRequireDefault(_index5);
 	
+	var _index7 = __webpack_require__(729);
+	
+	var _index8 = _interopRequireDefault(_index7);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Home = function (_Component) {
@@ -37716,9 +37720,7 @@
 	        }
 	    }, {
 	        key: 'componentWillReceiveProps',
-	        value: function componentWillReceiveProps(nextProps) {
-	            this.setSessionStorage = nextProps.env.setSessionStorage;
-	        }
+	        value: function componentWillReceiveProps(nextProps) {}
 	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
@@ -37726,67 +37728,9 @@
 	                (0, _jquery2.default)('.content-for-m-header').attr('ui-content-for', 'm-header');
 	            }
 	        }
-	
-	        // 显示对话框
-	        // dialog(){
-	        //     var modalInstance = $modal.open({
-	        //         animation: true,
-	        //         templateUrl: 'xlbDialog',
-	        //         controller:'homePop',
-	        //         size: 20,
-	        //         resolve: {
-	        //             items: function () {
-	        //                 return $scope.items;
-	        //             }
-	        //         }
-	        //     });
-	        //     modalInstance.result.then(function (selectedItem) {
-	        //         $scope.selected = selectedItem;
-	        //     }, function () {
-	        //         $log.info('Modal dismissed at:' + new Date());
-	        //     });
-	        // };
-	
-	        // 投资详情
-	
-	    }, {
-	        key: 'getInvestDetail',
-	        value: function getInvestDetail(borrowId, pname, ifnew, limitTime) {
-	            if (arguments.length >= 4 && arguments[3] > 0) {
-	                // dialog();
-	                return; //限量标不给跳转
-	            }
-	            if (pname) {
-	                this.setSessionStorage('Detail_tender_plan_name', pname);
-	            }
-	            if (ifnew == 0 || ifnew == 1) {
-	                this.setSessionStorage('Detail_tender_if_new', ifnew + '');
-	            }
-	            this.setSessionStorage('Detail_borrowId', borrowId);
-	            window.location.href = "/#/invest/detail";
-	        }
-	    }, {
-	        key: 'getTenderInfoDetail',
-	
-	
-	        // 立即投资
-	        value: function getTenderInfoDetail(borrowId) {
-	            if (arguments.length >= 2 && arguments[1] > 0) return;
-	            if (borrowId) {
-	                this.setSessionStorage('Detail_borrowId', borrowId);
-	            }
-	            window.location.href = "/#/invest";
-	        }
-	    }, {
-	        key: 'gotoList',
-	        value: function gotoList() {
-	            window.location.href = "/#/invest/list";
-	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this2 = this;
-	
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'scrollable' },
@@ -37802,165 +37746,10 @@
 	                        'article',
 	                        { className: 'wx-mainbody' },
 	                        _react2.default.createElement(_index2.default, { items: this.props.banner.items }),
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'wx-index-pro-cont' },
-	                            _react2.default.createElement(
-	                                'ul',
-	                                { className: 'wx-index-pro-list' },
-	                                this.props.investList.investsList ? this.props.investList.investsList.map(function (list, idx) {
-	                                    var itemTitle = void 0;
-	                                    var fullThreshold = list.isFullThreshold == 1 ? _react2.default.createElement(
-	                                        'span',
-	                                        { className: 'red-tag' },
-	                                        '\u6EE1\u62A2'
-	                                    ) : "";
-	                                    if (list.isLimit != 1 || list.limitTime <= 0) {
-	                                        itemTitle = _react2.default.createElement(
-	                                            'h3',
-	                                            null,
-	                                            _react2.default.createElement(
-	                                                'em',
-	                                                { className: 'h3-title' },
-	                                                fullThreshold,
-	                                                list.name
-	                                            ),
-	                                            _react2.default.createElement('i', null)
-	                                        );
-	                                    } else {
-	                                        itemTitle = _react2.default.createElement(
-	                                            'h3',
-	                                            { className: 'count-down' },
-	                                            _react2.default.createElement('b', null),
-	                                            '\u5373\u5C06\u53D1\u552E\uFF1A',
-	                                            _react2.default.createElement(
-	                                                'time',
-	                                                null,
-	                                                list.timer
-	                                            )
-	                                        );
-	                                    }
-	                                    var isRead = list.isReward == 1 ? _react2.default.createElement(
-	                                        'span',
-	                                        { className: 'take' },
-	                                        list.promotionTitle
-	                                    ) : "";
-	                                    var isBonusTicket = list.isBonusticket == 1 ? _react2.default.createElement(
-	                                        'span',
-	                                        null,
-	                                        '\u7EA2\u5305\u5238'
-	                                    ) : "";
-	                                    var isAllowIncrease = list.isAllowIncrease == 1 ? _react2.default.createElement(
-	                                        'span',
-	                                        null,
-	                                        '\u52A0\u606F\u5238'
-	                                    ) : "";
-	                                    var isTag = list.isTag == 1 ? _react2.default.createElement(
-	                                        'span',
-	                                        null,
-	                                        list.tagTitle
-	                                    ) : "";
-	                                    var recommendMark = list.is_zhiding == true ? _react2.default.createElement('img', { src: './images/icon-recommend.png', className: 'recommend-mark' }) : "";
-	                                    return _react2.default.createElement(
-	                                        'li',
-	                                        { key: idx },
-	                                        _react2.default.createElement(
-	                                            'div',
-	                                            { className: "pro-box " + list.biao_type_zi_bgcss, onClick: _this2.getInvestDetail.bind(_this2, list.id, false, list.isNew, list.limitTime) },
-	                                            itemTitle,
-	                                            _react2.default.createElement(
-	                                                'dl',
-	                                                { className: 'pro-info' },
-	                                                _react2.default.createElement(
-	                                                    'dt',
-	                                                    null,
-	                                                    _react2.default.createElement(
-	                                                        'strong',
-	                                                        { className: list.isReward == 0 && list.isBonusticket == 0 && list.isAllowIncrease == 0 && list.isBonusticket == 0 ? 'only-data' : "" },
-	                                                        list.annualRate,
-	                                                        _react2.default.createElement(
-	                                                            'b',
-	                                                            { className: 'font-12' },
-	                                                            '%'
-	                                                        ),
-	                                                        list.increaseApr > 0 ? _react2.default.createElement(
-	                                                            'b',
-	                                                            { className: 'font-22' },
-	                                                            '+',
-	                                                            list.increaseApr
-	                                                        ) : "",
-	                                                        list.increaseApr > 0 ? _react2.default.createElement(
-	                                                            'b',
-	                                                            { className: 'font-12' },
-	                                                            '%'
-	                                                        ) : ""
-	                                                    ),
-	                                                    isRead,
-	                                                    isBonusTicket,
-	                                                    isAllowIncrease,
-	                                                    isTag
-	                                                ),
-	                                                _react2.default.createElement(
-	                                                    'dd',
-	                                                    null,
-	                                                    _react2.default.createElement(
-	                                                        'span',
-	                                                        null,
-	                                                        _react2.default.createElement(
-	                                                            'b',
-	                                                            null,
-	                                                            '\u501F\u6B3E\u671F\u9650\uFF1A'
-	                                                        ),
-	                                                        list.investmentHorizon
-	                                                    ),
-	                                                    _react2.default.createElement(
-	                                                        'span',
-	                                                        null,
-	                                                        _react2.default.createElement(
-	                                                            'b',
-	                                                            null,
-	                                                            '\u53EF\u6295\u91D1\u989D\uFF1A'
-	                                                        ),
-	                                                        list.availableAmount,
-	                                                        ' \u5143'
-	                                                    )
-	                                                )
-	                                            )
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            'div',
-	                                            { className: "index-list-tag " + list.biaotag },
-	                                            list.biao_type_zi
-	                                        ),
-	                                        recommendMark
-	                                    );
-	                                }) : ""
-	                            ),
-	                            this.props.investList.investsLen === 1 ? _react2.default.createElement(
-	                                'div',
-	                                { className: 'btn-area-com margin-t-1-5rem' },
-	                                this.props.investList.investsLen === 1 && this.props.investList.investsList[0].statusMessage == '投资中' && this.props.investList.investsList[0].biao_type_zi != '限量标' ? _react2.default.createElement(
-	                                    'a',
-	                                    { className: 'orange-radius-btn wd-80', onClick: this.getTenderInfoDetail.bind(this, this.props.investList.investsList[0].id) },
-	                                    '\u7ACB\u5373\u6295\u8D44'
-	                                ) : "",
-	                                this.props.investList.investsLen === 1 && this.props.investList.investsList[0].isLimit && this.props.investList.investsList[0].limitTime > 0 ? _react2.default.createElement(
-	                                    'a',
-	                                    { 'class': 'gray-radius-btn wd-80' },
-	                                    '\u5373\u5C06\u53D1\u552E'
-	                                ) : "",
-	                                this.props.investList.lastTenderInfo !== false ? _react2.default.createElement(
-	                                    'a',
-	                                    { 'class': 'gray-radius-btn wd-80' },
-	                                    new Date(this.props.investList.lastTenderInfo.addtime * 1000).getMonth() + 1 + "月" + new Date(this.props.investList.lastTenderInfo.addtime * 1000).getDate() + "日" + new Date(this.props.investList.lastTenderInfo.addtime * 1000).getHours() + ":" + new Date(this.props.investList.lastTenderInfo.addtime * 1000).getMinutes() + " 抢光"
-	                                ) : ""
-	                            ) : "",
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'loading-btn', onClick: this.gotoList.bind(this) },
-	                                '\u67E5\u770B\u66F4\u591A\u9879\u76EE'
-	                            )
-	                        )
+	                        _react2.default.createElement(_index8.default, {
+	                            env: this.props.env,
+	                            investList: this.props.investList
+	                        })
 	                    ),
 	                    _react2.default.createElement(_index4.default, null)
 	                )
@@ -38017,8 +37806,6 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// require('slick-carousel');
-	
 	var Carousel = function (_Component) {
 	    (0, _inherits3.default)(Carousel, _Component);
 	
@@ -38030,24 +37817,42 @@
 	    (0, _createClass3.default)(Carousel, [{
 	        key: 'render',
 	        value: function render() {
-	            var settings = {
-	                dots: this.props.items && this.props.items.length > 1,
-	                infinite: true,
-	                speed: 2000,
-	                arrows: false
-	            };
 	            if (this.props.items && this.props.items.length > 0) {
+	
+	                var settings = {
+	                    dots: this.props.items.length > 1,
+	                    speed: 500,
+	                    arrows: false
+	                };
+	                if (this.props.items.length > 1) {
+	                    settings = Object.prototype.assign(settings, {
+	                        infinite: true,
+	                        autoplay: true,
+	                        autoplaySpeed: 5000
+	                    });
+	                }
+	                console.log('Carousel settings:', settings, 'items:', this.props.items);
 	                var content = this.props.items.map(function (item, i) {
 	                    return _react2.default.createElement(
 	                        'a',
-	                        { key: 'banner' + i, id: 'banner' + i, href: item.actionUrl },
+	                        { key: 'banner' + i,
+	                            id: 'banner' + i,
+	                            href: item.actionUrl },
 	                        _react2.default.createElement('img', { src: item.imageUrl })
 	                    );
 	                });
 	                return _react2.default.createElement(
-	                    _reactSlick2.default,
-	                    settings,
-	                    content
+	                    'div',
+	                    { className: 'wx-banner' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'index-banner' },
+	                        _react2.default.createElement(
+	                            _reactSlick2.default,
+	                            settings,
+	                            content
+	                        )
+	                    )
 	                );
 	            } else {
 	                return _react2.default.createElement('div', null);
@@ -40380,7 +40185,7 @@
 /* 728 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -40410,10 +40215,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _index = __webpack_require__(729);
-	
-	var _index2 = _interopRequireDefault(_index);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Footer = function (_Component) {
@@ -40425,17 +40226,13 @@
 		}
 	
 		(0, _createClass3.default)(Footer, [{
-			key: 'render',
+			key: "render",
 			value: function render() {
 				return _react2.default.createElement(
-					_index2.default,
-					null,
-					_react2.default.createElement(
-						'header',
-						{ className: 'wx-header wx-index-head' },
-						_react2.default.createElement('h1', { className: 'logo' }),
-						_react2.default.createElement('a', { href: '/#/users/account', className: 'wx-index-top-my' })
-					)
+					"header",
+					{ className: "wx-header wx-index-head" },
+					_react2.default.createElement("h1", { className: "logo" }),
+					_react2.default.createElement("a", { href: "/#/users/account", className: "wx-index-top-my" })
 				);
 			}
 		}]);
@@ -40448,7 +40245,7 @@
 /* 729 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -40480,47 +40277,250 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var BaseComponent = function (_Component) {
-	    (0, _inherits3.default)(BaseComponent, _Component);
+	var InvestList = function (_Component) {
+	    (0, _inherits3.default)(InvestList, _Component);
 	
-	    function BaseComponent(props) {
-	        (0, _classCallCheck3.default)(this, BaseComponent);
-	        return (0, _possibleConstructorReturn3.default)(this, (BaseComponent.__proto__ || (0, _getPrototypeOf2.default)(BaseComponent)).call(this, props));
+	    function InvestList(props) {
+	        (0, _classCallCheck3.default)(this, InvestList);
+	        return (0, _possibleConstructorReturn3.default)(this, (InvestList.__proto__ || (0, _getPrototypeOf2.default)(InvestList)).call(this, props));
 	    }
 	
-	    (0, _createClass3.default)(BaseComponent, [{
-	        key: "render",
+	    (0, _createClass3.default)(InvestList, [{
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            this.setSessionStorage = nextProps.env.setSessionStorage;
+	        }
+	
+	        // 显示对话框
+	        // dialog(){
+	        //     var modalInstance = $modal.open({
+	        //         animation: true,
+	        //         templateUrl: 'xlbDialog',
+	        //         controller:'homePop',
+	        //         size: 20,
+	        //         resolve: {
+	        //             items: function () {
+	        //                 return $scope.items;
+	        //             }
+	        //         }
+	        //     });
+	        //     modalInstance.result.then(function (selectedItem) {
+	        //         $scope.selected = selectedItem;
+	        //     }, function () {
+	        //         $log.info('Modal dismissed at:' + new Date());
+	        //     });
+	        // };
+	
+	        // 投资详情
+	
+	    }, {
+	        key: 'getInvestDetail',
+	        value: function getInvestDetail(borrowId, pname, ifnew, limitTime) {
+	            if (arguments.length >= 4 && arguments[3] > 0) {
+	                // dialog();
+	                return; //限量标不给跳转
+	            }
+	            if (pname) {
+	                this.setSessionStorage('Detail_tender_plan_name', pname);
+	            }
+	            if (ifnew == 0 || ifnew == 1) {
+	                this.setSessionStorage('Detail_tender_if_new', ifnew + '');
+	            }
+	            this.setSessionStorage('Detail_borrowId', borrowId);
+	            window.location.href = "/#/invest/detail";
+	        }
+	    }, {
+	        key: 'getTenderInfoDetail',
+	
+	
+	        // 立即投资
+	        value: function getTenderInfoDetail(borrowId) {
+	            if (arguments.length >= 2 && arguments[1] > 0) return;
+	            if (borrowId) {
+	                this.setSessionStorage('Detail_borrowId', borrowId);
+	            }
+	            window.location.href = "/#/invest";
+	        }
+	    }, {
+	        key: 'gotoList',
+	        value: function gotoList() {
+	            window.location.href = "/#/invest/list";
+	        }
+	    }, {
+	        key: 'render',
 	        value: function render() {
-	            var style = {};
-	            if (this.props.x !== undefined && this.props.y !== undefined) {
-	                style = {
-	                    position: "absolute",
-	                    left: (this.props.x || 0) + "px",
-	                    top: (this.props.y || 0) + "px"
-	                };
-	            }
-	            if (this.props.width !== undefined) {
-	                style.width = this.width + "px";
-	            }
-	            if (this.props.height !== undefined) {
-	                style.height = this.height + "px";
-	            }
+	            var _this2 = this;
+	
 	            return _react2.default.createElement(
-	                "div",
-	                { style: style },
-	                this.props.children
+	                'div',
+	                { className: 'wx-index-pro-cont' },
+	                _react2.default.createElement(
+	                    'ul',
+	                    { className: 'wx-index-pro-list' },
+	                    this.props.investList.investsList ? this.props.investList.investsList.map(function (list, idx) {
+	                        var itemTitle = void 0;
+	                        var fullThreshold = list.isFullThreshold == 1 ? _react2.default.createElement(
+	                            'span',
+	                            { className: 'red-tag' },
+	                            '\u6EE1\u62A2'
+	                        ) : "";
+	                        if (list.isLimit != 1 || list.limitTime <= 0) {
+	                            itemTitle = _react2.default.createElement(
+	                                'h3',
+	                                null,
+	                                _react2.default.createElement(
+	                                    'em',
+	                                    { className: 'h3-title' },
+	                                    fullThreshold,
+	                                    list.name
+	                                ),
+	                                _react2.default.createElement('i', null)
+	                            );
+	                        } else {
+	                            itemTitle = _react2.default.createElement(
+	                                'h3',
+	                                { className: 'count-down' },
+	                                _react2.default.createElement('b', null),
+	                                '\u5373\u5C06\u53D1\u552E\uFF1A',
+	                                _react2.default.createElement(
+	                                    'time',
+	                                    null,
+	                                    list.timer
+	                                )
+	                            );
+	                        }
+	                        var isRead = list.isReward == 1 ? _react2.default.createElement(
+	                            'span',
+	                            { className: 'take' },
+	                            list.promotionTitle
+	                        ) : "";
+	                        var isBonusTicket = list.isBonusticket == 1 ? _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            '\u7EA2\u5305\u5238'
+	                        ) : "";
+	                        var isAllowIncrease = list.isAllowIncrease == 1 ? _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            '\u52A0\u606F\u5238'
+	                        ) : "";
+	                        var isTag = list.isTag == 1 ? _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            list.tagTitle
+	                        ) : "";
+	                        var recommendMark = list.is_zhiding == true ? _react2.default.createElement('img', { src: './images/icon-recommend.png', className: 'recommend-mark' }) : "";
+	                        return _react2.default.createElement(
+	                            'li',
+	                            { key: idx },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: "pro-box " + list.biao_type_zi_bgcss, onClick: _this2.getInvestDetail.bind(_this2, list.id, false, list.isNew, list.limitTime) },
+	                                itemTitle,
+	                                _react2.default.createElement(
+	                                    'dl',
+	                                    { className: 'pro-info' },
+	                                    _react2.default.createElement(
+	                                        'dt',
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            'strong',
+	                                            { className: list.isReward == 0 && list.isBonusticket == 0 && list.isAllowIncrease == 0 && list.isBonusticket == 0 ? 'only-data' : "" },
+	                                            list.annualRate,
+	                                            _react2.default.createElement(
+	                                                'b',
+	                                                { className: 'font-12' },
+	                                                '%'
+	                                            ),
+	                                            list.increaseApr > 0 ? _react2.default.createElement(
+	                                                'b',
+	                                                { className: 'font-22' },
+	                                                '+',
+	                                                list.increaseApr
+	                                            ) : "",
+	                                            list.increaseApr > 0 ? _react2.default.createElement(
+	                                                'b',
+	                                                { className: 'font-12' },
+	                                                '%'
+	                                            ) : ""
+	                                        ),
+	                                        isRead,
+	                                        isBonusTicket,
+	                                        isAllowIncrease,
+	                                        isTag
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        'dd',
+	                                        null,
+	                                        _react2.default.createElement(
+	                                            'span',
+	                                            null,
+	                                            _react2.default.createElement(
+	                                                'b',
+	                                                null,
+	                                                '\u501F\u6B3E\u671F\u9650\uFF1A'
+	                                            ),
+	                                            list.investmentHorizon
+	                                        ),
+	                                        _react2.default.createElement(
+	                                            'span',
+	                                            null,
+	                                            _react2.default.createElement(
+	                                                'b',
+	                                                null,
+	                                                '\u53EF\u6295\u91D1\u989D\uFF1A'
+	                                            ),
+	                                            list.availableAmount,
+	                                            ' \u5143'
+	                                        )
+	                                    )
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: "index-list-tag " + list.biaotag },
+	                                list.biao_type_zi
+	                            ),
+	                            recommendMark
+	                        );
+	                    }) : ""
+	                ),
+	                this.props.investList && this.props.investList.investsLen === 1 ? _react2.default.createElement(
+	                    'div',
+	                    { className: 'btn-area-com margin-t-1-5rem' },
+	                    this.props.investList.investsLen === 1 && this.props.investList.investsList[0].statusMessage == '投资中' && this.props.investList.investsList[0].biao_type_zi != '限量标' ? _react2.default.createElement(
+	                        'a',
+	                        { className: 'orange-radius-btn wd-80', onClick: this.getTenderInfoDetail.bind(this, this.props.investList.investsList[0].id) },
+	                        '\u7ACB\u5373\u6295\u8D44'
+	                    ) : "",
+	                    this.props.investList.investsLen === 1 && this.props.investList.investsList[0].isLimit && this.props.investList.investsList[0].limitTime > 0 ? _react2.default.createElement(
+	                        'a',
+	                        { 'class': 'gray-radius-btn wd-80' },
+	                        '\u5373\u5C06\u53D1\u552E'
+	                    ) : "",
+	                    this.props.investList.lastTenderInfo !== false ? _react2.default.createElement(
+	                        'a',
+	                        { 'class': 'gray-radius-btn wd-80' },
+	                        new Date(this.props.investList.lastTenderInfo.addtime * 1000).getMonth() + 1 + "月" + new Date(this.props.investList.lastTenderInfo.addtime * 1000).getDate() + "日" + new Date(this.props.investList.lastTenderInfo.addtime * 1000).getHours() + ":" + new Date(this.props.investList.lastTenderInfo.addtime * 1000).getMinutes() + " 抢光"
+	                    ) : ""
+	                ) : "",
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'loading-btn', onClick: this.gotoList.bind(this) },
+	                    '\u67E5\u770B\u66F4\u591A\u9879\u76EE'
+	                )
 	            );
 	        }
 	    }]);
-	    return BaseComponent;
+	    return InvestList;
 	}(_react.Component);
 	
-	BaseComponent.propTypes = {
-	    x: _react.PropTypes.number,
-	    y: _react.PropTypes.number
+	InvestList.PropTypes = {
+	    investList: _react.PropTypes.object,
+	    env: _react.PropTypes.object
 	};
 	
-	exports.default = BaseComponent;
+	exports.default = InvestList;
 
 /***/ },
 /* 730 */
@@ -40543,7 +40543,15 @@
 	
 	var _investList2 = _interopRequireDefault(_investList);
 	
-	var _actions = __webpack_require__(734);
+	var _noviceItem = __webpack_require__(734);
+	
+	var _noviceItem2 = _interopRequireDefault(_noviceItem);
+	
+	var _intro = __webpack_require__(735);
+	
+	var _intro2 = _interopRequireDefault(_intro);
+	
+	var _actions = __webpack_require__(736);
 	
 	var thisActions = _interopRequireWildcard(_actions);
 	
@@ -40553,7 +40561,9 @@
 	
 	exports.default = (0, _redux.combineReducers)({
 	    banner: _banner2.default,
-	    investList: _investList2.default
+	    investList: _investList2.default,
+	    noviceItem: _noviceItem2.default,
+	    intro: _intro2.default
 	});
 	var actions = exports.actions = thisActions;
 
@@ -40602,7 +40612,9 @@
 	});
 	exports.default = {
 	    GNR_HOME_UpdateBannerData: "GNR:HOME:UPDATE_BANNER_DATA",
-	    GNR_HOME_UpdateInvestList: "GNR:HOME:UPDATE_INVEST_LIST"
+	    GNR_HOME_UpdateInvestList: "GNR:HOME:UPDATE_INVEST_LIST",
+	    GNR_HOME_UpdateNoviceItem: "GNR:HOME:UPDATE_NOVICE_ITEM",
+	    GNR_HOME_UpdateIntroInfo: "GNR:HOME:UPDATE_INTRO_INFO"
 	};
 
 /***/ },
@@ -40629,7 +40641,7 @@
 	
 	function returnTime(data) {
 	    var time = data.limitTime;
-	    if (time <= 0) $interval.cancel(data.TimerId);
+	    if (time <= 0) clearInterval(data.TimerId);
 	    var h = Math.floor(time / 3600);
 	    var m = Math.floor(time % 3600 / 60);
 	    var s = Math.floor(time % 3600 % 60);
@@ -40728,6 +40740,79 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	
+	var _assign = __webpack_require__(172);
+	
+	var _assign2 = _interopRequireDefault(_assign);
+	
+	exports.default = noviceItem;
+	
+	var _actionTypes = __webpack_require__(732);
+	
+	var _actionTypes2 = _interopRequireDefault(_actionTypes);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function noviceItem() {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	    var action = arguments[1];
+	
+	    switch (action.type) {
+	        case _actionTypes2.default.GNR_HOME_UpdateNoviceItem:
+	            return (0, _assign2.default)({}, state, { item: action.data, receivedAt: action.receivedAt });
+	        default:
+	            return state;
+	    }
+	}
+
+/***/ },
+/* 735 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _assign = __webpack_require__(172);
+	
+	var _assign2 = _interopRequireDefault(_assign);
+	
+	exports.default = introInfo;
+	
+	var _actionTypes = __webpack_require__(732);
+	
+	var _actionTypes2 = _interopRequireDefault(_actionTypes);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function introInfo() {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	    var action = arguments[1];
+	
+	    switch (action.type) {
+	        case _actionTypes2.default.GNR_HOME_UpdateIntroInfo:
+	            return (0, _assign2.default)({}, state, { url: action.data, receivedAt: action.receivedAt });
+	        default:
+	            return state;
+	    }
+	}
+
+/***/ },
+/* 736 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _typeof2 = __webpack_require__(224);
+	
+	var _typeof3 = _interopRequireDefault(_typeof2);
+	
 	exports.GNR_HOME_getBannerData = GNR_HOME_getBannerData;
 	exports.GNR_HOME_getInvestList = GNR_HOME_getInvestList;
 	
@@ -40735,11 +40820,11 @@
 	
 	var _actionTypes2 = _interopRequireDefault(_actionTypes);
 	
-	var _isomorphicFetch = __webpack_require__(735);
+	var _isomorphicFetch = __webpack_require__(737);
 	
 	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 	
-	var _path = __webpack_require__(737);
+	var _path = __webpack_require__(739);
 	
 	var _path2 = _interopRequireDefault(_path);
 	
@@ -40758,13 +40843,13 @@
 	}
 	// Get Homepage Banner Data
 	function GNR_HOME_getBannerData(env) {
-	    var baseUrl = env ? env.settings('baseUrl') : "";
 	    if (env.platform.canInvokeNativeMethod()) {
 	        return function (dispatch) {
 	            var localBannerVersion = null;
 	            return env.platform.exec('getLocalData', 'banner').then(function (localBannerInfo) {
 	                console.log('Local banner info:', localBannerInfo);
 	                dispatch(receivedBannerData(localBannerInfo.homeBannerList));
+	                dispatch(receivedIntroInfo(localBannerInfo.introduceUrl));
 	                return env.platform.exec('getLocalDataVersion', 'banner');
 	            }).then(function (version) {
 	                console.log('Local banner version:', version);
@@ -40776,21 +40861,39 @@
 	                if (remoteBannerInfo.bannerVersion && remoteBannerInfo.bannerVersion != localBannerVersion) {
 	                    console.log('Remote banner version:', remoteBannerInfo.bannerVersion, ', local banner version:', localBannerVersion);
 	                    dispatch(receivedBannerData(remoteBannerInfo.homeBannerList));
+	                    dispatch(receivedIntroInfo(remoteBannerInfo.introduceUrl));
+	                    return env.platform.exec('setLocalDataVersion', { name: 'banner', version: remoteBannerInfo.bannerVersion }).then(function (success) {
+	                        if (Number(success)) {
+	                            return exec.platform.exec('setLocalData', {
+	                                name: 'banner',
+	                                data: remoteBannerInfo
+	                            });
+	                        } else {
+	                            throw new Error('ERROR: failed to set local data version for banner');
+	                        }
+	                    });
 	                }
 	            }).catch(function (error) {
 	                console.log(error);
 	            });
 	        };
 	    } else {
-	        return function (dispatch) {
-	            return (0, _isomorphicFetch2.default)(baseUrl + '/top/wechat/banners', { mode: 'no-cors' }).then(function (response) {
-	                return response.json();
-	            }).then(function (json) {
-	                return dispatch(receivedBannerData(json.data));
-	            }).catch(function (e) {
-	                console.log("ERROR when get banner data for Home page:", e);
-	            });
-	        };
+	        var _ret = function () {
+	            var baseUrl = env ? env.settings('baseUrl') : "";
+	            return {
+	                v: function v(dispatch) {
+	                    return (0, _isomorphicFetch2.default)(baseUrl + '/top/wechat/banners', { mode: 'no-cors' }).then(function (response) {
+	                        return response.json();
+	                    }).then(function (json) {
+	                        return dispatch(receivedBannerData(json.data));
+	                    }).catch(function (e) {
+	                        console.log("ERROR when get banner data for Home page:", e);
+	                    });
+	                }
+	            };
+	        }();
+	
+	        if ((typeof _ret === 'undefined' ? 'undefined' : (0, _typeof3.default)(_ret)) === "object") return _ret.v;
 	    }
 	}
 	
@@ -40803,42 +40906,80 @@
 	        receivedAt: new Date()
 	    };
 	}
+	// Received Data of Novice item in Homepage
+	function receivedNoviceItem(data) {
+	    return {
+	        type: _actionTypes2.default.GNR_HOME_UpdateNoviceItem,
+	        data: data,
+	        receivedAt: new Date()
+	    };
+	}
+	// Received Introduction infomation in Homepage
+	function receivedIntroInfo(data) {
+	    return {
+	        type: _actionTypes2.default.GNR_HOME_UpdateIntroInfo,
+	        data: data,
+	        receivedAt: new Date()
+	    };
+	}
 	// getTopInverstsList
 	function GNR_HOME_getInvestList(env) {
-	    var baseUrl = env ? env.settings('baseUrl') : "";
-	    var headers = env ? env.settings('headers') : {};
-	    return function (dispatch) {
-	        return (0, _isomorphicFetch2.default)(baseUrl + '/top/wechat/borrows', {
-	            mode: 'no-cors',
-	            method: 'get',
-	            params: {
-	                from: 4
-	            },
-	            headers: headers
-	        }).then(function (response) {
-	            return response.json();
-	        }).then(function (json) {
-	            return dispatch(receivedInvestList(json.data));
-	        }).catch(function (e) {
-	            console.log("ERROR when get invest list for Home page:", e);
-	        });
-	    };
+	    if (env.platform.canInvokeNativeMethod()) {
+	        return function (dispatch) {
+	            return env.platform.requestAPI('top/borrow/manage/list').then(function (data) {
+	                if (data && data.tenderList && data.tenderList.length > 1) {
+	                    dispatch(receivedNoviceItem(data.tenderList.slice(0, 1)));
+	                    data.tenderList.splice(0, 1);
+	                    dispatch(receivedInvestList(data));
+	                } else {
+	                    throw new Error('ERROR: tender list returned from native api is empty');
+	                }
+	            }).catch(function (error) {
+	                console.log(error);
+	            });
+	        };
+	    } else {
+	        var _ret2 = function () {
+	            var baseUrl = env ? env.settings('baseUrl') : "";
+	            var headers = env ? env.settings('headers') : {};
+	            return {
+	                v: function v(dispatch) {
+	                    return (0, _isomorphicFetch2.default)(baseUrl + '/top/wechat/borrows', {
+	                        mode: 'no-cors',
+	                        method: 'get',
+	                        params: {
+	                            from: 4
+	                        },
+	                        headers: headers
+	                    }).then(function (response) {
+	                        return response.json();
+	                    }).then(function (json) {
+	                        return dispatch(receivedInvestList(json.data));
+	                    }).catch(function (e) {
+	                        console.log("ERROR when get invest list for Home page:", e);
+	                    });
+	                }
+	            };
+	        }();
+	
+	        if ((typeof _ret2 === 'undefined' ? 'undefined' : (0, _typeof3.default)(_ret2)) === "object") return _ret2.v;
+	    }
 	}
 
 /***/ },
-/* 735 */
+/* 737 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// the whatwg-fetch polyfill installs the fetch() function
 	// on the global object (window or self)
 	//
 	// Return that as the export for use in Webpack, Browserify etc.
-	__webpack_require__(736);
+	__webpack_require__(738);
 	module.exports = self.fetch.bind(self);
 
 
 /***/ },
-/* 736 */
+/* 738 */
 /***/ function(module, exports) {
 
 	(function(self) {
@@ -41302,7 +41443,7 @@
 
 
 /***/ },
-/* 737 */
+/* 739 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
