@@ -112,7 +112,7 @@ wechat ios:
 		echo '<script src="/js/app.min.js"></script>' >> ${appTmpDir}/tmp.html ;\
 		echo '<script src="/react/platform.js"></script>' >> ${appTmpDir}/tmp.html ;\
 		echo '<script src="/react/bundle.common.js"></script>' >> ${appTmpDir}/tmp.html ;\
-		echo '<link ref="stylesheet" tyle="text/css" href="/react/bundle.style.css">' >> ${appTmpDir}/tmp.html ;\
+		echo '<link rel="stylesheet" type="text/css" href="/react/bundle.style.css">' >> ${appTmpDir}/tmp.html ;\
 		sed '1,/<script src="js\/app.min.js/ d' ${appIntegrationDir}/src/html/index.html >> ${appTmpDir}/tmp.html ;\
 		mv ${appTmpDir}/tmp.html ${appIntegrationDir}/src/html/index.html ;\
 		export PATH=`pwd`/node_modules/.bin:$${PATH} && cd ${appIntegrationDir} && gulp build_q ;\

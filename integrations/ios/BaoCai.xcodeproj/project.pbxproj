@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21ED682E1DF021D000893A65 /* Components in Resources */ = {isa = PBXBuildFile; fileRef = 21ED682D1DF021D000893A65 /* Components */; };
+		21ED68301DF026A400893A65 /* Components in Resources */ = {isa = PBXBuildFile; fileRef = 21ED682F1DF026A400893A65 /* Components */; };
 		515BF5F47FB56CE6CBDDB112 /* libPods-BaoCai.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6564FE1865D38A24932A5D87 /* libPods-BaoCai.a */; };
 		7B1053FE1DD4078F0082248C /* Base.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B1053FD1DD4078F0082248C /* Base.storyboard */; };
 		7B174C821DDAB7CC005EE9EC /* BCBaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B174C811DDAB7CC005EE9EC /* BCBaseTest.m */; };
@@ -389,7 +389,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		21ED682D1DF021D000893A65 /* Components */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Components; sourceTree = "<group>"; };
+		21ED682F1DF026A400893A65 /* Components */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Components; sourceTree = "<group>"; };
 		2AF3DC517BA101EF4E574145 /* Pods-BaoCaiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaoCaiTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaoCaiTests/Pods-BaoCaiTests.release.xcconfig"; sourceTree = "<group>"; };
 		4CA7468F5A264F9FCB759F61 /* Pods-BaoCaiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaoCaiTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaoCaiTests/Pods-BaoCaiTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6564FE1865D38A24932A5D87 /* libPods-BaoCai.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BaoCai.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1466,7 +1466,7 @@
 		7B58B6AF1DAF7733007FFA6C /* BaoCai */ = {
 			isa = PBXGroup;
 			children = (
-				21ED682D1DF021D000893A65 /* Components */,
+				21ED682F1DF026A400893A65 /* Components */,
 				7B58BFA21DB0889A007FFA6C /* BaoCai.entitlements */,
 				7B58B70A1DAF77DD007FFA6C /* Unit */,
 				7B58B6E61DAF77DC007FFA6C /* UI */,
@@ -2608,7 +2608,7 @@
 				7B58B85C1DAF792B007FFA6C /* addTicket@2x.png in Resources */,
 				7B4877571DD2CAAB00F8AAE1 /* Withdrawals.storyboard in Resources */,
 				7B58BF921DB08589007FFA6C /* launch568.png in Resources */,
-				21ED682E1DF021D000893A65 /* Components in Resources */,
+				21ED68301DF026A400893A65 /* Components in Resources */,
 				7B58BF821DB08589007FFA6C /* dot_selected@2x.png in Resources */,
 				7B58B7871DAF7883007FFA6C /* loginViewClose@2x.png in Resources */,
 				7B58B8751DAF792B007FFA6C /* myIcon5@2x.png in Resources */,
