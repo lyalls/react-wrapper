@@ -75,8 +75,7 @@ WebApp.Instance.controller('LoginController', function ($rootScope, $scope, $loc
             notify({message: WebApp.dealHttp(data, $location, $timeout), duration: WebApp.duration});
 
         });
-        //登录埋点
-        window._hmt && window._hmt.push(['_trackEvent', 'login', 'click', 'phone', keywords]);
+        
     };
 
     //忘记密码

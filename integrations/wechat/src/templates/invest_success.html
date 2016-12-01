@@ -7,8 +7,8 @@
             <img src="images/tender-success.png" alt="">
             <p>{{shareData.message}}</p>
             <div class="btn-area margin-t-3rem" style="background: #fff;">
-              <a class="gold-btn half-btn" ng-click="toSomePlace(pathAll.toHome)">继续投资</a>
-              <a class="gold-l-btn half-btn" ng-click="toSomePlace(pathAll.investHistory)">查看投资记录</a>
+              <a class="gold-btn half-btn" ng-click="toSomePlace(pathAll.toHome)" id="continue-invest" onclick="_hmt.push(['_trackEvent', '继续投资', 'click'])">继续投资</a>
+              <a class="gold-l-btn half-btn" ng-click="toSomePlace(pathAll.investHistory)" id="view-invest" onclick="_hmt.push(['_trackEvent', '查看投资记录', 'click'])">查看投资记录</a>
            </div>
              <a ng-href="{{shareData.data.url}}">
             <img  ng-show="shareData.data.show_share" ng-src="{{shareData.data.show_share_img}}" class="ad-btm" />

@@ -20,9 +20,9 @@
             </fieldset>
             <!--<p class="k_login_forget_password"></p>-->
             <div class="k_btn k_login_next" bc-focus="button">
-                <button ng-click="login()">登录</button>
+                <button ng-click="login()" id="login" onclick="_hmt.push(['_trackEvent', '登录', 'click'])">登录</button>
             </div> 
-            <p class="wx-login-txt"><a  ng-click="toForget()" class="float-l">忘记密码?</a><a href='#/reg' class="float-r">立即注册</a></p>
+            <p class="wx-login-txt"><a  ng-click="toForget()" class="float-l">忘记密码?</a><a href='#/reg' class="float-r" id="register" onclick="_hmt.push(['_trackEvent', '注册', 'click'])"> 立即注册</a></p>
         </form>
     </div>
     

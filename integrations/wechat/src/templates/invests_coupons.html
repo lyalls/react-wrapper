@@ -4,7 +4,7 @@
 </div>
 <div ui-content-for="navbarAction">
     <div bc-focus="button">
-        <button type="button" ng-click="toConpusRule()"  class="k_top_right_input"/>规则</button>
+        <button type="button" ng-click="toConpusRule()"  class="k_top_right_input" id="coupon-rule" onclick="_hmt.push(['_trackEvent', '选择优惠券-规则', 'click'])"/>规则</button>
     </div>
 </div>
 <div class="coupons scrollable">
@@ -15,12 +15,12 @@
         </ul>
     </div>
     <div id="couponsId" class="scrollable-content">
-        <div couponslist='bonuslist' my-title="红包券" ng-show="showtag" my-name='{{info}}' list='data.bounsList' item-click='itemClick(args)'></div>
-        <div couponslist='increaseList' my-title="加息券"   ng-show="!showtag" my-name='{{info}}' list='data.increaseList' item-click='itemClick(args)'></div>
+        <div couponslist='bonuslist' my-title="红包券" ng-show="showtag" my-name='{{info}}' list='data.bounsList' item-click='itemClick(args)' id="coupon-bouns" onclick="_hmt.push(['_trackEvent', '选择优惠券-红包券', 'click'])"></div>
+        <div couponslist='increaseList' my-title="加息券"   ng-show="!showtag" my-name='{{info}}' list='data.increaseList' item-click='itemClick(args)' id="coupon-increase" onclick="_hmt.push(['_trackEvent', '选择优惠券-加息券', 'click'])"></div>
     </div>
 
     <footer class="wx-scrollable-bottom">
-        <button class="orange-radius-btn wd-80" ng-click="btnDone()" type="button donebtn">确定</button>
+        <button class="orange-radius-btn wd-80" ng-click="btnDone()" type="button donebtn" id="coupon-confirm" onclick="_hmt.push(['_trackEvent', '选择优惠券-确定', 'click'])">确定</button>
     </footer>
 </div>
 </div>

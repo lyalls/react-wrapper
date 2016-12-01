@@ -94,9 +94,7 @@ wechat ios:
 	cat ${appTmpDir}/tmpHead.js ${appTmpDir}/tmp.js ${appTmpDir}/tmpTail.js > ${appTmpDir}/webpack.config.js
 	rm -rf ${appTmpDir}/tmp.js ${appTmpDir}/tmpHead.js ${appTmpDir}/tmpTail.js
 	# Run the webpack to build target components
-	export PATH=`pwd`/node_modules/.bin:$${PATH} ;\
-	cd ${appTmpDir} && which webpack ;\ 
-	webpack --config webpack.config.js --progress --colors --inline
+	export PATH=`pwd`/node_modules/.bin:$${PATH} && cd ${appTmpDir} && which webpack && webpack --config webpack.config.js --progress --colors --inline
 	cp ${platformPolygonFile} ${appTmpDir}/react
 	# Post-process for WeChat: 
 		# Move the template files to wechat template direcotory; 
@@ -114,7 +112,7 @@ wechat ios:
 		echo '<script src="/js/app.min.js"></script>' >> ${appTmpDir}/tmp.html ;\
 		echo '<script src="/react/platform.js"></script>' >> ${appTmpDir}/tmp.html ;\
 		echo '<script src="/react/bundle.common.js"></script>' >> ${appTmpDir}/tmp.html ;\
-		echo '<link ref="stylesheet" tyle="text/css" href="react/bundle.style.css">' >> ${appTmpDir}/tmp.html ;\
+		echo '<link ref="stylesheet" tyle="text/css" href="/react/bundle.style.css">' >> ${appTmpDir}/tmp.html ;\
 		sed '1,/<script src="js\/app.min.js/ d' ${appIntegrationDir}/src/html/index.html >> ${appTmpDir}/tmp.html ;\
 		mv ${appTmpDir}/tmp.html ${appIntegrationDir}/src/html/index.html ;\
 		export PATH=`pwd`/node_modules/.bin:$${PATH} && cd ${appIntegrationDir} && gulp build_q ;\

@@ -36,10 +36,10 @@
             <div class="active_code_pop_mask"></div>
         </div>
         <ul class="wx-menu-list-com">
-            <li ng-if="typeNid=='bld'" ng-click="getBorrowerInfo(investsDetail.id)"><label>企业介绍</label></li>
-            <li ng-if="typeNid!='bld'" ng-click="getBorrowerInfo(investsDetail.id)"><label>借款人信息</label></li>
-            <li ng-click="getProjectInfo(investsDetail.id)"><label>项目风控信息</label></li>
-            <li ng-click="getRecordInfo(investsDetail.id)"><label>投资记录</label><span>{{investsDetail.investPersonNum}}人</span></li>
+            <li ng-if="typeNid=='bld'" ng-click="getBorrowerInfo(investsDetail.id)" id="company-intro" onclick="_hmt.push(['_trackEvent', '企业介绍', 'click'])"><label>企业介绍</label></li>
+            <li ng-if="typeNid!='bld'" ng-click="getBorrowerInfo(investsDetail.id)" id="borrow-info" onclick="_hmt.push(['_trackEvent', '借款人信息', 'click'])"><label>借款人信息</label></li>
+            <li ng-click="getProjectInfo(investsDetail.id)" id="project-intro" onclick="_hmt.push(['_trackEvent', '项目分控信息', 'click'])"><label>项目风控信息</label></li>
+            <li ng-click="getRecordInfo(investsDetail.id)" id="invest-record" onclick="_hmt.push(['_trackEvent', '投资记录', 'click'])"><label>投资记录</label><span>{{investsDetail.investPersonNum}}人</span></li>
         </ul>
     </article>
 
@@ -58,7 +58,7 @@
                 <div ng-if="investsDetail.isFullThreshold ==1"><button ng-click="getTenderInfoDetail(investsDetail.id)" class="red-radius-btn wd-80 margin-t-05rem">投资{{investsDetail.availableAmount_num_new}}元</button></div>
             </div>
             <div ng-if="investsDetail.availableAmount_num_new > investsDetail.tenderAccountMin">
-                <div ng-if="investsDetail.isFullThreshold !=1"><button ng-click="getTenderInfoDetail(investsDetail.id)" class="orange-radius-btn wd-80 margin-t-05rem">立即投资</button></div>
+                <div ng-if="investsDetail.isFullThreshold !=1"><button ng-click="getTenderInfoDetail(investsDetail.id)" class="orange-radius-btn wd-80 margin-t-05rem" id="product-detail-invest" onclick="_hmt.push(['_trackEvent', '标的详情-立即投资', 'click'])">立即投资</button></div>
                 <div ng-if="investsDetail.isFullThreshold ==1"><button ng-click="getTenderInfoDetail(investsDetail.id)" class="red-radius-btn wd-80 margin-t-05rem">抢满标</button></div>
             </div>
         </div>

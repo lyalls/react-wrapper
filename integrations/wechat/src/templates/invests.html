@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-xs-12 item">
                 账户余额：<span class="color_type1">{{formatNum(tenderInfo.availableBalance)}}</span> 元
-                <button ng-controller="PaymentController" type="button" value="充值" ng-click="toRecharge()"  class="right button_type1"/>充值</button>
+                <button ng-controller="PaymentController" type="button" value="充值" ng-click="toRecharge()"  class="right button_type1" id="invest-recharge" onclick="_hmt.push(['_trackEvent', '投资页充值', 'click'])"/>充值</button>
             </div>
              <div class="col-xs-12 item">项目可投金额：<span class="color_type1">{{formatNum(tenderInfo.availableAmount)}}</span> 元</div>
         </div>
@@ -20,7 +20,7 @@
                        ng-model="investAmount" ng-change="investAmountChanged()"/> </div>
         </div>
         <div class="row couposrow" ng-if="couposshow">
-            <div class="col-xs-12" ng-click="gotoSelectCoupos()">
+            <div class="col-xs-12" ng-click="gotoSelectCoupos()" id="invest-coupon" onclick="_hmt.push(['_trackEvent', '投资页-优惠券', 'click'])">
                 优惠劵:<span class="right color_type1">{{conusinfo}}</span>
              </div>
         </div>
@@ -38,8 +38,8 @@
                         value="马上投资" ng-click="investBc(investAmount)" />-->
             <d  iv class="k_btn k_invests_next" ng-model="pathAll" bc-focus="button">
                 <button ng-if="projectData.tenderAccountMin <= 100 && tenderInfo.isFullShow == 1" ng-click="preCheck(investAmount, tenderInfo.availableAmount, tenderInfo.availableBalance)" style="background: #ff5842;">抢满标</button>
-                <button ng-if="projectData.tenderAccountMin <= 100 && tenderInfo.isFullShow != 1" ng-click="preCheck(investAmount, tenderInfo.availableAmount, tenderInfo.availableBalance)">立即投资</button>
-                <button ng-if="projectData.tenderAccountMin > 100 && projectData.availableAmount_num_new > projectData.tenderAccountMin" ng-click="preCheck(investAmount, tenderInfo.availableAmount, tenderInfo.availableBalance)">立即投资</button>
+                <button ng-if="projectData.tenderAccountMin <= 100 && tenderInfo.isFullShow != 1" ng-click="preCheck(investAmount, tenderInfo.availableAmount, tenderInfo.availableBalance)" id="invest-to" onclick="_hmt.push(['_trackEvent', '投资页-立即投资', 'click'])">立即投资</button>
+                <button ng-if="projectData.tenderAccountMin > 100 && projectData.availableAmount_num_new > projectData.tenderAccountMin" ng-click="preCheck(investAmount, tenderInfo.availableAmount, tenderInfo.availableBalance)" id="invest-to" onclick="_hmt.push(['_trackEvent', '投资页-立即投资', 'click'])">立即投资</button>
                 <button ng-if="projectData.tenderAccountMin > 100 && projectData.availableAmount_num_new <= projectData.tenderAccountMin" ng-click="preCheck(investAmount, tenderInfo.availableAmount, tenderInfo.availableBalance)">投资{{projectData.availableAmount_num_new}} 元</button>
                 <div style="margin-top: 20px; padding-left: 30px; padding-right: 30px; font-size: 1.5rem;">
                 	点击立即投资，即表示您已同意按
@@ -142,8 +142,8 @@
                         </div>
                         <div class="k_clear">
                         <div class="common_popup_bottom_btns">
-                            <button ng-click="cancel()" class="same_btn gray-font">取消</button>
-                            <button ng-click="toSomePlace(pathAll.validateIDCard)" class="same_btn">立即认证</button>                            
+                            <button ng-click="cancel()" class="same_btn gray-font" id="invest-norealname-cancel" onclick="_hmt.push(['_trackEvent', '投资页-未实名-取消', 'click'])">取消</button>
+                            <button ng-click="toSomePlace(pathAll.validateIDCard)" class="same_btn" id="invest-norealname-set" onclick="_hmt.push(['_trackEvent', '投资页-未实名-立即设置', 'click'])">立即认证</button>                            
                         </div>       
                         </div>
                         </div>
@@ -181,8 +181,8 @@
                         </div>
                         <div class="k_clear">
                             <div class="common_popup_bottom_btns">
-                            <button ng-click="cancel()" class="same_btn gray-font">取消</button>
-                            <button ng-click="toSomePlace(pathAll.setPayPassword)" class="same_btn">立即设置</button>                            
+                            <button ng-click="cancel()" class="same_btn gray-font" id="invest-paypass-cancel" onclick="_hmt.push(['_trackEvent', '投资页-交易密码-取消', 'click'])">取消</button>
+                            <button ng-click="toSomePlace(pathAll.setPayPassword)" class="same_btn" id="invest-paypass-set" onclick="_hmt.push(['_trackEvent', '投资页-交易密码-立即设置', 'click'])">立即设置</button>                            
                             </div>
                         </div>
                         </div>
@@ -192,8 +192,8 @@
                         <div class="k_layer_txt"><p>主人，您的余额不足,请进行充值！</p></div>
                         <div class="k_clear">
                             <div class="common_popup_bottom_btns">
-                            <button ng-click="cancel()" class="same_btn gray-font">取消</button>
-                            <button ng-click="toSomePlace(pathAll.rechargeM)" class="same_btn">立即充值</button>
+                            <button ng-click="cancel()" class="same_btn gray-font" id="invest-balance-cancel" onclick="_hmt.push(['_trackEvent', '投资页-余额不足-取消', 'click'])">取消</button>
+                            <button ng-click="toSomePlace(pathAll.rechargeM)" class="same_btn" id="invest-balance-set" onclick="_hmt.push(['_trackEvent', '投资页-余额不足-立即充值', 'click'])">立即充值</button>
                             </div>
                         </div>
                         </div>

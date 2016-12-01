@@ -15,7 +15,7 @@
                            placeholder="请设置登录密码"
                            onpaste="return false"
                            ng-model="setPassword" />
-                    <span class="pw-status"><img src="{{imgPass}}" width="50%" ng-click="showPass()"></span>
+                    <span class="pw-status"><img src="{{imgPass}}" width="50%" ng-click="showPass()" id="register-pass" onclick="_hmt.push(['_trackEvent', '注册设置密码', 'click'])"></span>
                 </div>
                 <div class="k_input" bc-focus="input">
                     <input type="text"
@@ -24,7 +24,7 @@
                 </div>
             </fieldset>
             <div class="k_btn k_reg_name_next" bc-focus="input">
-                <button  ng-click="register()">完成</button>
+                <button  ng-click="register()" id="register—finish" onclick="_hmt.push(['_trackEvent', '注册完成', 'click'])">完成</button>
             </div> 
         </form>
     </div>

@@ -15,7 +15,7 @@ class Carousel extends Component {
                     arrows: false,
             }
             if(this.props.items.length > 1){
-                settings = Object.prototype.assign(settings, {
+                settings = Object.assign(settings, {
                     infinite: true,
                     autoplay: true,
                     autoplaySpeed: 5000

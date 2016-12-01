@@ -27,17 +27,17 @@
 
      <ul class="account-ser-list">
          <li>
-             <div ng-click="bcChangeUrl(bcAllUrl.MY_INVEST)"><i class="icon-acc-01"></i>我的投资</div>
-             <div ng-click="bcChangeUrl(bcAllUrl.TRAN_RECORD)"><i class="icon-acc-02"></i>交易记录</div>
+             <div ng-click="bcChangeUrl(bcAllUrl.MY_INVEST)" id="account-invest" onclick="_hmt.push(['_trackEvent', '我的账户-我的投资', 'click'])"><i class="icon-acc-01"></i>我的投资</div>
+             <div ng-click="bcChangeUrl(bcAllUrl.TRAN_RECORD)" id="account-trace" onclick="_hmt.push(['_trackEvent', '我的账户-交易记录', 'click'])"><i class="icon-acc-02"></i>交易记录</div>
          </li>
          <li>
-             <div ng-click="bcChangeUrl(bcAllUrl.MY_COUPON)"><i class="icon-acc-03"></i>我的优惠券</div>
-             <div ng-click="bcChangeUrl(bcAllUrl.INVITE)"><i class="icon-acc-04"></i>邀请好友</div>
+             <div ng-click="bcChangeUrl(bcAllUrl.MY_COUPON)" id="account-coupon" onclick="_hmt.push(['_trackEvent', '我的账户-我的优惠券', 'click'])"><i class="icon-acc-03"></i>我的优惠券</div>
+             <div ng-click="bcChangeUrl(bcAllUrl.INVITE)" id="account-friend" onclick="_hmt.push(['_trackEvent', '我的账户-邀请好友', 'click'])"><i class="icon-acc-04"></i>邀请好友</div>
          </li>
      </ul>
      <div class="btn-area-com margin-t-2rem">
-		<a href="javascript:void(0)" class="orange-radius-btn w-half" ng-controller="PaymentController" ng-click="toRecharge()">充值</a>
-		<a href="javascript:void(0)" class="orange-l-radius-btn w-half" ng-controller="PresentController" ng-click="getPresentInfo()">提现</a>
+		<a href="javascript:void(0)" class="orange-radius-btn w-half" ng-controller="PaymentController" ng-click="toRecharge()" id="account-recharge" onclick="_hmt.push(['_trackEvent', '我的账户-充值', 'click'])">充值</a>
+		<a href="javascript:void(0)" class="orange-l-radius-btn w-half" ng-controller="PresentController" ng-click="getPresentInfo()" id="account-present" onclick="_hmt.push(['_trackEvent', '我的账户-提现', 'click'])">提现</a>
 	 </div>
 	 
 </article>
@@ -54,8 +54,8 @@
                    <p class="leftp">主人，您还未进行实名认证，请认证后进行充值！</p>                  
            </div>
            <div class="common_popup_bottom_btns">
-                   <button ng-click="cancel()"  class="same_btn gray-font">取消</button>
-                   <button ng-click="toSomePlace(pathAll.validateIDCard)" class="same_btn">立即认证</button>
+                   <button ng-click="cancel()"  class="same_btn gray-font" id="account-recharge-cancel" onclick="_hmt.push(['_trackEvent', '我的账户-充值取消', 'click'])">取消</button>
+                   <button ng-click="toSomePlace(pathAll.validateIDCard)" class="same_btn" id="account-recharge-set" onclick="_hmt.push(['_trackEvent', '我的账户-充值立即认证', 'click'])">立即认证</button>
            </div>
       </div>
 </script>
@@ -66,8 +66,8 @@
     </div>
     <div class="k_clear">
     <div class="common_popup_bottom_btns">
-        <button ng-click="cancel()" class="same_btn gray-font">取消</button>
-        <button ng-click="toSomePlace(pathAll.setPayPassword)" class="same_btn">立即设置</button>
+        <button ng-click="cancel()" class="same_btn gray-font" id="account-present-cancel" onclick="_hmt.push(['_trackEvent', '我的账户-提现取消', 'click'])">取消</button>
+        <button ng-click="toSomePlace(pathAll.setPayPassword)" class="same_btn" id="account-present-cancel" onclick="_hmt.push(['_trackEvent', '我的账户-提现立即认证', 'click'])">立即设置</button>
     </div>
     </div>
     </div>

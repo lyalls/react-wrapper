@@ -3,7 +3,7 @@
     
 <div ui-content-for="m-header" >
 <header class="wx-header wx-common-head">
-    <i class="go-back" ng-click="goHistory()" ></i><h1>邀请好友</h1><span><a href="/#/invite/rule" >规则</a></span>
+    <i class="go-back" ng-click="goHistory()" ></i><h1>邀请好友</h1><span><a href="/#/invite/rule" id="invite-friend-rule" onclick="_hmt.push(['_trackEvent', '邀请好友-规则', 'click'])">规则</a></span>
 </header>
 </div>
     
@@ -58,11 +58,11 @@
     
 <footer ng-if="isWeChat" class="ui-footer btn-area-com btm-btn-space">
     <!--wechat jump -->
-    <a href="{{inviteUrl}}" class="orange-radius-btn wd-94 font-18">立即邀请好友</a>
+    <a href="{{inviteUrl}}" class="orange-radius-btn wd-94 font-18" id="invite-friend" onclick="_hmt.push(['_trackEvent', '邀请好友', 'click'])">立即邀请好友</a>
 </footer>
 <footer ng-if="!isWeChat" class="ui-footer btn-area-com btm-btn-space">
     <!--other -->
-    <a ng-click="inviteShare(inviteCode)" class="orange-radius-btn wd-94 font-18">立即邀请好友</a>
+    <a ng-click="inviteShare(inviteCode)" class="orange-radius-btn wd-94 font-18" id="invite-friend" onclick="_hmt.push(['_trackEvent', '邀请好友', 'click'])">立即邀请好友</a>
 </footer>
 </div>
 </div>
