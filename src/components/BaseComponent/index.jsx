@@ -73,21 +73,61 @@ class BaseComponent extends Component {
         }
 
         if(style.position == undefined){
-            style.position = "absolute";
+            if((this.props.relative !== undefined && !this.props.relative)
+                ||(this.props.absolute !== undefined && this.props.absolute)
+                ){
+                style.position = "absolute";
+            }else{
+                style.position = "relative";
+            }
         }
 
         this.state = style;
     }
     onWindowResize(event){
         if(this.props.fullWidth){
-            this.setState({width : window.innerWidth})
+            this.setState({width : window.innerWidth});
+        }
+        if(this.props.fullHeight){
+            this.setState({height: window.innerHeight});
         }
     }
     componentDidMount() {
-        window.onresize = this.onWindowResize.bind(this);
+        if(this.props.fullWidth || this.props.fullHeight){
+            if(window.onresize === undefined || window.onresize === null){
+                function Resizer(){
+                    this.listeners = [];
+                }
+                Resizer.prototype.addListener = function(listener){
+                    this.listeners.push(listener);
+                }
+                Resizer.prototype.removeListener = function(listener){
+                    const idx = this.listeners.indexOf(listener);
+                    if(idx >= 0){
+                        this.listeners.splice(idx,1);
+                    }
+                }
+                Resizer.prototype.respondOrAddListener = function(eventOrListener){
+                    if(typeof eventOrListener === 'function'){
+                        this.addListener(eventOrListener);
+                    }else{
+                        this.listeners.forEach( func => {
+                            if(typeof func !== 'function') return;
+                            func(eventOrListener);
+                        });
+                    }
+                }
+
+                function generateResponder(){
+                    let resizer = new Resizer();
+                    return resizer.respondOrAddListener.bind(resizer);
+                }
+                window.onresize = generateResponder();
+            }
+            window.onresize(this.onWindowResize.bind(this));
+        }
     }
     render(){
-        
         return (
             <div style={this.state} className = {this.props.className} >
                 {this.props.children}
@@ -111,6 +151,7 @@ BaseComponent.propTypes = {
     style: PropTypes.object,
     centerX: PropTypes.number,
     centerY: PropTypes.number,
+    relative: PropTypes.bool,
 }
 
 export default BaseComponent;

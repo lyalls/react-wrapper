@@ -12,11 +12,12 @@ class NoviceItem extends Component {
 				<BaseComponent height={76} width={19} x={25} y={0} 
 					className={"novice-item-icon"} 
 					style={{backgroundSize: "19px 76px"}}
+					absolute
 				/>
-				<BaseComponent left={50} right={50} top={8 * heightScale} height={30} className={"novice-item-name-label"} />
+				<BaseComponent left={50} right={50} top={8 * heightScale} height={30} className={"novice-item-name-label"} absolute/>
 				{/* Missing progress circle view */}
-				<BaseComponent centerX={0} centerY={0} width={177 * heightScale} height={177 * heightScale}>
-					<BaseComponent left={15} right={15} top={15} bottom={15}
+				<BaseComponent centerX={0} centerY={0} width={177 * heightScale} height={177 * heightScale} absolute>
+					<BaseComponent absolute left={15} right={15} top={15} bottom={15}
 						className={"novice-item-circle-bg"}  
 						style = {{backgroundSize: (177 * heightScale - 30) +'px'}}
 					/>

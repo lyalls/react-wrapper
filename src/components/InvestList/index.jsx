@@ -59,7 +59,7 @@ class InvestList extends Component {
     }
     render(){
         return (
-                <BaseComponent fullWidth style={{position: 'relative'}}>
+                <BaseComponent fullWidth>
                     <div className="wx-index-pro-cont">
                         <ul className="wx-index-pro-list" >
                             {
