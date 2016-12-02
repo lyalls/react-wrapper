@@ -93,6 +93,7 @@ class BaseComponent extends Component {
         }
     }
     componentDidMount() {
+        // queue for window resize event
         if(this.props.fullWidth || this.props.fullHeight){
             if(window.onresize === undefined || window.onresize === null){
                 function Resizer(){
@@ -118,11 +119,8 @@ class BaseComponent extends Component {
                     }
                 }
 
-                function generateResponder(){
-                    let resizer = new Resizer();
-                    return resizer.respondOrAddListener.bind(resizer);
-                }
-                window.onresize = generateResponder();
+                let resizer = new Resizer();
+                window.onresize = resizer.respondOrAddListener.bind(resizer);;
             }
             window.onresize(this.onWindowResize.bind(this));
         }
