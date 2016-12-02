@@ -4,6 +4,8 @@ import Carousel from '../../../components/Carousel/index.jsx';
 import Footer from '../../../components/Footer/index.jsx';
 import Header from '../../../components/Header/index.jsx';
 import InvestList from '../../../components/InvestList/index.jsx';
+import NoviceItem from '../../../components/NoviceItemInHomePage/index.jsx'
+
 
 class Home extends Component {
     constructor(props) {
@@ -29,6 +31,12 @@ class Home extends Component {
                 }
                 <article className="wx-mainbody">   
                     <Carousel items={this.props.banner.items} />
+
+                    {
+                        (this.props.env.platform.isWechat || this.props.env.platform.isIOS || this.props.env.platform.isAndroid) 
+                        ? <NoviceItem />
+                        : ""
+                    }
                     <InvestList 
                         env = {this.props.env}
                         investList = {this.props.investList} 

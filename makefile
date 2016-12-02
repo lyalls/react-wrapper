@@ -67,6 +67,7 @@ wechat ios:
 			elif [[ $${file} == app.less ]]; then \
 				echo '@import "slick.less";' >> ./src/css/$${file} ;\
 				echo '@import "slick-theme.less";' >> ./src/css/$${file} ;\
+				echo '@import "react.components.less";' >> ./src/css/$${file} ;\
 			fi ;\
 		done; \
 	fi

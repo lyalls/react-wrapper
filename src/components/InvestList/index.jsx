@@ -1,4 +1,5 @@
 import React , {Component, PropTypes} from 'react';
+import BaseComponent from '../BaseComponent/index.jsx';
 
 class InvestList extends Component {
     constructor(props) {
@@ -58,7 +59,8 @@ class InvestList extends Component {
     }
     render(){
         return (
-                <div className="wx-index-pro-cont">
+                <BaseComponent fullWidth style={{position: 'relative'}}>
+                    <div className="wx-index-pro-cont">
                         <ul className="wx-index-pro-list" >
                             {
                                 this.props.investList.investsList ?
@@ -136,6 +138,7 @@ class InvestList extends Component {
                         }
                         <div className="loading-btn" onClick={this.gotoList.bind(this)}>查看更多项目</div>
                     </div>
+                </BaseComponent>
         );
     }
 }
