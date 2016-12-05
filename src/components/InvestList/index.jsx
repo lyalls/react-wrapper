@@ -1,5 +1,9 @@
 import React , {Component, PropTypes} from 'react';
 import BaseComponent from '../BaseComponent/index.jsx';
+import NoviceItem from '../NoviceItemInHomePage/index.jsx'
+import AnnualRate from '../AnnualRate/index.jsx'
+import ItemTags from '../ItemTags/index.jsx'
+import IntroIcons from '../IntroIcons/index.jsx'
 
 class InvestList extends Component {
     constructor(props) {
@@ -31,6 +35,7 @@ class InvestList extends Component {
 
     // 投资详情
     getInvestDetail (borrowId,pname,ifnew,limitTime) {
+        console.log(borrowId, pname, ifnew, limitTime);
         if (arguments.length >= 4 && arguments[3] > 0) {
             // dialog();
             return; //限量标不给跳转
@@ -54,28 +59,58 @@ class InvestList extends Component {
         window.location.href = "/#/invest";
     };
 
+    gotoPage(pageName){
+        switch(pageName){
+        case 'investList':
+            window.location.href = "/#/invest/list";
+            break;
+        case 'aboutus':
+            window.location.href = "/#/aboutus/index";
+            break;
+        default:
+            break;
+        }
+    }
     gotoList(){
-        window.location.href = "/#/invest/list" ;
+        this.gotoPage('investList');
+    }
+    itemTitle(item){
+        let itemTitle;
+        let fullThreshold = (item.isFullThreshold==1)?<span className="red-tag">满抢</span>:"";
+        if(item.isLimit != 1 || item.limitTime<=0){
+            itemTitle = <h3><em className="h3-title">{fullThreshold}{item.name}</em><i></i></h3>;
+        }else{
+            itemTitle = <h3 className="count-down"><b></b>即将发售：<time>{item.timer}</time></h3>;
+        }
+        return itemTitle;
     }
     render(){
+        let separateNoviceItem = ((this.props.env.platform.isIOS || this.props.env.platform.isAndroid) && this.props.investList.investsList && this.props.investList.investsList.length > 0);
+        let investList = (separateNoviceItem)? this.props.investList.investsList.slice(1) : this.props.investList.investsList;
+        let noviceItemData = (separateNoviceItem)? this.props.investList.investsList[0] : {};
+        let noviceItemTitle = this.itemTitle(noviceItemData);
         return (
                 <BaseComponent fullWidth>
+                    {
+                        separateNoviceItem
+                        ? <BaseComponent fullWidth>
+                            <IntroIcons
+                                onClick={this.gotoPage.bind(this, 'aboutus')}
+                            />
+                            <NoviceItem heightScale = {this.props.heightScale} height = {this.props.noviceHeight} 
+                                    itemData={noviceItemData} itemTitle={noviceItemTitle}
+                                    onClick={this.getInvestDetail.bind(this,noviceItemData.id,false,noviceItemData.isNew, noviceItemData.limitTime)}
+                            />
+
+                          </BaseComponent>
+                        : ""
+                    }
                     <div className="wx-index-pro-cont">
                         <ul className="wx-index-pro-list" >
                             {
-                                this.props.investList.investsList ?
-                                this.props.investList.investsList.map( (list, idx) =>{
-                                    let itemTitle;
-                                    let fullThreshold = (list.isFullThreshold==1)?<span className="red-tag">满抢</span>:"";
-                                    if(list.isLimit != 1 || list.limitTime<=0){
-                                        itemTitle = <h3><em className="h3-title">{fullThreshold}{list.name}</em><i></i></h3>;
-                                    }else{
-                                        itemTitle = <h3 className="count-down"><b></b>即将发售：<time>{list.timer}</time></h3>;
-                                    }
-                                    let isRead = (list.isReward==1)? <span className="take">{list.promotionTitle}</span> : "";
-                                    let isBonusTicket = (list.isBonusticket == 1) ? <span >红包券</span> : "";
-                                    let isAllowIncrease = (list.isAllowIncrease == 1) ? <span>加息券</span> : "";
-                                    let isTag = (list.isTag == 1) ? <span>{list.tagTitle}</span> : "";
+                                investList ?
+                                investList.map( (list, idx) =>{
+                                    let itemTitle = this.itemTitle(list);
                                     let recommendMark = (list.is_zhiding == true) ? <img src="./images/icon-recommend.png" className="recommend-mark"/> : "";
                                     return (
                                         <li key={idx}>
@@ -83,19 +118,8 @@ class InvestList extends Component {
                                                 {itemTitle}
                                                 <dl className="pro-info">
                                                     <dt>
-                                                        <strong className={(list.isReward==0 && list.isBonusticket==0 && list.isAllowIncrease == 0 && list.isBonusticket==0)?'only-data':""}>
-                                                            {list.annualRate}<b className="font-12">%</b>
-                                                            {
-                                                                (list.increaseApr > 0)? <b className="font-22">+{list.increaseApr}</b> : ""
-                                                            }
-                                                            {
-                                                                (list.increaseApr > 0)? <b className="font-12">%</b>: ""
-                                                            }
-                                                        </strong>
-                                                        {isRead}
-                                                        {isBonusTicket}
-                                                        {isAllowIncrease}
-                                                        {isTag}
+                                                        <AnnualRate investItem={list} />
+                                                        <ItemTags investItem = {list} />
                                                     </dt>
                                                     <dd><span><b>借款期限：</b>{list.investmentHorizon}</span><span><b>可投金额：</b>{list.availableAmount} 元</span></dd>
                                                 </dl>
@@ -146,6 +170,8 @@ class InvestList extends Component {
 InvestList.PropTypes = {
     investList: PropTypes.object,
     env: PropTypes.object,
+    heightScale: PropTypes.number,
+    noviceHeight: PropTypes.number,
 }
 
 export default InvestList;

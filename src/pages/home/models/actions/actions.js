@@ -101,11 +101,11 @@ export function GNR_HOME_getInvestList(env){
             return env.platform.requestAPI('top/borrow/manage/list')
                                 .then(function(data){
                                     if(data && data.tenderList && data.tenderList.length > 1){
-                                        dispatch(receivedNoviceItem(data.tenderList.slice(0,1)));
-                                        data.tenderList.splice(0,1)
+                                        // dispatch(receivedNoviceItem(data.tenderList.slice(0,1)));
+                                        // data.tenderList.splice(0,1);
                                         dispatch(receivedInvestList(data));
                                     }else{
-                                        throw new Error('ERROR: tender list returned from native api is empty');
+                                        throw new Error('ERROR: tender list returned from native api is empty:', data);
                                     }
                                 })
                                 .catch(function(error){

@@ -21,7 +21,6 @@ class Carousel extends Component {
                     autoplaySpeed: 5000
                 })
             }
-            console.log('Carousel settings:', settings, 'items:', this.props.items);
             let content = this.props.items.map( (item, i) => (
                         <a  key = { 'banner' + i } 
                             id = {'banner'+i} 

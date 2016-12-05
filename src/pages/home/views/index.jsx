@@ -4,7 +4,6 @@ import Carousel from '../../../components/Carousel/index.jsx';
 import Footer from '../../../components/Footer/index.jsx';
 import Header from '../../../components/Header/index.jsx';
 import InvestList from '../../../components/InvestList/index.jsx';
-import NoviceItem from '../../../components/NoviceItemInHomePage/index.jsx'
 
 
 class Home extends Component {
@@ -23,6 +22,9 @@ class Home extends Component {
     }
 
     render(){
+        let isShowNotice = false;
+        let heightScale = window.innerHeight - 113 > 568 - 113 ? (window.innerHeight - 113) / (568 - 113) : 1 ;
+        let noviceHeight = 233 * heightScale + (isShowNotice ? 0 : (20 * heightScale + 8 * heightScale))
         return (
             <div className="scrollable">
             <div className="scrollable-content k_p0">
@@ -31,14 +33,9 @@ class Home extends Component {
                 }
                 <article className="wx-mainbody">   
                     <Carousel items={this.props.banner.items} />
-
-                    {
-                        (this.props.env.platform.isWechat || this.props.env.platform.isIOS || this.props.env.platform.isAndroid) 
-                        ? <NoviceItem />
-                        : ""
-                    }
                     <InvestList 
                         env = {this.props.env}
+                        heightScale = {heightScale} noviceHeight = {noviceHeight}
                         investList = {this.props.investList} 
                     />
                 </article>
