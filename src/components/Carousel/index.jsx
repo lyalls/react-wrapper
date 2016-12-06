@@ -29,7 +29,6 @@ class Carousel extends Component {
                         </a>
                     ));
             return (
-
                 <div className="wx-banner">
                     <div className="index-banner">
                     <Slider {...settings} >

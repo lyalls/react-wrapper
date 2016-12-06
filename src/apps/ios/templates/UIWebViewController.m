@@ -18,6 +18,8 @@
 #import <MWPhotoBrowser/MWPhotoBrowser.h>
 #import "HTTPRequest.h"
 
+#import "UITenderDetailViewController.h"
+
 @interface UIWebViewController()<UIWebViewDelegate,NJKWebViewProgressDelegate>
 {
     dispatch_queue_t _queue;
@@ -347,6 +349,45 @@
     [_webView loadRequest:self.req];
 }
 
+// 打开投资详情页
+-(void) getInvestDetail:(id)params callId:(id)callId{
+    NSString *tenderId = [params objectForKey:@"borrowId"];
+    if(tenderId != nil){
+        UITenderDetailViewController *viewController = [[UITenderDetailViewController alloc] init];
+        viewController.tenderId = tenderId;
+        [self.navigationController pushViewController:viewController animated:YES];
+    }else{
+        NSLog(@"ERROR: [%@] can't getKey 'borrowId' from params {%@}, when invoked by H5 in native method [getInvestDetail:callId]", [self class], params);
+    }
+}
+
+// 跳转到指定页面
+-(void) gotoPage:(id)params callId:(id)callId{
+    NSString *pageName = [params objectForKey:@"pageName"];
+    if(pageName != nil){
+        if([pageName isEqualToString:@"aboutus"]){
+            NSString *introduceUrl = [params objectForKey:@"url"];
+            [self openWebBrowserWithUrl: introduceUrl];
+        }else{
+            NSLog(@"ERROR: [%@] doesn't support pageName [%@] in params {%@}, when invoked by H5 in native method [gotoPage:callId]", [self class], pageName, params);
+        }
+    }else{
+        NSLog(@"ERROR: [%@] can't getKey 'pageName' from params {%@}, when invoked by H5 in native method [gotoPage:callId]", [self class], params);
+    }
+}
+
+// 打开散标详情页
+-(void) getTenderInfoDetail:(id) params callId:(id)callId{
+    NSString *tenderId = [params objectForKey:@"borrowId"];
+    if(tenderId != nil){
+        UITenderDetailViewController *viewController = [[UITenderDetailViewController alloc] init];
+        viewController.tenderId = tenderId;
+        [self.navigationController pushViewController:viewController animated:YES];
+    }else{
+        NSLog(@"ERROR: [%@] can't getKey 'borrowId' from params {%@}, when invoked by H5 in native method [getTenderInfoDetail:callId]", [self class], params);
+    }
+}
+
 // MARK: 本地数据 与 API 请求
 // 获取本地数据版本
 -(void) getLocalDataVersion:(id)dataName callId:(NSString*)callId{
@@ -480,7 +521,8 @@
     dispatch_async(_queue, ^{
          for (NSArray* params in jsArray) {
              NSLog(@"%@ is going to execute native method from H5 invocation, params: %@", [self class], params);
-             SEL sel = NSSelectorFromString([NSString stringWithFormat:@"%@:callId:",params[0]]);
+             NSString *selName = [NSString stringWithFormat:@"%@:callId:",params[0]];
+             SEL sel = NSSelectorFromString(selName);
              NSString* callId = nil;
              if([params[2] isKindOfClass:[NSString class]])
              {
@@ -506,7 +548,8 @@
                     });
                  }
                  else{
-                     NSLog(@"method:%@ not found",params[0]);
+                     NSLog(@"ERROR: [%@] Native method: %@ (%@ in native) not found, which was invoked by H5 request",
+                           [self class], params[0], selName);
                  }
              }
          }

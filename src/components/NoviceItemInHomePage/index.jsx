@@ -54,14 +54,14 @@ class NoviceItem extends Component {
 								sizeAdjustment={{width: 4, height: 0}} textAlign={'center'}>
 						{this.props.itemData.investmentHorizon}
 					</BaseComponent>
-					{/* tags */}
-					<BaseComponent absolute centerX={0} bottom={5*heightScale} >
-						<dl className="pro-info">
-							<dt>
-								<ItemTags investItem={this.props.itemData} />
-							</dt>
-						</dl>
-					</BaseComponent>
+				</BaseComponent>
+				{/* tags */}
+				<BaseComponent absolute centerX={0} bottom={5*heightScale} >
+					<dl className="pro-info">
+						<dt>
+							<ItemTags investItem={this.props.itemData} />
+						</dt>
+					</dl>
 				</BaseComponent>
 			</BaseComponent>
 		);

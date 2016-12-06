@@ -26,7 +26,7 @@ const envSettings = {
         canInvokeNativeMethod: function(){ 
             return (
                 App && App.platform && typeof App.platform.exec === 'function' 
-                && (this.isIOS || this.isAndroid)
+                && (this.isIOS || this.isAndroid || this.isWechat)
             )
         },
         exec: function(cmd, param){

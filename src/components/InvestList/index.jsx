@@ -10,7 +10,6 @@ class InvestList extends Component {
         super(props);
     }
     componentWillReceiveProps(nextProps) {
-        this.setSessionStorage = nextProps.env.setSessionStorage;
     }
 
     // 显示对话框
@@ -35,44 +34,17 @@ class InvestList extends Component {
 
     // 投资详情
     getInvestDetail (borrowId,pname,ifnew,limitTime) {
-        console.log(borrowId, pname, ifnew, limitTime);
-        if (arguments.length >= 4 && arguments[3] > 0) {
-            // dialog();
-            return; //限量标不给跳转
-        }
-        if(pname){
-            this.setSessionStorage('Detail_tender_plan_name',pname)
-        }
-        if(ifnew==0 || ifnew==1){
-            this.setSessionStorage('Detail_tender_if_new',ifnew+'');
-        }
-        this.setSessionStorage('Detail_borrowId', borrowId);
-        window.location.href = "/#/invest/detail";
+        this.props.getInvestDetail(...arguments);
     };
 
     // 立即投资
     getTenderInfoDetail(borrowId) {
-        if (arguments.length >= 2 && arguments[1] > 0) return;
-        if (borrowId) {
-            this.setSessionStorage('Detail_borrowId', borrowId);
-        }
-        window.location.href = "/#/invest";
+        this.props.getTenderInfoDetail(...arguments);
     };
 
-    gotoPage(pageName){
-        switch(pageName){
-        case 'investList':
-            window.location.href = "/#/invest/list";
-            break;
-        case 'aboutus':
-            window.location.href = "/#/aboutus/index";
-            break;
-        default:
-            break;
-        }
-    }
-    gotoList(){
-        this.gotoPage('investList');
+    // 跳转页面
+    gotoPage(pageName, params){
+        this.props.gotoPage(pageName, params);
     }
     itemTitle(item){
         let itemTitle;
@@ -85,7 +57,7 @@ class InvestList extends Component {
         return itemTitle;
     }
     render(){
-        let separateNoviceItem = ((this.props.env.platform.isIOS || this.props.env.platform.isAndroid) && this.props.investList.investsList && this.props.investList.investsList.length > 0);
+        let separateNoviceItem = this.props.isSeparateFirstNoviceItem;
         let investList = (separateNoviceItem)? this.props.investList.investsList.slice(1) : this.props.investList.investsList;
         let noviceItemData = (separateNoviceItem)? this.props.investList.investsList[0] : {};
         let noviceItemTitle = this.itemTitle(noviceItemData);
@@ -94,14 +66,16 @@ class InvestList extends Component {
                     {
                         separateNoviceItem
                         ? <BaseComponent fullWidth>
+                            <BaseComponent fullWidth height={8*this.props.heightScale} backgroundColor={"#EFEFEF"} />
                             <IntroIcons
-                                onClick={this.gotoPage.bind(this, 'aboutus')}
+                                onClick={this.gotoPage.bind(this, 'aboutus', {url: this.props.introUrl})}
                             />
+                            <BaseComponent fullWidth height={8*this.props.heightScale} backgroundColor={"#EFEFEF"} />
                             <NoviceItem heightScale = {this.props.heightScale} height = {this.props.noviceHeight} 
                                     itemData={noviceItemData} itemTitle={noviceItemTitle}
                                     onClick={this.getInvestDetail.bind(this,noviceItemData.id,false,noviceItemData.isNew, noviceItemData.limitTime)}
                             />
-
+                            <BaseComponent fullWidth height={8*this.props.heightScale} backgroundColor={"#EFEFEF"} />
                           </BaseComponent>
                         : ""
                     }
@@ -160,7 +134,21 @@ class InvestList extends Component {
                             </div>
                             :""
                         }
-                        <div className="loading-btn" onClick={this.gotoList.bind(this)}>查看更多项目</div>
+                        {
+                            separateNoviceItem
+                            ?<BaseComponent>
+                                <BaseComponent fullWidth height={8*this.props.heightScale} backgroundColor={"#EFEFEF"} />
+                                <BaseComponent fullWidth 
+                                    height={12*this.props.heightScale} 
+                                    backgroundColor={"#EFEFEF"}  
+                                >
+                                    <BaseComponent absolute centerY={0} centerX={0} color={"#D0D0D0"} fontSize={12}> 
+                                        投资有风险，选择需谨慎 
+                                    </BaseComponent>
+                                </BaseComponent>
+                             </BaseComponent>
+                            :<div className="loading-btn" onClick={this.gotoPage.bind(this,'investList')}>查看更多项目</div>
+                        }
                     </div>
                 </BaseComponent>
         );
@@ -172,6 +160,11 @@ InvestList.PropTypes = {
     env: PropTypes.object,
     heightScale: PropTypes.number,
     noviceHeight: PropTypes.number,
+    isSeparateFirstNoviceItem: PropTypes.bool,
+    getInvestDetail: PropTypes.func,
+    getTenderInfoDetail: PropTypes.func,
+    gotoPage: PropTypes.func,
+    introUrl: PropTypes.string,
 }
 
 export default InvestList;

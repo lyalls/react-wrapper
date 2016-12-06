@@ -43,7 +43,7 @@ class BaseComponent extends Component {
         style.left = props.x || props.left || style.left;
         style.top = props.y || props.top || style.right;
 
-        for(let propName of ['right', 'bottom', 'width', 'height', 'fontSize', 'color', 'textAlign']){
+        for(let propName of ['right', 'bottom', 'width', 'height', 'fontSize', 'color', 'textAlign', 'backgroundColor']){
             if(props[propName] !== undefined){
                 style[propName] = props[propName];
             }
@@ -211,6 +211,7 @@ BaseComponent.propTypes = {
     right: PropTypes.number,
     className: PropTypes.string,
     style: PropTypes.object,
+    backgroundColor: PropTypes.string,
     centerX: PropTypes.number,
     centerY: PropTypes.number,
     relative: PropTypes.bool,
