@@ -128,7 +128,7 @@ wechat ios:
 				cp ${appTemplateDir}/$${comp}/* ${appIntegrationDir}/BaoCai/UI/Home/Controller ;\
 			fi ;\
 		done;\
-		cp ${appTemplateDir}/UIWebViewController.* ${appIntegrationDir}/BaoCai/UI/Base/Controller ;\
+		cp ${appTemplateDir}/UIWebViewController* ${appIntegrationDir}/BaoCai/UI/Base/Controller ;\
 		cp -r ${appTmpDir}/react ${appIntegrationDir}/BaoCai/Components/react ;\
 	fi
 	rm -rf ${appTmpDir}

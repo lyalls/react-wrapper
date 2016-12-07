@@ -8,17 +8,16 @@
 
 #import "UIWebViewController.h"
 #import "NSString+Category.h"
-#import "UIShareViewController.h"
 #import "UILoginViewController.h"
 #import "NJKWebViewProgressView.h"
 #import "NJKWebViewProgress.h"
 #import "UIViewController+WebView.h"
 #import "UIAlertView+Category.h"
 #import "UIPlayViewController.h"
-#import <MWPhotoBrowser/MWPhotoBrowser.h>
 #import "HTTPRequest.h"
+#import <MWPhotoBrowser/MWPhotoBrowser.h>
+#import "UIShareViewController.h"
 
-#import "UITenderDetailViewController.h"
 
 @interface UIWebViewController()<UIWebViewDelegate,NJKWebViewProgressDelegate>
 {
@@ -191,41 +190,18 @@
     }
 }
 
-// MARK: WebView消息 及 NSNotificationCenter相关业务消息
-//title改变
--(void) titleChanged:(id)parmas callId:(NSString*)callId
+//打开登录页面
+-(void) openLoginPage:(id)parmas callId:(NSString*)callId
 {
-    self.title = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    if(callId)
-    {
-        [self JSCallback:callId param:@""];
-    }
-}
-
-- (void)loginSuccess {
-    //刷新
-    // NSString* url = _webView.request.URL.absoluteString;
-    NSString *url = self.req.URL.absoluteString;
-    if(_logPath)
-    {
-        url = _logPath;
-        _logPath = nil;
-    }
+    _logPath = parmas;
+    UIStoryboard *loginRegisterStoryboard = [UIStoryboard storyboardWithName:@"LoginRegister" bundle:nil];
+    UINavigationController* nav = [loginRegisterStoryboard instantiateViewControllerWithIdentifier:@"LoginViewNav"];
     
-    self.req = [self getWebBrowserRequestWithUrl:url];
-    NSLog(@"%@ is going to reload when login success to url: %@", [self class], url);
-    [self reLoad:nil callId:nil];
+    UILoginViewController *view = (UILoginViewController*)nav.topViewController;
+    
+    [view show:self callback:nil];
 }
 
-- (void)logoutSuccess {
-    //刷新
-    // NSString* url = _webView.request.URL.absoluteString;
-    NSString *url = self.req.URL.absoluteString;
-    self.req = [self getWebBrowserRequestWithUrl:url];
-    [self reLoad:nil callId:nil];
-}
-
-// MARK: Native 页面跳转
 //默认左边导航栏按钮动作
 -(void)leftButtonPress:(id)sender
 {
@@ -236,6 +212,28 @@
     else{
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+
+//显示图片
+-(void) showImage:(id)parmas callId:(NSString*)callId
+{
+    NSNumber* currentIndex = [parmas valueForKey:@"index"];
+    NSMutableArray* list = [[NSMutableArray alloc] init];
+    for (NSString* url in [parmas valueForKey:@"list"]) {
+        [list addObject:[MWPhoto photoWithURL:[url toURL]]];
+    }
+    
+    MWPhotoBrowser *photoBrowser = [[MWPhotoBrowser alloc] initWithPhotos:list];
+    photoBrowser.displayActionButton = NO;
+    photoBrowser.displayNavArrows = NO;
+    photoBrowser.displaySelectionButtons = NO;
+    photoBrowser.alwaysShowControls = NO;
+    photoBrowser.zoomPhotosToFill = YES;
+    photoBrowser.enableGrid = NO;
+    photoBrowser.startOnGrid = NO;
+    photoBrowser.enableSwipeToDismiss = NO;
+    [photoBrowser setCurrentPhotoIndex:[currentIndex integerValue]];
+    [self.navigationController pushViewController:photoBrowser animated:YES];
 }
 
 //分享
@@ -286,29 +284,19 @@
     
 }
 
-//显示对话框
--(void) showImage:(id)parmas callId:(NSString*)callId
+//重新加载页面
+-(void) reLoad:(id)parmas callId:(NSString*)callId
 {
-    NSNumber* currentIndex = [parmas valueForKey:@"index"];
-    NSMutableArray* list = [[NSMutableArray alloc] init];
-    for (NSString* url in [parmas valueForKey:@"list"]) {
-        [list addObject:[MWPhoto photoWithURL:[url toURL]]];
+    
+    if(parmas)
+    {
+        self.req = [self getWebBrowserRequestWithUrl:parmas];
     }
     
-    MWPhotoBrowser *photoBrowser = [[MWPhotoBrowser alloc] initWithPhotos:list];
-    photoBrowser.displayActionButton = NO;
-    photoBrowser.displayNavArrows = NO;
-    photoBrowser.displaySelectionButtons = NO;
-    photoBrowser.alwaysShowControls = NO;
-    photoBrowser.zoomPhotosToFill = YES;
-    photoBrowser.enableGrid = NO;
-    photoBrowser.startOnGrid = NO;
-    photoBrowser.enableSwipeToDismiss = NO;
-    [photoBrowser setCurrentPhotoIndex:[currentIndex integerValue]];
-    [self.navigationController pushViewController:photoBrowser animated:YES];
+    [_webView loadRequest:self.req];
 }
 
-//显示视频播放
+//播放视频
 -(void) showVideo:(id)parmas callId:(NSString*)callId
 {
     UIPlayViewController *play = [self getControllerByStoryBoardType:StoryBoardTypeTender identifier:@"UIPlayViewController"];
@@ -326,66 +314,38 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-//打开登录页面
--(void) openLoginPage:(id)parmas callId:(NSString*)callId
+// MARK: WebView消息 及 NSNotificationCenter相关业务消息
+//title改变
+-(void) titleChanged:(id)parmas callId:(NSString*)callId
 {
-    _logPath = parmas;
-    UIStoryboard *loginRegisterStoryboard = [UIStoryboard storyboardWithName:@"LoginRegister" bundle:nil];
-    UINavigationController* nav = [loginRegisterStoryboard instantiateViewControllerWithIdentifier:@"LoginViewNav"];
-    
-    UILoginViewController *view = (UILoginViewController*)nav.topViewController;
-    
-    [view show:self callback:nil];
-}
-//重新加载页面
--(void) reLoad:(id)parmas callId:(NSString*)callId
-{
-    
-    if(parmas)
+    self.title = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    if(callId)
     {
-        self.req = [self getWebBrowserRequestWithUrl:parmas];
+        [self JSCallback:callId param:@""];
+    }
+}
+
+- (void)loginSuccess {
+    //刷新
+    // NSString* url = _webView.request.URL.absoluteString;
+    NSString *url = self.req.URL.absoluteString;
+    if(_logPath)
+    {
+        url = _logPath;
+        _logPath = nil;
     }
     
-    [_webView loadRequest:self.req];
+    self.req = [self getWebBrowserRequestWithUrl:url];
+    NSLog(@"%@ is going to reload when login success to url: %@", [self class], url);
+    [self reLoad:nil callId:nil];
 }
 
-// 打开投资详情页
--(void) getInvestDetail:(id)params callId:(id)callId{
-    NSString *tenderId = [params objectForKey:@"borrowId"];
-    if(tenderId != nil){
-        UITenderDetailViewController *viewController = [[UITenderDetailViewController alloc] init];
-        viewController.tenderId = tenderId;
-        [self.navigationController pushViewController:viewController animated:YES];
-    }else{
-        NSLog(@"ERROR: [%@] can't getKey 'borrowId' from params {%@}, when invoked by H5 in native method [getInvestDetail:callId]", [self class], params);
-    }
-}
-
-// 跳转到指定页面
--(void) gotoPage:(id)params callId:(id)callId{
-    NSString *pageName = [params objectForKey:@"pageName"];
-    if(pageName != nil){
-        if([pageName isEqualToString:@"aboutus"]){
-            NSString *introduceUrl = [params objectForKey:@"url"];
-            [self openWebBrowserWithUrl: introduceUrl];
-        }else{
-            NSLog(@"ERROR: [%@] doesn't support pageName [%@] in params {%@}, when invoked by H5 in native method [gotoPage:callId]", [self class], pageName, params);
-        }
-    }else{
-        NSLog(@"ERROR: [%@] can't getKey 'pageName' from params {%@}, when invoked by H5 in native method [gotoPage:callId]", [self class], params);
-    }
-}
-
-// 打开散标详情页
--(void) getTenderInfoDetail:(id) params callId:(id)callId{
-    NSString *tenderId = [params objectForKey:@"borrowId"];
-    if(tenderId != nil){
-        UITenderDetailViewController *viewController = [[UITenderDetailViewController alloc] init];
-        viewController.tenderId = tenderId;
-        [self.navigationController pushViewController:viewController animated:YES];
-    }else{
-        NSLog(@"ERROR: [%@] can't getKey 'borrowId' from params {%@}, when invoked by H5 in native method [getTenderInfoDetail:callId]", [self class], params);
-    }
+- (void)logoutSuccess {
+    //刷新
+    // NSString* url = _webView.request.URL.absoluteString;
+    NSString *url = self.req.URL.absoluteString;
+    self.req = [self getWebBrowserRequestWithUrl:url];
+    [self reLoad:nil callId:nil];
 }
 
 // MARK: 本地数据 与 API 请求
