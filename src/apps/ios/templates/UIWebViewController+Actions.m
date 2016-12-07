@@ -30,15 +30,13 @@
 // 跳转到指定页面
 -(void) gotoPage:(id)params callId:(id)callId{
     NSString *pageName = [params objectForKey:@"pageName"];
-    if(pageName != nil){
-        if([pageName isEqualToString:@"aboutus"]){
-            NSString *introduceUrl = [params objectForKey:@"url"];
-            [self openWebBrowserWithUrl: introduceUrl];
-        }else{
-            NSLog(@"ERROR: [%@] doesn't support pageName [%@] in params {%@}, when invoked by H5 in native method [gotoPage:callId]", [self class], pageName, params);
-        }
+    NSString *url = [params objectForKey:@"url"];
+    if(url != nil){
+        [self openWebBrowserWithUrl: url];
+    }else if(pageName != nil){
+        NSLog(@"ERROR: [%@] doesn't support pageName [%@] in params {%@}, when invoked by H5 in native method [gotoPage:callId]", [self class], pageName, params);
     }else{
-        NSLog(@"ERROR: [%@] can't getKey 'pageName' from params {%@}, when invoked by H5 in native method [gotoPage:callId]", [self class], params);
+        NSLog(@"ERROR: [%@] can't getKey 'pageName' or 'url' from params {%@}, when invoked by H5 in native method [gotoPage:callId]", [self class], params);
     }
 }
 

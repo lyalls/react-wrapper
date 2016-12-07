@@ -5,9 +5,13 @@ class Carousel extends Component {
     constructor(props) {
         super(props);
     }
-    openUrl(event){
-        event.preventDefault();
-        console.log('[Carousel] open url:', event);
+    openUrl(e){
+        if(this.props.env.platform.canInvokeNativeMethod()){
+            e.preventDefault();
+            if(e.currentTarget.href){
+                this.props.env.platform.exec('gotoPage', {url: e.currentTarget.href});
+            }
+        }
     }
     render(){
         if(this.props.items && this.props.items.length > 0){
@@ -30,7 +34,7 @@ class Carousel extends Component {
                             href = { item.actionUrl }
                             onClick={this.openUrl.bind(this)}
                         >
-                            <img src = {item.imageUrl} />
+                            <img src = {item.imageUrl}/>
                         </a>
                     ));
             return (
@@ -51,6 +55,7 @@ class Carousel extends Component {
 }
 
 Carousel.propTypes = {
+    env: PropTypes.object,
     items: PropTypes.array,
     openUrl: PropTypes.func,
 }

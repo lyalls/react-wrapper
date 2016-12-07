@@ -120,6 +120,7 @@ wechat ios:
 		cd - && cp ${appTemplateDir}/jquery-3.1.1.min.js ${appIntegrationDir}/www/js ;\
 		cp -r ${appTmpDir}/react ${appIntegrationDir}/www/react ;\
 	elif [[ ${target} == ios ]]; then \
+		rm -rf ${appIntegrationDir}/BaoCai/Components ;\
 		mkdir -p ${appIntegrationDir}/BaoCai/Components ;\
 		for comp in `echo ${components}`; do \
 			targetFileName=`echo $${comp}|awk '{print $1}' FS=":"`; \
