@@ -5,7 +5,9 @@ class Carousel extends Component {
     constructor(props) {
         super(props);
     }
-
+    openUrl(url){
+        console.log('[Carousel] open url:', url);
+    }
     render(){
         if(this.props.items && this.props.items.length > 0){
 
@@ -24,7 +26,9 @@ class Carousel extends Component {
             let content = this.props.items.map( (item, i) => (
                         <a  key = { 'banner' + i } 
                             id = {'banner'+i} 
-                            href = { item.actionUrl }>
+                            href = { item.actionUrl }
+                            onClick={this.openUrl.bind(this, item.actionUrl)}
+                        >
                             <img src = {item.imageUrl} />
                         </a>
                     ));
@@ -46,7 +50,8 @@ class Carousel extends Component {
 }
 
 Carousel.propTypes = {
-    items: PropTypes.array
+    items: PropTypes.array,
+    openUrl: PropTypes.func,
 }
 
 export default Carousel;

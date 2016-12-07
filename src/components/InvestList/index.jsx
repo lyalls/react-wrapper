@@ -47,6 +47,7 @@ class InvestList extends Component {
         this.props.gotoPage(pageName, params);
     }
     itemTitle(item){
+        if(!item) return null;
         let itemTitle;
         let fullThreshold = (item.isFullThreshold==1)?<span className="red-tag">满抢</span>:"";
         if(item.isLimit != 1 || item.limitTime<=0){
@@ -58,13 +59,18 @@ class InvestList extends Component {
     }
     render(){
         let separateNoviceItem = this.props.isSeparateFirstNoviceItem;
-        let investList = (separateNoviceItem)? this.props.investList.investsList.slice(1) : this.props.investList.investsList;
-        let noviceItemData = (separateNoviceItem)? this.props.investList.investsList[0] : {};
-        let noviceItemTitle = this.itemTitle(noviceItemData);
+        let investList = (separateNoviceItem)
+                            ? (this.props.investList.investsList && this.props.investList.investsList.length>1)
+                                ? this.props.investList.investsList.slice(1) 
+                                : this.props.investList.investsList
+                            : this.props.investList.investsList;
+        let noviceItemData = (separateNoviceItem && this.props.investList.investsList && this.props.investList.investsList.length > 0)
+                            ? this.props.investList.investsList[0] : null;
+        let noviceItemTitle = noviceItemData ? this.itemTitle(noviceItemData) : null;
         return (
                 <BaseComponent fullWidth>
                     {
-                        separateNoviceItem
+                        noviceItemData
                         ? <BaseComponent fullWidth>
                             <BaseComponent fullWidth height={8*this.props.heightScale} backgroundColor={"#EFEFEF"} />
                             <IntroIcons

@@ -67,12 +67,12 @@ class BaseComponent extends Component {
             if(props.centerX !== undefined && style.width !== undefined && typeof style.width === 'number'){
                 delete style.right;
                 style.left = "50%" 
-                translate.x = Math.round(props.centerX / style.width * 2 * 100 - 50);
+                translate.x = style.width === 0 ? 0 : Math.round(props.centerX / style.width * 2 * 100 - 50);
             }
             if(props.centerY !== undefined && style.height !== undefined && typeof style.height === 'number'){
                 delete style.bottom;
                 style.top = "50%" 
-                translate.y = Math.round(props.centerY / style.height * 2 * 100 - 50);
+                translate.y = style.height === 0 ? 0 : Math.round(props.centerY / style.height * 2 * 100 - 50);
             }
             style.transform = `translate(${translate.x}%, ${translate.y}%)`;
         }
