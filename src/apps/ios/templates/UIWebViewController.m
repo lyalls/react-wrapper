@@ -136,9 +136,7 @@
     }
 }
 
-//页面加载完成
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
+-(void)setTitleFromDocument{
     if(!self.staticTitle){
         NSString *title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
         NSRange range = [title rangeOfString:@":"];
@@ -152,6 +150,12 @@
             self.title = title;
         }
     }
+}
+
+//页面加载完成
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self setTitleFromDocument];   
 }
 
 //UIWebViewDelegate
@@ -339,7 +343,7 @@
 //title改变
 -(void) titleChanged:(id)parmas callId:(NSString*)callId
 {
-    self.title = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    [self setTitleFromDocument];
     if(callId)
     {
         [self JSCallback:callId param:@""];
