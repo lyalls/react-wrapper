@@ -82,18 +82,18 @@
     self.leftBt.titleLabel.font = [UIFont systemFontOfSize:16];
     [self.leftBt setBackgroundImage:[UIImage imageNamed:@"backImage.png"] forState:normal];
     [self.leftBt addTarget:self action:@selector(leftButtonPress:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftBt];
-    self.navigationItem.leftBarButtonItem = leftButtonItem;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccess) name:LogoutNotification object:nil];
 
+    [self setLeftButtonHidden:YES];
     isViewLoaded = YES;
 }
 
 //
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     if(self.showLoading)
     {
         [self.navigationController.navigationBar addSubview:_progressView];
@@ -139,8 +139,19 @@
 //页面加载完成
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    if(!self.staticTitle)
-        self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    if(!self.staticTitle){
+        NSString *title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+        NSRange range = [title rangeOfString:@":"];
+        NSLog(@"Document title: %@, range of ':' location: %ld, length: %ld", title, range.location, range.length);
+        if(range.length > 0 && range.location < title.length - 1){
+            NSString *tabTitle = [title substringWithRange:NSMakeRange(0, range.location)];
+            NSString *navTitle = [title substringWithRange:NSMakeRange(range.location+1, title.length - range.location - 1)];
+            self.navigationController.navigationBar.topItem.title = navTitle;
+            self.navigationController.title = tabTitle;
+        }else{
+            self.title = title;
+        }
+    }
 }
 
 //UIWebViewDelegate
@@ -200,6 +211,16 @@
     UILoginViewController *view = (UILoginViewController*)nav.topViewController;
     
     [view show:self callback:nil];
+}
+
+//显示或隐藏返回按钮
+-(void)setLeftButtonHidden:(BOOL)hidden{
+    if(hidden){
+        self.navigationItem.leftBarButtonItem = nil;
+    }else{
+        UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftBt];
+        self.navigationItem.leftBarButtonItem = leftButtonItem;
+    }
 }
 
 //默认左边导航栏按钮动作
