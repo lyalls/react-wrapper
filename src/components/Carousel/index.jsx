@@ -5,8 +5,9 @@ class Carousel extends Component {
     constructor(props) {
         super(props);
     }
-    openUrl(url){
-        console.log('[Carousel] open url:', url);
+    openUrl(event){
+        event.preventDefault();
+        console.log('[Carousel] open url:', event);
     }
     render(){
         if(this.props.items && this.props.items.length > 0){
@@ -27,7 +28,7 @@ class Carousel extends Component {
                         <a  key = { 'banner' + i } 
                             id = {'banner'+i} 
                             href = { item.actionUrl }
-                            onClick={this.openUrl.bind(this, item.actionUrl)}
+                            onClick={this.openUrl.bind(this)}
                         >
                             <img src = {item.imageUrl} />
                         </a>
