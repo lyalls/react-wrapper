@@ -4,6 +4,7 @@
 # Last modified: 2016-11-30 #
 # Modified by: Lin Sun      #
 #############################
+SHELL := `which bash`
 # Please modify the src dir path
 h5SrcDir=/Users/sunl/Dev/PROJECTS/baocai/baocainet/mbaocai/webapp/trunk/resources/web
 ifneq "${h5src}" ""
