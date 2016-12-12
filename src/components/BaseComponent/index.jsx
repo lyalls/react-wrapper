@@ -1,5 +1,10 @@
 import React, {Component, PropTypes} from 'react';
 
+/*
+    Don't use 'style' property for BaseComponent directly, instead, use 'customStyle', 
+    it would be used by react directly when re-renderring components,
+    thus by-pass all calculated styles
+*/
 class BaseComponent extends Component {
     static lastComponentId = 0;
     static nextComponentId(){
@@ -11,9 +16,7 @@ class BaseComponent extends Component {
         this.setStyle(props);
         this.setEvents(props);
     }
-    componentWillReceiveProps(nextProps) {
-        this.setState(nextProps);
-    }
+    
     setEvents(props){
         let events = {};
         // Events
@@ -25,12 +28,8 @@ class BaseComponent extends Component {
         if(this.state === undefined) this.state = {};
         this.state = Object.assign({}, this.state, {events: events});
     }
-    setStyle(props){
+    setStyle(props, isUpdate){
         let style = {};
-
-        // Default values
-        style.left = 0;
-        style.top = 0;
 
         if(!props) return {
             position: 'absolute',
@@ -40,8 +39,10 @@ class BaseComponent extends Component {
 
         // Statics properties
         // Coordinates
-        style.left = props.x || props.left || style.left;
-        style.top = props.y || props.top || style.right;
+        if(props.x !== undefined) style.left = props.x;
+        else if(props.left !== undefined) style.left = props.left;
+        if(props.y !== undefined) style.top = props.y;
+        else if(props.top !== undefined) style.top = props.top;
 
         for(let propName of ['right', 'bottom', 'width', 'height', 'fontSize', 'color', 'textAlign', 'backgroundColor']){
             if(props[propName] !== undefined){
@@ -86,6 +87,10 @@ class BaseComponent extends Component {
         // Merge props style
         if(props.style){
             style = Object.assign({}, props.style, style);
+            console.error('WARNING:', "'style' property of 'BaseComponent' is deprecated, which would cause reactjs bypass other calculated properties");
+        }
+        if(props.customStyle){
+            style = Object.assign({}, style, props.customStyle);
         }
 
         if(style.position == undefined){
@@ -97,8 +102,23 @@ class BaseComponent extends Component {
                 style.position = "relative";
             }
         }
-        if(!this.state) this.state = {}
-        this.state = Object.assign({}, this.state, {style: style});
+
+        if(!this.state) this.state = {};
+        style = Object.assign({}, this.state.style, style);
+        let newState = Object.assign({}, this.state);
+        newState.style = style;
+
+        if(this.componentId === 'BaseComponent_11'){
+            console.log(this.componentId, 'old state:', this.state, 'new state:', newState);   
+        }
+        if(isUpdate){
+            console.log('BaseComponent_11', document.getElementsByClassName('BaseComponent_11')[0]);
+        }
+
+        this.state = newState;
+
+
+        // this.state = Object.assign({}, this.state);
     }
     onWindowResize(event){
         let newProp = Object.assign({}, this.props);
@@ -109,13 +129,26 @@ class BaseComponent extends Component {
             newProp = Object.assign(newProp, {width : window.innerHeight})
         }
         this.setStyle(newProp);
-        this.forceUpdate();
+        // this.forceUpdate();
     }
+
+
+    componentWillMount() {
+        
+    }
+    componentWillReceiveProps(nextProps) {
+        this.setState(nextProps);
+    }
+
+    
     componentDidMount() {
+        if(this.componentId === 'BaseComponent_11'){
+            console.log(this.componentId, 'is mounted', 'BaseComponent_11', document.getElementsByClassName('BaseComponent_11')[0]);
+        }
         // For dynamic properties
         if((this.state.style.width === undefined && this.props.centerX !== undefined)
          || (this.state.style.height === undefined && this.props.centerY !== undefined)){
-            let newProps = Object.assign({}, this.state.style);
+            let newProps = {}; // Object.assign({}, this.state.style);
             let sizeAdj = this.props.sizeAdjustment;
             if(this.state.style.width === undefined){
                 newProps.width = document.getElementsByClassName(this.componentId)[0].clientWidth;
@@ -127,9 +160,9 @@ class BaseComponent extends Component {
                 if(sizeAdj && sizeAdj.height) newProps.height += sizeAdj.height;
                 newProps.centerY = this.props.centerY;
             }
-            let props = Object.assign({}, newProps);
-            this.setStyle(props);
-            this.forceUpdate();
+            console.log(this.componentId + ' is going to update state for dynamic propeties: ', newProps);
+            this.setStyle(newProps, true);
+            // this.forceUpdate();
         }
         // queue for window resize event
         if(this.props.fullWidth || this.props.fullHeight){
@@ -187,6 +220,9 @@ class BaseComponent extends Component {
         }
     }
     render(){
+        if(this.componentId === 'BaseComponent_11'){
+            console.log(this.componentId, 'style:', this.state.style);
+        }
         return (
             <div className = {((this.props.className)?this.props.className + " ":"")+this.componentId } 
                  style={this.state.style} {...this.state.events}
@@ -210,6 +246,7 @@ BaseComponent.propTypes = {
     right: PropTypes.number,
     className: PropTypes.string,
     style: PropTypes.object,
+    customStyle: PropTypes.object,
     backgroundColor: PropTypes.string,
     centerX: PropTypes.number,
     centerY: PropTypes.number,

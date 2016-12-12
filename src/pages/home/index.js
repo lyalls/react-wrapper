@@ -75,24 +75,9 @@ export default function(env){
             }.bind(this),
 
             // 跳转页面
-            gotoPage: function(pageName, params){
-                if(env.platform.canInvokeNativeMethod()){
-                    if(params && params.url){
-                        env.platform.exec('gotoPage', {pageName, url: params.url});
-                    }
-                }else{
-                    switch(pageName){
-                    case 'investList':
-                        window.location.href = "/#/invest/list";
-                        break;
-                    case 'aboutus':
-                        window.location.href = "/#/aboutus/index";
-                        break;
-                    default:
-                        break;
-                    }
-                }
-            }.bind(this),
+            gotoPage: function(...argments){
+                env.gotoPage(...argments);
+            },
         }
     }
 

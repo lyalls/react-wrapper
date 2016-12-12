@@ -3,7 +3,6 @@ import BaseComponent from '../BaseComponent/index.jsx';
 import NoviceItem from '../NoviceItemInHomePage/index.jsx'
 import AnnualRate from '../AnnualRate/index.jsx'
 import ItemTags from '../ItemTags/index.jsx'
-import IntroIcons from '../IntroIcons/index.jsx'
 
 class InvestList extends Component {
     constructor(props) {
@@ -72,10 +71,6 @@ class InvestList extends Component {
                     {
                         noviceItemData
                         ? <BaseComponent fullWidth>
-                            <BaseComponent fullWidth height={8*this.props.heightScale} backgroundColor={"#EFEFEF"} />
-                            <IntroIcons
-                                onClick={this.gotoPage.bind(this, 'aboutus', {url: this.props.introUrl})}
-                            />
                             <BaseComponent fullWidth height={8*this.props.heightScale} backgroundColor={"#EFEFEF"} />
                             <NoviceItem heightScale = {this.props.heightScale} height = {this.props.noviceHeight} 
                                     itemData={noviceItemData} itemTitle={noviceItemTitle}

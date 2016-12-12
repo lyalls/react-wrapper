@@ -5,6 +5,7 @@ import Footer from '../../../components/Footer/index.jsx';
 import Header from '../../../components/Header/index.jsx';
 import InvestList from '../../../components/InvestList/index.jsx';
 import BaseComponent from '../../../components/BaseComponent/index.jsx';
+import IntroIcons from '../../../components/IntroIcons/index.jsx'
 import ReactPullToRefresh from 'react-pull-to-refresh';
 
 class Home extends Component {
@@ -52,6 +53,14 @@ class Home extends Component {
                 }
                 <article className="wx-mainbody">   
                     <Carousel items={this.props.banner.items} env={this.props.env}/>
+                    <BaseComponent fullWidth height={8*heightScale} backgroundColor={"#EFEFEF"} />
+                    <IntroIcons
+                        gotoIntro={this.props.gotoPage.bind(null, 'aboutus', {url: this.props.introUrl})}
+                        isLogin={
+                            this.props.env.platform.isWechat && this.props.userInfo !== undefined && this.props.userInfo.user !== undefined
+                        }
+                        gotoPage={this.props.gotoPage}
+                    />
                     <InvestList 
                         userInfo = {this.props.userInfo}
                         env = {this.props.env}

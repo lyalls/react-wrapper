@@ -14,7 +14,7 @@ class NoviceItem extends Component {
 			<BaseComponent height={height} fullWidth className={"novice-item"} onClick={this.props.onClick}>
 				<BaseComponent height={76} width={19} x={25} y={0} 
 					className={"novice-item-icon"} 
-					style={{backgroundSize: "19px 76px"}}
+					customStyle={{backgroundSize: "19px 76px"}}
 					absolute
 				/>
 				<BaseComponent left={50} right={50} top={8 * heightScale} height={30} 
@@ -30,7 +30,7 @@ class NoviceItem extends Component {
 					{/* Background image */}
 					<BaseComponent absolute left={15} right={15} top={15} bottom={15}
 						className={"novice-item-circle-bg"}  
-						style = {{backgroundSize: (177 * heightScale - 30) +'px'}}
+						customStyle = {{backgroundSize: (177 * heightScale - 30) +'px'}}
 					/>
 					{/* Annual rate title */}
 					<BaseComponent absolute className={"novice-item-annual-rate-title"}
@@ -38,7 +38,7 @@ class NoviceItem extends Component {
 									bgImgFitSize
 					/>
 					{/* Separator line */}
-					<BaseComponent absolute style={{backgroundColor: "#EFEFEF"}}
+					<BaseComponent absolute customStyle={{backgroundColor: "#EFEFEF"}}
 									top={60*heightScale} width={60*heightScale} height={1} centerX={0}
 					/>
 					{/* Annual rate data */}

@@ -92,7 +92,10 @@ const envSettings = {
     retrieveKey: function(key) {
         let value = null; 
         try {
-            value = JSON.parse(this.sessionStorage[key]);
+            const v = this.sessionStorage[key];
+            if(v !== undefined){
+                value = JSON.parse(v);
+            }
         } catch (e) {
             console.log(`ERROR when parsing sessionStorage for key[${key}]:`,e);
         }
@@ -138,6 +141,33 @@ const envSettings = {
         }else value = settings;
         console.log(`Getting settings[${key}]:`, value);
         return value;
+    },
+    gotoPage: function(pageName, params){
+        if(this.platform.canInvokeNativeMethod()){
+            if(params && params.url){
+                this.platform.exec('gotoPage', {pageName, url: params.url});
+            }
+        }else{
+            switch(pageName){
+            case 'investList':
+                window.location.href = "/#/invest/list";
+                break;
+            case 'aboutus':
+                window.location.href = "/#/aboutus/index";
+                break;
+            case 'My Assets':
+                window.location.href = '/#/users/account';
+                break;
+            case 'My Coupon':
+                window.location.href = '/#/my/coupon';
+                break;
+            case 'Discovery':
+                window.location.href = '/#/discovery';
+                break;
+            default:
+                break;
+            }
+        }
     }
 };
 
