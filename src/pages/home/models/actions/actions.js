@@ -3,7 +3,41 @@ import fetch from 'isomorphic-fetch';
 import path from 'path';
 
 // Promise of App.platform.exec
+function receivedAccountInfo(data){
+    return {
+        type: actionTypes.GNR_HOME_UpdateUserInfo,
+        userInfo: data,
+        receivedAt: new Date()
+    }
+}
 
+export function GNR_HOME_getAccountInfo(env){
+    if(env.platform.isWechat){
+        return function(dispatch){
+            const token = env.retrieveKey(env.keys.TOKEN);
+            let baseUrl = env ? env.settings('baseUrl') : "";
+            return fetch(`${baseUrl}/users`, 
+                            {
+                                mode: 'no-cors', 
+                                method: 'get', 
+                                headers: {'X-Authorization': token}
+                            }
+                        )
+                    .then(response => {
+                        return response.data;
+                    })
+                    .then(data =>{
+                        dispatch(receivedAccountInfo(data));
+                        return dispatch(GNR_HOME_getBannerData(env, true));
+                    })
+                    .catch( error =>{
+                        return dispatch(GNR_HOME_getBannerData(env, true, true));
+                        console.log("ERROR: ", error);
+                    });
+
+        }
+    }
+}
 //*************************************************************************
 // Received Data of Banner in Homepage
 function receivedBannerData(data){
@@ -14,7 +48,7 @@ function receivedBannerData(data){
     }
 }
 // Get Homepage Banner Data
-export function GNR_HOME_getBannerData(env){
+export function GNR_HOME_getBannerData(env, needExec, isLogin){
     if(env.platform.canInvokeNativeMethod()){
         return function(dispatch){
             let localBannerVersion = null;
@@ -54,10 +88,12 @@ export function GNR_HOME_getBannerData(env){
                             console.log(error);
                         })
         }
-    }else{
+    }else if(env.platform.isWechat && needExec){
         let baseUrl = env ? env.settings('baseUrl') : "";
+        let url = `${baseUrl}/top/wechat/banners`;
+        if(isLogin) url = `${baseUrl}/top/wechat/nologin/banners`;
         return function(dispatch) {
-            return fetch(`${baseUrl}/top/wechat/banners`, {mode: 'no-cors'})
+            return fetch(url, {mode: 'no-cors'})
                 .then(response => response.json())
                 .then(json=> {
                     return dispatch(receivedBannerData(json.data))

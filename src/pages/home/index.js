@@ -33,8 +33,10 @@ export default function(env){
     function mapDispatchToProps(dispatch){
         return {
             onLoading: function(){
-                dispatch(homeActions.GNR_HOME_getBannerData(env));
+                dispatch(homeActions.GNR_HOME_getAccountInfo(env));
+                // dispatch(homeActions.GNR_HOME_getBannerData(env));
                 dispatch(homeActions.GNR_HOME_getInvestList(env));
+
             },
 
             // 投资详情

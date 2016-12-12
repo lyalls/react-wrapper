@@ -52,9 +52,8 @@ class Home extends Component {
                 }
                 <article className="wx-mainbody">   
                     <Carousel items={this.props.banner.items} env={this.props.env}/>
-                    <InvestList className={ 
-                        isNative ? "native-class ....": "wechat-class..."
-                     }
+                    <InvestList 
+                        userInfo = {this.props.userInfo}
                         env = {this.props.env}
                         heightScale = {heightScale} noviceHeight = {noviceHeight}
                         investList = {this.props.investList} 
