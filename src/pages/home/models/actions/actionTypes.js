@@ -3,4 +3,5 @@ export default {
     GNR_HOME_UpdateInvestList: "GNR:HOME:UPDATE_INVEST_LIST",
     GNR_HOME_UpdateNoviceItem: "GNR:HOME:UPDATE_NOVICE_ITEM",
     GNR_HOME_UpdateIntroInfo: "GNR:HOME:UPDATE_INTRO_INFO",
+    GNR_HOME_UpdateUserInfo: "GNR:HOME:UPDATE_USER_INFO",
 }

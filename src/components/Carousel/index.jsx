@@ -17,7 +17,8 @@ class Carousel extends Component {
         if(this.props.items && this.props.items.length > 0){
 
             let settings = {
-                    dots: (this.props.items.length > 1),
+                    // dots: (this.props.items.length > 1),
+                    dots: false,
                     speed: 500,
                     arrows: false,
             }

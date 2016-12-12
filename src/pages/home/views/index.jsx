@@ -21,13 +21,16 @@ class Home extends Component {
             $('.content-for-m-header').attr('ui-content-for', 'm-header')
         }
     }
+    componentWillUnmount() {
+        
+    }
 
     render(){
         let isShowNotice = false;
         let heightScale = window.innerHeight > 568 - 113 ? (window.innerHeight) / (568 - 113) : 1 ;
         let noviceHeight = 233 * heightScale + (isShowNotice ? 0 : (20 * heightScale + 8 * heightScale));
         let isSeparateFirstNoviceItem = (this.props.env.platform.canInvokeNativeMethod() && this.props.investList.investsList && this.props.investList.investsList.length > 0);
-        // isSeparateFirstNoviceItem |= this.props.env.platform.isWechat;
+         isSeparateFirstNoviceItem |= this.props.env.platform.isWechat;
 
         /*<ReactPullToRefresh
                 onRefresh={this.props.onLoading.bind(this)}
@@ -49,7 +52,9 @@ class Home extends Component {
                 }
                 <article className="wx-mainbody">   
                     <Carousel items={this.props.banner.items} env={this.props.env}/>
-                    <InvestList 
+                    <InvestList className={ 
+                        isNative ? "native-class ....": "wechat-class..."
+                     }
                         env = {this.props.env}
                         heightScale = {heightScale} noviceHeight = {noviceHeight}
                         investList = {this.props.investList} 
