@@ -127,8 +127,7 @@ class BaseComponent extends Component {
                 if(sizeAdj && sizeAdj.height) newProps.height += sizeAdj.height;
                 newProps.centerY = this.props.centerY;
             }
-            let props = Object.assign({}, this.props, newProps);
-            if(props.children) delete props.children;
+            let props = Object.assign({}, newProps);
             this.setStyle(props);
             this.forceUpdate();
         }
