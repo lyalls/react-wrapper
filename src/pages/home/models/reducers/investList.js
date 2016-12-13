@@ -60,7 +60,6 @@ function investItem(state = {}, action){
         }
         
         if (action.data.isLimit == 1 && action.data.limitTime > 0) {
-
             action.data.timer = {
                 start: (new Date()).getTime(),
                 limit: action.data.limitTime * 1000,

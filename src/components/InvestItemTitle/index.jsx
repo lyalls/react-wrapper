@@ -6,7 +6,6 @@ class InvestItemTitle extends Component {
         super(props);
     }
     componentDidMount() {
-        
         if(this.props.item && this.props.item.timer){
             const timeLimit = (this.props.item.timer.limit - ((new Date()).getTime() - this.props.item.timer.start));
             const that = this;
@@ -15,6 +14,12 @@ class InvestItemTitle extends Component {
                     that.forceUpdate();
                 }, timeLimit)
             }
+        }
+    }
+
+    componentWillUnmount() {
+        if(this.timeout){
+            clearTimeout(this.timeout);
         }
     }
 
