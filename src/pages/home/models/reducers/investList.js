@@ -58,17 +58,9 @@ function investItem(state = {}, action){
             biao_type_zi_bgcss = 'bg-02';
             biao_type_zi_type = 'xianl';
         }
-        action.data.isLimit = 1;
-        action.data.limitTime = Math.round(Math.random() * 10);
+        
         if (action.data.isLimit == 1 && action.data.limitTime > 0) {
 
-            // action.data.timer = formatTime(action.data);
-            // (function(i) {
-            //     action.data.TimerId = setInterval(function() {
-            //         action.data.limitTime = (+action.data.limitTime) -1;
-            //         action.data.timer = formatTime(action.data);
-            //     }, 1000);
-            // })(action.index);
             action.data.timer = {
                 start: (new Date()).getTime(),
                 limit: action.data.limitTime * 1000,
