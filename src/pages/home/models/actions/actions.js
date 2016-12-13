@@ -2,7 +2,8 @@ import actionTypes from './actionTypes';
 import fetch from 'isomorphic-fetch';
 import path from 'path';
 
-// Promise of App.platform.exec
+//*************************************************************************
+// Check login status
 function receivedAccountInfo(data){
     return {
         type: actionTypes.GNR_HOME_UpdateUserInfo,
@@ -31,7 +32,7 @@ export function GNR_HOME_getAccountInfo(env){
                         return dispatch(GNR_HOME_getBannerData(env, true));
                     })
                     .catch( error =>{
-                        return dispatch(GNR_HOME_getBannerData(env, true, true));
+                        return dispatch(GNR_HOME_getBannerData(env));
                         console.log("ERROR: ", error);
                     });
 
@@ -47,8 +48,16 @@ function receivedBannerData(data){
         receivedAt: new Date()
     }
 }
+// Received Introduction infomation in Homepage
+function receivedIntroInfo(data){
+    return {
+        type: actionTypes.GNR_HOME_UpdateIntroInfo,
+        data: data,
+        receivedAt: new Date()
+    }   
+}
 // Get Homepage Banner Data
-export function GNR_HOME_getBannerData(env, needExec, isLogin){
+export function GNR_HOME_getBannerData(env, isLogin){
     if(env.platform.canInvokeNativeMethod()){
         return function(dispatch){
             let localBannerVersion = null;
@@ -88,10 +97,10 @@ export function GNR_HOME_getBannerData(env, needExec, isLogin){
                             console.log(error);
                         })
         }
-    }else if(env.platform.isWechat && needExec){
+    }else{
         let baseUrl = env ? env.settings('baseUrl') : "";
-        let url = `${baseUrl}/top/wechat/banners`;
-        if(isLogin) url = `${baseUrl}/top/wechat/nologin/banners`;
+        let url = `${baseUrl}/top/wechat/nologin/banners`;
+        if(isLogin) url = `${baseUrl}/top/wechat/banners`;
         return function(dispatch) {
             return fetch(url, {mode: 'no-cors'})
                 .then(response => response.json())
@@ -122,15 +131,15 @@ function receivedNoviceItem(data){
         receivedAt: new Date()
     }
 }
-// Received Introduction infomation in Homepage
-function receivedIntroInfo(data){
+// Update invest item counting time
+export function GNR_HOME_updateInvestItem(item, index){
     return {
-        type: actionTypes.GNR_HOME_UpdateIntroInfo,
-        data: data,
-        receivedAt: new Date()
-    }   
+        type: actionTypes.GNR_HOME_UpdateInvestItem,
+        data: item,
+        index: index
+    }
 }
-// getTopInverstsList
+// Get invest list
 export function GNR_HOME_getInvestList(env){
     if(env.platform.canInvokeNativeMethod()){
         return function(dispatch){

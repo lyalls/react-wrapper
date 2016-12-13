@@ -30,8 +30,8 @@ class Home extends Component {
         let isShowNotice = false;
         let heightScale = window.innerHeight > 568 - 113 ? (window.innerHeight) / (568 - 113) : 1 ;
         let noviceHeight = 233 * heightScale + (isShowNotice ? 0 : (20 * heightScale + 8 * heightScale));
-        let isSeparateFirstNoviceItem = (this.props.env.platform.canInvokeNativeMethod() && this.props.investList.investsList && this.props.investList.investsList.length > 0);
-         isSeparateFirstNoviceItem |= this.props.env.platform.isWechat;
+        let isSeparateFirstNoviceItem = (this.props.env.platform.canInvokeNativeMethod() && this.props.investList.items && this.props.investList.items.length > 0);
+         // isSeparateFirstNoviceItem |= this.props.env.platform.isWechat;
 
         /*<ReactPullToRefresh
                 onRefresh={this.props.onLoading.bind(this)}
@@ -53,7 +53,11 @@ class Home extends Component {
                 }
                 <article className="wx-mainbody">   
                     <Carousel items={this.props.banner.items} env={this.props.env}/>
-                    <BaseComponent fullWidth height={8*heightScale} backgroundColor={"#EFEFEF"} />
+                    {
+                        this.props.env.platform.canInvokeNativeMethod()
+                        ? <BaseComponent fullWidth height={8*heightScale} backgroundColor={"#EFEFEF"} />
+                        : ""
+                    }
                     <IntroIcons
                         gotoIntro={this.props.gotoPage.bind(null, 'aboutus', {url: this.props.introUrl})}
                         isLogin={

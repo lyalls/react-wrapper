@@ -1,8 +1,8 @@
 import React , {Component, PropTypes} from 'react';
 import BaseComponent from '../BaseComponent/index.jsx';
 import NoviceItem from '../NoviceItemInHomePage/index.jsx'
-import AnnualRate from '../AnnualRate/index.jsx'
-import ItemTags from '../ItemTags/index.jsx'
+import InvestItem from '../InvestItem/index.jsx'
+import InvestItemTitle from '../InvestItemTitle/index.jsx'
 
 class InvestList extends Component {
     constructor(props) {
@@ -45,27 +45,17 @@ class InvestList extends Component {
     gotoPage(pageName, params){
         this.props.gotoPage(pageName, params);
     }
-    itemTitle(item){
-        if(!item) return null;
-        let itemTitle;
-        let fullThreshold = (item.isFullThreshold==1)?<span className="red-tag">满抢</span>:"";
-        if(item.isLimit != 1 || item.limitTime<=0){
-            itemTitle = <h3><em className="h3-title">{fullThreshold}{item.name}</em><i></i></h3>;
-        }else{
-            itemTitle = <h3 className="count-down"><b></b>即将发售：<time>{item.timer}</time></h3>;
-        }
-        return itemTitle;
-    }
+    
     render(){
         let separateNoviceItem = this.props.isSeparateFirstNoviceItem;
         let investList = (separateNoviceItem)
-                            ? (this.props.investList.investsList && this.props.investList.investsList.length>1)
-                                ? this.props.investList.investsList.slice(1) 
-                                : this.props.investList.investsList
-                            : this.props.investList.investsList;
-        let noviceItemData = (separateNoviceItem && this.props.investList.investsList && this.props.investList.investsList.length > 0)
-                            ? this.props.investList.investsList[0] : null;
-        let noviceItemTitle = noviceItemData ? this.itemTitle(noviceItemData) : null;
+                            ? (this.props.investList.items && this.props.investList.items.length>1)
+                                ? this.props.investList.items.slice(1) 
+                                : this.props.investList.items
+                            : this.props.investList.items;
+        let noviceItemData = (separateNoviceItem && this.props.investList.items && this.props.investList.items.length > 0)
+                            ? this.props.investList.items[0] : null;
+        let noviceItemTitle = noviceItemData ? <InvestItemTitle item={noviceItemData}/> : null;
         return (
                 <BaseComponent fullWidth>
                     {
@@ -84,26 +74,9 @@ class InvestList extends Component {
                         <ul className="wx-index-pro-list" >
                             {
                                 investList ?
-                                investList.map( (list, idx) =>{
-                                    let itemTitle = this.itemTitle(list);
-                                    let recommendMark = (list.is_zhiding == true) ? <img src="./images/icon-recommend.png" className="recommend-mark"/> : "";
-                                    return (
-                                        <li key={idx}>
-                                            <div className={ "pro-box " + list.biao_type_zi_bgcss} onClick={this.getInvestDetail.bind(this,list.id,false,list.isNew, list.limitTime)}>
-                                                {itemTitle}
-                                                <dl className="pro-info">
-                                                    <dt>
-                                                        <AnnualRate investItem={list} />
-                                                        <ItemTags investItem = {list} />
-                                                    </dt>
-                                                    <dd><span><b>借款期限：</b>{list.investmentHorizon}</span><span><b>可投金额：</b>{list.availableAmount} 元</span></dd>
-                                                </dl>
-                                            </div>
-                                            <div className={"index-list-tag "+ list.biaotag}>{list.biao_type_zi}</div>
-                                            {recommendMark}
-                                        </li>
-                                    )
-                                })
+                                investList.map( (item, idx) =>(
+                                    <InvestItem key={'investItem'+idx} getInvestDetail={this.getInvestDetail} itemTitle={this.itemTitle} item={item}/>
+                                ))
                                 : ""
                             }
                         </ul>
@@ -111,12 +84,12 @@ class InvestList extends Component {
                             (this.props.investList && this.props.investList.investsLen === 1) ?
                             <div className="btn-area-com margin-t-1-5rem">
                                 {
-                                    (this.props.investList.investsLen === 1 && this.props.investList.investsList[0].statusMessage=='投资中' && this.props.investList.investsList[0].biao_type_zi != '限量标')
-                                    ? <a className="orange-radius-btn wd-80" onClick={this.getTenderInfoDetail.bind(this, this.props.investList.investsList[0].id)}>立即投资</a>
+                                    (this.props.investList.investsLen === 1 && this.props.investList.items[0].statusMessage=='投资中' && this.props.investList.items[0].biao_type_zi != '限量标')
+                                    ? <a className="orange-radius-btn wd-80" onClick={this.getTenderInfoDetail.bind(this, this.props.investList.items[0].id)}>立即投资</a>
                                     : ""
                                 }
                                 {
-                                    (this.props.investList.investsLen === 1 && this.props.investList.investsList[0].isLimit &&  this.props.investList.investsList[0].limitTime > 0)
+                                    (this.props.investList.investsLen === 1 && this.props.investList.items[0].isLimit &&  this.props.investList.items[0].limitTime > 0)
                                     ? <a class="gray-radius-btn wd-80">即将发售</a>
                                     : ""
                                 }
