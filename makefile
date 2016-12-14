@@ -21,6 +21,11 @@ ifeq "${updateSrc}" "true"
 	doUpdateSourceFile=true
 endif
 
+doCompileSource=true
+ifeq "${compileSrc}" "false"
+		doCompileSource=false
+endif
+
 webpackConfigFile=./src/apps/webpack.config.js
 appIndexTemplateFile=./src/apps/index.js
 platformPolygonFile=./src/apps/platform.js
@@ -117,7 +122,9 @@ wechat ios:
 		echo '<link rel="stylesheet" type="text/css" href="/react/bundle.style.css">' >> ${appTmpDir}/tmp.html ;\
 		sed '1,/<script src="js\/app.min.js/ d' ${appIntegrationDir}/src/html/index.html >> ${appTmpDir}/tmp.html ;\
 		mv ${appTmpDir}/tmp.html ${appIntegrationDir}/src/html/index.html ;\
-		export PATH=`pwd`/node_modules/.bin:$${PATH} && cd ${appIntegrationDir} && gulp build_q ;\
+		if [[ "${doCompileSource}" == "true" ]];then \
+			export PATH=`pwd`/node_modules/.bin:$${PATH} && cd ${appIntegrationDir} && gulp build_q ;\
+		fi; \
 		cd - && cp ${appTemplateDir}/jquery-3.1.1.min.js ${appIntegrationDir}/www/js ;\
 		cp -r ${appTmpDir}/react ${appIntegrationDir}/www/react ;\
 	elif [[ ${target} == ios ]]; then \
