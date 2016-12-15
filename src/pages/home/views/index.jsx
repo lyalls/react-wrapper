@@ -7,6 +7,7 @@ import InvestList from '../../../components/InvestList/index.jsx';
 import BaseComponent from '../../../components/BaseComponent/index.jsx';
 import IntroIcons from '../../../components/IntroIcons/index.jsx'
 import ReactPullToRefresh from 'react-pull-to-refresh';
+import InduceBarDownloadApp, {shouldShowDownloadAppBar} from '../../../components/InduceBarDownloadApp/index.jsx';
 import {OpenDialog} from '../../../components/Dialog/index.jsx';
 
 
@@ -14,7 +15,7 @@ class Home extends Component {
     constructor(props) {
         super(props);
         // Init state
-        this.state = {}
+        this.state = {isDownloadAppBarHidden: !shouldShowDownloadAppBar()}
     }
     componentWillMount() {
         this.props.onLoading();
@@ -22,16 +23,19 @@ class Home extends Component {
     componentWillReceiveProps(nextProps) {
     }
     componentDidMount() {
-        if(this.props.env.platform.isWechat){
-            $('.content-for-m-header').attr('ui-content-for', 'm-header')
-        }
+        
     }
     componentWillUnmount() {
         
     }
 
-    
+    // Pull down refresh
+    handleRefresh(resolve, reject){
+        this.props.onLoading();
+    }
+    // End of pull refresh
 
+    // Dialog
     openDialog(msg){
         console.log('Openning dialog modal with msg:', msg, 'this:', this);
         this.setState({isDialogOpen : true});
@@ -42,46 +46,62 @@ class Home extends Component {
         console.log('Closing dialog modal');
         this.setState({isDialogOpen : false});
     }
-    getDialogModalParent(){
-        return document.querySelector('#dialog-modal-root');
-    }
     // End of Dialog
     //
     getInvestDetail(...args){
         this.props.getInvestDetail(...args, this.openDialog.bind(this));
+    }
+
+    // Download App Bar
+    setDownloadAppBarHidden(shouldHide){
+        this.setState({isDownloadAppBarHidden: shouldHide});
     }
     render(){
         let isShowNotice = false;
         let heightScale = window.innerHeight > 568 - 113 ? (window.innerHeight) / (568 - 113) : 1 ;
         let noviceHeight = 233 * heightScale + (isShowNotice ? 0 : (20 * heightScale + 8 * heightScale));
         let isSeparateFirstNoviceItem = (this.props.env.platform.canInvokeNativeMethod() && this.props.investList.items && this.props.investList.items.length > 0);
-         // isSeparateFirstNoviceItem |= this.props.env.platform.isWechat;
-
-        /*<ReactPullToRefresh
-                onRefresh={this.props.onLoading.bind(this)}
-             >
-                <BaseComponent fullWidth backgroundColor={"#EFEFEF"} height={100} top={-100}>
-                    <BaseComponent centerY={0} centerX={0} color={"#D0D0D0"}>
-                        值得信赖的投资理财平台
-                    </BaseComponent>
-                </BaseComponent>
-             </ReactPullToRefresh>
-        */
-        
+        // isSeparateFirstNoviceItem |= this.props.env.platform.isWechat;
+        let showPullToRefresh = this.props.env.platform.canInvokeNativeMethod();
+        // let wrapper = showPullToRefresh 
+        //             ?   <ReactPullToRefresh
+        //                     onRefresh={this.handleRefresh.bind(this)}
+        //                     className="your-own-class-if-you-want"
+        //                     style={{
+        //                         textAlign: 'center'
+        //                     }}
+        //                 >
+        //                 <h3 style={{top: -30, position: 'abstolute'}}>Pull down to refresh</h3>
+        //                 {
+        //                     (this.props.env.platform.isWechat)
+        //                     ?<div className="content-for-m-header"><Header/></div>
+        //                     :""
+        //                 } 
+        //                 </ReactPullToRefresh>
+        //             :   <div className="scrollable">
+        //                 <div className="scrollable-content k_p0">
+        //                 </div>
+        //                 </div>
         return (
+
             <div className="scrollable">
-            <div className="scrollable-content k_p0">
+            <div className={ (this.state.isDownloadAppBarHidden ? "" : 'index-btm-padding ') + "scrollable-content"} id="mContent">
                 {
-                    (this.props.env.platform.isWechat)
-                    ?<div className="content-for-m-header"><Header/></div>
-                    :""
+                    this.props.env.platform.canInvokeNativeMethod()
+                    ? null
+                    : <Header
+                        isLogin = {
+                            this.props.env.platform.isWechat && this.props.userInfo !== undefined && this.props.userInfo.user !== undefined
+                        }
+                        gotoPage = {this.props.gotoPage}
+                      />
                 }
-                <article id="article_list" className="wx-mainbody">   
+                <article id="article_list" className="wx-mainbody" style={{minHeight: "100%", overflow: 'hidden'}}>   
                     <Carousel items={this.props.banner.items} env={this.props.env}/>
                     {
                         this.props.env.platform.canInvokeNativeMethod()
                         ? <BaseComponent fullWidth height={8*heightScale} backgroundColor={"#EFEFEF"} />
-                        : ""
+                        : null
                     }
                     <IntroIcons
                         gotoIntro={this.props.gotoPage.bind(null, 'aboutus', {url: this.props.introUrl})}
@@ -103,9 +123,16 @@ class Home extends Component {
                     />
                 </article>
                 {
-                    (this.props.env.platform.isWechat)?<Footer />:""
+                    this.props.env.platform.canInvokeNativeMethod() ? null : <Footer gotoPage={this.props.gotoPage}/>
                 }
             </div>
+            {
+                this.props.env.platform.canInvokeNativeMethod() 
+                ? null 
+                : this.state.isDownloadAppBarHidden 
+                    ? null
+                    : <InduceBarDownloadApp gotoPage={this.props.gotoPage} setHidden={this.setDownloadAppBarHidden.bind(this)}/> 
+            }
             </div>
         );
     }

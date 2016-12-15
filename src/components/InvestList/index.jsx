@@ -69,7 +69,7 @@ class InvestList extends Component {
                             />
                             <BaseComponent fullWidth height={8*this.props.heightScale} backgroundColor={"#EFEFEF"} />
                           </BaseComponent>
-                        : ""
+                        : null
                     }
                     <div className="wx-index-pro-cont">
                         <ul className="wx-index-pro-list" >
@@ -78,7 +78,7 @@ class InvestList extends Component {
                                 investList.map( (item, idx) =>(
                                     <InvestItem key={'investItem'+idx} getInvestDetail={this.getInvestDetail.bind(this)} itemTitle={this.itemTitle} item={item}/>
                                 ))
-                                : ""
+                                : null
                             }
                         </ul>
                         {
@@ -87,12 +87,12 @@ class InvestList extends Component {
                                 {
                                     (this.props.investList.investsLen === 1 && this.props.investList.items[0].statusMessage=='投资中' && this.props.investList.items[0].biao_type_zi != '限量标')
                                     ? <a className="orange-radius-btn wd-80" onClick={this.getTenderInfoDetail.bind(this, this.props.investList.items[0].id)}>立即投资</a>
-                                    : ""
+                                    : null
                                 }
                                 {
                                     (this.props.investList.investsLen === 1 && this.props.investList.items[0].isLimit &&  this.props.investList.items[0].limitTime > 0)
                                     ? <a class="gray-radius-btn wd-80">即将发售</a>
-                                    : ""
+                                    : null
                                 }
                                 {
                                     (this.props.investList.lastTenderInfo !== false)
@@ -104,10 +104,10 @@ class InvestList extends Component {
                                         +new Date(this.props.investList.lastTenderInfo.addtime * 1000).getMinutes()+" 抢光"
                                     } 
                                     </a>
-                                    : ""
+                                    : null
                                 }
                             </div>
-                            :""
+                            :null
                         }
                         {
                             separateNoviceItem

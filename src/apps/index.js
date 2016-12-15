@@ -143,30 +143,68 @@ const envSettings = {
         return value;
     },
     gotoPage: function(pageName, params){
+        console.log('gotoPage, this:', this, 'pageName:', pageName, 'params:', params);
+        let href = null;
+        let mesg = null;
+        switch(pageName){
+        case 'investList':
+            mesg = '查看更多项目';
+            href = "/#/invest/list";
+            break;
+        case 'aboutus':
+            mesg = '了解抱财';
+            href = "/#/aboutus/index";
+            break;
+        case 'login':
+            mesg = '登录';
+            href = "/#/login";
+            break;
+        case 'register':
+            mesg = '注册';
+            href = "/#/reg";
+            break;
+        case 'My Assets':
+            mesg = '我的资产';
+            href = '/#/users/account';
+            break;
+        case 'My Account':
+            mesg = '我的账户';
+            href = '/#/users/account';
+            break;
+        case 'My Coupon':
+            mesg = '我的优惠券';
+            href = '/#/my/coupon';
+            break;
+        case 'Discovery':
+            mesg = '发现';
+            href = '/#/discovery';
+            break;
+        case 'Customer Service':
+            mesg = '在线客服';
+            href = 'http://kefu.easemob.com/webim/im.html?tenantId=21606';
+            break;
+        case 'Switch to PC':
+            mesg = '切换电脑版';
+            href = 'http://www.baocai.com/?_from=pc';
+            break;
+        case 'Download App':
+            mesg = "下载App";
+            href = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.baocai.p2p';
+            break;
+        default:
+            break;
+        }
+
+        // Exec
         if(this.platform.canInvokeNativeMethod()){
             if(params && params.url){
                 this.platform.exec('gotoPage', {pageName, url: params.url});
             }
-        }else{
-            switch(pageName){
-            case 'investList':
-                window.location.href = "/#/invest/list";
-                break;
-            case 'aboutus':
-                window.location.href = "/#/aboutus/index";
-                break;
-            case 'My Assets':
-                window.location.href = '/#/users/account';
-                break;
-            case 'My Coupon':
-                window.location.href = '/#/my/coupon';
-                break;
-            case 'Discovery':
-                window.location.href = '/#/discovery';
-                break;
-            default:
-                break;
+        }else if(href){
+            if(typeof _hmt !== undefined && mesg){
+                _hmt.push(['_trackEvent', mesg, 'click']);
             }
+            window.location.href = href;
         }
     }
 };

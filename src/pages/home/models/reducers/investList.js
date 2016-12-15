@@ -27,7 +27,7 @@ function toReverse(number,fix) {
 function investItem(state = {}, action){
     switch(action.type){
     case actionTypes.GNR_HOME_UpdateInvestItem:
-        var biao_tag = {'xins':'yellow-tag','xianl':'orange-tag','bld':'purple-tag','gou':'blue-tag','rongsan':'orange-l-tag','fangchan':'yellow-l-tag','newb':'red-dark-tag'};
+        var biao_tag = {'xins':'yellow-tag','xianl':'orange-tag','bld':'purple-tag','gou':'blue-tag','rongsan':'orange-l-tag','fangchan':'yellow-l-tag','newb':'red-dark-tag','memb':'member-tag'};
         var biao_typenid ={'rongsan':'融三板','bld':'保理贷','fangchan':'房抵贷','gou':'担保贷'};
         //根据不同的标的类型显示不同的底色图标
         var biao_typenid_bgcss ={'rongsan':'bg-06','bld':'bg-03','fangchan':'bg-05','gou':'bg-04'};
@@ -59,6 +59,21 @@ function investItem(state = {}, action){
             biao_type_zi_type = 'xianl';
         }
         
+        if(action.data.isMember == 1 && action.data.tenderSchedule !=100){
+            //会员标
+            biao_type_zi = '会员标';
+            biao_type_zi_bgcss = 'bg-08';
+            biao_type_zi_type = 'memb';
+        }
+
+        //起投金额
+        var StartInvestTag = action.data.tenderAccountMin;
+        if(StartInvestTag>=10000)
+        {
+            StartInvestTag = parseInt(StartInvestTag/10000)+"万";
+        }
+        action.data.StartInvestTag = StartInvestTag;
+
         if (action.data.isLimit == 1 && action.data.limitTime > 0) {
             action.data.timer = {
                 start: (new Date()).getTime(),

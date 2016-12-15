@@ -7,13 +7,25 @@ class AnnualRate extends Component {
     }
     render(){
     	return(
-    		<strong className={(this.props.investItem.isReward==0 && this.props.investItem.isBonusticket==0 && this.props.investItem.isAllowIncrease == 0 && this.props.investItem.isBonusticket==0)?'only-data':""}>
+    		<strong className={ (     this.props.investItem.isReward!=1 
+                                    && this.props.investItem.isBonusticket!=1 
+                                    && this.props.investItem.isAllowIncrease!=1 
+                                    && this.props.investItem.isTag!=1
+                                    && this.props.investItem.tenderAccountMin<=100
+                                )
+                                ? 'only-data' : ""
+                    }
+            >
                 {this.props.investItem.annualRate}<b className="font-12">%</b>
                 {
-                    (this.props.investItem.increaseApr > 0)? <b className="font-22">+{this.props.investItem.increaseApr}</b> : ""
+                    (this.props.investItem.increaseApr > 0)
+                    ? <b className="font-22">+{this.props.investItem.increaseApr}</b>
+                    : null
                 }
                 {
-                    (this.props.investItem.increaseApr > 0)? <b className="font-12">%</b>: ""
+                    (this.props.investItem.increaseApr > 0)
+                    ? <b className="font-12">%</b>
+                    :null
                 }
             </strong>
     	)

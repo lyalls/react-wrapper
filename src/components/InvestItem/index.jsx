@@ -15,7 +15,6 @@ class InvestItem extends Component {
     render(){
         let item = this.props.item;
     	let itemTitle = <InvestItemTitle item={this.props.item}/>;
-        let recommendMark = (item.is_zhiding == true) ? <img src="./images/icon-recommend.png" className="recommend-mark"/> : "";
         return (
             <li>
                 <div className={ "pro-box " + item.biao_type_zi_bgcss} onClick={this.getInvestDetail.bind(this,item.id,false,item.isNew, item.limitTime)}>
@@ -28,8 +27,8 @@ class InvestItem extends Component {
                         <dd><span><b>借款期限：</b>{item.investmentHorizon}</span><span><b>可投金额：</b>{item.availableAmount} 元</span></dd>
                     </dl>
                 </div>
-                <div className={"index-item-tag "+ item.biaotag}>{item.biao_type_zi}</div>
-                {recommendMark}
+                <div className={"index-list-tag "+ item.biaotag}>{item.biao_type_zi}</div>
+                {(item.is_zhiding == true) ? <img src="./images/icon-recommend.png" className="recommend-mark"/> : null}
             </li>
         )
     }
