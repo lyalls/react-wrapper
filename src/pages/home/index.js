@@ -42,13 +42,16 @@ export default function(env){
             },
 
             // 投资详情
-            getInvestDetail: function(borrowId,pname,ifnew,limitTime) {
+            getInvestDetail: function(borrowId,pname,ifnew,limitTime, ...otherArgs) {
                 if(env.platform.canInvokeNativeMethod()){
                     env.platform.exec('getInvestDetail', {borrowId, pname, ifnew, limitTime});
                 }else{
+                    let openDialog = otherArgs && otherArgs.length > 0 ? otherArgs[otherArgs.length - 1]:null;
                     let setSessionStorage = env.setSessionStorage;
                     if (arguments.length >= 4 && arguments[3] > 0) {
-                        // dialog();
+                        if(typeof openDialog === 'function'){
+                            openDialog('即将发售，敬请期待！');
+                        }
                         return; //限量标不给跳转
                     }
                     if(pname){

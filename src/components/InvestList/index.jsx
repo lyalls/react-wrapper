@@ -3,6 +3,7 @@ import BaseComponent from '../BaseComponent/index.jsx';
 import NoviceItem from '../NoviceItemInHomePage/index.jsx'
 import InvestItem from '../InvestItem/index.jsx'
 import InvestItemTitle from '../InvestItemTitle/index.jsx'
+import Dialog from '../Dialog/index.jsx'
 
 class InvestList extends Component {
     constructor(props) {
@@ -75,7 +76,7 @@ class InvestList extends Component {
                             {
                                 investList ?
                                 investList.map( (item, idx) =>(
-                                    <InvestItem key={'investItem'+idx} getInvestDetail={this.getInvestDetail} itemTitle={this.itemTitle} item={item}/>
+                                    <InvestItem key={'investItem'+idx} getInvestDetail={this.getInvestDetail.bind(this)} itemTitle={this.itemTitle} item={item}/>
                                 ))
                                 : ""
                             }

@@ -29,6 +29,7 @@
     "material-ui": "^0.16.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
+    "react-dynamic-modal": "^1.1.1",
     "react-pull-to-refresh": "^1.0.6",
     "react-redux": "^4.4.5",
     "react-slick": "^0.14.5",

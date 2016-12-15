@@ -7,10 +7,14 @@ import InvestList from '../../../components/InvestList/index.jsx';
 import BaseComponent from '../../../components/BaseComponent/index.jsx';
 import IntroIcons from '../../../components/IntroIcons/index.jsx'
 import ReactPullToRefresh from 'react-pull-to-refresh';
+import {OpenDialog} from '../../../components/Dialog/index.jsx';
+
 
 class Home extends Component {
     constructor(props) {
         super(props);
+        // Init state
+        this.state = {}
     }
     componentWillMount() {
         this.props.onLoading();
@@ -26,6 +30,26 @@ class Home extends Component {
         
     }
 
+    
+
+    openDialog(msg){
+        console.log('Openning dialog modal with msg:', msg, 'this:', this);
+        this.setState({isDialogOpen : true});
+        this.setState({dialogContent : msg});
+        OpenDialog({content: msg, dismiss: this.closeDialog.bind(this)})
+    }
+    closeDialog(){
+        console.log('Closing dialog modal');
+        this.setState({isDialogOpen : false});
+    }
+    getDialogModalParent(){
+        return document.querySelector('#dialog-modal-root');
+    }
+    // End of Dialog
+    //
+    getInvestDetail(...args){
+        this.props.getInvestDetail(...args, this.openDialog.bind(this));
+    }
     render(){
         let isShowNotice = false;
         let heightScale = window.innerHeight > 568 - 113 ? (window.innerHeight) / (568 - 113) : 1 ;
@@ -43,6 +67,7 @@ class Home extends Component {
                 </BaseComponent>
              </ReactPullToRefresh>
         */
+        
         return (
             <div className="scrollable">
             <div className="scrollable-content k_p0">
@@ -51,7 +76,7 @@ class Home extends Component {
                     ?<div className="content-for-m-header"><Header/></div>
                     :""
                 }
-                <article className="wx-mainbody">   
+                <article id="article_list" className="wx-mainbody">   
                     <Carousel items={this.props.banner.items} env={this.props.env}/>
                     {
                         this.props.env.platform.canInvokeNativeMethod()
@@ -72,7 +97,7 @@ class Home extends Component {
                         investList = {this.props.investList} 
                         isSeparateFirstNoviceItem = {isSeparateFirstNoviceItem}
                         getTenderInfoDetail={this.props.getTenderInfoDetail}
-                        getInvestDetail={this.props.getInvestDetail}
+                        getInvestDetail={this.getInvestDetail.bind(this)}
                         gotoPage={this.props.gotoPage}
                         introUrl={(this.props.intro !== undefined)?this.props.intro.url:null}
                     />
