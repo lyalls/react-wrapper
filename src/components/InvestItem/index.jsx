@@ -14,11 +14,10 @@ class InvestItem extends Component {
 
     render(){
         let item = this.props.item;
-    	let itemTitle = <InvestItemTitle item={this.props.item}/>;
         return (
             <li>
                 <div className={ "pro-box " + item.biao_type_zi_bgcss} onClick={this.getInvestDetail.bind(this,item.id,false,item.isNew, item.limitTime)}>
-                    {itemTitle}
+                    <InvestItemTitle item={item}/>
                     <dl className="pro-info">
                         <dt>
                             <AnnualRate investItem={item} />

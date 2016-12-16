@@ -26,6 +26,11 @@ ifeq "${compileSrc}" "false"
 		doCompileSource=false
 endif
 
+doDistribute=false
+ifeq "${dist}" "true"
+	doDistribute=true
+endif
+
 webpackConfigFile=./src/apps/webpack.config.js
 appIndexTemplateFile=./src/apps/index.js
 platformPolygonFile=./src/apps/platform.js
@@ -126,7 +131,10 @@ wechat ios:
 			export PATH=`pwd`/node_modules/.bin:$${PATH} && cd ${appIntegrationDir} && gulp build_q ;\
 		fi; \
 		cd - && cp ${appTemplateDir}/jquery-3.1.1.min.js ${appIntegrationDir}/www/js ;\
-		cp -r ${appTmpDir}/react ${appIntegrationDir}/www/react ;\
+		cp -r ${appTmpDir}/react ${appIntegrationDir}/www/ ;\
+		if [[ ${doDistribute} == true ]];then \
+			cp -r ${appIntegrationDir}/www/* ${h5SrcDir}/www/ ;\
+		fi; \
 	elif [[ ${target} == ios ]]; then \
 		rm -rf ${appIntegrationDir}/BaoCai/Components ;\
 		mkdir -p ${appIntegrationDir}/BaoCai/Components ;\
