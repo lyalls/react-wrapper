@@ -109,6 +109,7 @@ class Home extends Component {
                             this.props.env.platform.isWechat && this.props.userInfo !== undefined && this.props.userInfo.user !== undefined
                         }
                         gotoPage={this.props.gotoPage}
+                        env={this.props.env}
                     />
                     <InvestList 
                         userInfo = {this.props.userInfo}
