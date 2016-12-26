@@ -90,8 +90,8 @@
     self.leftBt.titleLabel.font = [UIFont systemFontOfSize:16];
     [self.leftBt setBackgroundImage:[UIImage imageNamed:@"backImage.png"] forState:normal];
     [self.leftBt addTarget:self action:@selector(leftButtonPress:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftBt];
-    self.navigationItem.leftBarButtonItem = leftButtonItem;
+    
+    [self setLeftButtonHidden:NO];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(bbsLoginSuccess) name:BBSLoginSuccessNotification object:nil];
@@ -212,6 +212,16 @@
 - (void)openLoginPage:(id)parmas callId:(NSString *)callId {
     _logPath = parmas;
     [self toLoginViewController];
+}
+
+//显示或隐藏返回按钮
+- (void)setLeftButtonHidden:(BOOL)hidden {
+    if(hidden){
+        self.navigationItem.leftBarButtonItem = nil;
+    }else{
+        UIBarButtonItem *leftButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.leftBt];
+        self.navigationItem.leftBarButtonItem = leftButtonItem;
+    }
 }
 
 //默认左边导航栏按钮动作

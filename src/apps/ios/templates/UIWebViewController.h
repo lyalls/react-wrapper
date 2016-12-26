@@ -34,6 +34,8 @@ typedef void(^WebEventHandller)(id param,NSString* callbackId);
 - (void)openShare:(id)parmas callId:(NSString *)callId;
 //显示对话框
 - (void)showDialog:(id)parmas callId:(NSString *)callId;
+// 隐藏或显示导航栏左返回按钮
+- (void)setLeftButtonHidden:(BOOL)hidden;
 
 //添加事件处理
 - (void)addEventHandler:(NSString *)eventName WebEventHandller:(WebEventHandller)handller;

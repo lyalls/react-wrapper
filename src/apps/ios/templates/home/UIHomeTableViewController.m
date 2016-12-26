@@ -23,6 +23,7 @@
     // 加载 H5 页面
     if([[self class] copySrcToDoc]){
         [self setReq:[NSURLRequest requestWithURL:[NSURL URLWithString:[[self class] componentIndex: @"home"]]]];
+        [self setLeftButtonHidden:YES];
     }else{
         NSLog(@"Can't load component: [%@]", @"home");
     }
