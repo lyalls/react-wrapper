@@ -141,12 +141,27 @@
     }
 }
 
+-(void)setTitleFromDocument{
+    if(!self.staticTitle){
+        NSString *title = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+        NSRange range = [title rangeOfString:@":"];
+        NSLog(@"Document title: %@, range of ':' location: %ld, length: %ld", title, range.location, range.length);
+        if(range.length > 0 && range.location < title.length - 1){
+            NSString *tabTitle = [title substringWithRange:NSMakeRange(0, range.location)];
+            NSString *navTitle = [title substringWithRange:NSMakeRange(range.location+1, title.length - range.location - 1)];
+            self.navigationController.navigationBar.topItem.title = navTitle;
+            self.navigationController.title = tabTitle;
+        }else{
+            self.title = title;
+        }
+    }
+}
+
 #pragma mark - Web view delegate
 
 //页面加载完成
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    if(!self.staticTitle)
-        self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    [self setTitleFromDocument];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
@@ -395,7 +410,7 @@
 // MARK: - WebView消息 及 NSNotificationCenter相关业务消息
 //title改变
 - (void)titleChanged:(id)parmas callId:(NSString *)callId {
-    self.title = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    [self setTitleFromDocument];
     if (callId) {
         [self JSCallback:callId param:@""];
     }

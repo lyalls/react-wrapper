@@ -108,13 +108,6 @@ class BaseComponent extends Component {
         let newState = Object.assign({}, this.state);
         newState.style = style;
 
-        if(this.componentId === 'BaseComponent_11'){
-            console.log(this.componentId, 'old state:', this.state, 'new state:', newState);   
-        }
-        if(isUpdate){
-            console.log('BaseComponent_11', document.getElementsByClassName('BaseComponent_11')[0]);
-        }
-
         this.state = newState;
 
 
@@ -122,14 +115,19 @@ class BaseComponent extends Component {
     }
     onWindowResize(event){
         let newProp = Object.assign({}, this.props);
+        let needUpdate = false;
         if(this.props.fullWidth){
             newProp = Object.assign(newProp, {width : window.innerWidth})
+            needUpdate = true;
         }
         if(this.props.fullHeight){
             newProp = Object.assign(newProp, {width : window.innerHeight})
+            needUpdate = true;
         }
-        this.setStyle(newProp);
-        // this.forceUpdate();
+        if(needUpdate){
+            this.setStyle(newProp);
+            this.forceUpdate();
+        }
     }
 
 
@@ -142,9 +140,6 @@ class BaseComponent extends Component {
 
     
     componentDidMount() {
-        if(this.componentId === 'BaseComponent_11'){
-            console.log(this.componentId, 'is mounted', 'BaseComponent_11', document.getElementsByClassName('BaseComponent_11')[0]);
-        }
         // For dynamic properties
         if((this.state.style.width === undefined && this.props.centerX !== undefined)
          || (this.state.style.height === undefined && this.props.centerY !== undefined)){
@@ -160,9 +155,8 @@ class BaseComponent extends Component {
                 if(sizeAdj && sizeAdj.height) newProps.height += sizeAdj.height;
                 newProps.centerY = this.props.centerY;
             }
-            console.log(this.componentId + ' is going to update state for dynamic propeties: ', newProps);
             this.setStyle(newProps, true);
-            // this.forceUpdate();
+            this.forceUpdate();
         }
         // queue for window resize event
         if(this.props.fullWidth || this.props.fullHeight){
@@ -220,9 +214,6 @@ class BaseComponent extends Component {
         }
     }
     render(){
-        if(this.componentId === 'BaseComponent_11'){
-            console.log(this.componentId, 'style:', this.state.style);
-        }
         return (
             <div className = {((this.props.className)?this.props.className + " ":"")+this.componentId } 
                  style={this.state.style} {...this.state.events}
