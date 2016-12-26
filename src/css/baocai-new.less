@@ -379,7 +379,20 @@ a.blue-link,.blue-link{color: #6496fa;}
 }
 
 //用户账户
-.account-bar{width: 100%; background: url("../images/account-bg.jpg") no-repeat; background-size: 100% 15rem; height: 15rem; border-bottom: 0; padding-top:2.5rem;}/*20161115*/
+.wx-mainbody.big-screen .account-bar{background-size: 100% 18rem; height: 18rem;}
+.wx-mainbody.big-screen .account-bar dt{.font-size(1.6rem); .height(2.1rem); .line-height(2rem); .wd(8.6rem);}
+.wx-mainbody.big-screen .account-bar dd strong{font-size: 2.8rem;}
+.wx-mainbody.big-screen .account-info li p{.font-size(1.5rem); }
+.wx-mainbody.big-screen .account-info li p strong{.color(#fff); .font-size(2.1rem); margin-right: 0.3rem;}
+.wx-mainbody.big-screen .account-ser-list li{border-top:1px solid #e6e6e6; border-bottom:1px solid #e6e6e6; background: #fff; overflow: hidden; margin-bottom: 1.25rem;}
+.wx-mainbody.big-screen .account-ser-list li div{padding: 0 1rem; height: 4.8rem; line-height: 4.8rem; background: url("../images/arrow-r-gray-b.png") 97% center no-repeat; background-size: 0.94rem 1.6rem;}
+.wx-mainbody.big-screen .account-ser-list li div i{margin-right: 1.3rem; position: relative; display: inline-block;}
+.wx-mainbody.big-screen .account-ser-list .icon-acc-01{background: url("../images/icon-user-invest.png") no-repeat; background-size:contain; width: 2rem; height: 2.1rem; top: 0.3rem;}
+.wx-mainbody.big-screen .account-ser-list .icon-acc-02{background: url("../images/icon-user-trade.png") no-repeat; background-size:contain; width: 1.8rem; height: 1.6rem; top: 0.2rem;}
+.wx-mainbody.big-screen .account-ser-list .icon-acc-03{background: url("../images/icon-user-coupon.png") no-repeat; background-size:contain; width: 2.1rem; height: 1.7rem; top: 0.2rem;}
+.wx-mainbody.big-screen .account-ser-list .icon-acc-04{background: url("../images/icon-user-firend.png") no-repeat; background-size:contain; width: 2.1rem; height: 2.1rem; top: 0.2rem;}
+
+.account-bar{width: 100%; background: url("../images/account-bg.jpg") no-repeat; background-size: 100% 16rem; height: 16rem; border-bottom: 0; padding-top:2rem;}/*20161115*/
 .account-bar dl{.txt-align(c);}
 .account-bar dt{.color(#ff8142); .font-size(1.3rem); .height(1.75rem); .line-height(1.75rem); .wd(7.75rem); background: #fffaf0; .color(#ff8142); .margin-2val(0,auto); border-radius: 1.5rem; .margin-b(1.1rem); font-weight: normal; .border-inset(1px,dashed,#ffd1a7,1px,#fffaf0);}/*20161115*/
 .account-bar dd{.color(#fff);}
@@ -388,10 +401,21 @@ a.blue-link,.blue-link{color: #6496fa;}
 .account-info{width: 100%; overflow: hidden; text-align: center; position: relative; background: transparent; .padding-2val(1.5rem,0)}/*20161115*/
 .account-info:after{.one-px-border(0,solid,#e6e6e6); bottom:0;}/*20161115*/
 .account-info li{width: 50%; float: left; position: relative;}
-.account-info li:last-child:before{content: ''; position: absolute; width: 1px; border-left: 1px dashed #dcdcdc; height: 70%; top:0.7rem; left: 0;}
+.account-info li:last-child:before{content: ''; position: absolute; width: 1px; border-left: 1px dashed #dcdcdc; -webkit-transform:scaleX(.5); -webkit-transform-origin:0 0; height: 70%; top:0.7rem; left: 0;}
 .account-info li label{font-weight: normal; .color(#fff); margin-bottom: 0;}/*20161115*/
 .account-info li p{.font-size(1.2rem); .color(#fff)}/*20161115*/
 .account-info li p strong{.color(#fff); .font-size(1.9rem); margin-right: 0.3rem;}/*20161115*/
+
+/*20161116*/
+.account-ser-list{width: 100%;}
+.account-ser-list li{width: 100%; border-top:1px solid #e6e6e6; border-bottom:1px solid #e6e6e6; background: #fff; overflow: hidden; margin-bottom: 1.25rem;}
+.account-ser-list li div{padding: 0 1rem; height: 4.4rem; line-height: 4.4rem; border-bottom: 1px solid #e6e6e6;  background: url("../images/arrow-r-gray-b.png") 97% center no-repeat; background-size: 0.8rem 1.4rem;}
+.account-ser-list li div:last-child{border-bottom:0;}
+.account-ser-list li div i{margin-right: 1.3rem; position: relative; display: inline-block;}
+.account-ser-list .icon-acc-01{background: url("../images/icon-user-invest.png") no-repeat; background-size:contain; width: 1.8rem; height: 1.9rem; top: 0.3rem;}
+.account-ser-list .icon-acc-02{background: url("../images/icon-user-trade.png") no-repeat; background-size:contain; width: 1.69rem; height: 1.5rem; top: 0.2rem;}
+.account-ser-list .icon-acc-03{background: url("../images/icon-user-coupon.png") no-repeat; background-size:contain; width: 1.9rem; height: 1.6rem; top: 0.2rem;}
+.account-ser-list .icon-acc-04{background: url("../images/icon-user-firend.png") no-repeat; background-size:contain; width: 1.9rem; height: 1.9rem; top: 0.2rem;}
 
 .gray-btm{position: fixed; bottom:0; left: 0; right: 0; background: #505050; .color(#aaa); .txt-align(c); .height(4.6rem); .line-height(4.6rem); .font-size(1.4rem);}
 .gray-btm a,.gray-btm a:hover,.gray-btm a:active,.gray-btm a:visited{.color(#aaa);.font-size(1.4rem);}
@@ -428,7 +452,7 @@ a.blue-link,.blue-link{color: #6496fa;}
 
 
 //底部
-.wx-index-bottom{padding: 1.6rem 0 1.3rem; .txt-align(c); background: #f5f5f5;  bottom:0; .wd(100%); .margin-t(1rem); z-index: 100; border-top: 3px solid #f0f0f0}/*2016.11.7*/
+.wx-index-bottom{padding: 1.6rem 0 1rem; .txt-align(c); background: #f5f5f5;  bottom:0; .wd(100%); .margin-t(1rem); z-index: 100; border-top: 3px solid #f0f0f0}/*2016.11.7*/
 .wx-index-bottom li{color: #bebebe; font-size: 1.2rem; margin: 0;}/*2016.11.7*/
 .wx-index-bottom li a{display: inline-block; margin:0 0 1.6rem; font-size: 1.3rem; color: #969696; background: #f5f5f5; .height(2rem); .line-height(2rem); border-left:1px dashed #dcdcdc; padding: 0 0.8rem;}/*2016.11.7*/
 .wx-index-bottom li a:first-child{border-left:0;}/*2016.11.7*/
@@ -672,16 +696,7 @@ a.blue-link,.blue-link{color: #6496fa;}
 .user-ser-list li div span.green{color: #3bca85;}
 .user-ser-list li div span i{display: inline-block; width: 0.8rem; height: 1.4rem; background: url("../images/arrow-r-gray-b.png") no-repeat; background-size: contain; position: relative; top: 0.3rem; margin-left: 0.5rem;}
 
-/*20161116*/
-.account-ser-list{width: 100%;}
-.account-ser-list li{width: 100%; border-top:1px solid #e6e6e6; border-bottom:1px solid #e6e6e6; background: #fff; overflow: hidden; margin-bottom: 1.25rem;}
-.account-ser-list li div{padding: 0 1rem; height: 4.2rem; line-height: 4.2rem; border-bottom: 1px solid #e6e6e6;  background: url("../images/arrow-r-gray-b.png") 97% center no-repeat; background-size: 0.8rem 1.4rem;}
-.account-ser-list li div:last-child{border-bottom:0;}
-.account-ser-list li div i{margin-right: 1.3rem; position: relative; display: inline-block;}
-.account-ser-list .icon-acc-01{background: url("../images/icon-user-invest.png") no-repeat; background-size:contain; width: 1.4rem; height: 1.5rem; top: 0.3rem;}
-.account-ser-list .icon-acc-02{background: url("../images/icon-user-trade.png") no-repeat; background-size:contain; width: 1.29rem; height: 1.1rem; top: 0.1rem;}
-.account-ser-list .icon-acc-03{background: url("../images/icon-user-coupon.png") no-repeat; background-size:contain; width: 1.5rem; height: 1.2rem; top: 0.1rem;}
-.account-ser-list .icon-acc-04{background: url("../images/icon-user-firend.png") no-repeat; background-size:contain; width: 1.5rem; height: 1.5rem; top: 0.1rem;}
+
 
 .wx-index-bottom.margin-t-3-4rem{margin-top: 3.4rem;}
 

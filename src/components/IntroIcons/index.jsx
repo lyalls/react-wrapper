@@ -9,7 +9,7 @@ class IntroIcons extends Component {
     	return(
             <BaseComponent className={"index-enter-area"} >
             {
-                this.props.isLogin 
+                this.props.isLogin && !this.env.platform.canInvokeNativeMethod()
                 ?<ul className="index-enter-item" >
                     <li onClick={this.props.gotoPage.bind(null, 'My Assets')}>
                         <i className="index-enter-icon-1"></i>
@@ -51,6 +51,7 @@ IntroIcons.PropTypes = {
     gotoIntro: PropTypes.func,
     isLogin: PropTypes.bool,
     gotoPage: PropTypes.func,
+    env: PropTypes.object,
 }
 
 export default IntroIcons;

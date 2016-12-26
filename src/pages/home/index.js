@@ -47,6 +47,9 @@ export default function(env){
                     env.platform.exec('getInvestDetail', {borrowId, pname, ifnew, limitTime});
                 }else{
                     let openDialog = otherArgs && otherArgs.length > 0 ? otherArgs[otherArgs.length - 1]:null;
+                    // For debugging dialog use
+                    //openDialog('即将发售，敬请期待！');
+                    //return;
                     let setSessionStorage = env.setSessionStorage;
                     if (arguments.length >= 4 && arguments[3] > 0) {
                         if(typeof openDialog === 'function'){

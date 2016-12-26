@@ -58,7 +58,7 @@ class InvestList extends Component {
                             ? this.props.investList.items[0] : null;
         let noviceItemTitle = noviceItemData ? <InvestItemTitle item={noviceItemData}/> : null;
         return (
-                <BaseComponent fullWidth>
+                <div width="100%">
                     {
                         noviceItemData
                         ? <BaseComponent fullWidth>
@@ -125,7 +125,7 @@ class InvestList extends Component {
                             :<div className="loading-btn" onClick={this.gotoPage.bind(this,'investList')}>查看更多项目</div>
                         }
                     </div>
-                </BaseComponent>
+                </div>
         );
     }
 }

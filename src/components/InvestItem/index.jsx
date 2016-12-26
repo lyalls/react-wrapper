@@ -2,6 +2,7 @@ import React , {Component, PropTypes} from 'react';
 import InvestItemTitle from '../InvestItemTitle/index.jsx'
 import AnnualRate from '../AnnualRate/index.jsx'
 import ItemTags from '../ItemTags/index.jsx'
+import BaseComponent from '../BaseComponent/index.jsx'
 
 class InvestItem extends Component {
     constructor(props) {
