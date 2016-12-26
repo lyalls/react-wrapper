@@ -32,7 +32,7 @@
     NSString *pageName = [params objectForKey:@"pageName"];
     NSString *url = [params objectForKey:@"url"];
     if(url != nil){
-        [self openWebBrowserWithUrl: url];
+        [self openWebWithUrl: url];
     }else if(pageName != nil){
         NSLog(@"ERROR: [%@] doesn't support pageName [%@] in params {%@}, when invoked by H5 in native method [gotoPage:callId]", [self class], pageName, params);
     }else{
