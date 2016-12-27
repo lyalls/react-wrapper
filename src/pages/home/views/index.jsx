@@ -6,16 +6,15 @@ import Header from '../../../components/Header/index.jsx';
 import InvestList from '../../../components/InvestList/index.jsx';
 import BaseComponent from '../../../components/BaseComponent/index.jsx';
 import IntroIcons from '../../../components/IntroIcons/index.jsx'
-import ReactPullToRefresh from 'react-pull-to-refresh';
-import InduceBarDownloadApp, {shouldShowDownloadAppBar} from '../../../components/InduceBarDownloadApp/index.jsx';
+import PullToRefresh from 'react-pull-to-refresh';
 import {OpenDialog} from '../../../components/Dialog/index.jsx';
+import ScrollablePageWrapper from '../../../components/ScrollablePageWrapper/index.jsx';
 
 
 class Home extends Component {
     constructor(props) {
         super(props);
-        // Init state
-        this.state = {isDownloadAppBarHidden: !shouldShowDownloadAppBar()}
+        
     }
     componentWillMount() {
         this.props.onLoading();
@@ -52,10 +51,6 @@ class Home extends Component {
         this.props.getInvestDetail(...args, this.openDialog.bind(this));
     }
 
-    // Download App Bar
-    setDownloadAppBarHidden(shouldHide){
-        this.setState({isDownloadAppBarHidden: shouldHide});
-    }
     render(){
         let isShowNotice = false;
         let heightScale = window.innerHeight > 568 - 113 ? (window.innerHeight) / (568 - 113) : 1 ;
@@ -66,8 +61,10 @@ class Home extends Component {
         
         return (
 
-            <div className="scrollable">
-            <div className={ (this.state.isDownloadAppBarHidden ? "" : 'index-btm-padding ') + "scrollable-content"} id="mContent">
+            <ScrollablePageWrapper 
+                    env={this.props.env} 
+                    gotoPage={this.props.gotoPage}
+            >
                 {
                     this.props.env.platform.canInvokeNativeMethod()
                     ? null
@@ -108,15 +105,8 @@ class Home extends Component {
                 {
                     this.props.env.platform.canInvokeNativeMethod() ? null : <Footer gotoPage={this.props.gotoPage}/>
                 }
-            </div>
-            {
-                this.props.env.platform.canInvokeNativeMethod() 
-                ? null 
-                : this.state.isDownloadAppBarHidden 
-                    ? null
-                    : <InduceBarDownloadApp gotoPage={this.props.gotoPage} setHidden={this.setDownloadAppBarHidden.bind(this)}/> 
-            }
-            </div>
+            </ScrollablePageWrapper>
+           
         );
     }
 }
