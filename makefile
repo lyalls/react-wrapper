@@ -62,7 +62,11 @@ wechat ios:
 	echo "SRC: " ${appSrcDir}
 	if [[ ${doUpdateSourceFile} == true ]];then svn update ${appSrcDir}; fi
 	mkdir -p ${appIntegrationDir}
-	rsync -av ${appSrcDir}/ ${appIntegrationDir} --exclude='*.xcworkspace'
+	if [[ ${target} == ios && -d ${appIntegrationDir}/BaoCai.xcworkspace ]];then \
+		rsync -av ${appSrcDir}/ ${appIntegrationDir} --exclude='*.xcworkspace' ;\
+	else \
+		rsync -av ${appSrcDir}/ ${appIntegrationDir} ;\
+	fi
 	rm -rf ${appTmpDir}
 	mkdir -p ${appTmpDir}
 	cp ${webpackConfigFile} ${appTmpDir}

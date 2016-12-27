@@ -22,20 +22,22 @@ class ScrollablePageWrapper extends Component {
     }
 	render(){
 		let page = (this.props.env && this.props.env.platform && this.props.env.platform.canInvokeNativeMethod()) 
-				? 	<div className="scrollable" id="content">
+				? 	<div className="scrollable">
 				        <div className="scrollable-content" id="mContent">	
-					        <PullToRefresh onRefresh={this.onRefresh.bind(this)} className="react-pull-to-refresh" style={{textAlign: 'center'}}>
-								<div id="ptr">
-									<span class="genericon genericon-next"></span>
-									<div class="loading">
-									    <span id="l1">ABCDEFG</span>
-									    <span id="l2">HIGJLMK</span>
-									    <span id="l3">OPQ RST</span>
-								  	</div>
+					        <PullToRefresh onRefresh={this.onRefresh.bind(this)} className="react-pull-to-refresh scrollable" style={{textAlign: 'center'}}>
+					        	<div className="scrollable-content">
+									<div id="refresh-ptr">
+										<span class="genericon genericon-next"></span>
+										<div class="refresh-loading">
+										    <span id="refresh-l1">ABCDEFG</span>
+										    <span id="refresh-l2">HIGJLMK</span>
+										    <span id="refresh-l3">OPQ RST</span>
+									  	</div>
+									</div>
+									<div id="refresh-content">
+									{this.props.children}
+									</div>
 								</div>
-								
-								{this.props.children}
-
 				  			</PullToRefresh>
 					  	</div>
 					</div>
