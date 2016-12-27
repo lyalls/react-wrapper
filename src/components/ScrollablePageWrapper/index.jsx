@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import PullToRefresh from 'react-pull-to-refresh';
 import BaseComponent from '../BaseComponent/index.jsx';
 import InduceBarDownloadApp, {shouldShowDownloadAppBar} from '../InduceBarDownloadApp/index.jsx';
 
@@ -22,25 +21,11 @@ class ScrollablePageWrapper extends Component {
     }
 	render(){
 		let page = (this.props.env && this.props.env.platform && this.props.env.platform.canInvokeNativeMethod()) 
-				? 	<div className="scrollable">
-				        <div className="scrollable-content" id="mContent">	
-					        <PullToRefresh onRefresh={this.onRefresh.bind(this)} className="react-pull-to-refresh scrollable" style={{textAlign: 'center'}}>
-					        	<div className="scrollable-content">
-									<div id="refresh-ptr">
-										<span class="genericon genericon-next"></span>
-										<div class="refresh-loading">
-										    <span id="refresh-l1">ABCDEFG</span>
-										    <span id="refresh-l2">HIGJLMK</span>
-										    <span id="refresh-l3">OPQ RST</span>
-									  	</div>
-									</div>
-									<div id="refresh-content">
-									{this.props.children}
-									</div>
-								</div>
-				  			</PullToRefresh>
-					  	</div>
+				? <div className="scrollable">
+        			<div className="scrollable-content" id="mContent">	
+						{this.props.children}
 					</div>
+				  </div>
 				: <div className="scrollable">
 			        <div className={ (this.state.isDownloadAppBarHidden ? "" : 'index-btm-padding ') + "scrollable-content"} id="mContent">
 			        	{this.props.children}
