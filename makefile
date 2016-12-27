@@ -1,7 +1,7 @@
 ######## Src Builder ######## 
 # Created at:    2016-11-14 #
 # Created by: Lin Sun       #
-# Last modified: 2016-11-30 #
+# Last modified: 2016-12-27 #
 # Modified by: Lin Sun      #
 #############################
 SHELL:=/bin/bash
@@ -35,6 +35,8 @@ webpackConfigFile=./src/apps/webpack.config.js
 appIndexTemplateFile=./src/apps/index.js
 platformPolygonFile=./src/apps/platform.js
 
+appIntegrationBase=./integrations
+
 # Do local test, DON'T modify original codes
 wechat: appSrcDir=${h5SrcDir}
 wechat: appIntegrationDir=./integrations/wechat
@@ -60,8 +62,7 @@ wechat ios:
 	echo "SRC: " ${appSrcDir}
 	if [[ ${doUpdateSourceFile} == true ]];then svn update ${appSrcDir}; fi
 	mkdir -p ${appIntegrationDir}
-	rm -rf ${appIntegrationDir}
-	cp -r ${appSrcDir} ${appIntegrationDir}
+	rsync -av ${appSrcDir}/ ${appIntegrationDir} --exclude='*.xcworkspace'
 	rm -rf ${appTmpDir}
 	mkdir -p ${appTmpDir}
 	cp ${webpackConfigFile} ${appTmpDir}
