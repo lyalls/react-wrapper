@@ -9,12 +9,21 @@ class Footer extends Component {
 		return (
 			<footer className="wx-index-bottom">
 			    <ul>
-			        <li><a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.baocai.p2p">APP下载</a> <a href="tel:4006167070">客服电话</a></li>
-			        <li>&copy; 2016抱财网Baocai.com 投资有风险 选择需谨慎</li>
-			    </ul>
-			</footer>
+					<li>
+						<a onClick={this.props.gotoPage.bind(this,'aboutus')}>了解抱财</a> 
+						<a onClick={this.props.gotoPage.bind(this,'Customer Service')}>在线客服</a> 
+						<a onClick={this.props.gotoPage.bind(this,'Switch to PC')}>切换电脑版</a>
+						<a onClick={this.props.gotoPage.bind(this,'Download App')} id="downapp">下载APP</a></li>
+					<li>&copy; 2016抱财网Baocai.com 投资有风险 选择需谨慎</li>
+					<li>客服电话：400-616-7070</li>
+				</ul>			
+    	</footer>
 		);
 	}
+}
+
+Footer.PropTypes = {
+	gotoPage: PropTypes.func.isRequired
 }
 
 export default Footer;
