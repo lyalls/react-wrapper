@@ -6,7 +6,6 @@ import Header from '../../../components/Header/index.jsx';
 import InvestList from '../../../components/InvestList/index.jsx';
 import BaseComponent from '../../../components/BaseComponent/index.jsx';
 import IntroIcons from '../../../components/IntroIcons/index.jsx'
-import PullToRefresh from 'react-pull-to-refresh';
 import {OpenDialog} from '../../../components/Dialog/index.jsx';
 import ScrollablePageWrapper from '../../../components/ScrollablePageWrapper/index.jsx';
 

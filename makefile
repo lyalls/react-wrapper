@@ -56,19 +56,37 @@ ios: targetNameInAppIndex=IOS
 ios: syncFromH5=false
 
 
-wechat ios:
-	# Prepare the environment
-	npm install
-	echo "SRC: " ${appSrcDir}
-	if [[ ${doUpdateSourceFile} == true ]];then svn update ${appSrcDir}; fi
-	mkdir -p ${appIntegrationDir}
-	if [[ ${target} == ios && -d ${appIntegrationDir}/BaoCai.xcworkspace ]];then \
-		rsync -av ${appSrcDir}/ ${appIntegrationDir} --exclude='*.xcworkspace' ;\
+# DEBUG #
+# REQUIRED PARAMETER: page=<page name>
+debug: appSrcDir=${h5SrcDir}
+debug: appIntegrationDir=./integrations/debug
+debug: appTmpDir=./src/apps/debug/tmp
+debug: appTemplateDir=./src/apps/mobile/templates
+debug: components=${page}
+debug: target=debug
+debug: targetNameInAppIndex=Debug
+debug: syncFromH5=false
+# DEBUG #
+
+
+debug wechat ios:
+	# Prepare the environment, copy source code if not debugging raw page
+	if [[ ${target} != debug ]];then \
+		npm install ;\
+		echo "SRC: " ${appSrcDir} ;\
+		if [[ ${doUpdateSourceFile} == true ]];then svn update ${appSrcDir}; fi ;\
+		mkdir -p ${appIntegrationDir} ;\
+		if [[ ${target} == ios && -d ${appIntegrationDir}/BaoCai.xcworkspace ]];then \
+			rsync -av ${appSrcDir}/ ${appIntegrationDir} --exclude='*.xcworkspace' ;\
+		elif [[ ${target} != debug ]];then \
+			rsync -av ${appSrcDir}/ ${appIntegrationDir} ;\
+		fi ;\
 	else \
-		rsync -av ${appSrcDir}/ ${appIntegrationDir} ;\
+		rm -rf ${appIntegrationDir} ;\
+		mkdir -p ${appIntegrationDir} ;\
 	fi
-	rm -rf ${appTmpDir}
-	mkdir -p ${appTmpDir}
+	rm -rf ${appTmpDir} 
+	mkdir -p ${appTmpDir} 
 	cp ${webpackConfigFile} ${appTmpDir}
 	# Copy CSS & image files && Fix “less import” problem
 	if [[ ${syncFromH5} == true ]]; then \
@@ -113,13 +131,20 @@ wechat ios:
 	# Run the webpack to build target components
 	export PATH=`pwd`/node_modules/.bin:$${PATH} && cd ${appTmpDir} && which webpack && webpack --config webpack.config.js --progress --colors --inline
 	cp ${platformPolygonFile} ${appTmpDir}/react
+	# Post-process for Debug: 
 	# Post-process for WeChat: 
 		# Move the template files to wechat template direcotory; 
 		# Modify index.html; 
 		# Build the test project with these template files
 	# Post-process for iOS:
 		# Copy H5 files to iOS project, together with the controllers and webViewController
-	if [[ ${target} == wechat ]]; then \
+	if [[ ${target} == debug ]];then \
+		cp -r ${appTmpDir}/react ${appIntegrationDir} ;\
+		cp -r ${appTmpDir}/*.html ${appIntegrationDir} ;\
+		cp -r ${appTemplateDir}/server ${appIntegrationDir} ;\
+		cp -r ${appTemplateDir}/package.json ${appIntegrationDir} ;\
+		sed "s/index.html/${page}.html/g" ${appTemplateDir}/server.js > ${appIntegrationDir}/server.js ;\
+	elif [[ ${target} == wechat ]]; then \
 		for comp in `echo ${components}`; do \
 			templateFileName=`echo $${comp}|awk '{print $$2}' FS=":"` ; \
 			mv ${appTmpDir}/$${templateFileName}.html ${appIntegrationDir}/src/templates ;\
@@ -153,9 +178,14 @@ wechat ios:
 		cp ${appTemplateDir}/UIWebViewController* ${appIntegrationDir}/BaoCai/UI/Base/Controller ;\
 		cp -r ${appTmpDir}/react ${appIntegrationDir}/BaoCai/Components/react ;\
 	fi
-	rm -rf ${appTmpDir}
+	# Clear the temporary workspace
+	rm -rf ${appTmpDir} ;
 	# Start the integrated system for WeChat
-	if [[ ${target} == wechat ]]; then cd ${appIntegrationDir} && npm start ; fi
+	if [[ ${target} == wechat ]]; then \
+		cd ${appIntegrationDir} && npm start ;\
+	elif [[ ${target} == debug ]];then \
+		cd ${appIntegrationDir} && npm run server ;\
+	fi
 
 ######## Sync to SVN ######## 
 # Last modified: 2016-11-14 #
