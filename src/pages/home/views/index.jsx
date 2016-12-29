@@ -55,7 +55,7 @@ class Home extends Component {
         let heightScale = window.innerHeight > 568 - 113 ? (window.innerHeight) / (568 - 113) : 1 ;
         let noviceHeight = 233 * heightScale + (isShowNotice ? 0 : (20 * heightScale + 8 * heightScale));
         let isSeparateFirstNoviceItem = (this.props.env.platform.canInvokeNativeMethod() && this.props.investList.items && this.props.investList.items.length > 0);
-         // isSeparateFirstNoviceItem |= this.props.env.platform.isWechat;
+          // isSeparateFirstNoviceItem |= this.props.env.platform.isWechat;
         let showPullToRefresh = this.props.env.platform.canInvokeNativeMethod();
         
         return (

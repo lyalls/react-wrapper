@@ -57,14 +57,24 @@ ios: syncFromH5=false
 
 
 # DEBUG #
-# REQUIRED PARAMETER: page=<page name>
+# REQUIRED PARAMETER: page=<page name> platform=[IOS/Android/Wechat]
+_PLATFORM_=${platform}
+ifeq "${_PLATFORM_}" ""
+	_PLATFORM_=Wechat
+endif
+
+_PAGE_=${page}
+ifeq "${_PAGE_}" ""
+	_PAGE_=home
+endif
+
 debug: appSrcDir=${h5SrcDir}
 debug: appIntegrationDir=./integrations/debug
 debug: appTmpDir=./src/apps/debug/tmp
 debug: appTemplateDir=./src/apps/mobile/templates
-debug: components=${page}
+debug: components=${_PAGE_}
 debug: target=debug
-debug: targetNameInAppIndex=Debug
+debug: targetNameInAppIndex=${_PLATFORM_}
 debug: syncFromH5=false
 # DEBUG #
 
@@ -129,9 +139,12 @@ debug wechat ios:
 	cat ${appTmpDir}/tmpHead.js ${appTmpDir}/tmp.js ${appTmpDir}/tmpTail.js > ${appTmpDir}/webpack.config.js
 	rm -rf ${appTmpDir}/tmp.js ${appTmpDir}/tmpHead.js ${appTmpDir}/tmpTail.js
 	# Run the webpack to build target components
-	export PATH=`pwd`/node_modules/.bin:$${PATH} && cd ${appTmpDir} && which webpack && webpack --config webpack.config.js --progress --colors --inline
-	cp ${platformPolygonFile} ${appTmpDir}/react
+	if [[ ${target} != debug ]];then \
+		export PATH=`pwd`/node_modules/.bin:$${PATH} && cd ${appTmpDir} && which webpack && webpack --config webpack.config.js --progress --colors --inline ;\
+		cp ${platformPolygonFile} ${appTmpDir}/react ;\
+	fi
 	# Post-process for Debug: 
+		# Copy source files into debug folder, using webpack-hot-middleware to build page on-changes
 	# Post-process for WeChat: 
 		# Move the template files to wechat template direcotory; 
 		# Modify index.html; 
@@ -139,10 +152,12 @@ debug wechat ios:
 	# Post-process for iOS:
 		# Copy H5 files to iOS project, together with the controllers and webViewController
 	if [[ ${target} == debug ]];then \
-		cp -r ${appTmpDir}/react ${appIntegrationDir} ;\
 		cp -r ${appTmpDir}/*.html ${appIntegrationDir} ;\
 		cp -r ${appTemplateDir}/server ${appIntegrationDir} ;\
-		cp -r ${appTemplateDir}/package.json ${appIntegrationDir} ;\
+		sed 's/..\/..\/..\//..\/..\/src\//g' ${appTmpDir}/webpack.config.js > ${appIntegrationDir}/webpack.config.js;\
+		for comp in `echo ${components}`; do\
+			sed "s/..\/..\/..\/pages/..\/..\/src\/pages/g" ${appTmpDir}/$${comp}.js > ${appIntegrationDir}/$${comp}.js ;\
+		done;\
 		sed "s/index.html/${page}.html/g" ${appTemplateDir}/server.js > ${appIntegrationDir}/server.js ;\
 	elif [[ ${target} == wechat ]]; then \
 		for comp in `echo ${components}`; do \
@@ -184,7 +199,7 @@ debug wechat ios:
 	if [[ ${target} == wechat ]]; then \
 		cd ${appIntegrationDir} && npm start ;\
 	elif [[ ${target} == debug ]];then \
-		cd ${appIntegrationDir} && npm run server ;\
+		export PATH=`pwd`/node_modules/.bin:$${PATH} && nodemon -w ${appIntegrationDir} -e node ${appIntegrationDir}/server.js ;\
 	fi
 
 ######## Sync to SVN ######## 
