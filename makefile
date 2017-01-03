@@ -141,7 +141,7 @@ debug wechat ios:
 	# Run the webpack to build target components
 	if [[ ${target} != debug ]];then \
 		export PATH=`pwd`/node_modules/.bin:$${PATH} && cd ${appTmpDir} && which webpack && webpack --config webpack.config.js --progress --colors --inline ;\
-		cp ${platformPolygonFile} ${appTmpDir}/react ;\
+		cd - && cp ${platformPolygonFile} ${appTmpDir}/react ;\
 	fi
 	# Post-process for Debug: 
 		# Copy source files into debug folder, using webpack-hot-middleware to build page on-changes
@@ -228,4 +228,6 @@ clear:
 			rm -rf ./src/apps/$${app}/tmp ;\
 		fi ;\
 	done
+
+
 
