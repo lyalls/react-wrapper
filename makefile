@@ -87,9 +87,9 @@ debug wechat ios:
 		if [[ ${doUpdateSourceFile} == true ]];then svn update ${appSrcDir}; fi ;\
 		mkdir -p ${appIntegrationDir} ;\
 		if [[ ${target} == ios && -d ${appIntegrationDir}/BaoCai.xcworkspace ]];then \
-			rsync -av ${appSrcDir}/ ${appIntegrationDir} --exclude='*.xcworkspace' ;\
+			rsync -a ${appSrcDir}/ ${appIntegrationDir} --exclude='*.xcworkspace' ;\
 		elif [[ ${target} != debug ]];then \
-			rsync -av ${appSrcDir}/ ${appIntegrationDir} ;\
+			rsync -a ${appSrcDir}/ ${appIntegrationDir} ;\
 		fi ;\
 	else \
 		rm -rf ${appIntegrationDir} ;\
