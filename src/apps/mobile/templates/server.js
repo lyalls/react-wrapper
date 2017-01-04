@@ -9,6 +9,9 @@ var proxy = require('./server/proxy');
 var myproxy = proxy("m224.baocai.com",80);
 app.use(logger('dev'));
 
+// static
+app.use(express.static(__dirname + '/public'));
+
 // Webpack Hot Compiler
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.config');

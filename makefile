@@ -154,6 +154,8 @@ debug wechat ios:
 	if [[ ${target} == debug ]];then \
 		cp -r ${appTmpDir}/*.html ${appIntegrationDir} ;\
 		cp -r ${appTemplateDir}/server ${appIntegrationDir} ;\
+		mkdir -p ${appIntegrationDir}/public ;\
+		cp -r ./src/images ${appIntegrationDir}/public; \
 		sed 's/..\/..\/..\//..\/..\/src\//g' ${appTmpDir}/webpack.config.js > ${appIntegrationDir}/webpack.config.js;\
 		for comp in `echo ${components}`; do\
 			sed "s/..\/..\/..\/pages/..\/..\/src\/pages/g" ${appTmpDir}/$${comp}.js > ${appIntegrationDir}/$${comp}.js ;\
@@ -177,6 +179,7 @@ debug wechat ios:
 		fi; \
 		cd - && cp ${appTemplateDir}/jquery-3.1.1.min.js ${appIntegrationDir}/www/js ;\
 		cp -r ${appTmpDir}/react ${appIntegrationDir}/www/ ;\
+		cp -r ./src/images/* ${appIntegrationDir}/www/images/ ;\
 		if [[ ${doDistribute} == true ]];then \
 			cp -r ${appIntegrationDir}/www/* ${h5SrcDir}/www/ ;\
 		fi; \
