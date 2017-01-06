@@ -5,9 +5,13 @@ var express = require('express');
 var app = express();
 var msg = require('./server/msg');
 var proxy = require('./server/proxy');
+var compression = require('compression');
 
 var myproxy = proxy("m224.baocai.com",80);
 app.use(logger('dev'));
+
+// Compression
+app.use(compression({level:9}));
 
 // static
 app.use(express.static(__dirname + '/public'));
