@@ -39,17 +39,18 @@ module.exports = {
                 test: /\.less$/,
                 loader: ExtractTextPlugin.extract('style-loader', 'css!less?indentedSyntax=true&sourceMap=true')
             },
-            {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
-            }, 
+            // {
+            //     test: /\.css$/,
+            //     loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+            // }, 
             {
                 test: /\.json$/,
                 loader: 'json'
             },
             {
                 test: /\.(jpe?g|gif|png|eot|svg|woff|woff2|ttf)([\?]?.*)$/,
-                loaders: ['url-loader']
+                // loaders: ['url-loader']
+                loaders: ['file-loader']
             },
         ],
     },

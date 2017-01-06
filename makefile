@@ -82,15 +82,17 @@ debug: syncFromH5=false
 debug wechat ios:
 	# Prepare the environment, copy source code if not debugging raw page
 	if [[ ${target} != debug ]];then \
-		npm install ;\
 		echo "SRC: " ${appSrcDir} ;\
-		if [[ ${doUpdateSourceFile} == true ]];then svn update ${appSrcDir}; fi ;\
-		mkdir -p ${appIntegrationDir} ;\
-		if [[ ${target} == ios && -d ${appIntegrationDir}/BaoCai.xcworkspace ]];then \
-			rsync -a ${appSrcDir}/ ${appIntegrationDir} --exclude='*.xcworkspace' ;\
-		elif [[ ${target} != debug ]];then \
-			rsync -a ${appSrcDir}/ ${appIntegrationDir} ;\
-		fi ;\
+		if [[ ${doUpdateSourceFile} == true ]];then \
+			npm install ;\
+			svn update ${appSrcDir};\
+			mkdir -p ${appIntegrationDir} ;\
+			if [[ ${target} == ios && -d ${appIntegrationDir}/BaoCai.xcworkspace ]];then \
+				rsync -a ${appSrcDir}/ ${appIntegrationDir} --exclude='*.xcworkspace' ;\
+			elif [[ ${target} != debug ]];then \
+				rsync -a ${appSrcDir}/ ${appIntegrationDir} ;\
+			fi ;\
+		fi;\
 	else \
 		rm -rf ${appIntegrationDir} ;\
 		mkdir -p ${appIntegrationDir} ;\
