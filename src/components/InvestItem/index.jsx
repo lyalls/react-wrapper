@@ -22,7 +22,7 @@ class InvestItem extends Component {
             this.props.isNativeApp 
             ?   <li>
                      <div className="app-pro-box" onClick={this.getInvestDetail.bind(this,item.id,false,item.isNew, item.limitTime)}>
-                         <InvestItemTitle item={item}/>
+                         <InvestItemTitle item={item} isNativeApp/>
                          <dl className="app-pro-info">
                              <dt><strong>{item.annualRate}<b className="font-12">%</b></strong><span>{item.investmentHorizon}</span><span className="cir-progress">{item.tenderSchedule}%</span></dt>
                              <dd>

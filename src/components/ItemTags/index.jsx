@@ -59,32 +59,40 @@ class ItemTags extends Component {
                     else lastTag = t;
                 }
             }
+
             tags = tags.map((t,i) =>{
                 if(t===null) return null;
+                t.tail = null;
+                t.head = null;
                 if(t === firstTag){
                     if(t===lastTag || lastTag === null){
-                        t.className = "act-tag-type-1" + ( t.className ? " "+t.className : "");
+                        lastTag = t;
+                        t.className = "act-tag-type-4" + ( t.className ? " "+t.className : "");
+                        t.head = <s></s>;
+                        t.tail = <b></b>;
                     }else{
-                        t.className = "act-tag-type-1 " + ( t.className ? " "+t.className : "");
+                        t.className = "act-tag-type-1" + ( t.className ? " "+t.className : "");
+                        t.head = <s></s>;
                     }
                 }else if(t === lastTag){
-                    t.className = "act-tag-type-3 " + ( t.className ? " "+t.className : "");
+                    t.className = "act-tag-type-3" + ( t.className ? " "+t.className : "");
+                    t.head = <s></s>;
                 }else{
-                    t.className = "act-tag-type-2 " + ( t.className ? " "+t.className : "");
+                    t.className = "act-tag-type-2" + ( t.className ? " "+t.className : "");
                 }
-                let key='itemTag_'+i;
+                t.key='itemTag_'+i;
                 switch(t.type){
                 case 'bonusTicket':
-                    return <li key={key}><div className={t.className}><span>红包券</span><s></s></div></li>
+                    return <li key={t.key}><div className={t.className}><span>红包券</span>{t.head}{t.tail}</div></li>
                     break;
                 case 'allowIncrease':
-                    return <li key={key}><div className={t.className}><span>加息券</span></div></li>
+                    return <li key={t.key}><div className={t.className}><span>加息券</span>{t.head}{t.tail}</div></li>
                     break;
                 case 'limitMinAmount':
-                    return <li key={key}><div className={t.className}><span>{this.props.StartInvestTag}</span><s></s></div></li>
+                    return <li key={t.key}><div className={t.className}><span>{this.props.StartInvestTag}</span>{t.head}{t.tail}</div></li>
                     break;
                 case 'tag':
-                    return <li key={key}><div className={t.className}><span>{this.props.investItem.tagTitle}</span></div></li>
+                    return <li key={t.key}><div className={t.className}><span>{this.props.investItem.tagTitle}</span>{t.head}{t.tail}</div></li>
                     break;
                 default:
                     return null;

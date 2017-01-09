@@ -58,6 +58,8 @@ class InvestList extends Component {
         let noviceItemData = (separateNoviceItem && this.props.investList.items && this.props.investList.items.length > 0)
                             ? this.props.investList.items[0] : null;
         let noviceItemTitle = noviceItemData ? <InvestItemTitle item={noviceItemData}/> : null;
+
+
         return (
                 <div width="100%">
                     {
@@ -72,8 +74,8 @@ class InvestList extends Component {
                           </BaseComponent>
                         : null
                     }
-                    <div className="wx-index-pro-cont">
-                        <ul className="wx-index-pro-list" >
+                    <div className={this.props.isNativeApp ? "app-index-pro-cont" : "wx-index-pro-cont"}>
+                        <ul className={this.props.isNativeApp ? "app-index-pro-list" :"wx-index-pro-list"}>
                             {
                                 investList ?
                                 investList.map( (item, idx) =>(
