@@ -5,6 +5,8 @@ class ItemTags extends Component {
     constructor(props) {
         super(props);
     }
+    componentDidMount() {
+    }
     render(){
 
         // <dd>
@@ -19,31 +21,31 @@ class ItemTags extends Component {
         let isRead = (this.props.investItem.isReward==1)
                         ? (this.props.isNativeApp) 
                             ? null
-                            :<span className="take">{this.props.investItem.promotionTitle}</span> 
+                            :<span key="itemTag1" className="take">{this.props.investItem.promotionTitle}</span> 
                         : null;
 
         let isBonusTicket = (this.props.investItem.isBonusticket == 1) 
                         ? (this.props.isNativeApp) 
                             ? {type: 'bonusTicket'}
-                            : <span >红包券</span> 
+                            : <span key="itemTag2" >红包券</span> 
                         : null;
 
         let isAllowIncrease = (this.props.investItem.isAllowIncrease == 1) 
                         ? (this.props.isNativeApp) 
                             ? {type: 'allowIncrease', className: 'app-palered-tag'}
-                            : <span>加息券</span> 
+                            : <span key="itemTag3" >加息券</span> 
                         : null;
 
         let isTag = (this.props.investItem.isTag == 1) 
                         ? (this.props.isNativeApp) 
                             ? {type: 'tag', className: 'app-yellow-tag'}
-                            : <span>{this.props.investItem.tagTitle}</span> 
+                            : <span key="itemTag4" >{this.props.investItem.tagTitle}</span> 
                         : null;
 
-        let isLimitMinAmount = (this.props.tenderAccountMin > 100) 
+        let isLimitMinAmount = (this.props.investItem.tenderAccountMin > 100) 
                         ? (this.props.isNativeApp) 
                             ? {type: 'limitMinAmount', className: 'app-gold-tag'}
-                            : <span>{this.props.StartInvestTag}元起投</span> 
+                            : <span key="itemTag5" >{this.props.StartInvestTag}元起投</span> 
                         : null;
 
         let tags = [isRead, isBonusTicket, isAllowIncrease, isTag, isLimitMinAmount];
@@ -57,7 +59,6 @@ class ItemTags extends Component {
                     else lastTag = t;
                 }
             }
-            console.log('firstTag:', firstTag, 'lastTag:', lastTag);
             tags = tags.map((t,i) =>{
                 if(t===null) return null;
                 if(t === firstTag){
@@ -71,19 +72,19 @@ class ItemTags extends Component {
                 }else{
                     t.className = "act-tag-type-2 " + ( t.className ? " "+t.className : "");
                 }
-                t.key='itemTag_'+i;
+                let key='itemTag_'+i;
                 switch(t.type){
                 case 'bonusTicket':
-                    return <li key={t.key}><div className={t.className}><span>红包券</span><s></s></div></li>
+                    return <li key={key}><div className={t.className}><span>红包券</span><s></s></div></li>
                     break;
                 case 'allowIncrease':
-                    return <li key={t.key}><div className={t.className}><span>加息券</span></div></li>
+                    return <li key={key}><div className={t.className}><span>加息券</span></div></li>
                     break;
                 case 'limitMinAmount':
-                    return <li key={t.key}><div className={t.className}><span>{this.props.StartInvestTag}</span><s></s></div></li>
+                    return <li key={key}><div className={t.className}><span>{this.props.StartInvestTag}</span><s></s></div></li>
                     break;
                 case 'tag':
-                    return <li key={t.key}><div className={t.className}><span>{this.props.investItem.tagTitle}</span></div></li>
+                    return <li key={key}><div className={t.className}><span>{this.props.investItem.tagTitle}</span></div></li>
                     break;
                 default:
                     return null;

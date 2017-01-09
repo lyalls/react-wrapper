@@ -8,6 +8,9 @@ class InvestItem extends Component {
     constructor(props) {
         super(props);
     }
+    componentDidMount() {
+        
+    }
     // 投资详情
     getInvestDetail (borrowId,pname,ifnew,limitTime) {
         this.props.getInvestDetail(...arguments);

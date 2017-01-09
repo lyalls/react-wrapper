@@ -9,7 +9,8 @@ class InvestList extends Component {
     constructor(props) {
         super(props);
     }
-    componentWillReceiveProps(nextProps) {
+    componentDidMount() {
+        
     }
 
     // 显示对话框
