@@ -16,25 +16,41 @@ class InvestItem extends Component {
     render(){
         let item = this.props.item;
         return (
-            <li>
-                <div className={ "pro-box " + item.biao_type_zi_bgcss} onClick={this.getInvestDetail.bind(this,item.id,false,item.isNew, item.limitTime)}>
-                    <InvestItemTitle item={item}/>
-                    <dl className="pro-info">
-                        <dt>
-                            <AnnualRate investItem={item} />
-                            <ItemTags investItem = {item} />
-                        </dt>
-                        <dd><span><b>借款期限：</b>{item.investmentHorizon}</span><span><b>可投金额：</b>{item.availableAmount} 元</span></dd>
-                    </dl>
-                </div>
-                <div className={"index-list-tag "+ item.biaotag}>{item.biao_type_zi}</div>
-                {(item.is_zhiding == true) ? <img src="./images/icon-recommend.png" className="recommend-mark"/> : null}
-            </li>
+            this.props.isNativeApp 
+            ?   <li>
+                     <div className="app-pro-box">
+                         <InvestItemTitle item={item}/>
+                         <dl className="app-pro-info">
+                             <dt><strong>{item.annualRate}<b className="font-12">%</b></strong><span>{item.investmentHorizon}</span><span className="cir-progress">{item.tenderSchedule}%</span></dt>
+                             <dd>
+                                 <ul className="pro-act-tag">
+                                     <ItemTags investItem={item} isNativeApp />
+                                 </ul>
+                             </dd>
+                         </dl>
+                         <div className="pro-tags"><img src="./images/app_gou.png" /></div>
+                     </div>
+                  </li>
+            :   <li>
+                    <div className={ "pro-box " + item.biao_type_zi_bgcss} onClick={this.getInvestDetail.bind(this,item.id,false,item.isNew, item.limitTime)}>
+                        <InvestItemTitle item={item}/>
+                        <dl className="pro-info">
+                            <dt>
+                                <AnnualRate investItem={item} />
+                                <ItemTags investItem = {item} />
+                            </dt>
+                            <dd><span><b>借款期限：</b>{item.investmentHorizon}</span><span><b>可投金额：</b>{item.availableAmount} 元</span></dd>
+                        </dl>
+                    </div>
+                    <div className={"index-list-tag "+ item.biaotag}>{item.biao_type_zi}</div>
+                    {(item.is_zhiding == true) ? <img src="./images/icon-recommend.png" className="recommend-mark"/> : null}
+                </li>
         )
     }
 }
 
 InvestItem.PropTypes = {
+    isNativeApp: PropTypes.bool,
     item: PropTypes.object,
     getInvestDetail: PropTypes.func,
 }
