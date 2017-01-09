@@ -90,8 +90,8 @@ class Home extends Component {
                         env={this.props.env}
                     />
                     <InvestList 
+                        isNativeApp = {this.props.env.platform.canInvokeNativeMethod() || this.props.env.platform.isWechat}
                         userInfo = {this.props.userInfo}
-                        env = {this.props.env}
                         heightScale = {heightScale} noviceHeight = {noviceHeight}
                         investList = {this.props.investList} 
                         isSeparateFirstNoviceItem = {isSeparateFirstNoviceItem}

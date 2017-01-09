@@ -76,7 +76,13 @@ class InvestList extends Component {
                             {
                                 investList ?
                                 investList.map( (item, idx) =>(
-                                    <InvestItem key={'investItem'+idx} getInvestDetail={this.getInvestDetail.bind(this)} itemTitle={this.itemTitle} item={item}/>
+                                    <InvestItem 
+                                        key={'investItem'+idx} 
+                                        getInvestDetail={this.getInvestDetail.bind(this)} 
+                                        itemTitle={this.itemTitle} 
+                                        item={item}
+                                        isNativeApp={this.props.isNativeApp}
+                                    />
                                 ))
                                 : null
                             }
@@ -131,8 +137,8 @@ class InvestList extends Component {
 }
 
 InvestList.PropTypes = {
+    isNativeApp: PropTypes.bool,
     investList: PropTypes.object,
-    env: PropTypes.object,
     heightScale: PropTypes.number,
     noviceHeight: PropTypes.number,
     isSeparateFirstNoviceItem: PropTypes.bool,
