@@ -8,19 +8,9 @@ class ItemTags extends Component {
     componentDidMount() {
     }
     render(){
-
-        // <dd>
-        //     <ul className="pro-act-tag">
-        //         <li><div className="act-tag-type-1 app-gold-tag"><span>200元起投</span><s></s></div></li>
-        //         <li><div className="act-tag-type-2 app-palered-tag"><span>加息券</span></div></li>
-        //         <li><div className="act-tag-type-2 app-yellow-tag"><span>抢</span></div></li>
-        //         <li><div className="act-tag-type-3"><span>红包券</span><s></s></div></li>
-        //     </ul>
-        // </dd>
-
         let isRead = (this.props.investItem.isReward==1)
                         ? (this.props.isNativeApp) 
-                            ? null
+                            ? {type: 'promotionTag', className: 'app-palered-tag take'}
                             :<span key="itemTag1" className="take">{this.props.investItem.promotionTitle}</span> 
                         : null;
 
@@ -32,7 +22,7 @@ class ItemTags extends Component {
 
         let isAllowIncrease = (this.props.investItem.isAllowIncrease == 1) 
                         ? (this.props.isNativeApp) 
-                            ? {type: 'allowIncrease', className: 'app-palered-tag'}
+                            ? {type: 'allowIncrease'}
                             : <span key="itemTag3" >加息券</span> 
                         : null;
 
@@ -82,6 +72,8 @@ class ItemTags extends Component {
                 }
                 t.key='itemTag_'+i;
                 switch(t.type){
+                case 'promotionTag':
+                    return <li key={t.key}><div className={t.className}><span>{this.props.investItem.promotionTitle}</span>{t.head}{t.tail}</div></li>
                 case 'bonusTicket':
                     return <li key={t.key}><div className={t.className}><span>红包券</span>{t.head}{t.tail}</div></li>
                     break;
@@ -89,7 +81,7 @@ class ItemTags extends Component {
                     return <li key={t.key}><div className={t.className}><span>加息券</span>{t.head}{t.tail}</div></li>
                     break;
                 case 'limitMinAmount':
-                    return <li key={t.key}><div className={t.className}><span>{this.props.StartInvestTag}</span>{t.head}{t.tail}</div></li>
+                    return <li key={t.key}><div className={t.className}><span>{this.props.investItem.StartInvestTag}元起投</span>{t.head}{t.tail}</div></li>
                     break;
                 case 'tag':
                     return <li key={t.key}><div className={t.className}><span>{this.props.investItem.tagTitle}</span>{t.head}{t.tail}</div></li>

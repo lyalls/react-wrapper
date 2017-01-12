@@ -103,8 +103,8 @@ debug wechat ios:
 	# Copy CSS & image files && Fix “less import” problem
 	if [[ ${syncFromH5} == true ]]; then \
 		svn update ${h5SrcDir} ; \
-		cp ${h5SrcDir}/src/images/* ./src/images; \
-		cp ${h5SrcDir}/src/less/* ./src/css; \
+		rsync -a ${h5SrcDir}/src/images/* ./src/images; \
+		rsync -a ${h5SrcDir}/src/less/* ./src/css --exclude="app.less" ; \
 		for file in `ls ./src/css`; do \
 			sed 's/import "mobile-angular-ui/import "\.\.\/\.\.\/bower_components\/mobile-angular-ui/g' ./src/css/$${file} > ${appTmpDir}/tmp.less ;\
 			mv ${appTmpDir}/tmp.less ./src/css/$${file};\
@@ -139,6 +139,9 @@ debug wechat ios:
 	done
 	# Compose the webpack.config.js and delete the temporary files
 	cat ${appTmpDir}/tmpHead.js ${appTmpDir}/tmp.js ${appTmpDir}/tmpTail.js > ${appTmpDir}/webpack.config.js
+	if [[ ${target} == ios || ${target} == android || ${target} == cordova ]];then \
+		sed 's/publicPath: "\/react\/",/publicPath: ".\/",/g' ${appTmpDir}/webpack.config.js > ${appTmpDir}/tmp.js && mv ${appTmpDir}/tmp.js ${appTmpDir}/webpack.config.js ;\
+	fi
 	rm -rf ${appTmpDir}/tmp.js ${appTmpDir}/tmpHead.js ${appTmpDir}/tmpTail.js
 	# Run the webpack to build target components
 	if [[ ${target} != debug ]];then \
@@ -197,9 +200,10 @@ debug wechat ios:
 		done;\
 		cp ${appTemplateDir}/UIWebViewController* ${appIntegrationDir}/BaoCai/UI/Base/Controller ;\
 		cp -r ${appTmpDir}/react ${appIntegrationDir}/BaoCai/Components/react ;\
+		cp -r src/images ${appIntegrationDir}/BaoCai/Components/images ;\
 	fi
 	# Clear the temporary workspace
-	rm -rf ${appTmpDir} ;
+	#rm -rf ${appTmpDir} ;
 	# Start the integrated system for WeChat
 	if [[ ${target} == wechat ]]; then \
 		cd ${appIntegrationDir} && npm start ;\

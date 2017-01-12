@@ -217,6 +217,7 @@ class BaseComponent extends Component {
         return (
             <div className = {((this.props.className)?this.props.className + " ":"")+this.componentId } 
                  style={this.state.style} {...this.state.events}
+                 id={this.props.id ? this.props.id : this.componentId}
             >
                 {this.props.children}
             </div>
@@ -225,6 +226,7 @@ class BaseComponent extends Component {
 }
 
 BaseComponent.propTypes = {
+    id: PropTypes.string,
     x: PropTypes.number,
     y: PropTypes.number,
     width: PropTypes.number,        // if not provided, it's going to autosize mode
@@ -251,3 +253,29 @@ BaseComponent.propTypes = {
 }
 
 export default BaseComponent;
+
+export const RGB_Decimal2String = function(rgb){
+    if(!rgb || rgb.length === 0) return rgb;
+    let result="#";
+    for (let d of rgb.split(',')){
+        d=Number(d);
+        let hr = "";
+        while(d>15){
+            let h = Math.floor(d/16);
+            d=d%(16*h);
+            if(h>9){
+                h=String.fromCharCode(65+h-10);
+            }
+            hr+=h;
+        }
+        if(d>9){
+            d=String.fromCharCode(65+d-10);
+        }
+        hr+=d;
+        if(hr.length<2){
+            hr="0"+hr;
+        }
+        result+=hr;
+    }
+    return result;
+}
