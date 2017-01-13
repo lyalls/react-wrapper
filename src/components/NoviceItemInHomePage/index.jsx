@@ -32,7 +32,7 @@ class NoviceItem extends Component {
 					<BaseComponent absolute left={3} right={3} top={3} bottom={3}
 					>
 						<CircleProgress 
-							progress={(100||0)/100}
+							progress={(this.props.itemData.tenderSchedule||0)/100}
 							radius={177 * heightScale / 2 - 9}
                             strokeWidth={3}
                             backgroundStrokeColor={RGB_Decimal2String("239,239,239")}
