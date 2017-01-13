@@ -56,7 +56,7 @@ class CircleProgress extends Component {
                     .attr('stroke-linecap', that.stats.lineCap)
                     .attr('fill', that.stats.tintFillColor)
                     .appendTo($('#'+that.stats.arcsId))
-                if(i==1 && that.props.anchorStyle === 'round'){
+                if(i==1 && that.props.anchorStyle === 'round' &&  targetAngle - startAngle < Math.PI * 1.98 ){
                     let paints = ['M', x + Math.cos(targetAngle)*radius , y - Math.sin(targetAngle)*radius];
                     Array.prototype.push.apply(paints, [
                         'A', that.stats.strokeWidth/2 + 0.5, that.stats.strokeWidth/2 + 0.5, 
@@ -76,7 +76,7 @@ class CircleProgress extends Component {
                     .appendTo($('#'+that.stats.arcsId))
                 }
             }
-            perc += Math.PI/70;
+            perc += Math.PI/50;
             // if(perc >= Math.PI*2) perc = 0;
 
             $('#'+that.stats.circleId).html($('#'+that.stats.circleId).html());

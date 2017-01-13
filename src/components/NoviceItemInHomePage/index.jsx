@@ -71,7 +71,7 @@ class NoviceItem extends Component {
 					</BaseComponent>
 				</BaseComponent>
 				{/* tags */}
-				<BaseComponent absolute centerX={0} bottom={5*heightScale} >
+				<BaseComponent absolute centerX={0} bottom={15*heightScale} >
 					<dl className="pro-info">
 						<dt>
 							<ItemTags investItem={this.props.itemData} />
