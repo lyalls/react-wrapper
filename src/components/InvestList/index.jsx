@@ -61,7 +61,7 @@ class InvestList extends Component {
 
 
         return (
-                <div width="100%">
+                <div width="100%" style={{background: "#EFEFEF"}}>
                     {
                         noviceItemData
                         ? <BaseComponent fullWidth>
@@ -70,7 +70,7 @@ class InvestList extends Component {
                                     itemData={noviceItemData} itemTitle={noviceItemTitle}
                                     onClick={this.getInvestDetail.bind(this,noviceItemData.id,false,noviceItemData.isNew, noviceItemData.limitTime)}
                             />
-                            <BaseComponent fullWidth height={8*this.props.heightScale} backgroundColor={"#EFEFEF"} />
+                            <BaseComponent fullWidth height={4*this.props.heightScale} backgroundColor={"#EFEFEF"} />
                           </BaseComponent>
                         : null
                     }

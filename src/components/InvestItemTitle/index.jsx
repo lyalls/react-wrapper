@@ -30,20 +30,34 @@ class InvestItemTitle extends Component {
     }
     render(){
         let item = this.props.item;
-        let fullThreshold = (item.isFullThreshold==1)?<span className="red-tag">满抢</span>:null;
+        let fullThreshold = (item.isFullThreshold==1)
+                        ? this.props.isNativeApp 
+                            ? null
+                            : <span className="red-tag">满抢</span>
+                        : null;
         let memberIcon = (item.biao_type_zi == '会员标') 
-                        ? this.props.isNativeApp && item.tenderCrownImageUrl && item.tenderCrownImageUrl !== ""
-                            ? <BaseComponent left={28} height={12} width={12} centerY={0}>
-                                <img src={item.tenderCrownImageUrl}/>
-                              </BaseComponent>
+                        ? this.props.isNativeApp
+                            ? item.tenderCrownImageUrl && item.tenderCrownImageUrl !== ""
+                                ? <BaseComponent absolute left={0} height={12} width={12} centerY={0}>
+                                    <img src={item.tenderCrownImageUrl}/>
+                                  </BaseComponent>
+                                : <BaseComponent absolute left={0} centerY={0} width={12}>
+                                    <h3 style={{textAlign: "left", fontSize: 8}} ><em><strong className="icon-crown"></strong></em></h3>
+                                  </BaseComponent>
                             : <strong className="icon-crown"></strong>
                         :null;
+        let adjustLeft = this.props.isNativeApp && item.tenderCrownImageUrl && item.tenderCrownImageUrl !== ""
+                        ? 4 : 10;
         let itemName = (item.isLimit != 1 || item.limitTime<=0 ) 
                         ? this.props.isNativeApp 
-                            ? 
-                              <h3 style={{fontSize: 17, textAlign: 'left', wordWrap: 'break-word'}}>
-                                <em>{memberIcon}{fullThreshold}{item.name}</em>
-                              </h3>
+                            ? <BaseComponent height={30} right={0} left={0}>
+                                {memberIcon}
+                                <BaseComponent absolute left={memberIcon==null ? 0 : 12 + adjustLeft} centerY={0} right={60}>
+                                    <span>
+                                        <strong style={{left: 0, right: 0, fontSize: 17, overflow: "hidden", textAlign: 'left', display: "block", whiteSpace: "nowrap", textOverflow: "ellipsis"}}>{item.name}</strong>
+                                    </span>
+                                </BaseComponent>
+                              </BaseComponent>
                             : <h3>
                                 <em className="h3-title">{memberIcon}{fullThreshold}{item.name}</em>
                                 {this.props.isNativeApp ? null : <i></i> }

@@ -23,20 +23,21 @@ class InvestItem extends Component {
             this.props.isNativeApp 
             ?   <li>
                     {
+                        // 底层背景
+                        !item.tenderSolidBorderColor || item.tenderSolidBorderColor === "" || item.tenderSolidBorderColor === "255,255,255"
+                        ? null
+                        : 
+                        <BaseComponent absolute top={3} right={3} left={4} bottom={4} 
+                            customStyle={{ borderWidth: 1, borderStyle: 'solid', borderColor: RGB_Decimal2String(item.tenderSolidBorderColor)}}
+                        />
+                    }
+                    {
                         // 标的类型图片
                         item.tenderTypeImageUrl && item.tenderTypeImageUrl !== ""
                         ? <BaseComponent absolute left={-5} top={10} width={32} height={63}>
                             <img src={item.tenderTypeImageUrl} />
                           </BaseComponent>
                         : null
-                    }
-                    {
-                        // 底层背景
-                        !item.tenderSolidBorderColor || item.tenderSolidBorderColor === "" || item.tenderSolidBorderColor === "255,255,255"
-                        ? null
-                        : <BaseComponent absolute top={-5} rigit={-5} left={-5} bottom={-5}
-                            customStyle={{borderWidth: 1, borderStyle: 'solid', borderColor: RGB_Decimal2String(item.tenderSolidBorderColor)}}
-                          />
                     }
                     <div className="app-pro-box" 
                             style={
@@ -46,7 +47,7 @@ class InvestItem extends Component {
                         {
                             // 会员标的右上角图标
                             item.tenderRightImageUrl && item.tenderRightImageUrl !== ""
-                            ? <BaseComponent absolute top={10} right={10} width={23} height={23}>
+                            ? <BaseComponent absolute top={5} right={5} width={23} height={23}>
                                 <img src={item.tenderRightImageUrl}/>
                               </BaseComponent>
                             : null
@@ -59,7 +60,7 @@ class InvestItem extends Component {
                                 // <dt><strong>{item.annualRate}<b className="font-12">%</b></strong><span>{item.investmentHorizon}</span><span className="cir-progress">{item.tenderSchedule}%</span></dt>
                             }
                             <AnnualRate investItem={item} isNativeApp />
-                            <BaseComponent top={10} height={35}/>
+                            <BaseComponent top={10} height={40}/>
                             <dd>
                                 <ul className="pro-act-tag">
                                     <ItemTags investItem={item} isNativeApp />

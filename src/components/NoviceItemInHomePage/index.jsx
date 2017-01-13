@@ -1,7 +1,8 @@
 import React , {Component, PropTypes} from 'react';
-import BaseComponent from '../BaseComponent/index.jsx';
-import AnnualRate from '../AnnualRate/index.jsx'
-import ItemTags from '../ItemTags/index.jsx'
+import BaseComponent, {RGB_Decimal2String} from '../BaseComponent/index.jsx';
+import AnnualRate from '../AnnualRate/index.jsx';
+import ItemTags from '../ItemTags/index.jsx';
+import CircleProgress from '../CircleProgress/index.jsx';
 
 class NoviceItem extends Component {
 	constructor(props) {
@@ -11,7 +12,7 @@ class NoviceItem extends Component {
 		let heightScale = this.props.heightScale;
 		let height = this.props.height;
 		return (
-			<BaseComponent height={height} fullWidth className={"novice-item"} onClick={this.props.onClick}>
+			<BaseComponent height={height} fullWidth className={"novice-item"} onClick={this.props.onClick} backgroundColor={"#FFF"}>
 				<BaseComponent height={76} width={19} x={25} y={0} 
 					className={"novice-item-icon"} 
 					customStyle={{backgroundSize: "19px 76px"}}
@@ -27,6 +28,20 @@ class NoviceItem extends Component {
 				</BaseComponent>
 				{/* Missing progress circle view */}
 				<BaseComponent centerX={0} centerY={0} width={177 * heightScale} height={177 * heightScale} absolute>
+					{/* Circle progress */}
+					<BaseComponent absolute left={3} right={3} top={3} bottom={3}
+					>
+						<CircleProgress 
+							progress={(100||0)/100}
+							radius={177 * heightScale / 2 - 9}
+                            strokeWidth={3}
+                            backgroundStrokeColor={RGB_Decimal2String("239,239,239")}
+                            tintStrokeColor={RGB_Decimal2String("255,108,0")}
+                            anchorStyle={"round"}
+                            doAnimation
+                            extendRadius={6}
+						/>
+					</BaseComponent>
 					{/* Background image */}
 					<BaseComponent absolute left={15} right={15} top={15} bottom={15}
 						className={"novice-item-circle-bg"}  

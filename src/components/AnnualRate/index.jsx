@@ -1,91 +1,17 @@
 import React , {Component, PropTypes} from 'react';
 import BaseComponent, { RGB_Decimal2String } from '../BaseComponent/index.jsx';
-import $ from 'jquery';
-
-let id = 0;
+import CircleProgress from '../CircleProgress/index.jsx';
 
 class AnnualRate extends Component {
     constructor(props) {
         super(props);
-        this.stats={id: 'AnnualRate'+id};
-        this.stats.arcsId='AnnualRateArcs'+id;
-        this.stats.circleId='AnnualRateCircle'+id;
-        id++;
     }
     componentDidMount() {
-        this.setCircleProgress(this.props.investItem.tenderSchedule*2*Math.PI/100);
-    }
-    setCircleProgress(progress, doAnimation=true){
-        // Reference: https://codepen.io/smlsvnssn/pen/FolaA/
-        let that=this;
-        var perc = 0;
-        /*$('#mapWrapper').click(function(){
-        update();
-        })*/
-        update();
-        //setInterval(update, 20);
-
-        function update(){
-            if(perc > progress) return;
-            if(doAnimation){
-                requestAnimationFrame(update)
-            }
-            // console.log(perc)
-            $('#'+that.stats.arcsId).empty();
-            // for (let i = 0; i < 2; i++) {
-                //var n = Math.random()*Math.PI*1.99999;
-                // stroke={RGB_Decimal2String("255,108,0")} strokeWidth={1.5}
-                // strokeDasharray={"4,2"} strokeLinecap={"rect"}
-                // fill="none"
-                let targetArc = (doAnimation ? perc: progress);
-                 $('<path />').attr('d', createSvgArc(0, 0, 19, 0, targetArc))
-                    .attr('stroke', RGB_Decimal2String("255,108,0"))
-                    .attr('stroke-width', 1.5)
-                    .attr('stroke-dasharray', "8,4")
-                    .attr('stroke-linecap', "rect")
-                    .attr('fill', "none")
-                    .appendTo($('#'+that.stats.arcsId))
-            // }
-            perc += Math.PI/50;
-            // if(perc >= Math.PI*2) perc = 0;
-
-            $('#'+that.stats.circleId).html($('#'+that.stats.circleId).html());
-            //$('#arcs').children().attr('fill', '#000');
-        }
-
-
-        function createSvgArc (x, y, r, startAngle, endAngle) {
-            if(startAngle>endAngle){
-                var s = startAngle;
-                startAngle = endAngle;
-                endAngle = s;
-            }
-            if (endAngle - startAngle > Math.PI*2 ) {
-                endAngle = Math.PI*1.99999;
-            }
-
-            var largeArc = endAngle - startAngle <= Math.PI ? 0 : 1;
-
-            return ['M', x+Math.cos(startAngle)*r, y-(Math.sin(startAngle)*r),
-                'A', r, r, 0, largeArc, 0, x+Math.cos(endAngle)*r, y-(Math.sin(endAngle)*r),
-            ].join(' ');
-
-            // return ['M', x, y,
-            //     'L', x+Math.cos(startAngle)*r, y-(Math.sin(startAngle)*r), 
-            //     'A', r, r, 0, largeArc, 0, x+Math.cos(endAngle)*r, y-(Math.sin(endAngle)*r),
-            //     'L', x, y
-            // ].join(' ');
-        }
-
-        function randomColorAsString() {
-            return '#'+'0123456789abcdef'.split('').map(function(v,i,a){
-            return i>5 ? null : a[Math.floor(Math.random()*16)] }).join('');
-        }
     }
     render(){
     	return(
             this.props.isNativeApp 
-            ?   <BaseComponent id={this.stats.id} left={28} right={0} top={12} >
+            ?   <BaseComponent left={28} right={0} top={14} >
                     <BaseComponent  customStyle={{width: "100%"}}>
                         <strong style={{fontSize: 20, color: RGB_Decimal2String("255,108,0")}}>
                             {this.props.investItem.annualRate}
@@ -106,19 +32,18 @@ class AnnualRate extends Component {
                             </font>
                         </BaseComponent>
                         <BaseComponent  absolute right={40} centerY={0} width={40} height={40}>
-                            <BaseComponent id={this.stats.circleId} absolute width={40} height={40} top={0} left={0} >
-                                <svg width={"100%"} height={"100%"}>
-                                    <circle cx={20} cy={20} r={19} 
-                                        stroke={RGB_Decimal2String("239,239,239")} strokeWidth={1.5}
-                                        strokeDasharray={"8,4"} strokeLinecap={"rect"}
-                                        fill="none"
-                                    />
-                                    <g id={this.stats.arcsId} transform=" translate(20 20) rotate(-90) scale(1 -1)"></g>
-                                </svg>
-                            </BaseComponent>
+                            <CircleProgress
+                                progress={(this.props.investItem.tenderSchedule||0)/100} 
+                                radius={20}
+                                strokeWidth={2}
+                                backgroundStrokeColor={RGB_Decimal2String("239,239,239")}
+                                tintStrokeColor={RGB_Decimal2String("255,108,0")}
+                                dashArray={"8,6"}
+                                doAnimation
+                            />
                             <BaseComponent absolute centerY={0} centerX={0}>
                                 <font style={{fontSize: 13, color: RGB_Decimal2String("255,108,0")}}>
-                                    {this.props.investItem.tenderSchedule}%
+                                    {this.props.investItem.tenderSchedule+"%"}
                                 </font>
                             </BaseComponent>
                         </BaseComponent>

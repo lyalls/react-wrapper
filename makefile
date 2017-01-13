@@ -75,7 +75,7 @@ debug: appTemplateDir=./src/apps/mobile/templates
 debug: components=${_PAGE_}
 debug: target=debug
 debug: targetNameInAppIndex=${_PLATFORM_}
-debug: syncFromH5=false
+debug: syncFromH5=${doUpdateSourceFile}
 # DEBUG #
 
 
@@ -104,7 +104,7 @@ debug wechat ios:
 	if [[ ${syncFromH5} == true ]]; then \
 		svn update ${h5SrcDir} ; \
 		rsync -a ${h5SrcDir}/src/images/* ./src/images; \
-		rsync -a ${h5SrcDir}/src/less/* ./src/css --exclude="app.less" ; \
+		rsync -a ${h5SrcDir}/src/less/* ./src/css ; \
 		for file in `ls ./src/css`; do \
 			sed 's/import "mobile-angular-ui/import "\.\.\/\.\.\/bower_components\/mobile-angular-ui/g' ./src/css/$${file} > ${appTmpDir}/tmp.less ;\
 			mv ${appTmpDir}/tmp.less ./src/css/$${file};\
@@ -114,6 +114,7 @@ debug wechat ios:
 				echo '@import "slick.less";' >> ./src/css/$${file} ;\
 				echo '@import "slick-theme.less";' >> ./src/css/$${file} ;\
 				echo '@import "react.components.less";' >> ./src/css/$${file} ;\
+				echo '@import "baocai-app.less";' >> ./src/css/$${file} ;\
 			fi ;\
 		done; \
 	fi
