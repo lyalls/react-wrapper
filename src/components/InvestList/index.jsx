@@ -61,7 +61,7 @@ class InvestList extends Component {
 
 
         return (
-                <div width="100%" style={{background: "#EFEFEF"}}>
+                <div width="100%" style={{background: this.props.isNativeApp ? "#EFEFEF" : "#FFF"}}>
                     {
                         noviceItemData
                         ? <BaseComponent fullWidth>
