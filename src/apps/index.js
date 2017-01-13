@@ -201,7 +201,7 @@ const envSettings = {
                 this.platform.exec('gotoPage', {pageName, url: params.url});
             }
         }else if(href){
-            if(undefined !== typeof _hmt && mesg){
+            if('undefined' !== typeof _hmt && mesg){
                 _hmt.push(['_trackEvent', mesg, 'click']);
             }
             window.location.href = href;
