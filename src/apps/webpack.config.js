@@ -50,7 +50,7 @@ module.exports = {
             {
                 test: /\.(jpe?g|gif|png|eot|svg|woff|woff2|ttf)([\?]?.*)$/,
                 // loaders: ['url-loader']
-                loaders: ['file-loader']
+                loaders: ['file-loader?name=[path][name].[ext]']
             },
         ],
     },

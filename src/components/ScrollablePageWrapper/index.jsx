@@ -15,6 +15,9 @@ class ScrollablePageWrapper extends Component {
 			resolve();
 		}, 1000)
 	}
+	onScroll(event){
+		console.log(event);
+	}
 	// Download App Bar
     setDownloadAppBarHidden(shouldHide){
         this.setState({isDownloadAppBarHidden: shouldHide});
@@ -22,11 +25,11 @@ class ScrollablePageWrapper extends Component {
 	render(){
 		let page = (this.props.env && this.props.env.platform && this.props.env.platform.canInvokeNativeMethod()) 
 				? <div className="scrollable">
-        			<div className="scrollable-content" id="mContent">	
+        			<div className="scrollable-content" id="mContent" >	
 						{this.props.children}
 					</div>
 				  </div>
-				: <div className="scrollable">
+				: <div className="scrollable" onScroll={this.onScroll.bind(this)}>
 			        <div className={ (this.state.isDownloadAppBarHidden ? "" : 'index-btm-padding ') + "scrollable-content"} id="mContent">
 			        	{this.props.children}
 			         </div>

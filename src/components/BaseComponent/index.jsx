@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import $ from 'jquery';
 
 /*
     Don't use 'style' property for BaseComponent directly, instead, use 'customStyle', 
@@ -113,6 +114,7 @@ class BaseComponent extends Component {
 
         // this.state = Object.assign({}, this.state);
     }
+    // Window resize
     onWindowResize(event){
         let newProp = Object.assign({}, this.props);
         let needUpdate = false;
@@ -129,7 +131,6 @@ class BaseComponent extends Component {
             this.forceUpdate();
         }
     }
-
 
     componentWillMount() {
         
@@ -202,6 +203,7 @@ class BaseComponent extends Component {
             }
         }
     }
+
     componentWillUnmount() {
         // Remove listener from onresizer
         if(this.windowResizeListener && typeof window.onresize === 'function'){

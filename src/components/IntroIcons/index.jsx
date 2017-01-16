@@ -5,26 +5,30 @@ class IntroIcons extends Component {
     constructor(props) {
         super(props);
     }
+    gotoIntroPage(){
+        console.log('using local intro page function')
+        this.props.gotoPage.call(this, 'aboutus', {url: this.props.introPageUrl})
+    }
     render(){
     	return(
             <BaseComponent className={"index-enter-area"} >
             {
                 this.props.isLogin && !this.env.platform.canInvokeNativeMethod()
                 ?<ul className="index-enter-item" >
-                    <li onClick={this.props.gotoPage.bind(null, 'My Assets')}>
+                    <li onClick={this.props.gotoPage.bind(this, 'My Assets')}>
                         <i className="index-enter-icon-1"></i>
                         <h3 id="home-my-property" onClick={_hmt.push.bind(_hmt, ['_trackEvent', '我的资产', 'click'])}>我的资产</h3>
                     </li>
-                    <li onClick={this.props.gotoPage.bind(null, 'My Coupon')}>
+                    <li onClick={this.props.gotoPage.bind(this, 'My Coupon')}>
                         <i className="index-enter-icon-2"></i>
                         <h3 id="home-my-coupon" onClick={_hmt.push.bind(_hmt, ['_trackEvent', '我的优惠券', 'click'])}>我的优惠券</h3>
                     </li>
-                    <li onClick={this.props.gotoPage.bind(null, 'Discovery')}>
+                    <li onClick={this.props.gotoPage.bind(this, 'Discovery')}>
                         <i className="index-enter-icon-3"></i>
                         <h3 id="home-find" onClick={_hmt.push.bind(_hmt, ['_trackEvent', '发现', 'click'])}>发现</h3>
                     </li>
                 </ul>
-                :<ul className="index-enter-item un-login" onClick={this.props.gotoIntro}>
+                :<ul className="index-enter-item un-login" onClick={this.gotoIntroPage.bind(this)}>
                     <li >
                         <i className="index-enter-icon-1"></i>
                         <h3>上市系</h3>
@@ -48,10 +52,10 @@ class IntroIcons extends Component {
 }
 
 IntroIcons.PropTypes = {
-    gotoIntro: PropTypes.func,
     isLogin: PropTypes.bool,
     gotoPage: PropTypes.func,
     env: PropTypes.object,
+    introPageUrl: PropTypes.string,
 }
 
 export default IntroIcons;

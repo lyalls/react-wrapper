@@ -194,7 +194,7 @@ const envSettings = {
         default:
             break;
         }
-
+        console.log(href);
         // Exec
         if(this.platform.canInvokeNativeMethod()){
             if(params && params.url){

@@ -27,7 +27,7 @@ class InvestItem extends Component {
                         !item.tenderSolidBorderColor || item.tenderSolidBorderColor === "" || item.tenderSolidBorderColor === "255,255,255"
                         ? null
                         : 
-                        <BaseComponent absolute top={3} right={3} left={4} bottom={4} 
+                        <BaseComponent absolute top={3} right={3} left={3} bottom={3} 
                             customStyle={{ borderWidth: 1, borderStyle: 'solid', borderColor: RGB_Decimal2String(item.tenderSolidBorderColor)}}
                         />
                     }

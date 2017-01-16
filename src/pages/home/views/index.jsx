@@ -82,12 +82,12 @@ class Home extends Component {
                         : null
                     }
                     <IntroIcons
-                        gotoIntro={this.props.gotoPage.bind(null, 'aboutus', {url: this.props.introUrl})}
                         isLogin={
                             this.props.env.platform.isWechat && this.props.userInfo !== undefined && this.props.userInfo.user !== undefined
                         }
                         gotoPage={this.props.gotoPage}
                         env={this.props.env}
+                        introPageUrl={this.props.intro.url}
                     />
                     <InvestList 
                         isNativeApp = {isSeparateFirstNoviceItem}
